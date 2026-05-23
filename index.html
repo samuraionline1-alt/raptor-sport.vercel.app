@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raptor Sport | Official Store</title>
-    <!-- Tailwind CSS v4 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Chart.js สำหรับวาดกราฟแสดงประสิทธิภาพ -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
@@ -26,25 +23,21 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- PREMIUM NAVIGATION BAR (จัดสัดส่วนสมดุล 40:20:40 พร้อมโลโก้ใหม่ตรงกลาง) -->
     <header class="fixed top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
             
-            <!-- เมนูฝั่งซ้าย (40%) -->
             <div class="hidden md:flex space-x-10 w-[40%] justify-end pr-10 font-semibold tracking-wide text-sm">
                 <a href="#home" class="text-zinc-600 hover:text-[#FF6B00] transition-colors">Home</a>
                 <a href="#shop" class="text-zinc-600 hover:text-[#FF6B00] transition-colors">Shop</a>
             </div>
 
-            <!-- โลโก้แบรนด์ Raptor ตรงกลาง (20%) -->
             <div class="flex-shrink-0 flex items-center justify-center w-auto md:w-[20%]">
                 <a href="#home" class="flex items-center transform hover:scale-105 transition-transform duration-200">
-                    <!-- แสดงผลโลโก้ไดโนเสาร์ตัวใหม่แทนกรอบเดิม -->
-                    <img src="Capture4646 (1).png" alt="Raptor Logo" class="h-14 w-auto object-contain">
+                    <img src="Capture4646 (1).png" alt="Raptor Logo" class="h-14 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="hidden font-black text-2xl tracking-wider text-zinc-900">RAPTOR</span>
                 </a>
             </div>
 
-            <!-- เมนูฝั่งขวา & ตะกร้าสินค้า (40%) -->
             <div class="hidden md:flex space-x-10 w-[40%] pl-10 font-semibold tracking-wide text-sm items-center">
                 <a href="#reviews" class="text-zinc-600 hover:text-[#FF6B00] transition-colors">Reviews</a>
                 <a href="#contact" class="text-zinc-600 hover:text-[#FF6B00] transition-colors">Contact</a>
@@ -54,16 +47,17 @@
                 </div>
             </div>
 
-            <!-- ปุ่มเปิดเมนูบนมือถือ (Mobile Hamburger) -->
             <div class="md:hidden flex items-center justify-between w-full">
-                <img src="Capture4646 (1).png" alt="Raptor Logo" class="h-11 w-auto object-contain">
+                <div class="flex items-center">
+                    <img src="Capture4646 (1).png" alt="Raptor Logo" class="h-11 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="hidden font-black text-xl tracking-wider text-zinc-900">RAPTOR</span>
+                </div>
                 <button id="mobile-menu-btn" class="text-zinc-700 focus:outline-none text-2xl">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
         </div>
         
-        <!-- เมนูสไลด์ลงสไตล์โมบาย -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-zinc-100 px-6 py-4 space-y-4 shadow-xl">
             <a href="#home" class="block text-zinc-600 hover:text-[#FF6B00] font-semibold py-1">Home</a>
             <a href="#shop" class="block text-zinc-600 hover:text-[#FF6B00] font-semibold py-1">Shop</a>
@@ -72,71 +66,128 @@
         </div>
     </header>
 
-    <!-- SECTION 1: HOME (แบนเนอร์หลักพร้อมรูปสินค้าและจุดเด่น) -->
-    <section id="home" class="pt-32 pb-16 bg-gradient-to-br from-zinc-100 via-gray-200 to-zinc-300 min-h-screen flex items-center relative overflow-hidden">
-        <div class="absolute inset-0 opacity-15 pointer-events-none">
-            <div class="absolute top-0 right-0 w-full h-full bg-[linear-gradient(135deg,transparent_40%,#FF6B00_45%,transparent_46%,#FF6B00_50%,transparent_52%)] bg-[length:200px_200px]"></div>
+    <section id="home" class="relative min-h-screen pt-32 pb-20 bg-zinc-950 text-white flex items-center overflow-hidden">
+        
+        <div class="absolute inset-0 z-0 opacity-40 pointer-events-none select-none">
+            <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-orange-600/30 to-red-600/0 blur-3xl"></div>
+            <div class="absolute bottom-[-30%] left-[-20%] w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-zinc-800/20 to-zinc-900/0 blur-3xl"></div>
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                 
-                <!-- ฝั่งซ้าย: โชว์รูปและกล่องราคาโปรโมชั่นสปอร์ตพรีเมี่ยม -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-8 bg-zinc-900/5 p-8 rounded-3xl backdrop-blur-sm border border-white/20 shadow-xl">
-                    <div onclick="openProductModal()" class="cursor-pointer relative w-56 h-80 bg-gradient-to-b from-orange-500 to-red-600 rounded-2xl shadow-2xl flex flex-col justify-between p-4 text-white overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                        <div class="border-2 border-white/30 rounded-lg p-2 text-center">
-                            <span class="text-xs font-bold tracking-widest block">WARMING SPRAY</span>
-                        </div>
-                        <div class="my-auto text-center">
-                            <i class="fa-solid fa-fire text-6xl my-4 text-amber-200 animate-pulse"></i>
-                            <h3 class="font-bold text-2xl tracking-wide">RAPTOR</h3>
-                            <p class="text-xs text-orange-100">SPORT PERFORMANCE</p>
-                        </div>
-                        <div class="text-center text-xs bg-black/20 py-1 rounded">150 ml</div>
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-zinc-900/80 border border-zinc-800 rounded-full py-1.5 px-4 backdrop-blur-md mx-auto lg:mx-0">
+                        <span class="flex h-2 w-2 rounded-full bg-orange-500 animate-pulse"></span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-zinc-300">Raptor Performance Lab</span>
                     </div>
-
-                    <div class="space-y-4 w-full sm:w-auto">
-                        <div class="bg-white px-5 py-3 rounded-xl shadow-md flex items-center space-x-3 border-l-4 border-orange-500">
-                            <div class="bg-orange-100 p-2 rounded-lg text-orange-brand"><i class="fa-solid fa-dumbbell"></i></div>
-                            <div><p class="text-xs text-gray-400 font-bold">BENEFIT</p><p class="font-semibold text-sm">RELAX MUSCLE</p></div>
-                        </div>
-                        <div class="bg-white px-5 py-3 rounded-xl shadow-md flex items-center space-x-3 border-l-4 border-amber-500">
-                            <div class="bg-amber-100 p-2 rounded-lg text-amber-500"><i class="fa-solid fa-fire-flame-curved"></i></div>
-                            <div><p class="text-xs text-gray-400 font-bold">BENEFIT</p><p class="font-semibold text-sm">WARM UP BODY</p></div>
-                        </div>
-                        <div class="bg-white px-5 py-3 rounded-xl shadow-md flex items-center space-x-3 border-l-4 border-zinc-700">
-                            <div class="bg-zinc-100 p-2 rounded-lg text-zinc-700"><i class="fa-solid fa-repeat"></i></div>
-                            <div><p class="text-xs text-gray-400 font-bold">USE TIME</p><p class="font-semibold text-sm">BEFORE & AFTER</p></div>
-                        </div>
-                        <div class="bg-zinc-900 text-white px-5 py-4 rounded-xl shadow-lg text-center cursor-pointer hover:bg-zinc-800 transition-colors" onclick="openProductModal()">
-                            <span class="text-xs block text-orange-400 font-bold">ราคาพิเศษลด 49%</span>
-                            <span class="text-2xl font-bold text-red-500">฿179 บาท</span>
-                            <span class="text-[10px] block text-gray-400 mt-1">คลิกเพื่อดูโปรโมชั่นแฟลชเซล</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ฝั่งขวา: ข้อความและรายละเอียดสินค้า -->
-                <div class="space-y-6">
-                    <div class="space-y-2">
-                        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900">
-                            Raptor Sport <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-500">WARMING SPRAY</span>
+                    
+                    <div class="space-y-4">
+                        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1] uppercase">
+                            Ignite Your <br class="hidden sm:inline">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-orange-500 to-amber-400">
+                                Inner Peak
+                            </span>
                         </h1>
-                        <p class="inline-block bg-orange-brand text-white px-3 py-1 rounded text-sm font-semibold">สเปรย์วอร์มร้อนสำหรับนักกีฬา</p>
+                        <p class="text-lg sm:text-xl text-zinc-400 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            วิทยาศาสตร์การกีฬาขั้นสูงในรูปแบบสเปรย์ 
+                            ออกแบบมาเพื่อปลุกความพร้อมของเส้นใยกล้ามเนื้ออย่างล้ำลึก 
+                            ทลายทุกขีดจำกัดก่อนที่เกมการแข่งขันจะเริ่มขึ้น
+                        </p>
                     </div>
-                    <p class="text-sm text-gray-600 leading-relaxed">Raptor Sport สเปรย์ตัวร้อนร้อนสำหรับนักกีฬา ได้รับการคิดค้นและพัฒนาขึ้นเป็นพิเศษสำหรับเวิร์กเอาต์และการเตรียมความพร้อมของกล้ามเนื้อก่อนเล่นกีฬา การทำงานแบบดับเบิ้ลแอคชั่นให้ความรู้สึกอุ่นลึกยาวนาน ช่วยเพิ่มการไหลเวียนและเตรียมสภาพเนื้อเยื่อให้พร้อมรับมือกับการเคลื่อนไหวที่หนักหน่วง ป้องกันการบาดเจ็บได้อย่างมีประสิทธิภาพ</p>
-                    <div class="pt-2">
-                        <a href="#shop" class="inline-block w-full sm:w-auto text-center bg-zinc-900 hover:bg-orange-brand text-white font-bold py-4 px-12 rounded-xl shadow-lg transition-all">
-                            ดูสินค้าทั้งหมดในร้าน
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#shop" class="group relative inline-flex items-center justify-center w-full sm:w-auto bg-orange-brand hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-xl shadow-xl shadow-orange-900/20 transition-all overflow-hidden">
+                            <span class="relative z-10 flex items-center gap-2">
+                                เลือกซื้อผลิตภัณฑ์ <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+                            </span>
+                        </a>
+                        <a href="#reviews" class="inline-flex items-center justify-center w-full sm:w-auto bg-zinc-900/50 hover:bg-zinc-900 border border-zinc-800 text-zinc-300 font-semibold py-4 px-8 rounded-xl transition-all backdrop-blur-sm">
+                            วิทยาศาสตร์เบื้องหลังเรา
                         </a>
                     </div>
+
+                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-zinc-900 text-center lg:text-left max-w-md mx-auto lg:mx-0">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white">100%</div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-500 mt-1">Anti-Doping Safe</div>
+                        </div>
+                        <div class="border-x border-zinc-900 px-4">
+                            <div class="text-2xl sm:text-3xl font-bold text-white">Fast</div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-500 mt-1">Deep Absorption</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white">Premium</div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-500 mt-1">Sport Grade</div>
+                        </div>
+                    </div>
                 </div>
+                
+                <div class="lg:col-span-5 relative w-full">
+                    <div class="relative w-full max-w-[380px] mx-auto aspect-[3/4] bg-zinc-900/40 border border-zinc-800/80 rounded-3xl p-8 backdrop-blur-xl flex flex-col justify-between overflow-hidden shadow-2xl">
+                        
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl"></div>
+                        <div class="absolute bottom-4 left-4 font-mono text-[9px] text-zinc-700 tracking-widest select-none">
+                            SYS.LOC // 10.98.42
+                        </div>
+
+                        <div class="flex justify-between items-start border-b border-zinc-800 pb-4">
+                            <div>
+                                <span class="text-[10px] uppercase font-mono tracking-widest text-zinc-500 block">Formulation</span>
+                                <span class="text-sm font-bold text-zinc-200 tracking-wide">DOUBLE ACTION SYSTEM</span>
+                            </div>
+                            <div class="text-orange-brand text-xl"><i class="fa-solid fa-circle-nodes"></i></div>
+                        </div>
+
+                        <div class="my-auto py-8 text-center relative group">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-28 h-28 bg-orange-500/5 border border-orange-500/20 rounded-full animate-ping duration-3000"></div>
+                            </div>
+                            <div class="relative z-10 inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 border border-zinc-700 shadow-inner group-hover:border-orange-500/50 transition-colors duration-500">
+                                <i class="fa-solid fa-bolt-lightning text-4xl text-orange-brand transform group-hover:scale-110 transition-transform duration-300"></i>
+                            </div>
+                            <div class="mt-6 space-y-1">
+                                <p class="text-xs font-mono text-zinc-500 uppercase tracking-widest">Thermodynamic Status</p>
+                                <p class="text-base font-semibold text-zinc-300">Ready to Activate</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="bg-zinc-950/60 border border-zinc-850 p-3 rounded-xl flex items-center space-x-3">
+                                <div class="bg-orange-500/10 p-2 rounded-lg text-orange-brand text-xs"><i class="fa-solid fa-temperature-arrow-up"></i></div>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center">
+                                        <p class="text-xs font-bold text-zinc-300">Thermal Preparation</p>
+                                        <span class="text-[10px] font-mono text-orange-400">Optimum</span>
+                                    </div>
+                                    <div class="w-full bg-zinc-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                                        <div class="bg-gradient-to-r from-orange-500 to-amber-400 h-full rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-zinc-950/60 border border-zinc-850 p-3 rounded-xl flex items-center space-x-3">
+                                <div class="bg-zinc-800 p-2 rounded-lg text-zinc-400 text-xs"><i class="fa-solid fa-wind"></i></div>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center">
+                                        <p class="text-xs font-bold text-zinc-300">Micro-circulation</p>
+                                        <span class="text-[10px] font-mono text-zinc-400">Enhanced</span>
+                                    </div>
+                                    <div class="w-full bg-zinc-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                                        <div class="bg-zinc-600 h-full rounded-full" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: SHOP (รายการสินค้าทั้งหมด 10 ตัวอย่าง) -->
     <section id="shop" class="py-24 max-w-7xl mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16 space-y-2">
             <h2 class="text-3xl font-bold text-zinc-950 tracking-tight">RAPTOR OFFICIAL SHOP</h2>
@@ -146,7 +197,6 @@
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             
-            <!-- ชิ้นที่ 1: Raptor Sport Warming Spray (สเปรย์สูตรร้อน - คลิกเปิดหน้าต่างเซลเพจ) -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1">
                 <div class="bg-orange-50 p-6 relative flex items-center justify-center h-48 cursor-pointer" onclick="openProductModal()">
                     <i class="fa-solid fa-fire text-5xl text-orange-600 group-hover:scale-110 transition-transform"></i>
@@ -167,7 +217,6 @@
                 </div>
             </div>
 
-            <!-- ชิ้นที่ 2 -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
                 <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
                     <i class="fa-solid fa-snowflake text-5xl text-blue-500 group-hover:scale-110 transition-transform"></i>
@@ -179,7 +228,6 @@
                 </div>
             </div>
 
-            <!-- ชิ้นที่ 3 -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
                 <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-bolt text-5xl text-amber-500"></i></div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
@@ -188,7 +236,6 @@
                 </div>
             </div>
 
-            <!-- ชิ้นที่ 4 -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
                 <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-bottle-droplet text-5xl text-purple-500"></i></div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
@@ -197,7 +244,6 @@
                 </div>
             </div>
 
-            <!-- ชิ้นที่ 5 -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
                 <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-spa text-5xl text-teal-600"></i></div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
@@ -206,7 +252,6 @@
                 </div>
             </div>
 
-            <!-- ชิ้นที่ 6 -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
                 <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-capsules text-5xl text-emerald-600"></i></div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
@@ -215,7 +260,6 @@
                 </div>
             </div>
 
-            <!-- ชิ้นที่ 7 -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
                 <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-glass-water text-5xl text-blue-400"></i></div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
@@ -224,7 +268,6 @@
                 </div>
             </div>
 
-            <!-- ชิ้นที่ 8 -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
                 <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-cubes-nutrients text-5xl text-yellow-600"></i></div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
@@ -233,7 +276,6 @@
                 </div>
             </div>
 
-            <!-- ชิ้นที่ 9 -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
                 <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-shield-halved text-5xl text-red-500"></i></div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
@@ -242,7 +284,6 @@
                 </div>
             </div>
 
-            <!-- ชิ้นที่ 10 -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
                 <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-dumbbell text-5xl text-zinc-600"></i></div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
@@ -254,25 +295,20 @@
         </div>
     </section>
 
-    <!-- PREMIUM PRODUCT WINDOW (ป๊อปอัพเซเลเพจสเปรย์สูตรร้อนที่ส่งมา) -->
     <div id="product-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
             
-            <!-- ปุ่มปิดป๊อปอัพ -->
             <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
-            <!-- แถบหัวเรื่อง -->
             <div class="bg-zinc-900 text-white px-6 py-4 flex items-center justify-between">
                 <h3 class="font-bold text-lg text-orange-brand tracking-wider"><i class="fa-solid fa-bolt-lightning"></i> RAPTOR SPORT PREMIUM</h3>
                 <span class="text-xs text-gray-400 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
             </div>
 
-            <!-- เนื้อหาภายใน -->
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-10">
                 
-                <!-- ส่วนที่ 1: ภาพและรายละเอียดแบบเซลเพจหลัก -->
                 <section class="bg-white rounded-2xl shadow-sm p-6 grid md:grid-cols-2 gap-8 items-center">
                     <div class="flex flex-col items-center">
                         <div class="w-full max-w-[260px] h-96 bg-gradient-to-b from-orange-500 to-red-600 rounded-2xl shadow-xl flex flex-col justify-between p-6 text-white text-center">
@@ -307,7 +343,6 @@
                     </div>
                 </section>
 
-                <!-- ส่วนที่ 2: แฟลชเซลนับเวลาถอยหลัง -->
                 <section class="bg-gradient-to-r from-red-600 to-orange-500 rounded-2xl shadow-md p-6 text-white text-center relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 text-white/10 text-9xl font-black rotate-12"><i class="fa-solid fa-bolt"></i></div>
                     <h3 class="text-xl font-bold uppercase tracking-wider flex justify-center items-center gap-2">
@@ -326,7 +361,6 @@
                     </a>
                 </section>
 
-                <!-- ส่วนที่ 3: สารประกอบหลัก -->
                 <section class="bg-white rounded-2xl shadow-sm p-6">
                     <h3 class="text-xl font-bold text-center mb-6 border-b border-gray-100 pb-3 text-gray-900">ประสิทธิภาพจากส่วนประกอบสำคัญ</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -358,7 +392,6 @@
                     </div>
                 </section>
 
-                <!-- ส่วนที่ 4: กราฟประสิทธิภาพ (Chart.js) -->
                 <section class="bg-white rounded-2xl shadow-sm p-6">
                     <h3 class="text-xl font-bold text-center mb-1 text-gray-900">กราฟแสดงประสิทธิภาพการคลายกล้ามเนื้อ</h3>
                     <p class="text-xs text-gray-500 text-center mb-6">เปรียบเทียบระดับความพร้อมและผ่อนคลายของกล้ามเนื้อหลังฉีดใช้งาน (นาที)</p>
@@ -367,7 +400,6 @@
                     </div>
                 </section>
 
-                <!-- ส่วนที่ 5: ฟอร์มสั่งซื้อระบบปลายทาง -->
                 <section id="modal-order-form" class="bg-white rounded-2xl shadow-md border-2 border-[#FF6B00] p-6 space-y-6">
                     <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
                         <i class="fa-solid fa-fire animate-bounce mr-1"></i> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
@@ -399,7 +431,6 @@
         </div>
     </div>
 
-    <!-- SECTION 3: REVIEWS -->
     <section id="reviews" class="py-24 bg-zinc-950 text-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
@@ -433,10 +464,8 @@
         </div>
     </section>
 
-    <!-- SECTION 4: CONTACT -->
     <section id="contact" class="py-24 max-w-4xl mx-auto px-6">
         <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden grid grid-cols-1 md:grid-cols-2">
-            <!-- Contact Form -->
             <div class="p-8 space-y-6">
                 <div>
                     <h2 class="text-2xl font-bold text-zinc-900">CONTACT US</h2>
@@ -459,7 +488,6 @@
                 </form>
             </div>
             
-            <!-- Contact Info -->
             <div class="bg-zinc-900 p-8 text-white flex flex-col justify-between space-y-8">
                 <div>
                     <h3 class="text-xl font-bold text-orange-brand mb-2">Raptor Global Import Co., Ltd.</h3>
@@ -482,12 +510,10 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="bg-zinc-950 text-zinc-600 text-center py-6 text-xs border-t border-zinc-900">
         <p>&copy; 2026 RAPTOR SPORT WARMING SPRAY. All Rights Reserved.</p>
     </footer>
 
-    <!-- JAVASCRIPT SYSTEM LOGIC -->
     <script>
         let myChartInstance = null;
 
