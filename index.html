@@ -1,262 +1,774 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAPTOR SPORT FOOT SPRAY</title>
-    <!-- Tailwind CSS -->
+    <title>Raptor Sport | Official Store</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
         body { font-family: 'Kanit', sans-serif; }
+        .text-orange-brand { color: #FF6B00; }
+        .bg-orange-brand { background-color: #FF6B00; }
+        
+        /* Premium top navigation */
+        header {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.88), rgba(9, 9, 11, 0.9));
+            backdrop-filter: blur(14px) saturate(140%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+        }
+
+        .nav-link {
+            position: relative;
+            color: #d4d4d8;
+            transition: color .25s ease;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 2px;
+            border-radius: 999px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform .25s ease;
+            background: linear-gradient(90deg, #FF6B00, #FDBA74);
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .logo-premium-shell {
+            background: radial-gradient(circle at 30% 20%, rgba(59,130,246,0.28), rgba(15,23,42,0.92) 55%, rgba(2,6,23,0.98) 100%);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: 0 8px 20px rgba(15,23,42,0.5), 0 0 0 1px rgba(255,255,255,0.08) inset;
+            border-radius: 16px;
+            padding: 8px 12px;
+        }
+
+        .logo-premium-img {
+            mix-blend-mode: multiply;
+            filter: contrast(1.18) brightness(1.08);
+        }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100">
+<body class="bg-gray-50 text-gray-800">
 
-    <!-- Header / Nav -->
-    <header class="bg-emerald-950/80 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-emerald-800/30">
-        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <span class="font-bold text-xl tracking-wider text-emerald-400">RAPTOR OFFICIAL STORE</span>
+    <header class="fixed top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+            
+            <div class="hidden md:flex space-x-10 w-[40%] justify-end pr-10 font-semibold tracking-wide text-sm">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#shop" class="nav-link">Shop</a>
             </div>
-            <span class="bg-orange-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded-full">โปรโมชั่นพิเศษ</span>
+
+            <div class="hidden md:flex flex-shrink-0 items-center justify-center w-auto md:w-[20%]">
+                <a href="#home" class="flex items-center transform hover:scale-105 transition-transform duration-200">
+                    <div class="logo-premium-shell">
+                        <img src="Capture4646 (1).png" alt="Raptor Logo" class="logo-premium-img h-12 w-auto object-contain" onerror="this.style.display='none'; this.parentElement.nextElementSibling.style.display='block';">
+                    </div>
+                    <span class="hidden font-black text-2xl tracking-wider text-white">RAPTOR</span>
+                </a>
+            </div>
+
+            <div class="hidden md:flex space-x-10 w-[40%] pl-10 font-semibold tracking-wide text-sm items-center">
+                <a href="#reviews" class="nav-link">Reviews</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <div class="relative pl-6 border-l border-zinc-700/70 cursor-pointer text-zinc-100 hover:text-[#FF6B00] transition-colors">
+                    <i class="fa-solid fa-shopping-cart text-lg"></i>
+                    <span class="absolute -top-2 -right-2 bg-[#FF6B00] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </div>
+            </div>
+
+            <div class="md:hidden flex items-center justify-between w-full">
+                <div class="flex items-center">
+                    <div class="logo-premium-shell">
+                        <img src="Capture4646 (1).png" alt="Raptor Logo" class="logo-premium-img h-10 w-auto object-contain" onerror="this.style.display='none'; this.parentElement.nextElementSibling.style.display='block';">
+                    </div>
+                    <span class="hidden font-black text-xl tracking-wider text-zinc-900">RAPTOR</span>
+                </div>
+                <button id="mobile-menu-btn" class="text-zinc-100 focus:outline-none text-2xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-6 py-4 space-y-4 shadow-xl">
+            <a href="#home" class="block text-zinc-300 hover:text-[#FF6B00] font-semibold py-1">Home</a>
+            <a href="#shop" class="block text-zinc-300 hover:text-[#FF6B00] font-semibold py-1">Shop</a>
+            <a href="#reviews" class="block text-zinc-300 hover:text-[#FF6B00] font-semibold py-1">Reviews</a>
+            <a href="#contact" class="block text-zinc-300 hover:text-[#FF6B00] font-semibold py-1">Contact</a>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-6 space-y-8 mb-24">
+    <section id="home" class="relative min-h-screen pt-32 pb-20 bg-zinc-950 text-white flex items-center overflow-hidden">
+        
+        <div class="absolute inset-0 z-0 opacity-40 pointer-events-none select-none">
+            <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-orange-600/30 to-red-600/0 blur-3xl"></div>
+            <div class="absolute bottom-[-30%] left-[-20%] w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-zinc-800/20 to-zinc-900/0 blur-3xl"></div>
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        </div>
 
-        <!-- 1. ส่วนภาพสินค้า, ชื่อสินค้า, คำอธิบาย, ราคา, แฟลชเซล -->
-        <section class="bg-slate-800 rounded-2xl shadow-xl p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6 border border-slate-700/50">
-            <!-- ภาพสินค้า -->
-            <div class="flex flex-col justify-center items-center bg-gradient-to-b from-emerald-950 to-slate-800 rounded-xl p-4 min-h-[350px]">
-                <!-- นำ URL รูปภาพขวด Foot Spray ของคุณมาใส่ที่นี่แทนภาพเดิม -->
-                <img src="https://images.squarespace-cdn.com/content/v1/5c1a8dc49f1115865eb8df33/1545625126302-3I73Z9JZW3W6W5W7X9Y0/ke17ZwdGBToddI8pDm48kNiEM88mBdNsFNTbHQQGiPAUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoYc-ogX8kK6VKVWq7xSM3mw69Oee2OSQqWP5QgnqFstT2t99pT1Bqr4vF7Y7fCHZ4w7X_29mWdW9874K86x24QfO1BdpFMs/Product-Placeholder.jpg" alt="RAPTOR SPORT FOOT SPRAY" class="max-h-[400px] object-contain rounded-lg">
-            </div>
-
-            <!-- รายละเอียดสินค้า & ราคา -->
-            <div class="flex flex-col justify-between space-y-4">
-                <div>
-                    <span class="bg-emerald-500/10 text-emerald-400 text-xs font-bold px-2.5 py-1 rounded border border-emerald-500/20 uppercase tracking-widest">Cool & Dry Tech</span>
-                    <h1 class="text-2xl md:text-3xl font-bold text-white mt-2 mb-1">
-                        RAPTOR SPORT FOOT SPRAY
-                    </h1>
-                    <p class="text-sm text-orange-400 font-medium mb-4">TOTAL ODOR DEFENSE | สเปรย์ฉีดเท้าสูตรแห้งเย็นสดชื่น</p>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        ปกป้องมั่นใจทุกก้าวเดินด้วยนวัตกรรมสเปรย์ฉีดเท้าและรองเท้าสูตรพิเศษเพื่อนักกีฬาและผู้ขยับร่างกายตลอดเวลา ช่วยระงับกลิ่นเท้าได้อย่างเด็ดขาดด้วยเทคโนโลยี Total Odor Defense พร้อมให้ความรู้สึกเย็นสบาย แห้งไว ไม่เหนียวเหนอะหนะ ลดความอับชื้นสะสมในรองเท้าได้อย่างยาวนาน ปริมาณ 200 ml.
-                    </p>
-                </div>
-
-                <!-- แฟลชเซล (Flash Sale Banner) -->
-                <div class="bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl p-3 shadow-md flex justify-between items-center animate-pulse">
-                    <div class="flex items-center space-x-2">
-                        <i class="fa-solid fa-bolt text-xl text-yellow-300"></i>
-                        <span class="font-bold text-sm md:text-base tracking-wide">FLASH SALE จำกัดเวลา!</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-[10px] block text-orange-100">สิ้นสุดใน</span>
-                        <span id="countdown" class="font-mono font-bold bg-black/40 px-2 py-0.5 rounded text-sm text-yellow-300">00:15:00</span>
-                    </div>
-                </div>
-
-                <!-- ราคาและปุ่มสั่งซื้อ -->
-                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
-                    <div class="flex items-baseline space-x-3 mb-3">
-                        <span class="text-3xl font-extrabold text-orange-500">฿179</span>
-                        <span class="text-sm text-slate-400 line-through">฿290</span>
-                        <span class="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-0.5 rounded border border-red-500/30">ประหยัด 38%</span>
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-zinc-900/80 border border-zinc-800 rounded-full py-1.5 px-4 backdrop-blur-md mx-auto lg:mx-0">
+                        <span class="flex h-2 w-2 rounded-full bg-orange-500 animate-pulse"></span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-zinc-300">Raptor Performance Lab</span>
                     </div>
                     
-                    <!-- ปุ่มสั่งซื้อเลย -->
-                    <a href="#order-form" class="block text-center bg-emerald-600 hover:bg-emerald-500 active:scale-98 transition text-white font-bold text-lg py-3 px-6 rounded-xl shadow-lg shadow-emerald-600/30">
-                        <i class="fa-solid fa-cart-shopping mr-2"></i> สั่งซื้อเลยตอนนี้
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. ประสิทธิภาพของสารประกอบ -->
-        <section class="bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-700/50">
-            <h2 class="text-xl font-bold text-white mb-6 flex items-center border-b pb-3 border-slate-700">
-                <i class="fa-solid fa-flask-vial mr-2 text-emerald-400"></i> ประสิทธิภาพของสารประกอบสำคัญ
-            </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="border border-slate-700 rounded-xl p-4 bg-slate-900/50 text-center">
-                    <div class="w-12 h-12 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-3 border border-emerald-500/20">
-                        <i class="fa-solid fa-shield-virus text-emerald-400 text-xl"></i>
+                    <div class="space-y-4">
+                        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1] uppercase">
+                            Ignite Your <br class="hidden sm:inline">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-orange-500 to-amber-400">
+                                Inner Peak
+                            </span>
+                        </h1>
+                        <p class="text-lg sm:text-xl text-zinc-400 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            วิทยาศาสตร์การกีฬาขั้นสูงในรูปแบบสเปรย์ 
+                            ออกแบบมาเพื่อปลุกความพร้อมของเส้นใยกล้ามเนื้ออย่างล้ำลึก 
+                            ทลายทุกขีดจำกัดก่อนที่เกมการแข่งขันจะเริ่มขึ้น
+                        </p>
                     </div>
-                    <h3 class="font-bold text-white mb-1 text-sm">Total Odor Defense</h3>
-                    <p class="text-xs text-slate-400">สารสกัดประสิทธิภาพสูง เข้ายับยั้งเชื้อแบคทีเรียที่เป็นต้นเหตุของกลิ่นอับและกลิ่นไม่พึงประสงค์โดยตรง</p>
-                </div>
-                <div class="border border-slate-700 rounded-xl p-4 bg-slate-900/50 text-center">
-                    <div class="w-12 h-12 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-3 border border-emerald-500/20">
-                        <i class="fa-solid fa-wind text-emerald-400 text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-white mb-1 text-sm">Cool & Dry Tech</h3>
-                    <p class="text-xs text-slate-400">ช่วยลดการหลั่งเหงื่อบริเวณฝ่าเท้า ให้สัมผัสที่แห้งสบาย เบาสบายเท้า และเย็นสดชื่นยาวนานตลอดวัน</p>
-                </div>
-                <div class="border border-slate-700 rounded-xl p-4 bg-slate-900/50 text-center">
-                    <div class="w-12 h-12 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-3 border border-emerald-500/20">
-                        <i class="fa-solid fa-shoe-prints text-emerald-400 text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-white mb-1 text-sm">Shoe Care Friendly</h3>
-                    <p class="text-xs text-slate-400">เนื้อสเปรย์ละอองละเอียด ละมุนผิว สามารถใช้ฉีดพ่นลงในรองเท้าได้โดยไม่ทำลายเส้นใยและผิวของรองเท้าคู่โปรด</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- 3. กราฟแสดงประสิทธิภาพการใช้งานสินค้า -->
-        <section class="bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-700/50">
-            <h2 class="text-xl font-bold text-white mb-4 flex items-center border-b pb-3 border-slate-700">
-                <i class="fa-solid fa-chart-line mr-2 text-emerald-400"></i> กราฟแสดงประสิทธิภาพการควบคุมกลิ่นและเหงื่อ
-            </h2>
-            <p class="text-xs text-slate-400 mb-4">*ผลการทดสอบประสิทธิภาพการลดความอับชื้นและการเกิดกลิ่นระหว่างกิจกรรมการเล่นกีฬาเป็นเวลา 12 ชั่วโมง</p>
-            <div class="w-full max-h-[300px] flex justify-center">
-                <canvas id="footSprayChart" class="w-full"></canvas>
-            </div>
-        </section>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#shop" class="group relative inline-flex items-center justify-center w-full sm:w-auto bg-orange-brand hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-xl shadow-xl shadow-orange-900/20 transition-all overflow-hidden">
+                            <span class="relative z-10 flex items-center gap-2">
+                                เลือกซื้อผลิตภัณฑ์ <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+                            </span>
+                        </a>
+                        <a href="#reviews" class="inline-flex items-center justify-center w-full sm:w-auto bg-zinc-900/50 hover:bg-zinc-900 border border-zinc-800 text-zinc-300 font-semibold py-4 px-8 rounded-xl transition-all backdrop-blur-sm">
+                            วิทยาศาสตร์เบื้องหลังเรา
+                        </a>
+                    </div>
 
-        <!-- 4. รีวิวลูกค้า -->
-        <section class="bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-700/50">
-            <h2 class="text-xl font-bold text-white mb-6 flex items-center border-b pb-3 border-slate-700">
-                <i class="fa-solid fa-star mr-2 text-orange-400"></i> รีวิวจากผู้ใช้งานจริง
-            </h2>
-            <div class="space-y-4">
-                <div class="border-b border-slate-700 pb-4">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="font-semibold text-sm text-slate-200">คุณ ชัยวัฒน์ (นักฟุตบอลสโมสรท้องถิ่น)</span>
-                        <div class="text-orange-400 text-xs">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-zinc-900 text-center lg:text-left max-w-md mx-auto lg:mx-0">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white">100%</div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-500 mt-1">Anti-Doping Safe</div>
+                        </div>
+                        <div class="border-x border-zinc-900 px-4">
+                            <div class="text-2xl sm:text-3xl font-bold text-white">Fast</div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-500 mt-1">Deep Absorption</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white">Premium</div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-500 mt-1">Sport Grade</div>
                         </div>
                     </div>
-                    <p class="text-slate-400 text-sm">"ปกติถอดสตั๊ดมาเพื่อนแทบวิ่งหนีครับ พอได้ลองแร็พเตอร์ตัวนี้ฉีดก่อนใส่ถุงเท้า เล่นเสร็จถอดมาไม่มีกลิ่นเลย แถมเท้ายังแห้งสบายไม่แฉะเหงื่อด้วย สุดยอดมากครับ"</p>
                 </div>
-                <div class="border-b border-slate-700 pb-4">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="font-semibold text-sm text-slate-200">คุณ อานนท์ (เทรนเนอร์ฟิตเนส)</span>
-                        <div class="text-orange-400 text-xs">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                
+                <div class="lg:col-span-5 relative w-full">
+                    <div class="relative w-full max-w-[380px] mx-auto aspect-[3/4] bg-zinc-900/40 border border-zinc-800/80 rounded-3xl p-8 backdrop-blur-xl flex flex-col justify-between overflow-hidden shadow-2xl">
+                        
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl"></div>
+                        <div class="absolute bottom-4 left-4 font-mono text-[9px] text-zinc-700 tracking-widest select-none">
+                            SYS.LOC // 10.98.42
                         </div>
+
+                        <div class="flex justify-between items-start border-b border-zinc-800 pb-4">
+                            <div>
+                                <span class="text-[10px] uppercase font-mono tracking-widest text-zinc-500 block">Formulation</span>
+                                <span class="text-sm font-bold text-zinc-200 tracking-wide">DOUBLE ACTION SYSTEM</span>
+                            </div>
+                            <div class="text-orange-brand text-xl"><i class="fa-solid fa-circle-nodes"></i></div>
+                        </div>
+
+                        <div class="my-auto py-8 text-center relative group">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-28 h-28 bg-orange-500/5 border border-orange-500/20 rounded-full animate-ping duration-3000"></div>
+                            </div>
+                            <div class="relative z-10 inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 border border-zinc-700 shadow-inner group-hover:border-orange-500/50 transition-colors duration-500">
+                                <i class="fa-solid fa-bolt-lightning text-4xl text-orange-brand transform group-hover:scale-110 transition-transform duration-300"></i>
+                            </div>
+                            <div class="mt-6 space-y-1">
+                                <p class="text-xs font-mono text-zinc-500 uppercase tracking-widest">Thermodynamic Status</p>
+                                <p class="text-base font-semibold text-zinc-300">Ready to Activate</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="bg-zinc-950/60 border border-zinc-850 p-3 rounded-xl flex items-center space-x-3">
+                                <div class="bg-orange-500/10 p-2 rounded-lg text-orange-brand text-xs"><i class="fa-solid fa-temperature-arrow-up"></i></div>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center">
+                                        <p class="text-xs font-bold text-zinc-300">Thermal Preparation</p>
+                                        <span class="text-[10px] font-mono text-orange-400">Optimum</span>
+                                    </div>
+                                    <div class="w-full bg-zinc-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                                        <div class="bg-gradient-to-r from-orange-500 to-amber-400 h-full rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-zinc-950/60 border border-zinc-850 p-3 rounded-xl flex items-center space-x-3">
+                                <div class="bg-zinc-800 p-2 rounded-lg text-zinc-400 text-xs"><i class="fa-solid fa-wind"></i></div>
+                                <div class="flex-grow">
+                                    <div class="flex justify-between items-center">
+                                        <p class="text-xs font-bold text-zinc-300">Micro-circulation</p>
+                                        <span class="text-[10px] font-mono text-zinc-400">Enhanced</span>
+                                    </div>
+                                    <div class="w-full bg-zinc-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                                        <div class="bg-zinc-600 h-full rounded-full" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <p class="text-slate-400 text-sm">"ต้องใส่ผ้าใบสอนลูกค้าทั้งวัน เดินไปเดินมาสิบกว่าชั่วโมง สเปรย์ตัวนี้เอาอยู่ยาวๆ ครับ รู้สึกเย็นๆ สดชื่นตอนฉีด และคุมกลิ่นอับได้ดีมากๆ แนะนำเลยครับคุ้มราคา"</p>
                 </div>
+
             </div>
-        </section>
-
-        <!-- 5. แฟลชเซลรอบสอง และ ฟอร์มสั่งซื้อสินค้า -->
-        <section id="order-form" class="bg-slate-800 rounded-2xl shadow-xl p-6 border-2 border-emerald-500">
-            <div class="bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl p-4 shadow-md flex justify-between items-center mb-6">
-                <div>
-                    <span class="font-bold text-lg block"><i class="fa-solid fa-fire mr-1"></i> โอกาสสุดท้าย! ราคาพิเศษ ฿179</span>
-                    <span class="text-xs text-orange-100">กรอกข้อมูลเพื่อรับสิทธิ์ส่งฟรีเก็บเงินปลายทางทันที</span>
-                </div>
-                <div class="text-right bg-black/20 p-2 rounded-lg">
-                    <span class="text-[10px] block text-white/80">จำกัดโควต้า</span>
-                    <span class="font-bold text-base text-yellow-300">เหลือ 9 ชิ้นสุดท้าย</span>
-                </div>
-            </div>
-
-            <h3 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-file-invoice mr-2 text-emerald-400"></i> ข้อมูลการจัดส่งสินค้า</h3>
-            <form class="space-y-4" onsubmit="alert('ระบบจำลอง: บันทึกข้อมูลออเดอร์ RAPTOR FOOT SPRAY เรียบร้อยแล้ว!'); return false;">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">ชื่อ-นามสกุล *</label>
-                    <input type="text" required placeholder="กรุณากรอกชื่อและนามสกุล" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">เบอร์โทรศัพท์ *</label>
-                    <input type="tel" required placeholder="กรุณากรอกเบอร์โทรศัพท์ที่ติดต่อได้" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">ที่อยู่สำหรับการจัดส่ง *</label>
-                    <textarea required rows="3" placeholder="บ้านเลขที่, หมู่ที่, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
-                </div>
-                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 flex items-center justify-between">
-                    <span class="text-sm font-medium text-slate-300">การชำระเงิน</span>
-                    <span class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-truck-dropoff mr-1"></i> เก็บเงินปลายทาง (COD) ไม่บวกเพิ่ม</span>
-                </div>
-
-                <!-- ปุ่มสั่งซื้อปิดท้าย -->
-                <button type="submit" class="w-full text-center bg-orange-500 hover:bg-orange-600 active:scale-98 transition text-white font-bold text-xl py-4 px-6 rounded-xl shadow-lg shadow-orange-500/30 cursor-pointer uppercase tracking-wider">
-                    <i class="fa-solid fa-circle-check mr-2"></i> ยืนยันการสั่งซื้อด่วน ฿179
-                </button>
-            </form>
-        </section>
-
-    </main>
-
-    <!-- Sticky Bottom Bar สำหรับโทรศัพท์มือถือ -->
-    <div class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 p-3 shadow-2xl md:hidden z-40 flex justify-between items-center">
-        <div>
-            <span class="text-[10px] text-slate-400 block">ราคาโปรโมชั่นวันนี้</span>
-            <span class="text-2xl font-black text-orange-500">฿179</span>
         </div>
-        <a href="#order-form" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-2.5 rounded-lg text-sm shadow-md">
-            สั่งซื้อเลย <i class="fa-solid fa-chevron-right ml-1"></i>
-        </a>
+    </section>
+
+    <section id="shop" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-2">
+            <h2 class="text-3xl font-bold text-zinc-950 tracking-tight">RAPTOR OFFICIAL SHOP</h2>
+            <div class="h-1 w-20 bg-[#FF6B00] mx-auto rounded-full"></div>
+            <p class="text-gray-500 text-sm">เลือกซื้อผลิตภัณฑ์ดูแลร่างกายสำหรับนักกีฬาประสิทธิภาพสูง</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
+                <div class="bg-orange-50 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openProductModal()">
+                    <img src="S__117481475.jpg" alt="Raptor Sport Warming Spray" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
+                    <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded animate-pulse">Flash Sale</span>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2 cursor-pointer hover:text-orange-brand" onclick="openProductModal()">Raptor Sport Warming Spray (สเปรย์สูตรร้อน)</h3>
+                        <p class="text-xs text-gray-400 mt-1">สูตรผ่อนคลายกล้ามเนื้อฉับพลัน เร่งด่วน</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <div>
+                            <span class="font-bold text-red-600 text-base">฿179</span>
+                            <span class="text-[10px] text-gray-400 line-through block">฿350</span>
+                        </div>
+                        <button onclick="openProductModal()" class="bg-orange-brand text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-zinc-900 transition-colors font-semibold">ดูข้อมูล / ซื้อ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48 cursor-pointer" onclick="openCoolingModal()">
+                    <img src="Gemini_Generated_Image_td8ebptd8ebptd8e.png" alt="Raptor Sport Cooling Spray" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
+                    <span class="absolute top-2 left-2 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">Cool</span>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2 cursor-pointer hover:text-blue-600" onclick="openCoolingModal()">Raptor Sport Cooling Spray (สเปรย์สูตรเย็น)</h3><p class="text-xs text-gray-400 mt-1">สูตรไร้การบูร บรรเทาอาการปวดบวมอักเสบ</p></div>
+                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿250</span><button onclick="openCoolingModal()" class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors font-semibold">ดูข้อมูล / ซื้อ</button></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-bolt text-5xl text-amber-500"></i></div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Go Energy Gel (เจลพลังงาน)</h3><p class="text-xs text-gray-400 mt-1">ให้พลังงานรวดเร็วสำหรับนักวิ่งและนักกีฬา</p></div>
+                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿85</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-bottle-droplet text-5xl text-purple-500"></i></div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Dual Action Pack (เซ็ตคู่ ร้อน-เย็น)</h3><p class="text-xs text-gray-400 mt-1">รวมสเปรย์สูตรร้อนและเย็นในกล่องพิเศษ</p></div>
+                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿480</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-spa text-5xl text-teal-600"></i></div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Performance Massage Oil</h3><p class="text-xs text-gray-400 mt-1">น้ำมันนวดผ่อนคลายกล้ามเนื้อสูตรเข้มข้น</p></div>
+                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿320</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-capsules text-5xl text-emerald-600"></i></div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Amino Premium (30 แคปซูล)</h3><p class="text-xs text-gray-400 mt-1">กรดอะมิโนจำเป็นซ่อมแซมกล้ามเนื้อหลังซ้อม</p></div>
+                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿590</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-glass-water text-5xl text-blue-400"></i></div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Electrolyte Powder (เกลือแร่)</h3><p class="text-xs text-gray-400 mt-1">ช่วยรักษาสมดุลน้ำและป้องกันตะคริว</p></div>
+                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿45</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48 cursor-pointer" onclick="openWheyModal()"><i class="fa-solid fa-cubes-nutrients text-5xl text-yellow-600"></i><span class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">New</span></div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2 cursor-pointer hover:text-emerald-700" onclick="openWheyModal()">RAPTOR SPORT FOOT SPRAY</h3><p class="text-xs text-gray-400 mt-1">ช่วยระงับกลิ่นเท้าได้อย่างเด็ดขาดด้วยเทคโนโลยี Total Odor Defense </p></div>
+                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿750</span><button onclick="openWheyModal()" class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors font-semibold">ดูข้อมูล / ซื้อ</button></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-shield-halved text-5xl text-red-500"></i></div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Joint Support (บำรุงข้อต่อ)</h3><p class="text-xs text-gray-400 mt-1">ลดการเสียดสีของข้อต่อกระดูกขณะเคลื่อนไหว</p></div>
+                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿420</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-dumbbell text-5xl text-zinc-600"></i></div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Resistance Band (ยางยืด)</h3><p class="text-xs text-gray-400 mt-1">แรงต้านสูงสำหรับฝึกกล้ามเนื้อและวอร์มอัพ</p></div>
+                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿180</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="product-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
+        <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
+            
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="bg-zinc-900 text-white px-6 py-4 flex items-center justify-between">
+                <h3 class="font-bold text-lg text-orange-brand tracking-wider"><i class="fa-solid fa-bolt-lightning"></i> RAPTOR SPORT PREMIUM</h3>
+                <span class="text-xs text-gray-400 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-4 py-6 space-y-10">
+                
+                <section class="bg-white rounded-2xl shadow-sm p-6 grid md:grid-cols-2 gap-8 items-center">
+                    <div class="flex flex-col items-center">
+                        <div class="w-full max-w-[260px] h-96 bg-gradient-to-b from-orange-100 to-orange-200 rounded-2xl shadow-xl flex items-center justify-center p-4">
+                            <img src="S__117481475.jpg" alt="Raptor Sport Warming Spray" class="max-h-full w-auto object-contain rounded-xl">
+                        </div>
+                        <p class="text-xs text-gray-400 mt-3"><i class="fa-solid fa-arrows-rotate"></i> สินค้าแท้ 100% ปริมาณสุทธิ 150 ml</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <span class="bg-orange-100 text-orange-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Hot Item</span>
+                        <h2 class="text-3xl font-bold tracking-tight text-gray-900">RAPTOR SPORT WARMING SPRAY</h2>
+                        <p class="text-base text-gray-600 font-medium">สเปรย์ช่วยวอร์มร้อนสำหรับนักกีฬาและผู้รักการออกกำลังกาย</p>
+                        
+                        <div class="border-t border-b border-gray-100 py-3 space-y-1">
+                            <p class="text-gray-500 text-sm"><i class="fa-solid fa-check text-green-500 mr-2"></i>RELAX MUSCLE (ช่วยผ่อนคลายกล้ามเนื้อ)</p>
+                            <p class="text-gray-500 text-sm"><i class="fa-solid fa-check text-green-500 mr-2"></i>WARM UP BODY (เตรียมพร้อมร่างกายก่อนแข่ง)</p>
+                            <p class="text-gray-500 text-sm"><i class="fa-solid fa-check text-green-500 mr-2"></i>BEFORE & AFTER SPORTS (ใช้ได้ทั้งก่อนและหลังเล่นกีฬา)</p>
+                        </div>
+
+                        <div class="flex items-baseline space-x-3">
+                            <span class="text-4xl font-extrabold text-red-600">฿179</span>
+                            <span class="text-sm text-gray-400 line-through">฿350</span>
+                            <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">-49% OFF</span>
+                        </div>
+                        <p class="text-xs text-amber-600 bg-amber-50 p-3 rounded border border-amber-200"><i class="fa-solid fa-circle-info"></i> ซึมเร็ว ไม่เหนียวเหนอะหนะ ให้ความรู้สึกร้อนยาวนาน สบายเส้น</p>
+                    </div>
+                </section>
+
+                <section class="bg-gradient-to-r from-red-600 to-orange-500 rounded-2xl shadow-md p-6 text-white text-center relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 text-white/10 text-9xl font-black rotate-12"><i class="fa-solid fa-bolt"></i></div>
+                    <h3 class="text-xl font-bold uppercase tracking-wider flex justify-center items-center gap-2">
+                        <i class="fa-solid fa-stopwatch animate-pulse"></i> Flash Sale ข้อเสนอเวลาจำกัด!
+                    </h3>
+                    <p class="text-sm text-orange-100 mt-1">ราคาพิเศษนี้จะสิ้นสุดในอีก</p>
+                    
+                    <div class="flex justify-center space-x-3 my-4">
+                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="modal-hours" class="text-2xl font-bold">01</span><div class="text-[10px] text-gray-300">ชม.</div></div>
+                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="modal-minutes" class="text-2xl font-bold">45</span><div class="text-[10px] text-gray-300">นาที</div></div>
+                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="modal-seconds" class="text-2xl font-bold">30</span><div class="text-[10px] text-gray-300">วิ</div></div>
+                    </div>
+
+                    <a href="#modal-order-form" class="inline-block w-full sm:w-auto bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-extrabold text-lg px-8 py-3 rounded-full transition-all transform hover:scale-105 shadow">
+                        <i class="fa-solid fa-cart-shopping"></i> สั่งซื้อราคา 179 บาทเลยตอนนี้!
+                    </a>
+                </section>
+
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-center mb-6 border-b border-gray-100 pb-3 text-gray-900">ประสิทธิภาพจากส่วนประกอบสำคัญ</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="p-4 bg-orange-50/50 rounded-xl text-center border border-orange-100">
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto text-orange-brand text-lg font-bold mb-2">5.25%</div>
+                            <h4 class="font-bold text-sm text-gray-800">Menthol</h4>
+                            <p class="text-[11px] text-gray-500 mt-1">เย็นสดชื่น ผ่อนคลายกล้ามเนื้อเฉียบพลัน</p>
+                        </div>
+                        <div class="p-4 bg-orange-50/50 rounded-xl text-center border border-orange-100">
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto text-orange-brand text-lg font-bold mb-2">4.75%</div>
+                            <h4 class="font-bold text-sm text-gray-800">Eucalyptus Oil</h4>
+                            <p class="text-[11px] text-gray-500 mt-1">กลิ่นหอมสดชื่น กระตุ้นการตื่นตัว</p>
+                        </div>
+                        <div class="p-4 bg-orange-50/50 rounded-xl text-center border border-orange-100">
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto text-orange-brand text-lg font-bold mb-2">2.25%</div>
+                            <h4 class="font-bold text-sm text-gray-800">Clove Oil</h4>
+                            <p class="text-[11px] text-gray-500 mt-1">ช่วยลดอาการตึงตัวและเมื่อยล้า</p>
+                        </div>
+                        <div class="p-4 bg-orange-50/50 rounded-xl text-center border border-orange-100">
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto text-orange-brand text-lg font-bold mb-2">0.50%</div>
+                            <h4 class="font-bold text-sm text-gray-800">Methyl Nicotinate</h4>
+                            <p class="text-[11px] text-gray-500 mt-1">กระตุ้นการไหลเวียนโลหิต ให้ความร้อนยาวนาน</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-gray-50 p-4 rounded-xl text-xs text-gray-600 space-y-1">
+                        <p class="font-bold text-gray-700 text-sm"><i class="fa-solid fa-circle-exclamation text-amber-500 mr-1"></i> วิธีใช้และข้อควรระวัง:</p>
+                        <p>• เขย่ากระป๋องก่อนใช้ ฉีดสเปรย์บริเวณที่ต้องการห่างจากผิว 10-15 ซม. ก่อนหรือหลังออกกำลังกาย</p>
+                        <p>• ใช้สำหรับภายนอกเท่านั้น หลีกเลี่ยงการสัมผัสดวงตา และห้ามฉีดบริเวณแผลเปิด</p>
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-center mb-1 text-gray-900">กราฟแสดงประสิทธิภาพการคลายกล้ามเนื้อ</h3>
+                    <p class="text-xs text-gray-500 text-center mb-6">เปรียบเทียบระดับความพร้อมและผ่อนคลายของกล้ามเนื้อหลังฉีดใช้งาน (นาที)</p>
+                    <div class="relative w-full max-w-[500px] mx-auto h-[250px]">
+                        <canvas id="efficiencyChart"></canvas>
+                    </div>
+                </section>
+
+                <section id="modal-order-form" class="bg-white rounded-2xl shadow-md border-2 border-[#FF6B00] p-6 space-y-6">
+                    <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
+                        <i class="fa-solid fa-fire animate-bounce mr-1"></i> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
+                    <form class="space-y-4" onsubmit="alert('ระบบบันทึกการสั่งซื้อเรียบร้อย! (นี่คือตัวอย่างหน้าเว็บ)'); closeProductModal(); return false;">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg flex justify-between items-center text-sm">
+                            <span class="font-bold text-gray-700">ยอดรวมทั้งสิ้น:</span>
+                            <span class="text-xl font-black text-orange-brand">179 บาท (ส่งฟรีปลายทาง)</span>
+                        </div>
+                        <button type="submit" class="w-full bg-orange-brand hover:bg-orange-600 text-white font-bold text-lg py-3.5 rounded-xl shadow-md transition-all">
+                            <i class="fa-solid fa-circle-check mr-1"></i> ยืนยันการสั่งซื้อเลยตอนนี้
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </div>
     </div>
 
-    <!-- Script ควบคุม Countdown และ วาดกราฟ -->
-    <script>
-        // 1. ระบบนับเวลาถอยหลัง Flash Sale (15 นาที)
-        let time = 15 * 60;
-        const countdownEl = document.getElementById('countdown');
-        setInterval(() => {
-            if(time <= 0) time = 15 * 60; 
-            let minutes = Math.floor(time / 60);
-            let seconds = time % 60;
-            countdownEl.innerHTML = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            time--;
-        }, 1000);
+    <div id="cooling-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
+        <div class="bg-slate-50 rounded-2xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-slate-200 my-8">
+            <button onclick="closeCoolingModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="bg-blue-900 text-white px-6 py-4 flex items-center justify-between">
+                <h3 class="font-bold text-lg tracking-wider"><i class="fa-solid fa-snowflake mr-1"></i> RAPTOR SPORTS ICE COLD SPRAY</h3>
+                <span class="text-xs text-blue-100 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
+            </div>
+            <div class="max-w-4xl mx-auto px-4 py-6 space-y-8 mb-6">
+                <section class="bg-white rounded-2xl shadow-md p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4">
+                        <img src="Gemini_Generated_Image_td8ebptd8ebptd8e.png" alt="RAPTOR SPORTS ICE COLD SPRAY" class="max-h-[400px] object-contain rounded-lg">
+                    </div>
+                    <div class="flex flex-col justify-between space-y-4">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-blue-900 mb-2">RAPTOR SPORTS ICE COLD SPRAY</h2>
+                            <p class="text-sm text-blue-600 font-medium mb-4">สเปรย์สูตรเย็นสำหรับนักกีฬาและผู้รักการออกกำลังกาย</p>
+                            <p class="text-slate-600 text-base leading-relaxed">นวัตกรรมสเปรย์ฉีดผิวสูตรเย็นจัด ออกแบบมาเพื่อช่วยบรรเทาความเมื่อยล้า คลายกล้ามเนื้อได้อย่างรวดเร็วหลังจากการซ้อมหรือแข่งขัน ให้ความรู้สึกเย็นสดชื่นยาวนาน ละอองสเปรย์ละเอียด ซึมไว ไม่เหนียวเหนอะหนะ ไม่มีส่วนผสมของสารที่ทำให้เกิดการระคายเคือง ปริมาณจุใจ 250 ml.</p>
+                        </div>
+                        <div class="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-3 shadow-sm flex justify-between items-center animate-pulse">
+                            <div class="flex items-center space-x-2"><i class="fa-solid fa-bolt text-xl text-yellow-300"></i><span class="font-bold text-sm md:text-base tracking-wide">FLASH SALE จำกัดเวลา!</span></div>
+                            <span class="font-mono font-bold bg-black/30 px-2 py-0.5 rounded text-sm" id="cooling-countdown">00:15:00</span>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex items-baseline space-x-3 mb-3"><span class="text-3xl font-extrabold text-red-600">฿179</span><span class="text-sm text-slate-400 line-through">฿350</span><span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">ลดมหาโหด 49%</span></div><a href="#cooling-order-form" class="block text-center bg-blue-600 hover:bg-blue-700 transition text-white font-bold text-lg py-3 px-6 rounded-xl">สั่งซื้อเลยตอนนี้</a></div>
+                    </div>
+                </section>
 
-        // 2. ระบบกราฟแท่งเปรียบเทียบประสิทธิภาพก่อน-หลังใช้งานด้วย Chart.js
-        const ctx = document.getElementById('footSprayChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['การระงับกลิ่นอับ', 'ความแห้งสบายของฝ่าเท้า', 'ความเย็นสดชื่นผ่อนคลาย'],
-                datasets: [
-                    {
-                        label: 'ก่อนใช้สเปรย์',
-                        data: [25, 30, 10],
-                        backgroundColor: 'rgba(241, 94, 34, 0.4)',
-                        borderColor: '#f15e22',
-                        borderWidth: 1.5
+                <section class="bg-white rounded-2xl shadow-md p-6">
+                    <h2 class="text-xl font-bold text-blue-900 mb-6 flex items-center border-b pb-3 border-slate-100"><i class="fa-solid fa-flask-vial mr-2 text-blue-600"></i> ประสิทธิภาพของสารประกอบสำคัญ</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="border border-slate-100 rounded-xl p-4 bg-blue-50/30 text-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-snowflake text-blue-600 text-xl"></i></div><h3 class="font-bold text-slate-800 mb-1">Extreme Cooling Agent</h3><p class="text-xs text-slate-600">ให้ความเย็นสดชื่นทันทีที่สัมผัสผิว ช่วยลดอุณหภูมิสะสมของกล้ามเนื้อได้อย่างรวดเร็ว</p></div>
+                        <div class="border border-slate-100 rounded-xl p-4 bg-blue-50/30 text-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-person-running text-blue-600 text-xl"></i></div><h3 class="font-bold text-slate-800 mb-1">Muscle Recovery Complex</h3><p class="text-xs text-slate-600">สารสกัดพิเศษช่วยผ่อนคลายกล้ามเนื้อจากการตึงเครียดและลดโอกาสการเกิดตะคริวระหว่างเล่นกีฬา</p></div>
+                        <div class="border border-slate-100 rounded-xl p-4 bg-blue-50/30 text-center"><div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-shield-halved text-blue-600 text-xl"></i></div><h3 class="font-bold text-slate-800 mb-1">Non-Camphor Formula</h3><p class="text-xs text-slate-600">สูตรอ่อนโยน ปราศจากสารการบูร ไม่ทำให้แสบร้อน คัน หรือระคายเคืองผิวหนังในระยะยาว</p></div>
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-2xl shadow-md p-6">
+                    <h2 class="text-xl font-bold text-blue-900 mb-4 flex items-center border-b pb-3 border-slate-100"><i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> กราฟแสดงประสิทธิภาพการทำงาน (ระดับความเย็นต่อเนื่อง)</h2>
+                    <p class="text-xs text-slate-500 mb-4">*ผลลัพธ์จากการทดสอบประสิทธิภาพการรักษาความเย็นในกลุ่มผู้ใช้งานจริงจำนวน 50 คน</p>
+                    <div class="w-full max-h-[300px] flex justify-center"><canvas id="coolingPerformanceChart" class="w-full"></canvas></div>
+                </section>
+
+                <section id="cooling-order-form" class="bg-white rounded-2xl shadow-md p-6 border-2 border-blue-500">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-file-invoice mr-2 text-blue-600"></i> ข้อมูลการจัดส่ง</h3>
+                    <form class="space-y-4" onsubmit="alert('บันทึกข้อมูลการสั่งซื้อสำเร็จ! (นี่คือระบบจำลอง)'); closeCoolingModal(); return false;">
+                        <input type="text" required placeholder="ชื่อ-นามสกุล" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm">
+                        <input type="tel" required placeholder="เบอร์โทรศัพท์" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm">
+                        <textarea required rows="3" placeholder="ที่อยู่จัดส่งสินค้า" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm"></textarea>
+                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl py-4 rounded-xl">ยืนยันการสั่งซื้อ ฿179</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <section id="reviews" class="py-24 bg-zinc-950 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+                <h2 class="text-3xl font-bold tracking-tight">REVIEWS FROM ATHLETES</h2>
+                <div class="h-1 w-20 bg-[#FF6B00] mx-auto rounded-full"></div>
+                <p class="text-zinc-400 text-sm">เสียงตอบรับจริงจากกลุ่มนักกีฬาและผู้ใช้งานจริงทั่วประเทศ</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 space-y-3">
+                    <div class="flex text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-xs text-zinc-300 italic">"ฉีดก่อนวิ่ง 10 นาที รู้สึกกล้ามเนื้อตื่นตัวดีมาก ร้อนกำลังดี ไม่เหนียวเหนอะหนะเลยครับ วิ่งจบไม่ตะคริวเลย"</p>
+                    <div class="font-bold text-[11px] text-orange-400">- คุณสมชาย (นักวิ่งมาราธอน)</div>
+                </div>
+                <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 space-y-3">
+                    <div class="flex text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-xs text-zinc-300 italic">"พกติดกระเป๋าฟิตเนสตลอดค่ะ หลังเล่นขาตึงๆ ฉีดปุ๊บสบายขาขึ้นเยอะ กลิ่นเมนทอลหอมสดชื่นผ่อนคลายมาก"</p>
+                    <div class="font-bold text-[11px] text-orange-400">- คุณพัชรา (สายฟิตเนส/เวทเทรนนิ่ง)</div>
+                </div>
+                <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 space-y-3">
+                    <div class="flex text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-xs text-zinc-300 italic">"สเปรย์สูตรร้อนดีมากครับ ฉีดก่อนลงสนามฟุตบอล 15 นาที รู้สึกกล้ามเนื้อพร้อมกระตุกตื่นทันที แข่งแมตช์สำคัญได้สบาย"</p>
+                    <div class="font-bold text-[11px] text-orange-400">- นักฟุตบอลอาชีพ ลีกภูมิภาค</div>
+                </div>
+                <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 space-y-3">
+                    <div class="flex text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                    <p class="text-xs text-zinc-300 italic">"ใช้เจลพลังงานควบคู่กับสเปรย์วอร์มอัพตอนแข่งแมตช์ 7 คน อึดขึ้นอย่างเห็นได้ชัด ของแบรนด์ Raptor เค้าดีจริง"</p>
+                    <div class="font-bold text-[11px] text-orange-400">- โค้ชทีมฟุตบอลสมัครเล่น</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="whey-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
+        <div class="bg-white rounded-2xl max-w-3xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
+            <button onclick="closeWheyModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="bg-emerald-700 text-white px-6 py-4">
+                <h3 class="font-bold text-lg tracking-wide"><i class="fa-solid fa-dumbbell mr-1"></i> RAPTOR WHEY PROTEIN ISOLATE (1 LBS)</h3>
+            </div>
+            <div class="p-6 space-y-6">
+                <div class="grid md:grid-cols-2 gap-6 items-center">
+                    <div class="bg-emerald-50 rounded-xl p-8 flex items-center justify-center h-72">
+                        <i class="fa-solid fa-cubes-nutrients text-8xl text-emerald-600"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-bold text-zinc-900">โปรตีนไอโซเลตสำหรับสายลีน</h4>
+                        <p class="text-sm text-zinc-600 leading-relaxed">RAPTOR SPORT FOOT SPRAY โปรตีนคุณภาพสูง ดูดซึมเร็ว ไขมันต่ำ น้ำตาลต่ำ เหมาะสำหรับฟื้นฟูกล้ามเนื้อหลังออกกำลังกายและเสริมโปรตีนในแต่ละวันอย่างมีประสิทธิภาพ</p>
+                        <ul class="text-sm text-zinc-700 space-y-1">
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>โปรตีนสูงต่อเสิร์ฟ</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Low Fat / Low Sugar</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>เหมาะก่อน-หลังออกกำลังกาย</li>
+                        </ul>
+                        <div class="flex items-baseline gap-3">
+                            <span class="text-3xl font-extrabold text-emerald-700">฿750</span>
+                            <span class="text-xs text-zinc-400">ขนาด 1 Lbs</span>
+                        </div>
+                        <button type="button" onclick="alert('เพิ่ม RAPTOR SPORT FOOT SPRAY ลงตะกร้าเรียบร้อยแล้ว!')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl">
+                            <i class="fa-solid fa-cart-plus mr-1"></i> เพิ่มลงตะกร้า
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="contact" class="py-24 max-w-4xl mx-auto px-6">
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden grid grid-cols-1 md:grid-cols-2">
+            <div class="p-8 space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-zinc-900">CONTACT US</h2>
+                    <p class="text-xs text-gray-400">ติดต่อสอบถามข้อมูลเพิ่มเติมหรือสั่งซื้อยกลัง</p>
+                </div>
+                <form class="space-y-4 text-sm">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">NAME</label>
+                        <input type="text" placeholder="ชื่อของคุณ" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">EMAIL / PHONE</label>
+                        <input type="text" placeholder="อีเมล หรือ เบอร์โทรศัพท์" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">MESSAGE</label>
+                        <textarea rows="3" placeholder="พิมพ์ข้อความ..." class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500"></textarea>
+                    </div>
+                    <button type="button" class="w-full bg-zinc-900 hover:bg-orange-brand text-white font-bold py-3 rounded-xl transition-colors">SEND MESSAGE</button>
+                </form>
+            </div>
+            
+            <div class="bg-zinc-900 p-8 text-white flex flex-col justify-between space-y-8">
+                <div>
+                    <h3 class="text-xl font-bold text-orange-brand mb-2">Raptor Global Import Co., Ltd.</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">ผู้จัดจำหน่ายผลิตภัณฑ์ดูแลกล้ามเนื้อและอาหารเสริมประสิทธิภาพสูงสำหรับนักกีฬา</p>
+                </div>
+                <div class="space-y-3 text-xs">
+                    <div class="flex items-center space-x-3"><i class="fa-solid fa-location-dot text-orange-brand w-4"></i><span class="text-zinc-300">จังหวัดอุตรดิตถ์, ประเทศไทย</span></div>
+                    <div class="flex items-center space-x-3"><i class="fa-solid fa-envelope text-orange-brand w-4"></i><span class="text-zinc-300">support@raptor-global.com</span></div>
+                    <div class="flex items-center space-x-3"><i class="fa-solid fa-globe text-orange-brand w-4"></i><span class="text-zinc-300">www.raptor-global.com</span></div>
+                </div>
+                <div class="pt-4 border-t border-zinc-800">
+                    <p class="text-[10px] text-zinc-500 mb-2">SHOP VIA MARKETPLACES</p>
+                    <div class="flex space-x-4 text-lg">
+                        <a href="#" class="text-zinc-400 hover:text-orange-brand transition-colors"><i class="fa-solid fa-bag-shopping"></i></a>
+                        <a href="#" class="text-zinc-400 hover:text-orange-brand transition-colors"><i class="fa-solid fa-store"></i></a>
+                        <a href="#" class="text-zinc-400 hover:text-orange-brand transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-zinc-950 text-zinc-600 text-center py-6 text-xs border-t border-zinc-900">
+        <p>&copy; 2026 RAPTOR SPORT WARMING SPRAY. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        let myChartInstance = null;
+        let coolingChartInstance = null;
+
+        // ฟังก์ชันเปิดป๊อปอัพเซลเพจ และสร้างกราฟดีไซน์
+        function openProductModal() {
+            document.getElementById('product-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // ล็อกพื้นหลังไม่ให้เลื่อนตาม
+            
+            if (!myChartInstance) {
+                const ctx = document.getElementById('efficiencyChart').getContext('2d');
+                myChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '5 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที'],
+                        datasets: [{
+                            label: 'ระดับการคลายกล้ามเนื้อ (%)',
+                            data: [10, 65, 95, 90, 85, 60],
+                            borderColor: '#FF6B00',
+                            backgroundColor: 'rgba(255, 107, 0, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }]
                     },
-                    {
-                        label: 'หลังใช้ RAPTOR SPORT FOOT SPRAY',
-                        data: [98, 92, 95],
-                        backgroundColor: 'rgba(16, 185, 129, 0.7)',
-                        borderColor: '#10b981',
-                        borderWidth: 1.5
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 100 } }
                     }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        labels: { color: '#cbd5e1' }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: { color: '#cbd5e1' },
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: { 
-                            color: '#cbd5e1',
-                            callback: value => value + '%'
-                        },
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' }
-                    }
-                }
+                });
             }
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto'; // คืนค่าการเลื่อนหน้าเว็บตามปกติ
+        }
+        function openCoolingModal() {
+            document.getElementById('cooling-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            if (!coolingChartInstance) {
+                const ctx = document.getElementById('coolingPerformanceChart').getContext('2d');
+                coolingChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['นาทีที่ 0', 'นาทีที่ 5', 'นาทีที่ 15', 'นาทีที่ 30', 'นาทีที่ 45', 'นาทีที่ 60'],
+                        datasets: [{
+                            label: 'ระดับความเย็นสะสม (%)',
+                            data: [100, 95, 90, 85, 70, 50],
+                            borderColor: '#2563eb',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, max: 100 } }
+                    }
+                });
+            }
+        }
+        function closeCoolingModal() {
+            document.getElementById('cooling-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        function openWheyModal() {
+            document.getElementById('whey-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeWheyModal() {
+            document.getElementById('whey-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ระบบ Countdown นับถอยหลังวนลูป 2 ชม.
+        function startCountdown() {
+            let duration = 2 * 60 * 60; 
+            let coolingDuration = 15 * 60;
+            setInterval(function () {
+                let hours = parseInt(duration / 3600, 10);
+                let minutes = parseInt((duration % 3600) / 60, 10);
+                let seconds = parseInt(duration % 60, 10);
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                const hEl = document.getElementById("modal-hours");
+                const mEl = document.getElementById("modal-minutes");
+                const sEl = document.getElementById("modal-seconds");
+                
+                if(hEl) hEl.textContent = hours;
+                if(mEl) mEl.textContent = minutes;
+                if(sEl) sEl.textContent = seconds;
+
+                if (--duration < 0) {
+                    duration = 2 * 60 * 60; 
+                }
+
+                const cEl = document.getElementById("cooling-countdown");
+                if (cEl) {
+                    const cMin = Math.floor(coolingDuration / 60).toString().padStart(2, "0");
+                    const cSec = (coolingDuration % 60).toString().padStart(2, "0");
+                    cEl.textContent = `${cMin}:${cSec}`;
+                    coolingDuration = coolingDuration <= 0 ? 15 * 60 : coolingDuration - 1;
+                }
+            }, 1000);
+        }
+        window.onload = startCountdown;
+
+        // ระบบควบคุม Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
         });
     </script>
 </body>
