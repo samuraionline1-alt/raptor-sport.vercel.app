@@ -1,242 +1,479 @@
-<!doctype html>
-<html lang="th">
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ร้านขายของง่ายๆ</title>
-  <style>
-    :root {
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --primary: #2563eb;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --danger: #dc2626;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Noto Sans Thai", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-    header {
-      background: var(--card);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      padding: 16px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    h1 { margin: 0; font-size: 1.25rem; }
-    main {
-      max-width: 1100px;
-      margin: 20px auto;
-      padding: 0 16px;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 16px;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-    }
-    .card {
-      background: var(--card);
-      border-radius: 10px;
-      padding: 12px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.08);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .card img {
-      width: 100%;
-      border-radius: 8px;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      background: #e5e7eb;
-    }
-    .price { font-weight: 700; color: var(--primary); }
-    button {
-      border: none;
-      border-radius: 8px;
-      padding: 8px 10px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .add-btn { background: var(--primary); color: white; }
-    .remove-btn { background: var(--danger); color: white; }
-    .cart {
-      background: var(--card);
-      border-radius: 10px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.08);
-      padding: 14px;
-      align-self: start;
-      position: sticky;
-      top: 84px;
-    }
-    .cart-item {
-      display: grid;
-      grid-template-columns: 1fr auto auto;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 8px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #eee;
-    }
-    .muted { color: var(--muted); font-size: 0.9rem; }
-    .cart-footer {
-      margin-top: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 700;
-    }
-    .checkout-btn {
-      width: 100%;
-      margin-top: 12px;
-      background: #16a34a;
-      color: white;
-    }
-    @media (max-width: 900px) {
-      main { grid-template-columns: 1fr; }
-      .cart { position: static; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raptor Sport | Official Store</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
+        body { font-family: 'Kanit', sans-serif; }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>🛒 ร้านขายของง่ายๆ</h1>
-    <div id="cartCount">สินค้าในตะกร้า: 0</div>
-  </header>
+<body class="bg-gray-50 text-gray-800">
 
-  <main>
-    <section>
-      <h2>สินค้าแนะนำ</h2>
-      <div class="products" id="productList"></div>
+    <!-- NAVIGATION BAR -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Left Menu -->
+                <div class="hidden md:flex space-x-8 w-1/3 justify-end pr-8 font-medium">
+                    <a href="#home" class="text-gray-600 hover:text-orange-500 transition-colors">Home</a>
+                    <a href="#shop" class="text-gray-600 hover:text-orange-500 transition-colors">Shop</a>
+                </div>
+
+                <!-- Center Logo -->
+                <div class="flex-shrink-0 flex flex-col items-center justify-center w-auto md:w-1/3">
+                    <a href="#home" class="flex flex-col items-center">
+                        <!-- จำลองกรอบโลโก้หกเหลี่ยมสีส้ม/ดำตามรูป -->
+                        <div class="w-12 h-12 bg-zinc-900 border-2 border-orange-500 flex items-center justify-center rotate-45 overflow-hidden shadow-md">
+                            <span class="text-white text-xs font-bold -rotate-45 tracking-tighter">RAPTOR</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Right Menu & Cart -->
+                <div class="hidden md:flex space-x-8 w-1/3 pl-8 font-medium items-center">
+                    <a href="#reviews" class="text-gray-600 hover:text-orange-500 transition-colors">Reviews</a>
+                    <a href="#contact" class="text-gray-600 hover:text-orange-500 transition-colors">Contact</a>
+                    <div class="relative pl-4 border-l border-gray-200 cursor-pointer text-gray-700 hover:text-orange-500">
+                        <i class="fa-solid fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center justify-between w-full">
+                    <div class="w-12 h-12 bg-zinc-900 border-2 border-orange-500 flex items-center justify-center rotate-45">
+                        <span class="text-white text-[10px] font-bold -rotate-45">RAPTOR</span>
+                    </div>
+                    <button id="mobile-menu-btn" class="text-gray-600 focus:outline-none text-2xl">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-4 space-y-3 shadow-lg">
+            <a href="#home" class="block text-gray-600 hover:text-orange-500 font-medium py-2">Home</a>
+            <a href="#shop" class="block text-gray-600 hover:text-orange-500 font-medium py-2">Shop</a>
+            <a href="#reviews" class="block text-gray-600 hover:text-orange-500 font-medium py-2">Reviews</a>
+            <a href="#contact" class="block text-gray-600 hover:text-orange-500 font-medium py-2">Contact</a>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: HOME (Hero Section จัดดีไซน์ตามรูปแบบที่แนบมา) -->
+    <section id="home" class="pt-28 pb-16 bg-gradient-to-br from-zinc-100 via-gray-200 to-zinc-300 min-h-screen flex items-center overflow-hidden relative">
+        <!-- เส้นกราฟิกพื้นหลังเพิ่มความสปอร์ต -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute top-0 right-0 w-full h-full bg-[linear-gradient(135deg,transparent_40%,#f97316_45%,transparent_46%,#f97316_50%,transparent_52%)] bg-[length:200px_200px] animate-[pulse_6s_infinite]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Hero Left: Product Images & Highlights -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-8 bg-zinc-900/5 p-8 rounded-3xl backdrop-blur-sm border border-white/20 shadow-xl">
+                    <div class="relative w-56 h-80 bg-gradient-to-b from-orange-400 to-orange-600 rounded-2xl shadow-2xl flex flex-col justify-between p-4 text-white overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <div class="border-2 border-white/30 rounded-lg p-2 text-center">
+                            <span class="text-xs font-bold tracking-widest block">WARMING SPRAY</span>
+                        </div>
+                        <div class="my-auto text-center">
+                            <i class="fa-solid fa-fire text-6xl my-4 text-amber-200 animate-bounce"></i>
+                            <h3 class="font-bold text-2xl tracking-wide">RAPTOR</h3>
+                            <p class="text-xs text-orange-100">SPORT PERFORMANCE</p>
+                        </div>
+                        <div class="text-center text-xs bg-black/20 py-1 rounded">150 ml</div>
+                    </div>
+
+                    <!-- Highlights Badge -->
+                    <div class="space-y-4 w-full sm:w-auto">
+                        <div class="bg-white px-5 py-3 rounded-xl shadow-md flex items-center space-x-3 border-l-4 border-orange-500">
+                            <div class="bg-orange-100 p-2 rounded-lg text-orange-500"><i class="fa-solid fa-dumbbell"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-bold">BENEFIT</p>
+                                <p class="font-semibold text-sm">RELAX MUSCLE</p>
+                            </div>
+                        </div>
+                        <div class="bg-white px-5 py-3 rounded-xl shadow-md flex items-center space-x-3 border-l-4 border-amber-500">
+                            <div class="bg-amber-100 p-2 rounded-lg text-amber-500"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-bold">BENEFIT</p>
+                                <p class="font-semibold text-sm">WARM UP BODY</p>
+                            </div>
+                        </div>
+                        <div class="bg-white px-5 py-3 rounded-xl shadow-md flex items-center space-x-3 border-l-4 border-zinc-700">
+                            <div class="bg-zinc-100 p-2 rounded-lg text-zinc-700"><i class="fa-solid fa-repeat"></i></div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-bold">USE TIME</p>
+                                <p class="font-semibold text-sm">BEFORE & AFTER</p>
+                            </div>
+                        </div>
+                        <div class="bg-zinc-900 text-white px-5 py-4 rounded-xl shadow-lg text-center">
+                            <span class="text-xs block text-orange-400 font-bold">ราคาพิเศษ</span>
+                            <span class="text-2xl font-bold">2xx บาท</span>
+                            <span class="text-[10px] block text-gray-400 mt-1">ส่งฟรี ทั่วไทย</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right: Text Copy & Info -->
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900">
+                            Raptor Sport <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-600">WARMING SPRAY</span>
+                        </h1>
+                        <p class="inline-block bg-orange-500 text-white px-3 py-1 rounded text-sm font-semibold">สเปรย์วอร์มร้อนสำหรับนักกีฬา</p>
+                    </div>
+
+                    <div class="space-y-4 text-gray-600">
+                        <div>
+                            <h4 class="font-bold text-zinc-900 border-b pb-1 mb-2">DESCRIPTION</h4>
+                            <p class="text-sm leading-relaxed">Raptor Sport สเปรย์ตัวช่วยร้อนสำหรับนักกีฬา ใช้เมนทอลเพื่อระงับความรู้สึกปวดและลดอาการบวมอักเสบสำหรับนักกีฬา การแข่งขันแมตช์สำคัญต้องทำได้อย่างเต็มสูบ บินเปรียบเหมือนนกแร็พเตอร์บนสนาม สเปรย์ตัวช่วยร้อนสำหรับนักกีฬา</p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-zinc-900 border-b pb-1 mb-2">INSTRUCTION</h4>
+                            <ol class="list-decimal list-inside text-sm space-y-1">
+                                <li>เขย่าขวดก่อนใช้งาน</li>
+                                <li>สเปรย์ตัวช่วยร้อนสำหรับเจ้าหน้าที่และนักกีฬา</li>
+                                <li>ฉีดพ่นลงในบริเวณที่ปวดเมื่อยหรือปวดบวม หรือใช้ทาก่อนเล่นกีฬา 15 นาที</li>
+                                <li>ปลอดภัยต่อผิว ไม่ระคายเคือง ล้างออกได้ง่ายด้วยสบู่</li>
+                                <li>หลีกเลี่ยงการฉีดพ่นในบริเวณดวงตาหรือแผลสด</li>
+                            </ol>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-zinc-900 border-b pb-1 mb-2">FEATURES</h4>
+                            <ul class="grid grid-cols-2 gap-2 text-sm font-semibold">
+                                <li><i class="fa-solid fa-check text-orange-500 mr-2"></i>RELAX MUSCLE</li>
+                                <li><i class="fa-solid fa-check text-orange-500 mr-2"></i>WARM UP BODY</li>
+                                <li><i class="fa-solid fa-check text-orange-500 mr-2"></i>BEFORE & AFTER SPORTS</li>
+                                <li><i class="fa-solid fa-check text-orange-500 mr-2"></i>PREMIUM INGREDIENTS</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <a href="#shop" class="inline-block w-full sm:w-auto text-center bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold py-4 px-12 rounded-xl shadow-lg shadow-orange-500/20 transform hover:-translate-y-0.5 transition-all">
+                            SHOP NOW
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
 
-    <aside class="cart">
-      <h2>ตะกร้าสินค้า</h2>
-      <div id="cartItems" class="muted">ยังไม่มีสินค้าในตะกร้า</div>
-      <div class="cart-footer">
-        <span>รวม</span>
-        <span id="totalPrice">฿0</span>
-      </div>
-      <button class="checkout-btn" id="checkoutBtn">สั่งซื้อ</button>
-    </aside>
-  </main>
+    <hr class="border-gray-200">
 
-  <script>
-    const products = [
-      { id: 1, name: "เสื้อยืดสีขาว", price: 250, image: "https://picsum.photos/seed/shirt/400/300" },
-      { id: 2, name: "แก้วกาแฟ", price: 180, image: "https://picsum.photos/seed/mug/400/300" },
-      { id: 3, name: "กระเป๋าผ้า", price: 320, image: "https://picsum.photos/seed/bag/400/300" },
-      { id: 4, name: "หูฟัง", price: 790, image: "https://picsum.photos/seed/headphones/400/300" },
-      { id: 5, name: "สมุดโน้ต", price: 120, image: "https://picsum.photos/seed/notebook/400/300" }
-    ];
+    <!-- SECTION 2: SHOP (รายการสินค้า 10 ตัวอย่าง) -->
+    <section id="shop" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-2">
+            <h2 class="text-3xl font-bold text-zinc-950 tracking-tight">RAPTOR OFFICIAL SHOP</h2>
+            <div class="h-1 w-20 bg-orange-500 mx-auto rounded-full"></div>
+            <p class="text-gray-500 text-sm">ผลิตภัณฑ์เสริมอาหารและผลิตภัณฑ์ดูแลรักษาร่างกายสำหรับนักกีฬาประสิทธิภาพสูง</p>
+        </div>
 
-    const cart = new Map();
-
-    function formatBaht(value) {
-      return `฿${value.toLocaleString("th-TH")}`;
-    }
-
-    function renderProducts() {
-      const productList = document.getElementById("productList");
-      productList.innerHTML = products.map(product => `
-        <article class="card">
-          <img src="${product.image}" alt="${product.name}" />
-          <div>
-            <strong>${product.name}</strong>
-            <div class="price">${formatBaht(product.price)}</div>
-          </div>
-          <button class="add-btn" data-id="${product.id}">เพิ่มลงตะกร้า</button>
-        </article>
-      `).join("");
-
-      productList.querySelectorAll(".add-btn").forEach(btn => {
-        btn.addEventListener("click", () => addToCart(Number(btn.dataset.id)));
-      });
-    }
-
-    function addToCart(productId) {
-      const current = cart.get(productId) || 0;
-      cart.set(productId, current + 1);
-      renderCart();
-    }
-
-    function removeFromCart(productId) {
-      const current = cart.get(productId);
-      if (!current) return;
-      if (current === 1) {
-        cart.delete(productId);
-      } else {
-        cart.set(productId, current - 1);
-      }
-      renderCart();
-    }
-
-    function renderCart() {
-      const cartItems = document.getElementById("cartItems");
-      const totalPrice = document.getElementById("totalPrice");
-      const cartCount = document.getElementById("cartCount");
-
-      if (cart.size === 0) {
-        cartItems.innerHTML = '<div class="muted">ยังไม่มีสินค้าในตะกร้า</div>';
-        totalPrice.textContent = formatBaht(0);
-        cartCount.textContent = "สินค้าในตะกร้า: 0";
-        return;
-      }
-
-      let total = 0;
-      let count = 0;
-      const rows = [];
-
-      cart.forEach((qty, productId) => {
-        const product = products.find(p => p.id === productId);
-        if (!product) return;
-        const sum = product.price * qty;
-        total += sum;
-        count += qty;
-        rows.push(`
-          <div class="cart-item">
-            <div>
-              <div>${product.name}</div>
-              <div class="muted">${formatBaht(product.price)} x ${qty}</div>
+        <!-- Product Grid (10 Items) -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            
+            <!-- Item 1 -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                    <i class="fa-solid fa-fire text-5xl text-orange-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="absolute top-2 left-2 bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">Hot</span>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Sport Warming Spray (สเปรย์สูตรร้อน)</h3>
+                        <p class="text-xs text-gray-400 mt-1">ขนาด 150 ml สำหรับวอร์มกล้ามเนื้อก่อนแข่ง</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="font-bold text-orange-600 text-base">฿250</span>
+                        <button class="bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-500 transition-colors"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
             </div>
-            <strong>${formatBaht(sum)}</strong>
-            <button class="remove-btn" data-remove-id="${product.id}">-</button>
-          </div>
-        `);
-      });
 
-      cartItems.innerHTML = rows.join("");
-      totalPrice.textContent = formatBaht(total);
-      cartCount.textContent = `สินค้าในตะกร้า: ${count}`;
+            <!-- Item 2 -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                    <i class="fa-solid fa-snowflake text-5xl text-blue-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="absolute top-2 left-2 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">Cool</span>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Sport Cooling Spray (สเปรย์สูตรเย็น)</h3>
+                        <p class="text-xs text-gray-400 mt-1">สูตรไร้การบูร บรรเทาอาการปวดและลดการบวม</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="font-bold text-orange-600 text-base">฿250</span>
+                        <button class="bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-500 transition-colors"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
 
-      cartItems.querySelectorAll(".remove-btn").forEach(btn => {
-        btn.addEventListener("click", () => removeFromCart(Number(btn.dataset.removeId)));
-      });
-    }
+            <!-- Item 3 -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                    <i class="fa-solid fa-bolt text-5xl text-amber-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="absolute top-2 left-2 bg-zinc-900 text-white text-[10px] font-bold px-2 py-0.5 rounded">Energy</span>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Go Energy Gel (เจลพลังงาน)</h3>
+                        <p class="text-xs text-gray-400 mt-1">ให้พลังงานรวดเร็วสำหรับนักวิ่งและนักฟุตบอล</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="font-bold text-orange-600 text-base">฿85</span>
+                        <button class="bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-500 transition-colors"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
 
-    document.getElementById("checkoutBtn").addEventListener("click", () => {
-      if (cart.size === 0) {
-        alert("กรุณาเพิ่มสินค้าก่อนสั่งซื้อ");
-        return;
-      }
-      alert("สั่งซื้อสำเร็จ! (ตัวอย่างเดโม)");
-      cart.clear();
-      renderCart();
-    });
+            <!-- Item 4 -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                    <i class="fa-solid fa-bottle-droplet text-5xl text-purple-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="absolute top-2 left-2 bg-purple-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">Best Pack</span>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Dual Action Pack (เซ็ตคู่ ร้อน-เย็น)</h3>
+                        <p class="text-xs text-gray-400 mt-1">รวมสเปรย์สูตรร้อนและสูตรเย็นในกล่องพิเศษ</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="font-bold text-orange-600 text-base">฿480</span>
+                        <button class="bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-500 transition-colors"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
 
-    renderProducts();
-    renderCart();
-  </script>
+            <!-- Item 5 -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                    <i class="fa-solid fa-spa text-5xl text-teal-600 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Performance Massage Oil</h3>
+                        <p class="text-xs text-gray-400 mt-1">น้ำมันนวดผ่อนคลายกล้ามเนื้อสกัดเข้มข้น</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="font-bold text-orange-600 text-base">฿320</span>
+                        <button class="bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-500 transition-colors"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                    <i class="fa-solid fa-capsules text-5xl text-emerald-600 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Amino Premium (บรรจุ 30 แคปซูล)</h3>
+                        <p class="text-xs text-gray-400 mt-1">กรดอะมิโนจำเป็นช่วยซ่อมแซมกล้ามเนื้อหลังซ้อม</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="font-bold text-orange-600 text-base">฿590</span>
+                        <button class="bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-500 transition-colors"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                    <i class="fa-solid fa-glass-water text-5xl text-blue-400 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Electrolyte Powder (เครื่องดื่มเกลือแร่)</h3>
+                        <p class="text-xs text-gray-400 mt-1">ช่วยรักษาสมดุลน้ำและป้องกันการเกิดตะคริว</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="font-bold text-orange-600 text-base">฿45</span>
+                        <button class="bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-500 transition-colors"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 8 -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                    <i class="fa-solid fa-cubes-nutrients text-5xl text-yellow-600 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Whey Protein Isolate (1 Lbs)</h3>
+                        <p class="text-xs text-gray-400 mt-1">เวย์โปรตีนเกรดพรีเมียม ดูดซึมไว ลีนไขมัน</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="font-bold text-orange-600 text-base">฿750</span>
+                        <button class="bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-500 transition-colors"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 9 -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                    <i class="fa-solid fa-shield-halved text-5xl text-red-500 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Joint Support (บำรุงข้อต่อ)</h3>
+                        <p class="text-xs text-gray-400 mt-1">วิตามินบำรุงและลดการเสียดสีของข้อต่อกระดูก</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="font-bold text-orange-600 text-base">฿420</span>
+                        <button class="bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-500 transition-colors"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 10 -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                    <i class="fa-solid fa-dumbbell text-5xl text-zinc-600 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Resistance Band (ยางยืดออกกำลังกาย)</h3>
+                        <p class="text-xs text-gray-400 mt-1">แรงต้านสูงสำหรับใช้ฝึกกล้ามเนื้อและวอร์มอัพ</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="font-bold text-orange-600 text-base">฿180</span>
+                        <button class="bg-zinc-900 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-500 transition-colors"><i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: REVIEWS -->
+    <section id="reviews" class="py-24 bg-zinc-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+                <h2 class="text-3xl font-bold tracking-tight">REVIEWS FROM ATHLETES</h2>
+                <div class="h-1 w-20 bg-orange-500 mx-auto rounded-full"></div>
+                <p class="text-zinc-400 text-sm">เสียงตอบรับจริงจากกลุ่มนักกีฬาและผู้ใช้งานจริงทั่วประเทศ</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-zinc-800 p-6 rounded-2xl border border-zinc-700 space-y-4">
+                    <div class="flex text-amber-400 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-sm text-zinc-300 italic">"สเปรย์สูตรร้อนดีมากครับ ฉีดก่อนลงสนามฟุตบอล 15 นาที รู้สึกกล้ามเนื้อพร้อมกระตุกตื่นทันที วิ่งได้สุดโดยไม่มีอาการตึงเลยครับ แนะนำสำหรับคนเล่นกีฬาหนักๆ"</p>
+                    <div class="font-bold text-xs text-orange-400">- นักฟุตบอลอาชีพ ลีกภูมิภาค</div>
+                </div>
+                <!-- Review 2 -->
+                <div class="bg-zinc-800 p-6 rounded-2xl border border-zinc-700 space-y-4">
+                    <div class="flex text-amber-400 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-sm text-zinc-300 italic">"ชอบตัวสเปรย์เย็นมากค่ะ ไม่มีกลิ่นการบูรฉุนๆ เหมือนยี่ห้ออื่น ฉีดพ่นบำบัดกล้ามเนื้อหลังซ้อมวิ่งมาราธอนดีงามมาก อาการปวดบวมบรรเทาลงเร็วมากจริงๆ"</p>
+                    <div class="font-bold text-xs text-orange-400">- คุณมิ้นท์, นักวิ่ง Ultra Marathon</div>
+                </div>
+                <!-- Review 3 -->
+                <div class="bg-zinc-800 p-6 rounded-2xl border border-zinc-700 space-y-4">
+                    <div class="flex text-amber-400 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="text-sm text-zinc-300 italic">"ใช้เจลพลังงานควบคู่กับสเปรย์วอร์มอัพตอนแข่งแมตช์ 7 คน อึดขึ้นอย่างเห็นได้ชัด ของแบรนด์ Raptor เค้าดีจริง ราคาคุ้มค่าจัดส่งไวด้วยครับ"</p>
+                    <div class="font-bold text-xs text-orange-400">- โค้ชทีมฟุตบอลสมัครเล่น</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: CONTACT -->
+    <section id="contact" class="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden grid grid-cols-1 md:grid-cols-2">
+            <!-- Contact Left: Form -->
+            <div class="p-8 space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-zinc-900">CONTACT US</h2>
+                    <p class="text-xs text-gray-400">ติดต่อสอบถามข้อมูลเพิ่มเติมหรือสั่งซื้อยกลัง</p>
+                </div>
+                <form class="space-y-4 text-sm">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">NAME</label>
+                        <input type="text" placeholder="ชื่อของคุณ" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">EMAIL / PHONE</label>
+                        <input type="text" placeholder="อีเมล หรือ เบอร์โทรศัพท์" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">MESSAGE</label>
+                        <textarea rows="3" placeholder="พิมพ์ข้อความของคุณที่นี่..." class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500"></textarea>
+                    </div>
+                    <button type="button" class="w-full bg-zinc-900 hover:bg-orange-500 text-white font-bold py-3 rounded-xl transition-colors">SEND MESSAGE</button>
+                </form>
+            </div>
+            
+            <!-- Contact Right: Info -->
+            <div class="bg-zinc-900 p-8 text-white flex flex-col justify-between space-y-8">
+                <div>
+                    <h3 class="text-xl font-bold text-orange-500 mb-2">Raptor Global Import Co., Ltd.</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">ผู้จัดจำหน่ายผลิตภัณฑ์ดูแลกล้ามเนื้อและอาหารเสริมประสิทธิภาพสูงสำหรับนักกีฬา</p>
+                </div>
+                
+                <div class="space-y-4 text-sm">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-location-dot text-orange-500 w-5"></i>
+                        <span class="text-zinc-300">จังหวัดอุตรดิตถ์, ประเทศไทย</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-envelope text-orange-500 w-5"></i>
+                        <span class="text-zinc-300">support@raptor-global.com</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-globe text-orange-500 w-5"></i>
+                        <span class="text-zinc-300">www.raptor-global.com</span>
+                    </div>
+                </div>
+
+                <!-- E-Commerce Shortcut Icons -->
+                <div class="pt-4 border-t border-zinc-800">
+                    <p class="text-xs text-zinc-500 mb-2">SHOP VIA MARKETPLACES</p>
+                    <div class="flex space-x-4 text-xl">
+                        <a href="#" class="text-zinc-400 hover:text-orange-500 transition-colors" title="Shopee"><i class="fa-solid fa-bag-shopping"></i></a>
+                        <a href="#" class="text-zinc-400 hover:text-orange-500 transition-colors" title="Lazada"><i class="fa-solid fa-store"></i></a>
+                        <a href="#" class="text-zinc-400 hover:text-orange-500 transition-colors" title="TikTok Shop"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-zinc-950 text-zinc-600 text-center py-6 text-xs border-t border-zinc-900">
+        <p>&copy; 2026 Raptor Global Import Co., Ltd. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript Mobile Menu Toggle -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+        // ปิดเมนูออโต้เมื่อคลิกลิงก์
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => menu.classList.add('hidden'));
+        });
+    </script>
 </body>
 </html>
