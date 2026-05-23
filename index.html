@@ -247,13 +247,13 @@
             </div>
 
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between group transition-shadow">
-                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48">
+                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48 cursor-pointer" onclick="openCoolingModal()">
                     <i class="fa-solid fa-snowflake text-5xl text-blue-500 group-hover:scale-110 transition-transform"></i>
                     <span class="absolute top-2 left-2 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">Cool</span>
                 </div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
-                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Sport Cooling Spray (สเปรย์สูตรเย็น)</h3><p class="text-xs text-gray-400 mt-1">สูตรไร้การบูร บรรเทาอาการปวดบวมอักเสบ</p></div>
-                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿250</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2 cursor-pointer hover:text-blue-600" onclick="openCoolingModal()">Raptor Sport Cooling Spray (สเปรย์สูตรเย็น)</h3><p class="text-xs text-gray-400 mt-1">สูตรไร้การบูร บรรเทาอาการปวดบวมอักเสบ</p></div>
+                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿250</span><button onclick="openCoolingModal()" class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors font-semibold">ดูข้อมูล / ซื้อ</button></div>
                 </div>
             </div>
 
@@ -454,6 +454,42 @@
         </div>
     </div>
 
+    <div id="cooling-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
+        <div class="bg-slate-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-slate-200 my-8">
+            <button onclick="closeCoolingModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="bg-blue-900 text-white px-6 py-4 flex items-center justify-between">
+                <h3 class="font-bold text-lg tracking-wider"><i class="fa-solid fa-snowflake mr-1"></i> RAPTOR SPORTS ICE COLD SPRAY</h3>
+                <span class="text-xs text-blue-100 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
+            </div>
+            <div class="max-w-4xl mx-auto px-4 py-6 space-y-8 mb-6">
+                <section class="bg-white rounded-2xl shadow-md p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4">
+                        <img src="https://images.squarespace-cdn.com/content/v1/5c1a8dc49f1115865eb8df33/1545625126302-3I73Z9JZW3W6W5W7X9Y0/ke17ZwdGBToddI8pDm48kNiEM88mBdNsFNTbHQQGiPAUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoYc-ogX8kK6VKVWq7xSM3mw69Oee2OSQqWP5QgnqFstT2t99pT1Bqr4vF7Y7fCHZ4w7X_29mWdW9874K86x24QfO1BdpFMs/Product-Placeholder.jpg" alt="RAPTOR SPORTS ICE COLD SPRAY" class="max-h-[400px] object-contain rounded-lg">
+                    </div>
+                    <div class="flex flex-col justify-between space-y-4">
+                        <div><h2 class="text-2xl md:text-3xl font-bold text-blue-900 mb-2">RAPTOR SPORTS ICE COLD SPRAY</h2><p class="text-sm text-blue-600 font-medium mb-4">สเปรย์สูตรเย็นสำหรับนักกีฬาและผู้รักการออกกำลังกาย</p><p class="text-slate-600 text-base leading-relaxed">นวัตกรรมสเปรย์ฉีดผิวสูตรเย็นจัด ออกแบบมาเพื่อช่วยบรรเทาความเมื่อยล้า คลายกล้ามเนื้อได้อย่างรวดเร็วหลังจากการซ้อมหรือแข่งขัน ให้ความรู้สึกเย็นสดชื่นยาวนาน</p></div>
+                        <div class="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-3 shadow-sm flex justify-between items-center animate-pulse">
+                            <div class="flex items-center space-x-2"><i class="fa-solid fa-bolt text-xl text-yellow-300"></i><span class="font-bold text-sm md:text-base tracking-wide">FLASH SALE จำกัดเวลา!</span></div>
+                            <span class="font-mono font-bold bg-black/30 px-2 py-0.5 rounded text-sm" id="cooling-countdown">00:15:00</span>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100"><div class="flex items-baseline space-x-3 mb-3"><span class="text-3xl font-extrabold text-red-600">฿179</span><span class="text-sm text-slate-400 line-through">฿350</span><span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">ลดมหาโหด 49%</span></div><a href="#cooling-order-form" class="block text-center bg-blue-600 hover:bg-blue-700 transition text-white font-bold text-lg py-3 px-6 rounded-xl">สั่งซื้อเลยตอนนี้</a></div>
+                    </div>
+                </section>
+                <section id="cooling-order-form" class="bg-white rounded-2xl shadow-md p-6 border-2 border-blue-500">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-file-invoice mr-2 text-blue-600"></i> ข้อมูลการจัดส่ง</h3>
+                    <form class="space-y-4" onsubmit="alert('บันทึกข้อมูลการสั่งซื้อสำเร็จ! (นี่คือระบบจำลอง)'); closeCoolingModal(); return false;">
+                        <input type="text" required placeholder="ชื่อ-นามสกุล" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm">
+                        <input type="tel" required placeholder="เบอร์โทรศัพท์" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm">
+                        <textarea required rows="3" placeholder="ที่อยู่จัดส่งสินค้า" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm"></textarea>
+                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl py-4 rounded-xl">ยืนยันการสั่งซื้อ ฿179</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
     <section id="reviews" class="py-24 bg-zinc-950 text-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
@@ -575,10 +611,19 @@
             document.getElementById('product-modal').classList.add('hidden');
             document.body.style.overflow = 'auto'; // คืนค่าการเลื่อนหน้าเว็บตามปกติ
         }
+        function openCoolingModal() {
+            document.getElementById('cooling-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeCoolingModal() {
+            document.getElementById('cooling-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
 
         // ระบบ Countdown นับถอยหลังวนลูป 2 ชม.
         function startCountdown() {
             let duration = 2 * 60 * 60; 
+            let coolingDuration = 15 * 60;
             setInterval(function () {
                 let hours = parseInt(duration / 3600, 10);
                 let minutes = parseInt((duration % 3600) / 60, 10);
@@ -598,6 +643,14 @@
 
                 if (--duration < 0) {
                     duration = 2 * 60 * 60; 
+                }
+
+                const cEl = document.getElementById("cooling-countdown");
+                if (cEl) {
+                    const cMin = Math.floor(coolingDuration / 60).toString().padStart(2, "0");
+                    const cSec = (coolingDuration % 60).toString().padStart(2, "0");
+                    cEl.textContent = `${cMin}:${cSec}`;
+                    coolingDuration = coolingDuration <= 0 ? 15 * 60 : coolingDuration - 1;
                 }
             }, 1000);
         }
