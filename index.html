@@ -249,9 +249,10 @@
                 </div>
             </div>
 
+            <!-- ตำแหน่งภาพที่ 1 ของสเปรย์เย็น อัปเดตไฟล์ภาพเรียบร้อย -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
                 <div class="bg-blue-50/50 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openCoolingModal()">
-                    <img src="Artboard 7_0.jpg" alt="Raptor Sport Cooling Spray" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
+                    <img src="Gemini_Generated_Image_td8ebptd8ebptd8e.png" alt="Raptor Sport Cooling Spray" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
                     <span class="absolute top-2 left-2 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded animate-pulse">Flash Sale</span>
                 </div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
@@ -309,9 +310,10 @@
                 </div>
             </div>
 
+            <!-- ตำแหน่งภาพที่ 1 ของสเปรย์ฉีดเท้า อัปเดตไฟล์ภาพเรียบร้อย -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
                 <div class="bg-emerald-50/50 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openFootSprayModal()">
-                    <img src="Raptor_sport_foot_spray_can_2cfbad9fa4.jpeg" alt="RAPTOR SPORT FOOT SPRAY" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
+                    <img src="Gemini_Generated_Image_l3yjotl3yjotl3yj.png" alt="RAPTOR SPORT FOOT SPRAY" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
                     <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded animate-pulse">Flash Sale</span>
                 </div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
@@ -429,19 +431,56 @@
                         <canvas id="efficiencyChart"></canvas>
                     </div>
                 </section>
-                <section id="modal-order-form" class="bg-white rounded-2xl shadow-md border-2 border-[#FF6B00] p-6 space-y-6">
+
+                <!-- เพิ่มระบบรีวิวและฟอร์มจัดส่งปลายทางตามรูปโครงสร้าง (Warming Spray) -->
+                <section class="bg-white rounded-2xl shadow-sm p-6 max-w-xl mx-auto">
+                    <h3 class="text-xl font-bold text-center mb-6 text-gray-900">รีวิวจากผู้ใช้จริง</h3>
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-sm text-slate-800">คุณสมชาย (นักวิ่งมาราธอน)</span>
+                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">"ฉีดก่อนวิ่ง 10 นาที รู้สึกกล้ามเนื้อตื่นตัวดีมาก ร้อนกำลังดี ไม่เหนียวเหนอะหนะเลยครับ วิ่งจบไม่ตะคริวเลย"</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-sm text-slate-800">คุณพัชรา (สายฟิตเนส/เวทเทรนนิ่ง)</span>
+                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">"พกติดกระเป๋าฟิตเนสตลอดค่ะ หลังเล่นขาตึงๆ ฉีดปุ๊บสบายขาขึ้นเยอะ กลิ่นเมนทอลหอมสดชื่นผ่อนคลายมาก"</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="modal-order-form" class="bg-white rounded-2xl shadow-md border-2 border-[#FF6B00] p-6 max-w-xl mx-auto">
+                    <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm mb-6">
+                        🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-900 mb-6">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
                     <form class="space-y-4" onsubmit="alert('ระบบบันทึกการสั่งซื้อเรียบร้อย!'); closeProductModal(); return false;">
-                        <input type="text" required placeholder="ชื่อ-นามสกุลผู้รับ" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
-                        <input type="tel" required placeholder="เบอร์โทรศัพท์" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
-                        <textarea required rows="3" placeholder="ที่อยู่สำหรับจัดส่ง" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"></textarea>
-                        <button type="submit" class="w-full bg-orange-brand text-white font-bold text-lg py-3.5 rounded-xl">ยืนยันการสั่งซื้อเลยตอนนี้</button>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-orange-brand text-white font-bold text-lg py-3.5 rounded-xl shadow-md hover:bg-orange-600 transition-all cursor-pointer">
+                            ยืนยันการสั่งซื้อเลยตอนนี้
+                        </button>
                     </form>
                 </section>
             </div>
         </div>
     </div>
 
-    <!-- ป๊อปอัพ 2: RAPTOR SPORTS ICE COLD SPRAY (แก้ไขภาพสินค้าแสดงผลปกติแล้ว) -->
+    <!-- ป๊อปอัพ 2: RAPTOR SPORTS ICE COLD SPRAY (อัปเดตรูปภาพ Gemini_Generated_Image_td8ebptd8ebptd8e.png ครบ 2 จุด) -->
     <div id="cooling-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-slate-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-slate-200 my-8">
             <button onclick="closeCoolingModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -454,9 +493,9 @@
             
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
                 <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- แก้ไขจุดดึงรูปภาพของสเปรย์เย็นให้กลับมาแสดงปกติ -->
+                    <!-- ตำแหน่งภาพที่ 2 ของสเปรย์เย็น อัปเดตเสร็จสิ้น -->
                     <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4">
-                        <img src="Gemini_Generated_Image_td8ebptd8ebptd8e.png" alt="RAPTOR SPORTS ICE COLD SPRAY" class="w-full max-w-[320px] max-h-[380px] object-contain rounded-lg">
+                        <img src="Gemini_Generated_Image_td8ebptd8ebptd8e.png" alt="RAPTOR SPORTS ICE COLD SPRAY" class="max-h-[380px] object-contain rounded-lg">
                     </div>
                     <div class="flex flex-col justify-between space-y-4">
                         <div>
@@ -479,28 +518,6 @@
                             <a href="#cooling-order-form" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold text-base py-3 px-6 rounded-xl shadow-md transition-all">
                                 <i class="fa-solid fa-cart-shopping mr-1"></i> สั่งซื้อเลยตอนนี้
                             </a>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
-                    <h3 class="text-base font-bold text-blue-900 mb-4 flex items-center border-b pb-2 border-slate-100">
-                        <i class="fa-solid fa-star mr-2 text-yellow-500"></i> รีวิวจากผู้ใช้งานจริง
-                    </h3>
-                    <div class="space-y-3 text-xs md:text-sm">
-                        <div class="border-b border-slate-100 pb-3">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-semibold text-slate-700">คุณ ณัฐวุฒิ (นักฟุตบอลเดินสาย)</span>
-                                <div class="text-yellow-400 text-[10px]"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            </div>
-                            <p class="text-slate-600">"ฉีดตอนพักครึ่งคือดีมากครับ เย็นวาบลงไปถึงกล้ามเนื้อ คลายเหนื่อยได้เร็วมาก เล่นครึ่งหลังต่อได้สบายๆ เลย แนะนำครับ"</p>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-semibold text-slate-700">คุณ ธนพร (นักวิ่งมาราธอน)</span>
-                                <div class="text-yellow-400 text-[10px]"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            </div>
-                            <p class="text-slate-600">"ชอบตรงที่ละอองละเอียดมากและไม่เหนียวตัวเลยค่ะ ความเย็นอยู่ได้นาน คุ้มค่าราคามาก"</p>
                         </div>
                     </div>
                 </section>
@@ -535,20 +552,46 @@
                     <div class="w-full h-[240px] relative"><canvas id="coolingPerformanceChart"></canvas></div>
                 </section>
 
-                <section id="cooling-order-form" class="bg-white rounded-2xl shadow-md p-6 border-2 border-blue-500 space-y-6">
-                    <div class="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-3 shadow-sm flex justify-between items-center animate-pulse">
-                        <div>
-                            <span class="font-bold text-sm block"><i class="fa-solid fa-fire mr-1"></i> โอกาสสุดท้าย! ราคาพิเศษ ฿179</span>
-                            <span class="text-[11px] text-red-100">กรอกข้อมูลเพื่อรับสิทธิ์แฟลชเซลส่งฟรีปลายทางด่วนพิเศษ</span>
+                <!-- ปรับแต่งรีวิวของป๊อปอัพสเปรย์เย็นตามรูปตัวอย่าง -->
+                <section class="bg-white rounded-2xl shadow-sm p-6 max-w-xl mx-auto border border-slate-100">
+                    <h3 class="text-xl font-bold text-center mb-6 text-gray-900">รีวิวจากผู้ใช้จริง</h3>
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-sm text-slate-800">คุณสมชาย (นักวิ่งมาราธอน)</span>
+                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">"ฉีดก่อนวิ่ง 10 นาที รู้สึกกล้ามเนื้อตื่นตัวดีมาก ร้อนกำลังดี ไม่เหนียวเหนอะหนะเลยครับ วิ่งจบไม่ตะคริวเลย"</p>
                         </div>
-                        <span class="font-mono font-bold bg-black/30 px-2 py-0.5 rounded text-sm text-yellow-300" id="cooling-countdown-2">00:15:00</span>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-sm text-slate-800">คุณพัชรา (สายฟิตเนส/เวทเทรนนิ่ง)</span>
+                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">"พกติดกระเป๋าฟิตเนสตลอดค่ะ หลังเล่นขาตึงๆ ฉีดปุ๊บสบายขาขึ้นเยอะ กลิ่นเมนทอลหอมสดชื่นผ่อนคลายมาก"</p>
+                        </div>
                     </div>
-                    
-                    <h3 class="text-base font-bold text-slate-800 text-center"><i class="fa-solid fa-file-invoice mr-2 text-blue-600"></i> ข้อมูลการจัดส่ง</h3>
+                </section>
+
+                <!-- ปรับแต่งฟอร์มจัดส่งของป๊อปอัพสเปรย์เย็นตามรูปตัวอย่าง -->
+                <section id="cooling-order-form" class="bg-white rounded-2xl shadow-md p-6 border-2 border-blue-500 max-w-xl mx-auto space-y-6">
+                    <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
+                        🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
                     <form class="space-y-4" onsubmit="alert('บันทึกข้อมูลออเดอร์ RAPTOR SPORTS ICE COLD SPRAY สำเร็จ!'); closeCoolingModal(); return false;">
-                        <input type="text" required placeholder="ชื่อ-นามสกุล *" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-none focus:border-blue-500">
-                        <input type="tel" required placeholder="เบอร์โทรศัพท์ *" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-none focus:border-blue-500">
-                        <textarea required rows="3" placeholder="ที่อยู่จัดส่งสินค้า *" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-none focus:border-blue-500"></textarea>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                        </div>
                         <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer">ยืนยันการสั่งซื้อ ฿179</button>
                     </form>
                 </section>
@@ -556,7 +599,7 @@
         </div>
     </div>
 
-    <!-- ป๊อปอัพ 3: RAPTOR SPORT FOOT SPRAY (กู้คืนช่องฟอร์ม เบอร์โทร ที่อยู่จัดส่ง ครบถ้วนแล้ว) -->
+    <!-- ป๊อปอัพ 3: RAPTOR SPORT FOOT SPRAY (อัปเดตรูปภาพ Gemini_Generated_Image_l3yjotl3yjotl3yj.png ครบ 2 จุด และกู้คืนฟิลด์จัดส่งด่วน) -->
     <div id="footspray-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-slate-900 text-slate-100 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-emerald-800/50 my-8">
             <button onclick="closeFootSprayModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -568,8 +611,9 @@
             </div>
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
                 <section class="bg-slate-800 rounded-2xl p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6 border border-slate-700/50">
+                    <!-- ตำแหน่งภาพที่ 2 ของสเปรย์ฉีดเท้า อัปเดตเสร็จสิ้น -->
                     <div class="flex flex-col justify-center items-center bg-gradient-to-b from-emerald-950 to-slate-800 rounded-xl p-4">
-                        <img src="Raptor_sport_foot_spray_can_2cfbad9fa4.jpeg" alt="RAPTOR SPORT FOOT SPRAY" class="max-h-[380px] object-contain rounded-lg">
+                        <img src="Gemini_Generated_Image_l3yjotl3yjotl3yj.png" alt="RAPTOR SPORT FOOT SPRAY" class="max-h-[380px] object-contain rounded-lg">
                     </div>
                     <div class="flex flex-col justify-between space-y-4">
                         <div>
@@ -583,18 +627,9 @@
                             <span id="foot-countdown-1" class="font-mono font-bold bg-black/40 px-2 py-0.5 rounded text-sm text-yellow-300">00:15:00</span>
                         </div>
                         <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700">
-                            <div class="flex items-baseline space-x-3 mb-3">
-                                <span class="text-3xl font-extrabold text-orange-400">฿179</span>
-                                <span class="text-sm text-slate-500 line-through">฿290</span>
-                            </div>
+                            <div class="flex items-baseline space-x-3 mb-3"><span class="text-3xl font-extrabold text-orange-400">฿179</span><span class="text-sm text-slate-500 line-through">฿290</span></div>
                             <a href="#foot-order-form" class="block text-center bg-emerald-600 text-white font-bold text-base py-3 rounded-xl">สั่งซื้อเลยตอนนี้</a>
                         </div>
-                    </div>
-                </section>
-                <section class="bg-slate-800 rounded-2xl p-6 border border-slate-700/50">
-                    <h3 class="text-base font-bold text-white mb-4 flex items-center border-b pb-2 border-slate-700"><i class="fa-solid fa-star mr-2 text-orange-400"></i> รีวิวจากนักกีฬาผู้ใช้งานจริง</h3>
-                    <div class="space-y-3 text-xs md:text-sm">
-                        <p class="text-slate-400">"ปกติถอดสตั๊ดมาเพื่อนเดินหนีเลยครับ พอได้ลองตัวนี้ฉีดก่อนใส่ถุงเท้า เล่นเสร็จถอดมาไม่มีกลิ่นเลย แถมเท้าแห้งสบายมากครับ" <span class="text-orange-400 block mt-1">- คุณชัยวัฒน์</span></p>
                     </div>
                 </section>
                 
@@ -624,38 +659,55 @@
                 <section class="bg-slate-800 rounded-2xl p-6 border border-slate-700/50">
                     <div class="w-full h-[240px] relative"><canvas id="footSprayChart"></canvas></div>
                 </section>
-                
-                <!-- กู้คืนช่องฟอร์ม เบอร์โทร และที่อยู่จัดส่ง ของ Foot spray กลับมาให้ครบตามบรีฟ -->
-                <section id="foot-order-form" class="bg-slate-800 rounded-2xl p-6 border-2 border-emerald-500 space-y-4">
-                    <div class="bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl p-3 shadow-md flex justify-between items-center">
-                        <div>
-                            <span class="font-bold text-sm block"><i class="fa-solid fa-fire mr-1"></i> โอกาสสุดท้าย! ราคาพิเศษ ฿179</span>
-                            <span class="text-[11px] text-orange-100">ส่งฟรีบริการเก็บเงินปลายทาง (COD)</span>
+
+                <!-- ปรับแต่งรีวิวของป๊อปอัพสเปรย์ฉีดเท้าตามรูปตัวอย่าง -->
+                <section class="bg-slate-800 rounded-2xl p-6 border border-slate-700/50 max-w-xl mx-auto">
+                    <h3 class="text-xl font-bold text-center mb-6 text-white">รีวิวจากผู้ใช้จริง</h3>
+                    <div class="space-y-4">
+                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-sm text-slate-200">คุณสมชาย (นักวิ่งมาราธอน)</span>
+                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">"ฉีดก่อนวิ่ง 10 นาที รู้สึกกล้ามเนื้อตื่นตัวดีมาก ร้อนกำลังดี ไม่เหนียวเหนอะหนะเลยครับ วิ่งจบไม่ตะคริวเลย"</p>
                         </div>
-                        <span id="foot-countdown-2" class="font-mono font-bold bg-black/30 px-2 py-0.5 rounded text-sm text-yellow-300">00:15:00</span>
+                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-sm text-slate-200">คุณพัชรา (สายฟิตเนส/เวทเทรนนิ่ง)</span>
+                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">"พกติดกระเป๋าฟิตเนสตลอดค่ะ หลังเล่นขาตึงๆ ฉีดปุ๊บสบายขาขึ้นเยอะ กลิ่นเมนทอลหอมสดชื่นผ่อนคลายมาก"</p>
+                        </div>
                     </div>
-                    <h3 class="text-base font-bold text-white text-center">กรอกรายละเอียดเพื่อจัดส่งด่วนฟรี</h3>
+                </section>
+                
+                <!-- ปรับแต่งฟอร์มจัดส่งของป๊อปอัพสเปรย์ฉีดเท้าตามรูปตัวอย่าง -->
+                <section id="foot-order-form" class="bg-slate-800 rounded-2xl p-6 border-2 border-emerald-500 max-w-xl mx-auto space-y-6">
+                    <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
+                        🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 290 บาท)
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-white">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
                     <form class="space-y-4 text-slate-200" onsubmit="alert('บันทึกการสั่งซื้อ RAPTOR FOOT SPRAY สำเร็จ!'); closeFootSprayModal(); return false;">
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">ชื่อ-นามสกุล *</label>
-                            <input type="text" required placeholder="กรุณากรอกชื่อและนามสกุล" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            <label class="block text-sm font-bold text-slate-300 mb-1">ชื่อ-นามสกุลผู้รับ</label>
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
                         </div>
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">เบอร์โทรศัพท์ *</label>
-                            <input type="tel" required placeholder="กรุณากรอกเบอร์โทรศัพท์ที่ติดต่อได้" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            <label class="block text-sm font-bold text-slate-300 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
                         </div>
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">ที่อยู่จัดส่งสินค้า *</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
+                            <label class="block text-sm font-bold text-slate-300 mb-1">ที่อยู่สำหรับจัดส่ง</label>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-orange-500 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer">ยืนยันการสั่งซื้อด่วน ฿179</button>
+                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer">ยืนยันการสั่งซื้อด่วน ฿179</button>
                     </form>
                 </section>
             </div>
         </div>
     </div>
 
-    <!-- ส่วน REVIEWS FROM ATHLETES (กู้คืนรีวิวครบ 4 ช่องสมบูรณ์) -->
+    <!-- ส่วน REVIEWS FROM ATHLETES -->
     <section id="reviews" class="py-24 bg-zinc-950 text-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
@@ -688,7 +740,7 @@
         </div>
     </section>
 
-    <!-- ส่วน CONTACT US (กู้คืนหน้าตาดั้งเดิมแบบพรีเมียมเรียบร้อยแล้ว) -->
+    <!-- ส่วน CONTACT US -->
     <section id="contact" class="py-24 max-w-4xl mx-auto px-6">
         <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden grid grid-cols-1 md:grid-cols-2">
             <div class="p-8 space-y-6">
