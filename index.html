@@ -249,7 +249,7 @@
                 </div>
             </div>
 
-            <!-- ตำแหน่งภาพที่ 1 ของสเปรย์เย็น อัปเดตไฟล์ภาพเรียบร้อย -->
+            <!-- ตำแหน่งภาพสเปรย์สูตรเย็นที่ 1 อัปเดตไฟล์เรียบร้อยตามบรีฟเก่า -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
                 <div class="bg-blue-50/50 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openCoolingModal()">
                     <img src="Gemini_Generated_Image_td8ebptd8ebptd8e.png" alt="Raptor Sport Cooling Spray" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
@@ -270,11 +270,24 @@
                 </div>
             </div>
 
+            <!-- ตำแหน่งภาพเจลพลังงานที่ 1 อัปเดตไฟล์ Gemini_Generated_Image_dihrcjdihrcjdihr.png แล้ว -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
-                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-bolt text-5xl text-amber-500"></i></div>
+                <div class="bg-orange-50 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openEnergyGelModal()">
+                    <img src="Gemini_Generated_Image_dihrcjdihrcjdihr.png" alt="Raptor Go Energy Gel" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
+                    <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded animate-pulse">Flash Sale</span>
+                </div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
-                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Go Energy Gel (เจลพลังงาน)</h3><p class="text-xs text-gray-400 mt-1">ให้พลังงานรวดเร็วสำหรับนักวิ่งและนักกีฬา</p></div>
-                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿85</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2 cursor-pointer hover:text-orange-brand" onclick="openEnergyGelModal()">Raptor Go Energy Gel (เจลพลังงาน)</h3>
+                        <p class="text-xs text-gray-400 mt-1">ให้พลังงานรวดเร็ว 120kcal สำหรับนักวิ่งและนักกีฬา</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <div>
+                            <span class="font-bold text-red-600 text-base">฿179</span>
+                            <span class="text-[10px] text-gray-400 line-through block">฿350</span>
+                        </div>
+                        <button onclick="openEnergyGelModal()" class="bg-orange-brand text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-zinc-900 transition-colors font-semibold">ดูข้อมูล / ซื้อ</button>
+                    </div>
                 </div>
             </div>
 
@@ -310,7 +323,6 @@
                 </div>
             </div>
 
-            <!-- ตำแหน่งภาพที่ 1 ของสเปรย์ฉีดเท้า อัปเดตไฟล์ภาพเรียบร้อย -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
                 <div class="bg-emerald-50/50 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openFootSprayModal()">
                     <img src="Gemini_Generated_Image_l3yjotl3yjotl3yj.png" alt="RAPTOR SPORT FOOT SPRAY" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
@@ -432,7 +444,6 @@
                     </div>
                 </section>
 
-                <!-- เพิ่มระบบรีวิวและฟอร์มจัดส่งปลายทางตามรูปโครงสร้าง (Warming Spray) -->
                 <section class="bg-white rounded-2xl shadow-sm p-6 max-w-xl mx-auto">
                     <h3 class="text-xl font-bold text-center mb-6 text-gray-900">รีวิวจากผู้ใช้จริง</h3>
                     <div class="space-y-4">
@@ -480,7 +491,7 @@
         </div>
     </div>
 
-    <!-- ป๊อปอัพ 2: RAPTOR SPORTS ICE COLD SPRAY (อัปเดตรูปภาพ Gemini_Generated_Image_td8ebptd8ebptd8e.png ครบ 2 จุด) -->
+    <!-- ป๊อปอัพ 2: RAPTOR SPORTS ICE COLD SPRAY -->
     <div id="cooling-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-slate-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-slate-200 my-8">
             <button onclick="closeCoolingModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -493,7 +504,7 @@
             
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
                 <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- ตำแหน่งภาพที่ 2 ของสเปรย์เย็น อัปเดตเสร็จสิ้น -->
+                    <!-- ตำแหน่งภาพสเปรย์สูตรเย็นที่ 2 อัปเดตไฟล์เรียบร้อยตามบรีฟเก่า -->
                     <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4">
                         <img src="Gemini_Generated_Image_td8ebptd8ebptd8e.png" alt="RAPTOR SPORTS ICE COLD SPRAY" class="max-h-[380px] object-contain rounded-lg">
                     </div>
@@ -552,7 +563,6 @@
                     <div class="w-full h-[240px] relative"><canvas id="coolingPerformanceChart"></canvas></div>
                 </section>
 
-                <!-- ปรับแต่งรีวิวของป๊อปอัพสเปรย์เย็นตามรูปตัวอย่าง -->
                 <section class="bg-white rounded-2xl shadow-sm p-6 max-w-xl mx-auto border border-slate-100">
                     <h3 class="text-xl font-bold text-center mb-6 text-gray-900">รีวิวจากผู้ใช้จริง</h3>
                     <div class="space-y-4">
@@ -573,7 +583,6 @@
                     </div>
                 </section>
 
-                <!-- ปรับแต่งฟอร์มจัดส่งของป๊อปอัพสเปรย์เย็นตามรูปตัวอย่าง -->
                 <section id="cooling-order-form" class="bg-white rounded-2xl shadow-md p-6 border-2 border-blue-500 max-w-xl mx-auto space-y-6">
                     <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
                         🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
@@ -599,7 +608,7 @@
         </div>
     </div>
 
-    <!-- ป๊อปอัพ 3: RAPTOR SPORT FOOT SPRAY (อัปเดตรูปภาพ Gemini_Generated_Image_l3yjotl3yjotl3yj.png ครบ 2 จุด และกู้คืนฟิลด์จัดส่งด่วน) -->
+    <!-- ป๊อปอัพ 3: RAPTOR SPORT FOOT SPRAY -->
     <div id="footspray-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-slate-900 text-slate-100 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-emerald-800/50 my-8">
             <button onclick="closeFootSprayModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -611,7 +620,6 @@
             </div>
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
                 <section class="bg-slate-800 rounded-2xl p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6 border border-slate-700/50">
-                    <!-- ตำแหน่งภาพที่ 2 ของสเปรย์ฉีดเท้า อัปเดตเสร็จสิ้น -->
                     <div class="flex flex-col justify-center items-center bg-gradient-to-b from-emerald-950 to-slate-800 rounded-xl p-4">
                         <img src="Gemini_Generated_Image_l3yjotl3yjotl3yj.png" alt="RAPTOR SPORT FOOT SPRAY" class="max-h-[380px] object-contain rounded-lg">
                     </div>
@@ -659,8 +667,7 @@
                 <section class="bg-slate-800 rounded-2xl p-6 border border-slate-700/50">
                     <div class="w-full h-[240px] relative"><canvas id="footSprayChart"></canvas></div>
                 </section>
-
-                <!-- ปรับแต่งรีวิวของป๊อปอัพสเปรย์ฉีดเท้าตามรูปตัวอย่าง -->
+                
                 <section class="bg-slate-800 rounded-2xl p-6 border border-slate-700/50 max-w-xl mx-auto">
                     <h3 class="text-xl font-bold text-center mb-6 text-white">รีวิวจากผู้ใช้จริง</h3>
                     <div class="space-y-4">
@@ -681,12 +688,15 @@
                     </div>
                 </section>
                 
-                <!-- ปรับแต่งฟอร์มจัดส่งของป๊อปอัพสเปรย์ฉีดเท้าตามรูปตัวอย่าง -->
                 <section id="foot-order-form" class="bg-slate-800 rounded-2xl p-6 border-2 border-emerald-500 max-w-xl mx-auto space-y-6">
-                    <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
-                        🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 290 บาท)
+                    <div class="bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl p-3 shadow-md flex justify-between items-center">
+                        <div>
+                            <span class="font-bold text-sm block"><i class="fa-solid fa-fire mr-1"></i> โอกาสสุดท้าย! ราคาพิเศษ ฿179</span>
+                            <span class="text-[11px] text-orange-100">ส่งฟรีบริการเก็บเงินปลายทาง (COD)</span>
+                        </div>
+                        <span id="foot-countdown-2" class="font-mono font-bold bg-black/30 px-2 py-0.5 rounded text-sm text-yellow-300">00:15:00</span>
                     </div>
-                    <h3 class="text-xl font-bold text-center text-white">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
+                    <h3 class="text-xl font-bold text-center text-white">กรอกรายละเอียดเพื่อจัดส่งด่วนฟรี</h3>
                     <form class="space-y-4 text-slate-200" onsubmit="alert('บันทึกการสั่งซื้อ RAPTOR FOOT SPRAY สำเร็จ!'); closeFootSprayModal(); return false;">
                         <div>
                             <label class="block text-sm font-bold text-slate-300 mb-1">ชื่อ-นามสกุลผู้รับ</label>
@@ -700,14 +710,122 @@
                             <label class="block text-sm font-bold text-slate-300 mb-1">ที่อยู่สำหรับจัดส่ง</label>
                             <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer">ยืนยันการสั่งซื้อด่วน ฿179</button>
+                        <button type="submit" class="w-full bg-orange-500 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer">ยืนยันการสั่งซื้อด่วน ฿179</button>
                     </form>
                 </section>
             </div>
         </div>
     </div>
 
-    <!-- ส่วน REVIEWS FROM ATHLETES -->
+    <!-- ป๊อปอัพใหม่ 4: RAPTOR GO ENERGY GEL (เพิ่มโครงสร้างเซลเพจเต็มระบบและรูปภาพ Gemini_Generated_Image_dihrcjdihrcjdihr.png ครบทั้ง 2 จุด) -->
+    <div id="energygel-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
+        <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
+            <button onclick="closeEnergyGelModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="bg-zinc-900 text-white px-6 py-4 flex items-center justify-between">
+                <h3 class="font-bold text-lg text-orange-brand tracking-wider"><i class="fa-solid fa-bolt mr-1"></i> RAPTOR GO PREMIUM LAB</h3>
+                <span class="text-xs text-gray-400 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
+            </div>
+            <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
+                <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- ตำแหน่งภาพเจลพลังงานที่ 2 อัปเดตไฟล์ภาพเรียบร้อย -->
+                    <div class="flex flex-col justify-center items-center bg-gradient-to-b from-orange-50 to-white rounded-xl p-4">
+                        <img src="Gemini_Generated_Image_dihrcjdihrcjdihr.png" alt="Raptor Go Energy Gel" class="max-h-[380px] object-contain rounded-lg">
+                    </div>
+                    <div class="space-y-4 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-orange-100 text-orange-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Energy Booster</span>
+                            <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mt-2 mb-1 uppercase">RAPTOR GO ENERGY GEL</h2>
+                            <p class="text-xs text-gray-500 font-medium mb-3">แร็พเตอร์โก เอ็นเนอร์จี้ เจล - พลังงานทันที 120kcal พร้อมลุยทุกกิจกรรม</p>
+                            <p class="text-slate-600 text-xs md:text-sm leading-relaxed">ให้พลังงานรวดเร็วอย่างต่อเนื่อง 120 kcal เหมาะสำหรับนักวิ่งและนักกีฬา คัดสรรสารอาหารเกรดพรีเมียม ปลอดภัย มั่นใจได้ ทานง่าย ดูดซึมไว ไม่จุกเสียด ช่วยรักษาระดับสมรรถภาพทางกายให้คงที่ยาวนานสูงสุด</p>
+                        </div>
+                        <div class="bg-gradient-to-r from-red-600 to-orange-500 text-white rounded-xl p-3 shadow-sm flex justify-between items-center animate-pulse">
+                            <div class="flex items-center space-x-2"><i class="fa-solid fa-bolt text-xl text-yellow-300"></i><span class="font-bold text-sm md:text-base tracking-wide">FLASH SALE จำกัดเวลา!</span></div>
+                            <span class="font-mono font-bold bg-black/30 px-2 py-0.5 rounded text-sm text-yellow-300" id="energy-countdown-1">00:15:00</span>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="flex items-baseline space-x-3 mb-3">
+                                <span class="text-3xl font-extrabold text-red-600">฿179</span>
+                                <span class="text-sm text-gray-400 line-through">฿350</span>
+                            </div>
+                            <a href="#energy-order-form" class="block text-center bg-orange-500 hover:bg-orange-600 text-white font-bold text-base py-3 px-6 rounded-xl shadow-md transition-all">สั่งซื้อเลยตอนนี้</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
+                    <h3 class="text-base font-bold text-zinc-900 mb-4 flex items-center border-b pb-2 border-slate-100"><i class="fa-solid fa-flask-vial mr-2 text-orange-brand"></i> ประสิทธิภาพของสารประกอบสำคัญ</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-xs">
+                        <div class="p-3 bg-orange-50/50 rounded-xl border border-orange-100">
+                            <h4 class="font-bold text-gray-800">Vitamin B1</h4>
+                            <p class="text-[11px] text-gray-500 mt-1">เปลี่ยนคาร์โบไฮเดรตให้เป็นพลังงานหลักของกล้ามเนื้อ</p>
+                        </div>
+                        <div class="p-3 bg-orange-50/50 rounded-xl border border-orange-100">
+                            <h4 class="font-bold text-gray-800">Vitamin B6</h4>
+                            <p class="text-[11px] text-gray-500 mt-1">เร่งเผาผลาญ และช่วยลดความเมื่อยล้าสะสมในกล้ามเนื้อ</p>
+                        </div>
+                        <div class="p-3 bg-orange-50/50 rounded-xl border border-orange-100">
+                            <h4 class="font-bold text-gray-800">Vitamin B12</h4>
+                            <p class="text-[11px] text-gray-500 mt-1">บำรุงระบบประสาท ช่วยให้นักกีฬากระปรี้กระเปร่า มีสมาธิ</p>
+                        </div>
+                        <div class="p-3 bg-orange-50/50 rounded-xl border border-orange-100">
+                            <h4 class="font-bold text-gray-800">Magnesium</h4>
+                            <p class="text-[11px] text-gray-500 mt-1">รักษาสมดุลเกลือแร่ ลดความเสี่ยงการเกิดตะคริวเฉียบพลัน</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
+                    <h3 class="text-base font-bold text-gray-900 mb-2 flex items-center border-b pb-2 border-slate-100"><i class="fa-solid fa-chart-line mr-2 text-orange-brand"></i> กราฟแสดงประสิทธิภาพการคงระดับพลังงาน</h3>
+                    <div class="w-full h-[240px] relative"><canvas id="energyPerformanceChart"></canvas></div>
+                </section>
+
+                <section class="bg-white rounded-2xl shadow-sm p-6 max-w-xl mx-auto border border-slate-100">
+                    <h3 class="text-xl font-bold text-center mb-6 text-gray-900">รีวิวจากผู้ใช้จริง</h3>
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-sm text-slate-800">คุณสมชาย (นักวิ่งมาราธอน)</span>
+                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">"ฉีดก่อนวิ่ง 10 นาที รู้สึกกล้ามเนื้อตื่นตัวดีมาก ร้อนกำลังดี ไม่เหนียวเหนอะหนะเลยครับ วิ่งจบไม่ตะคริวเลย"</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-sm text-slate-800">คุณพัชรา (สายฟิตเนส/เวทเทรนนิ่ง)</span>
+                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">"พกติดกระเป๋าฟิตเนสตลอดค่ะ หลังเล่นขาตึงๆ ฉีดปุ๊บสบายขาขึ้นเยอะ กลิ่นเมนทอลหอมสดชื่นผ่อนคลายมาก"</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="energy-order-form" class="bg-white rounded-2xl shadow-md p-6 border-2 border-orange-500 max-w-xl mx-auto space-y-6">
+                    <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
+                        🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
+                    <form class="space-y-4" onsubmit="alert('บันทึกข้อมูลออเดอร์ RAPTOR GO ENERGY GEL สำเร็จ!'); closeEnergyGelModal(); return false;">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer">ยืนยันการสั่งซื้อ ฿179</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
     <section id="reviews" class="py-24 bg-zinc-950 text-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
@@ -740,7 +858,6 @@
         </div>
     </section>
 
-    <!-- ส่วน CONTACT US -->
     <section id="contact" class="py-24 max-w-4xl mx-auto px-6">
         <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden grid grid-cols-1 md:grid-cols-2">
             <div class="p-8 space-y-6">
@@ -795,6 +912,7 @@
         let myChartInstance = null;
         let coolingChartInstance = null;
         let footSprayChartInstance = null;
+        let energyGelChartInstance = null;
 
         function openProductModal() {
             document.getElementById('product-modal').classList.remove('hidden');
@@ -888,6 +1006,53 @@
             document.body.style.overflow = 'auto';
         }
 
+        // ฟังก์ชันระบบเปิดโมดอลเจลพลังงาน
+        function openEnergyGelModal() {
+            document.getElementById('energygel-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!energyGelChartInstance) {
+                const ctx = document.getElementById('energyPerformanceChart').getContext('2d');
+                energyGelChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '15 นาที', '30 นาที', '60 นาที', '90 นาที', '120 นาที'],
+                        datasets: [
+                            {
+                                label: 'เมื่อทาน RAPTOR GO',
+                                data: [40, 95, 90, 85, 88, 80],
+                                borderColor: '#FF6B00',
+                                backgroundColor: 'rgba(255, 107, 0, 0.1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'ไม่ได้ทานเจลพลังงาน',
+                                data: [40, 50, 45, 30, 20, 10],
+                                borderColor: '#94a3b8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: true, labels: { font: { size: 10 } } } },
+                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
+                    }
+                });
+            }
+        }
+
+        function closeEnergyGelModal() {
+            document.getElementById('energygel-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
         function startCountdown() {
             let duration = 2 * 60 * 60; 
             let flashSaleDuration = 15 * 60;
@@ -912,11 +1077,13 @@
                 const fEl2 = document.getElementById("foot-countdown-2");
                 const coolEl1 = document.getElementById("cooling-countdown-1");
                 const coolEl2 = document.getElementById("cooling-countdown-2");
+                const energyEl1 = document.getElementById("energy-countdown-1");
                 
                 if (fEl1) fEl1.textContent = `${cMin}:${cSec}`;
                 if (fEl2) fEl2.textContent = `${cMin}:${cSec}`;
                 if (coolEl1) coolEl1.textContent = `${cMin}:${cSec}`;
                 if (coolEl2) coolEl2.textContent = `${cMin}:${cSec}`;
+                if (energyEl1) energyEl1.textContent = `${cMin}:${cSec}`;
                 
                 flashSaleDuration = flashSaleDuration <= 0 ? 15 * 60 : flashSaleDuration - 1;
             }, 1000);
