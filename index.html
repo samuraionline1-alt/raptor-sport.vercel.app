@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ร้านขายของง่ายๆ</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --primary: #2563eb;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --danger: #dc2626;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans Thai", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background: var(--card);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 { margin: 0; font-size: 1.25rem; }
+    main {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: #e5e7eb;
+    }
+    .price { font-weight: 700; color: var(--primary); }
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .add-btn { background: var(--primary); color: white; }
+    .remove-btn { background: var(--danger); color: white; }
+    .cart {
+      background: var(--card);
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.08);
+      padding: 14px;
+      align-self: start;
+      position: sticky;
+      top: 84px;
+    }
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    .cart-footer {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+    }
+    .checkout-btn {
+      width: 100%;
+      margin-top: 12px;
+      background: #16a34a;
+      color: white;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+      .cart { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🛒 ร้านขายของง่ายๆ</h1>
+    <div id="cartCount">สินค้าในตะกร้า: 0</div>
+  </header>
+
+  <main>
+    <section>
+      <h2>สินค้าแนะนำ</h2>
+      <div class="products" id="productList"></div>
+    </section>
+
+    <aside class="cart">
+      <h2>ตะกร้าสินค้า</h2>
+      <div id="cartItems" class="muted">ยังไม่มีสินค้าในตะกร้า</div>
+      <div class="cart-footer">
+        <span>รวม</span>
+        <span id="totalPrice">฿0</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn">สั่งซื้อ</button>
+    </aside>
+  </main>
+
+  <script>
+    const products = [
+      { id: 1, name: "เสื้อยืดสีขาว", price: 250, image: "https://picsum.photos/seed/shirt/400/300" },
+      { id: 2, name: "แก้วกาแฟ", price: 180, image: "https://picsum.photos/seed/mug/400/300" },
+      { id: 3, name: "กระเป๋าผ้า", price: 320, image: "https://picsum.photos/seed/bag/400/300" },
+      { id: 4, name: "หูฟัง", price: 790, image: "https://picsum.photos/seed/headphones/400/300" },
+      { id: 5, name: "สมุดโน้ต", price: 120, image: "https://picsum.photos/seed/notebook/400/300" }
+    ];
+
+    const cart = new Map();
+
+    function formatBaht(value) {
+      return `฿${value.toLocaleString("th-TH")}`;
+    }
+
+    function renderProducts() {
+      const productList = document.getElementById("productList");
+      productList.innerHTML = products.map(product => `
+        <article class="card">
+          <img src="${product.image}" alt="${product.name}" />
+          <div>
+            <strong>${product.name}</strong>
+            <div class="price">${formatBaht(product.price)}</div>
+          </div>
+          <button class="add-btn" data-id="${product.id}">เพิ่มลงตะกร้า</button>
+        </article>
+      `).join("");
+
+      productList.querySelectorAll(".add-btn").forEach(btn => {
+        btn.addEventListener("click", () => addToCart(Number(btn.dataset.id)));
+      });
+    }
+
+    function addToCart(productId) {
+      const current = cart.get(productId) || 0;
+      cart.set(productId, current + 1);
+      renderCart();
+    }
+
+    function removeFromCart(productId) {
+      const current = cart.get(productId);
+      if (!current) return;
+      if (current === 1) {
+        cart.delete(productId);
+      } else {
+        cart.set(productId, current - 1);
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cartItems");
+      const totalPrice = document.getElementById("totalPrice");
+      const cartCount = document.getElementById("cartCount");
+
+      if (cart.size === 0) {
+        cartItems.innerHTML = '<div class="muted">ยังไม่มีสินค้าในตะกร้า</div>';
+        totalPrice.textContent = formatBaht(0);
+        cartCount.textContent = "สินค้าในตะกร้า: 0";
+        return;
+      }
+
+      let total = 0;
+      let count = 0;
+      const rows = [];
+
+      cart.forEach((qty, productId) => {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        const sum = product.price * qty;
+        total += sum;
+        count += qty;
+        rows.push(`
+          <div class="cart-item">
+            <div>
+              <div>${product.name}</div>
+              <div class="muted">${formatBaht(product.price)} x ${qty}</div>
+            </div>
+            <strong>${formatBaht(sum)}</strong>
+            <button class="remove-btn" data-remove-id="${product.id}">-</button>
+          </div>
+        `);
+      });
+
+      cartItems.innerHTML = rows.join("");
+      totalPrice.textContent = formatBaht(total);
+      cartCount.textContent = `สินค้าในตะกร้า: ${count}`;
+
+      cartItems.querySelectorAll(".remove-btn").forEach(btn => {
+        btn.addEventListener("click", () => removeFromCart(Number(btn.dataset.removeId)));
+      });
+    }
+
+    document.getElementById("checkoutBtn").addEventListener("click", () => {
+      if (cart.size === 0) {
+        alert("กรุณาเพิ่มสินค้าก่อนสั่งซื้อ");
+        return;
+      }
+      alert("สั่งซื้อสำเร็จ! (ตัวอย่างเดโม)");
+      cart.clear();
+      renderCart();
+    });
+
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
