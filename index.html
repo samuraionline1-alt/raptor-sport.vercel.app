@@ -48,6 +48,19 @@
         .nav-link:hover::after {
             transform: scaleX(1);
         }
+
+        .logo-premium-shell {
+            background: radial-gradient(circle at 30% 20%, rgba(59,130,246,0.28), rgba(15,23,42,0.92) 55%, rgba(2,6,23,0.98) 100%);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: 0 8px 20px rgba(15,23,42,0.5), 0 0 0 1px rgba(255,255,255,0.08) inset;
+            border-radius: 16px;
+            padding: 8px 12px;
+        }
+
+        .logo-premium-img {
+            mix-blend-mode: multiply;
+            filter: contrast(1.18) brightness(1.08);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -62,7 +75,9 @@
 
             <div class="hidden md:flex flex-shrink-0 items-center justify-center w-auto md:w-[20%]">
                 <a href="#home" class="flex items-center transform hover:scale-105 transition-transform duration-200">
-                    <img src="Capture4646 (1).png" alt="Raptor Logo" class="h-14 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-premium-shell">
+                        <img src="Capture4646 (1).png" alt="Raptor Logo" class="logo-premium-img h-12 w-auto object-contain" onerror="this.style.display='none'; this.parentElement.nextElementSibling.style.display='block';">
+                    </div>
                     <span class="hidden font-black text-2xl tracking-wider text-white">RAPTOR</span>
                 </a>
             </div>
@@ -78,7 +93,9 @@
 
             <div class="md:hidden flex items-center justify-between w-full">
                 <div class="flex items-center">
-                    <img src="Capture4646 (1).png" alt="Raptor Logo" class="h-11 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-premium-shell">
+                        <img src="Capture4646 (1).png" alt="Raptor Logo" class="logo-premium-img h-10 w-auto object-contain" onerror="this.style.display='none'; this.parentElement.nextElementSibling.style.display='block';">
+                    </div>
                     <span class="hidden font-black text-xl tracking-wider text-zinc-900">RAPTOR</span>
                 </div>
                 <button id="mobile-menu-btn" class="text-zinc-100 focus:outline-none text-2xl">
