@@ -61,6 +61,17 @@
             mix-blend-mode: multiply;
             filter: contrast(1.18) brightness(1.08);
         }
+
+        /* 🔥 Fire Animation Effect */
+        @keyframes fireMovement {
+            0% { transform: translateY(0) scale(1) rotate(-1deg); filter: drop-shadow(0 2px 4px rgba(255,107,0,0.4)); }
+            50% { transform: translateY(-4px) scale(1.08) rotate(2deg); filter: drop-shadow(0 6px 12px rgba(239,68,68,0.7)); }
+            100% { transform: translateY(0) scale(1) rotate(-1deg); filter: drop-shadow(0 2px 4px rgba(255,107,0,0.4)); }
+        }
+        .animate-fire {
+            display: inline-block;
+            animation: fireMovement 1.4s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -112,19 +123,20 @@
         </div>
     </header>
 
-    <section id="home" class="relative min-h-screen pt-32 pb-20 bg-zinc-950 text-white flex items-center overflow-hidden">
-        <div class="absolute inset-0 z-0 opacity-40 pointer-events-none select-none">
-            <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-orange-600/30 to-red-600/0 blur-3xl"></div>
-            <div class="absolute bottom-[-30%] left-[-20%] w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-zinc-800/20 to-zinc-900/0 blur-3xl"></div>
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+    <section id="home" class="relative min-h-screen pt-32 pb-20 text-white flex items-center overflow-hidden bg-zinc-950">
+        <div class="absolute inset-0 z-0">
+            <img src="A_high-resolution,_cinematic_wide-angle_photograph_202605241101.jpeg" alt="Raptor Background Lab" class="w-full h-full object-cover opacity-35 filter brightness-90 contrast-105">
+            <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-zinc-950/40"></div>
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         </div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                 <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
-                    <div class="inline-flex items-center space-x-2 bg-zinc-900/80 border border-zinc-800 rounded-full py-1.5 px-4 backdrop-blur-md mx-auto lg:mx-0">
+                    <div class="inline-flex items-center space-x-2 bg-zinc-900/90 border border-zinc-700 rounded-full py-1.5 px-4 backdrop-blur-md mx-auto lg:mx-0 shadow-lg">
                         <span class="flex h-2 w-2 rounded-full bg-orange-500 animate-pulse"></span>
-                        <span class="text-xs font-bold uppercase tracking-widest text-zinc-300">Raptor Performance Lab</span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-zinc-200">Raptor Performance Lab</span>
                     </div>
                     <div class="space-y-4">
                         <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1] uppercase">
@@ -133,45 +145,45 @@
                                 Inner Peak
                             </span>
                         </h1>
-                        <p class="text-lg sm:text-xl text-zinc-400 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        <p class="text-lg sm:text-xl text-zinc-300 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed shadow-sm">
                             วิทยาศาสตร์การกีฬาขั้นสูงในรูปแบบสเปรย์ 
                             ออกแบบมาเพื่อปลุกความพร้อมของเส้นใยกล้ามเนื้ออย่างล้ำลึก 
                             ทลายทุกขีดจำกัดก่อนที่เกมการแข่งขันจะเริ่มขึ้น
                         </p>
                     </div>
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#shop" class="group relative inline-flex items-center justify-center w-full sm:w-auto bg-orange-brand hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-xl shadow-xl shadow-orange-900/20 transition-all overflow-hidden">
+                        <a href="#shop" class="group relative inline-flex items-center justify-center w-full sm:w-auto bg-orange-brand hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-xl shadow-xl shadow-orange-950/50 transition-all overflow-hidden border border-orange-400/20">
                             <span class="relative z-10 flex items-center gap-2">
                                 เลือกซื้อผลิตภัณฑ์ <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
                             </span>
                         </a>
-                        <a href="#reviews" class="inline-flex items-center justify-center w-full sm:w-auto bg-zinc-900/50 hover:bg-zinc-900 border border-zinc-800 text-zinc-300 font-semibold py-4 px-8 rounded-xl transition-all backdrop-blur-sm">
+                        <a href="#reviews" class="inline-flex items-center justify-center w-full sm:w-auto bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 font-semibold py-4 px-8 rounded-xl transition-all backdrop-blur-sm shadow-md">
                             วิทยาศาสตร์เบื้องหลังเรา
                         </a>
                     </div>
-                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-zinc-900 text-center lg:text-left max-w-md mx-auto lg:mx-0">
+                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-zinc-800/80 text-center lg:text-left max-w-md mx-auto lg:mx-0">
                         <div>
-                            <div class="text-2xl sm:text-3xl font-bold text-white">100%</div>
-                            <div class="text-[11px] uppercase tracking-wider text-zinc-500 mt-1">Anti-Doping Safe</div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white tracking-wide">100%</div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-400 mt-1">Anti-Doping Safe</div>
                         </div>
-                        <div class="border-x border-zinc-900 px-4">
-                            <div class="text-2xl sm:text-3xl font-bold text-white">Fast</div>
-                            <div class="text-[11px] uppercase tracking-wider text-zinc-500 mt-1">Deep Absorption</div>
+                        <div class="border-x border-zinc-800/80 px-4">
+                            <div class="text-2xl sm:text-3xl font-bold text-white tracking-wide">Fast</div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-400 mt-1">Deep Absorption</div>
                         </div>
                         <div>
-                            <div class="text-2xl sm:text-3xl font-bold text-white">Premium</div>
-                            <div class="text-[11px] uppercase tracking-wider text-zinc-500 mt-1">Sport Grade</div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white tracking-wide">Premium</div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-400 mt-1">Sport Grade</div>
                         </div>
                     </div>
                 </div>
                 <div class="lg:col-span-5 relative w-full">
-                    <div class="relative w-full max-w-[380px] mx-auto aspect-[3/4] bg-zinc-900/40 border border-zinc-800/80 rounded-3xl p-8 backdrop-blur-xl flex flex-col justify-between overflow-hidden shadow-2xl">
+                    <div class="relative w-full max-w-[380px] mx-auto aspect-[3/4] bg-zinc-900/60 border border-zinc-700/50 rounded-3xl p-8 backdrop-blur-xl flex flex-col justify-between overflow-hidden shadow-2xl">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl"></div>
-                        <div class="absolute bottom-4 left-4 font-mono text-[9px] text-zinc-700 tracking-widest select-none">SYS.LOC // 10.98.42</div>
+                        <div class="absolute bottom-4 left-4 font-mono text-[9px] text-zinc-600 tracking-widest select-none">SYS.LOC // 10.98.42</div>
                         <div class="flex justify-between items-start border-b border-zinc-800 pb-4">
                             <div>
-                                <span class="text-[10px] uppercase font-mono tracking-widest text-zinc-500 block">Formulation</span>
-                                <span class="text-sm font-bold text-zinc-200 tracking-wide">DOUBLE ACTION SYSTEM</span>
+                                <span class="text-[10px] uppercase font-mono tracking-widest text-zinc-400 block">Formulation</span>
+                                <span class="text-sm font-bold text-zinc-100 tracking-wide">DOUBLE ACTION SYSTEM</span>
                             </div>
                             <div class="text-orange-brand text-xl"><i class="fa-solid fa-circle-nodes"></i></div>
                         </div>
@@ -183,16 +195,16 @@
                                 <i class="fa-solid fa-bolt-lightning text-4xl text-orange-brand transform group-hover:scale-110 transition-transform duration-300"></i>
                             </div>
                             <div class="mt-6 space-y-1">
-                                <p class="text-xs font-mono text-zinc-500 uppercase tracking-widest">Thermodynamic Status</p>
-                                <p class="text-base font-semibold text-zinc-300">Ready to Activate</p>
+                                <p class="text-xs font-mono text-zinc-400 uppercase tracking-widest">Thermodynamic Status</p>
+                                <p class="text-base font-semibold text-zinc-200">Ready to Activate</p>
                             </div>
                         </div>
                         <div class="space-y-3">
-                            <div class="bg-zinc-950/60 border border-zinc-850 p-3 rounded-xl flex items-center space-x-3">
+                            <div class="bg-zinc-950/80 border border-zinc-800 p-3 rounded-xl flex items-center space-x-3">
                                 <div class="bg-orange-500/10 p-2 rounded-lg text-orange-brand text-xs"><i class="fa-solid fa-temperature-arrow-up"></i></div>
                                 <div class="flex-grow">
                                     <div class="flex justify-between items-center">
-                                        <p class="text-xs font-bold text-zinc-300">Thermal Preparation</p>
+                                        <p class="text-xs font-bold text-zinc-200">Thermal Preparation</p>
                                         <span class="text-[10px] font-mono text-orange-400">Optimum</span>
                                     </div>
                                     <div class="w-full bg-zinc-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
@@ -200,11 +212,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-zinc-950/60 border border-zinc-850 p-3 rounded-xl flex items-center space-x-3">
+                            <div class="bg-zinc-950/80 border border-zinc-800 p-3 rounded-xl flex items-center space-x-3">
                                 <div class="bg-zinc-800 p-2 rounded-lg text-zinc-400 text-xs"><i class="fa-solid fa-wind"></i></div>
                                 <div class="flex-grow">
                                     <div class="flex justify-between items-center">
-                                        <p class="text-xs font-bold text-zinc-300">Micro-circulation</p>
+                                        <p class="text-xs font-bold text-zinc-200">Micro-circulation</p>
                                         <span class="text-[10px] font-mono text-zinc-400">Enhanced</span>
                                     </div>
                                     <div class="w-full bg-zinc-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
@@ -219,7 +231,6 @@
         </div>
     </section>
 
-    <!-- หน้าร้าน Shop Grid -->
     <section id="shop" class="py-24 max-w-7xl mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16 space-y-2">
             <h2 class="text-3xl font-bold text-zinc-950 tracking-tight">RAPTOR OFFICIAL SHOP</h2>
@@ -249,7 +260,6 @@
                 </div>
             </div>
 
-            <!-- ตำแหน่งภาพสเปรย์สูตรเย็นที่ 1 อัปเดตไฟล์เรียบร้อยตามบรีฟเก่า -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
                 <div class="bg-blue-50/50 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openCoolingModal()">
                     <img src="Gemini_Generated_Image_td8ebptd8ebptd8e.png" alt="Raptor Sport Cooling Spray" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
@@ -270,7 +280,6 @@
                 </div>
             </div>
 
-            <!-- ตำแหน่งภาพเจลพลังงานที่ 1 อัปเดตไฟล์ Gemini_Generated_Image_dihrcjdihrcjdihr.png แล้ว -->
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
                 <div class="bg-orange-50 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openEnergyGelModal()">
                     <img src="Gemini_Generated_Image_dihrcjdihrcjdihr.png" alt="Raptor Go Energy Gel" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
@@ -362,7 +371,6 @@
         </div>
     </section>
 
-    <!-- ป๊อปอัพ 1: Warming Spray -->
     <div id="product-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -400,7 +408,7 @@
                 <section class="bg-gradient-to-r from-red-600 to-orange-500 rounded-2xl shadow-md p-6 text-white text-center relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 text-white/10 text-9xl font-black rotate-12"><i class="fa-solid fa-bolt"></i></div>
                     <h3 class="text-xl font-bold uppercase tracking-wider flex justify-center items-center gap-2">
-                        <i class="fa-solid fa-stopwatch animate-pulse"></i> Flash Sale ข้อเสนอเวลาจำกัด!
+                        <i class="fa-solid fa-stopwatch animate-pulse"></i> <span class="animate-fire">🔥</span> Flash Sale ข้อเสนอเวลาจำกัด!
                     </h3>
                     <p class="text-sm text-orange-100 mt-1">ราคาพิเศษนี้จะสิ้นสุดในอีก</p>
                     <div class="flex justify-center space-x-3 my-4">
@@ -464,9 +472,9 @@
                     </div>
                 </section>
 
-                <section id="modal-order-form" class="bg-white rounded-2xl shadow-md border-2 border-[#FF6B00] p-6 max-w-xl mx-auto">
+                <section id="modal-order-form" class="bg-white rounded-2xl shadow-sm border-2 border-[#FF6B00] p-6 max-w-xl mx-auto">
                     <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm mb-6">
-                        🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
+                        <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
                     </div>
                     <h3 class="text-xl font-bold text-center text-gray-900 mb-6">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
                     <form class="space-y-4" onsubmit="alert('ระบบบันทึกการสั่งซื้อเรียบร้อย!'); closeProductModal(); return false;">
@@ -491,7 +499,6 @@
         </div>
     </div>
 
-    <!-- ป๊อปอัพ 2: RAPTOR SPORTS ICE COLD SPRAY -->
     <div id="cooling-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-slate-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-slate-200 my-8">
             <button onclick="closeCoolingModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -504,7 +511,6 @@
             
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
                 <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- ตำแหน่งภาพสเปรย์สูตรเย็นที่ 2 อัปเดตไฟล์เรียบร้อยตามบรีฟเก่า -->
                     <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4">
                         <img src="Gemini_Generated_Image_td8ebptd8ebptd8e.png" alt="RAPTOR SPORTS ICE COLD SPRAY" class="max-h-[380px] object-contain rounded-lg">
                     </div>
@@ -585,7 +591,7 @@
 
                 <section id="cooling-order-form" class="bg-white rounded-2xl shadow-md p-6 border-2 border-blue-500 max-w-xl mx-auto space-y-6">
                     <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
-                        🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
+                        <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
                     </div>
                     <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
                     <form class="space-y-4" onsubmit="alert('บันทึกข้อมูลออเดอร์ RAPTOR SPORTS ICE COLD SPRAY สำเร็จ!'); closeCoolingModal(); return false;">
@@ -608,7 +614,6 @@
         </div>
     </div>
 
-    <!-- ป๊อปอัพ 3: RAPTOR SPORT FOOT SPRAY -->
     <div id="footspray-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-slate-900 text-slate-100 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-emerald-800/50 my-8">
             <button onclick="closeFootSprayModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -691,7 +696,7 @@
                 <section id="foot-order-form" class="bg-slate-800 rounded-2xl p-6 border-2 border-emerald-500 max-w-xl mx-auto space-y-6">
                     <div class="bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl p-3 shadow-md flex justify-between items-center">
                         <div>
-                            <span class="font-bold text-sm block"><i class="fa-solid fa-fire mr-1"></i> โอกาสสุดท้าย! ราคาพิเศษ ฿179</span>
+                            <span class="font-bold text-sm block"><span class="animate-fire">🔥</span> โอกาสสุดท้าย! ราคาพิเศษ ฿179</span>
                             <span class="text-[11px] text-orange-100">ส่งฟรีบริการเก็บเงินปลายทาง (COD)</span>
                         </div>
                         <span id="foot-countdown-2" class="font-mono font-bold bg-black/30 px-2 py-0.5 rounded text-sm text-yellow-300">00:15:00</span>
@@ -717,7 +722,6 @@
         </div>
     </div>
 
-    <!-- ป๊อปอัพใหม่ 4: RAPTOR GO ENERGY GEL (เพิ่มโครงสร้างเซลเพจเต็มระบบและรูปภาพ Gemini_Generated_Image_dihrcjdihrcjdihr.png ครบทั้ง 2 จุด) -->
     <div id="energygel-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
             <button onclick="closeEnergyGelModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -729,7 +733,6 @@
             </div>
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
                 <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- ตำแหน่งภาพเจลพลังงานที่ 2 อัปเดตไฟล์ภาพเรียบร้อย -->
                     <div class="flex flex-col justify-center items-center bg-gradient-to-b from-orange-50 to-white rounded-xl p-4">
                         <img src="Gemini_Generated_Image_dihrcjdihrcjdihr.png" alt="Raptor Go Energy Gel" class="max-h-[380px] object-contain rounded-lg">
                     </div>
@@ -803,7 +806,7 @@
 
                 <section id="energy-order-form" class="bg-white rounded-2xl shadow-md p-6 border-2 border-orange-500 max-w-xl mx-auto space-y-6">
                     <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
-                        🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
+                        <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
                     </div>
                     <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
                     <form class="space-y-4" onsubmit="alert('บันทึกข้อมูลออเดอร์ RAPTOR GO ENERGY GEL สำเร็จ!'); closeEnergyGelModal(); return false;">
@@ -1006,7 +1009,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // ฟังก์ชันระบบเปิดโมดอลเจลพลังงาน
         function openEnergyGelModal() {
             document.getElementById('energygel-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
