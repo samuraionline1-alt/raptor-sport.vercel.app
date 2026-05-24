@@ -342,10 +342,22 @@
             </div>
 
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
-                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-capsules text-5xl text-emerald-600"></i></div>
+                <div class="bg-orange-50 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openWaterChargeModal()">
+                    <img src="Gemini_Generated_Image_xg4wwyxg4wwyxg4w.png" alt="RAPTOR SPEED WATER CHARGE" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
+                    <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded animate-pulse">Flash Sale</span>
+                </div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
-                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Amino Premium (30 แคปซูล)</h3><p class="text-xs text-gray-400 mt-1">กรดอะมิโนจำเป็นซ่อมแซมกล้ามเนื้อหลังซ้อม</p></div>
-                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿590</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2 cursor-pointer hover:text-orange-brand" onclick="openWaterChargeModal()">RAPTOR SPEED WATER CHARGE</h3>
+                        <p class="text-xs text-gray-400 mt-1">เครื่องดื่มวิตามินและอิเล็กโทรไลต์ กลิ่นแตงโม คืนความสดชื่นรวดเร็ว</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <div>
+                            <span class="font-bold text-red-600 text-base">฿490</span>
+                            <span class="text-[10px] text-gray-400 line-through block">฿850</span>
+                        </div>
+                        <button onclick="openWaterChargeModal()" class="bg-orange-brand text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-zinc-900 transition-colors font-semibold">ดูข้อมูล / ซื้อ</button>
+                    </div>
                 </div>
             </div>
 
@@ -1267,6 +1279,86 @@
     </div>
 
     <!-- Review Section -->
+
+    <!-- Modal 8: Raptor Speed Water Charge -->
+    <div id="watercharge-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
+        <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
+            <button onclick="closeWaterChargeModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="bg-zinc-900 text-white px-6 py-4 flex items-center justify-between">
+                <h3 class="font-bold text-lg text-orange-brand tracking-wider"><i class="fa-solid fa-glass-water mr-1"></i> RAPTOR SPEED WATER CHARGE</h3>
+                <span class="text-xs text-gray-400 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
+            </div>
+            <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
+                <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="flex flex-col items-center">
+                        <div class="w-full max-w-[340px] aspect-square bg-gradient-to-b from-orange-50 to-red-50 rounded-2xl shadow-xl flex items-center justify-center p-4 relative overflow-hidden group">
+                            <img src="Gemini_Generated_Image_xg4wwyxg4wwyxg4w.png" alt="Raptor Speed Water Charge" class="max-h-full w-auto object-contain rounded-xl transform group-hover:scale-[1.02] transition-transform duration-300">
+                            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow animate-pulse uppercase tracking-wider">Ondemand</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-3"><i class="fa-solid fa-glass-water text-orange-brand"></i> ชนิดผง ผสมน้ำ 500 ml. | น้ำหนักสุทธิ 6.0 กรัม x 20 ซอง</p>
+                    </div>
+                    <div class="space-y-4">
+                        <span class="bg-orange-100 text-orange-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide border border-orange-200">Hydration & Energy</span>
+                        <h2 class="text-3xl font-bold tracking-tight text-gray-900 uppercase">RAPTOR SPEED WATER CHARGE</h2>
+                        <p class="text-lg text-gray-650 font-medium">แร็พเตอร์สปีด วอเตอร์ ชาร์จ - เครื่องดื่มวิตามินและอิเล็กโทรไลต์ ดีไฮเดรชัน กลิ่นแตงโม หอมสดชื่น ดับกระหาย คืนความสดชื่นรวดเร็ว</p>
+                        <div class="border-t border-b border-gray-100 py-3 space-y-2">
+                            <p class="text-gray-600 text-sm flex items-center"><i class="fa-solid fa-bolt text-orange-500 mr-2"></i><strong>FAST HYDRATION:</strong> ช่วยชดเชยการสูญเสียน้ำและแร่ธาตุจากการออกกำลังกายได้อย่างรวดเร็ว</p>
+                            <p class="text-gray-600 text-sm flex items-center"><i class="fa-solid fa-capsules text-orange-500 mr-2"></i><strong>VITAMIN COMPLEX:</strong> อุดมไปด้วยกลุ่มวิตามิน B Complex (B1, B6, B12) บำรุงระบบประสาทและเร่งการเผาผลาญ</p>
+                            <p class="text-gray-600 text-sm flex items-center"><i class="fa-solid fa-shield-halved text-green-600 mr-2"></i><strong>ANTI-CRAMP:</strong> ประกอบด้วย แมกนีเซียม (Mg) และ แคลเซียม (Ca) ช่วยรักษาสมดุลกล้ามเนื้อและป้องกันตะคริว</p>
+                        </div>
+                        <div class="flex items-baseline space-x-3">
+                            <span class="text-4xl font-extrabold text-red-600">฿490</span>
+                            <span class="text-sm text-gray-400 line-through">฿850</span>
+                            <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">-42% OFF</span>
+                        </div>
+                        <p class="text-xs text-orange-600 bg-orange-50 p-3 rounded border border-orange-100"><i class="fa-solid fa-circle-info"></i> ละลายง่ายในน้ำเย็น ให้พลังงานสะอาด ปราศจากไขมันสะสม เพื่อการรักษาสมรรถภาพทางกายสูงสุด</p>
+                    </div>
+                </section>
+
+                <section class="bg-gradient-to-r from-red-600 to-orange-500 rounded-2xl shadow-md p-6 text-white text-center relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 text-white/10 text-9xl font-black rotate-12"><i class="fa-solid fa-bolt"></i></div>
+                    <h3 class="text-xl font-bold uppercase tracking-wider flex justify-center items-center gap-2"><i class="fa-solid fa-stopwatch animate-pulse"></i> <span class="animate-fire">🔥</span> Flash Sale ข้อเสนอเวลาจำกัด!</h3>
+                    <p class="text-sm text-orange-100 mt-1">ราคาพิเศษนี้จะสิ้นสุดในอีก</p>
+                    <div class="flex justify-center space-x-3 my-4">
+                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="water-hours" class="text-2xl font-bold">01</span><div class="text-[10px] text-gray-300">ชม.</div></div>
+                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="water-minutes" class="text-2xl font-bold">45</span><div class="text-[10px] text-gray-300">นาที</div></div>
+                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="water-seconds" class="text-2xl font-bold">30</span><div class="text-[10px] text-gray-300">วิ</div></div>
+                    </div>
+                    <a href="#water-order-form" class="inline-block w-full sm:w-auto bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-extrabold text-lg px-8 py-3 rounded-full shadow hover:scale-105 transition-all"><i class="fa-solid fa-cart-shopping"></i> สั่งซื้อราคาพิเศษ 490 บาทเลยตอนนี้!</a>
+                </section>
+
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-center mb-6 border-b border-gray-100 pb-3 text-gray-900">ประสิทธิภาพจากส่วนประกอบสำคัญเพื่อการคืนสมดุล</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-4 bg-orange-50/40 rounded-xl text-center border border-orange-100"><div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto text-orange-brand text-lg font-bold mb-2"><i class="fa-solid fa-bolt"></i></div><h4 class="font-bold text-sm text-gray-800">Electrolyte Blend (Mg + Ca)</h4><p class="text-[11px] text-gray-500 mt-1">ช่วยคงสมดุลของเกลือแร่ในกระแสเลือดและเซลล์กล้ามเนื้อ ลดความเสี่ยงในการเกิดตะคริวเฉียบพลันอย่างได้ผล</p></div>
+                        <div class="p-4 bg-orange-50/40 rounded-xl text-center border border-orange-100"><div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto text-orange-brand text-lg font-bold mb-2"><i class="fa-solid fa-battery-full"></i></div><h4 class="font-bold text-sm text-gray-800">Vitamin B Complex (B1, B6, B12)</h4><p class="text-[11px] text-gray-500 mt-1">เร่งการเปลี่ยนสารอาหารให้เป็นพลังงานบริสุทธิ์แก่นักกีฬา ช่วยลดความเหนื่อยล้าทางสมองและระบบประสาท</p></div>
+                        <div class="p-4 bg-orange-50/40 rounded-xl text-center border border-orange-100"><div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto text-orange-brand text-lg font-bold mb-2"><i class="fa-solid fa-droplet"></i></div><h4 class="font-bold text-sm text-gray-800">Water Charge Rehydration</h4><p class="text-[11px] text-gray-500 mt-1">นวัตกรรมช่วยเพิ่มอัตราการดูดซึมโมเลกุลน้ำเข้าสู่เซลล์ร่างกายได้เร็วกว่าน้ำดื่มปกติ ดับกระหายลึกถึงเซลล์</p></div>
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-center mb-1 text-gray-900"><i class="fa-solid fa-chart-line text-orange-600 mr-1"></i> กราฟแสดงระดับการรักษาความชุ่มชื้นสะสม (Hydration Level)</h3>
+                    <p class="text-xs text-gray-500 text-center mb-6">อัตราการรักษาระดับน้ำและแร่ธาตุในร่างกายระหว่างการออกกำลังกายต่อเนื่อง 120 นาที</p>
+                    <div class="w-full h-[240px] relative"><canvas id="waterChargeChartModal"></canvas></div>
+                </section>
+
+                <section id="water-order-form" class="bg-white rounded-2xl shadow-md border-2 border-[#FF6B00] p-6 max-w-xl mx-auto space-y-6">
+                    <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm"><span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 490 บาท (จากปกติ 850 บาท)</div>
+                    <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
+                    <form class="space-y-4" onsubmit="alert('ระบบบันทึกการสั่งซื้อ RAPTOR SPEED WATER CHARGE สำเร็จ!'); closeWaterChargeModal(); return false;">
+                        <div><label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label><input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></div>
+                        <div><label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label><input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></div>
+                        <div><label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label><textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea></div>
+                        <div class="bg-gray-50 p-4 rounded-xl flex justify-between items-center text-sm border border-gray-100"><span class="font-bold text-gray-700">ยอดรวมทั้งสิ้น:</span><span class="text-xl font-black text-orange-brand">490 บาท (ส่งฟรีปลายทาง)</span></div>
+                        <button type="submit" class="w-full bg-orange-brand text-white font-bold text-lg py-3.5 rounded-xl shadow-md hover:bg-orange-600 transition-all cursor-pointer">ยืนยันการสั่งซื้อเลยตอนนี้</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
     <section id="reviews" class="py-24 bg-zinc-950 text-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
@@ -1359,6 +1451,7 @@
         let modalDualActionChartInstance = null;
         let modalCoolPatchChartInstance = null;
         let modalTherapyOilChartInstance = null; // อินสแตนซ์สำหรับกราฟในโมดอลออยล์ธรรมชาติ
+        let waterChargeChartInstance = null;
 
         // ฟังก์ชันสั่งเปิดและวาดกราฟสำหรับโมดอลสินค้าใหม่ Raptor Sport & Therapy Oil
         function openTherapyOilModal() {
@@ -1405,6 +1498,53 @@
 
         function closeTherapyOilModal() {
             document.getElementById('therapyoil-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+
+        function openWaterChargeModal() {
+            document.getElementById('watercharge-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!waterChargeChartInstance) {
+                const ctx = document.getElementById('waterChargeChartModal').getContext('2d');
+                waterChargeChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '20 นาที', '40 นาที', '60 นาที', '90 นาที', '120 นาที'],
+                        datasets: [
+                            {
+                                label: 'ดื่ม RAPTOR SPEED WATER CHARGE',
+                                data: [50, 95, 92, 90, 88, 85],
+                                borderColor: '#FF6B00',
+                                backgroundColor: 'rgba(255, 107, 0, 0.08)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'ดื่มน้ำเปล่าบริสุทธิ์ตามปกติ',
+                                data: [50, 65, 55, 45, 35, 20],
+                                borderColor: '#94a3b8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
+                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
+                    }
+                });
+            }
+        }
+
+        function closeWaterChargeModal() {
+            document.getElementById('watercharge-modal').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
 
@@ -1676,6 +1816,13 @@
                 if(ohEl) ohEl.textContent = hours;
                 if(omEl) omEl.textContent = minutes;
                 if(osEl) osEl.textContent = seconds;
+
+                const whEl = document.getElementById("water-hours");
+                const wmEl = document.getElementById("water-minutes");
+                const wsEl = document.getElementById("water-seconds");
+                if(whEl) whEl.textContent = hours;
+                if(wmEl) wmEl.textContent = minutes;
+                if(wsEl) wsEl.textContent = seconds;
 
                 if (--duration < 0) duration = 2 * 60 * 60; 
 
