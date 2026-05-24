@@ -551,18 +551,23 @@
                         <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
                     </div>
                     <h3 class="text-xl font-bold text-center text-gray-900 mb-6">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-4" onsubmit="alert('ระบบบันทึกการสั่งซื้อเรียบร้อย!'); closeProductModal(); return false;">
+                    <form class="space-y-4 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR SPORT WARMING SPRAY" data-price="฿179" data-close-modal="closeProductModal">
+                        <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR SPORT WARMING SPRAY">
+                        <input type="hidden" name="product" value="RAPTOR SPORT WARMING SPRAY">
+                        <input type="hidden" name="price" value="฿179">
+                        <input type="hidden" name="payment_method" value="COD">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-orange-brand text-white font-bold text-lg py-3.5 rounded-xl shadow-md hover:bg-orange-600 transition-all cursor-pointer">
                             ยืนยันการสั่งซื้อเลยตอนนี้
@@ -669,18 +674,23 @@
                         <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
                     </div>
                     <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-4" onsubmit="alert('บันทึกข้อมูลออเดอร์ RAPTOR SPORTS ICE COLD SPRAY สำเร็จ!'); closeCoolingModal(); return false;">
+                    <form class="space-y-4 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR SPORTS ICE COLD SPRAY" data-price="฿179" data-close-modal="closeCoolingModal">
+                        <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR SPORTS ICE COLD SPRAY">
+                        <input type="hidden" name="product" value="RAPTOR SPORTS ICE COLD SPRAY">
+                        <input type="hidden" name="price" value="฿179">
+                        <input type="hidden" name="payment_method" value="COD">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer">ยืนยันการสั่งซื้อ ฿179</button>
                     </form>
@@ -778,18 +788,23 @@
                         <span id="foot-countdown-2" class="font-mono font-bold bg-black/40 px-2 py-0.5 rounded text-sm text-yellow-300">00:15:00</span>
                     </div>
                     <h3 class="text-xl font-bold text-center text-white">กรอกรายละเอียดเพื่อจัดส่งด่วนฟรี</h3>
-                    <form class="space-y-4 text-slate-200" onsubmit="alert('บันทึกการสั่งซื้อ RAPTOR FOOT SPRAY สำเร็จ!'); closeFootSprayModal(); return false;">
+                    <form class="space-y-4 text-slate-200 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR SPORT FOOT SPRAY" data-price="฿179" data-close-modal="closeFootSprayModal">
+                        <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR SPORT FOOT SPRAY">
+                        <input type="hidden" name="product" value="RAPTOR SPORT FOOT SPRAY">
+                        <input type="hidden" name="price" value="฿179">
+                        <input type="hidden" name="payment_method" value="COD">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
                         <div>
                             <label class="block text-sm font-bold text-slate-300 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" name="customer_name">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-300 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" name="phone">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-300 mb-1">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" name="address"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-orange-500 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer">ยืนยันการสั่งซื้อด่วน ฿179</button>
                     </form>
@@ -886,18 +901,23 @@
                         <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
                     </div>
                     <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-4" onsubmit="alert('บันทึกข้อมูลออเดอร์ RAPTOR GO ENERGY GEL สำเร็จ!'); closeEnergyGelModal(); return false;">
+                    <form class="space-y-4 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR GO ENERGY GEL" data-price="฿179" data-close-modal="closeEnergyGelModal">
+                        <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR GO ENERGY GEL">
+                        <input type="hidden" name="product" value="RAPTOR GO ENERGY GEL">
+                        <input type="hidden" name="price" value="฿179">
+                        <input type="hidden" name="payment_method" value="COD">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer">ยืนยันการสั่งซื้อ ฿179</button>
                     </form>
@@ -1014,18 +1034,23 @@
                         <i class="fa-solid fa-fire animate-bounce mr-1"></i> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 329 บาท (จากปกติ 700 บาท)
                     </div>
                     <h3 class="text-2xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-5" onsubmit="alert('ระบบบันทึกการสั่งซื้อ Raptor Dual Action Pack สำเร็จ!'); closeDualActionModal(); return false;">
+                    <form class="space-y-5 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR DUAL ACTION PACK" data-price="฿329" data-close-modal="closeDualActionModal">
+                        <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR DUAL ACTION PACK">
+                        <input type="hidden" name="product" value="RAPTOR DUAL ACTION PACK">
+                        <input type="hidden" name="price" value="฿329">
+                        <input type="hidden" name="payment_method" value="COD">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1.5">ชื่อ-นามสกุลผู้รับ</label>
-                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all" name="customer_name">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1.5">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all">
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all" name="phone">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1.5">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"></textarea>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all" name="address"></textarea>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-xl flex justify-between items-center text-sm border border-gray-100">
                             <span class="font-bold text-gray-700">ยอดรวมทั้งสิ้น:</span>
@@ -1114,18 +1139,23 @@
                         <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท
                     </div>
                     <h3 class="text-xl font-bold text-center mb-6">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-4" onsubmit="alert('บันทึกการสั่งซื้อ RAPTOR HERBAL ROLL-ON สำเร็จ!'); closeHerbalRollOnModal(); return false;">
+                    <form class="space-y-4 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR HERBAL ROLL-ON" data-price="฿179" data-close-modal="closeHerbalRollOnModal">
+                        <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR HERBAL ROLL-ON">
+                        <input type="hidden" name="product" value="RAPTOR HERBAL ROLL-ON">
+                        <input type="hidden" name="price" value="฿179">
+                        <input type="hidden" name="payment_method" value="COD">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" name="customer_name">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" name="phone">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" name="address"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg py-3.5 rounded-xl shadow-md transition-all cursor-pointer">ยืนยันการสั่งซื้อ ฿179</button>
                     </form>
@@ -1240,18 +1270,23 @@
                         <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
                     </div>
                     <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-4" onsubmit="alert('ระบบบันทึกการสั่งซื้อ RAPTOR COOL PATCH สำเร็จ!'); closeCoolPatchModal(); return false;">
+                    <form class="space-y-4 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR COOL PATCH" data-price="฿179" data-close-modal="closeCoolPatchModal">
+                        <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR COOL PATCH">
+                        <input type="hidden" name="product" value="RAPTOR COOL PATCH">
+                        <input type="hidden" name="price" value="฿179">
+                        <input type="hidden" name="payment_method" value="COD">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address"></textarea>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-xl flex justify-between items-center text-sm border border-gray-100">
                             <span class="font-bold text-gray-700">ยอดรวมทั้งสิ้น:</span>
@@ -1370,18 +1405,23 @@
                         <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
                     </div>
                     <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-4" onsubmit="alert('ระบบบันทึกการสั่งซื้อ RAPTOR SPORT & THERAPY OIL สำเร็จ!'); closeTherapyOilModal(); return false;">
+                    <form class="space-y-4 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR SPORT &amp; THERAPY OIL" data-price="฿179" data-close-modal="closeTherapyOilModal">
+                        <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR SPORT &amp; THERAPY OIL">
+                        <input type="hidden" name="product" value="RAPTOR SPORT &amp; THERAPY OIL">
+                        <input type="hidden" name="price" value="฿179">
+                        <input type="hidden" name="payment_method" value="COD">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address"></textarea>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-xl flex justify-between items-center text-sm border border-gray-100">
                             <span class="font-bold text-gray-700">ยอดรวมทั้งสิ้น:</span>
@@ -1499,18 +1539,23 @@
                             <h2 class="text-2xl font-bold mb-2">จองสิทธิ์ราคาพิเศษ</h2>
                             <p class="text-slate-400 text-sm">กรอกข้อมูลด้านล่างเพื่อรับสิทธิ์ราคาพิเศษ 290 บาท (จัดส่งด่วนฟรี)</p>
                         </div>
-                        <form class="space-y-5" onsubmit="alert('บันทึกคำสั่งซื้อของคุณเรียบร้อยแล้ว'); closeHerbalGelModal(); return false;">
+                        <form class="space-y-5 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR HERBAL COOLING GEL" data-price="฿290" data-close-modal="closeHerbalGelModal">
+                        <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR HERBAL COOLING GEL">
+                        <input type="hidden" name="product" value="RAPTOR HERBAL COOLING GEL">
+                        <input type="hidden" name="price" value="฿290">
+                        <input type="hidden" name="payment_method" value="COD">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
                             <div>
                                 <label class="block text-xs font-bold text-slate-400 uppercase mb-2">ชื่อ-นามสกุลผู้รับ</label>
-                                <input type="text" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white">
+                                <input type="text" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="customer_name">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-400 uppercase mb-2">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                                <input type="tel" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white">
+                                <input type="tel" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="phone">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-400 uppercase mb-2">ที่อยู่สำหรับการจัดส่ง</label>
-                                <textarea required rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white"></textarea>
+                                <textarea required rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="address"></textarea>
                             </div>
                             <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-xl font-bold text-lg uppercase tracking-wider transition-all shadow-lg shadow-emerald-950">ยืนยันคำสั่งซื้อ ฿290</button>
                         </form>
@@ -1592,10 +1637,15 @@
                 <section id="water-order-form" class="bg-white rounded-2xl shadow-md border-2 border-[#FF6B00] p-6 max-w-xl mx-auto space-y-6">
                     <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm"><span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 490 บาท (จากปกติ 850 บาท)</div>
                     <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-4" onsubmit="alert('ระบบบันทึกการสั่งซื้อ RAPTOR SPEED WATER CHARGE สำเร็จ!'); closeWaterChargeModal(); return false;">
-                        <div><label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label><input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></div>
-                        <div><label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label><input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></div>
-                        <div><label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label><textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea></div>
+                    <form class="space-y-4 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR SPEED WATER CHARGE" data-price="฿490" data-close-modal="closeWaterChargeModal">
+                        <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR SPEED WATER CHARGE">
+                        <input type="hidden" name="product" value="RAPTOR SPEED WATER CHARGE">
+                        <input type="hidden" name="price" value="฿490">
+                        <input type="hidden" name="payment_method" value="COD">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
+                        <div><label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label><input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name"></div>
+                        <div><label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label><input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone"></div>
+                        <div><label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label><textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address"></textarea></div>
                         <div class="bg-gray-50 p-4 rounded-xl flex justify-between items-center text-sm border border-gray-100"><span class="font-bold text-gray-700">ยอดรวมทั้งสิ้น:</span><span class="text-xl font-black text-orange-brand">490 บาท (ส่งฟรีปลายทาง)</span></div>
                         <button type="submit" class="w-full bg-orange-brand text-white font-bold text-lg py-3.5 rounded-xl shadow-md hover:bg-orange-600 transition-all cursor-pointer">ยืนยันการสั่งซื้อเลยตอนนี้</button>
                     </form>
@@ -1644,20 +1694,22 @@
                     <h2 class="text-2xl font-bold text-zinc-900">CONTACT US</h2>
                     <p class="text-xs text-gray-400">ติดต่อสอบถามข้อมูลเพิ่มเติมหรือสั่งซื้อยกลัง</p>
                 </div>
-                <form class="space-y-4 text-sm">
+                <form class="space-y-4 text-sm raptor-contact-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="Contact Message" data-price="-">
+                    <input type="hidden" name="_subject" value="New Raptor Contact Message">
+                    <input type="hidden" name="source" value="Raptor Sport Official Store Contact">
                     <div>
                         <label class="block text-xs font-bold text-gray-600 mb-1">NAME</label>
-                        <input type="text" placeholder="ชื่อของคุณ" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500">
+                        <input type="text" placeholder="ชื่อของคุณ" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="customer_name">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-600 mb-1">EMAIL / PHONE</label>
-                        <input type="text" placeholder="อีเมล หรือ เบอร์โทรศัพท์" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500">
+                        <input type="text" placeholder="อีเมล หรือ เบอร์โทรศัพท์" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="contact">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-600 mb-1">MESSAGE</label>
-                        <textarea rows="3" placeholder="พิมพ์ข้อความ..." class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500"></textarea>
+                        <textarea rows="3" placeholder="พิมพ์ข้อความ..." class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="message"></textarea>
                     </div>
-                    <button type="button" class="w-full bg-zinc-900 hover:bg-orange-brand text-white font-bold py-3 rounded-xl transition-colors">SEND MESSAGE</button>
+                    <button type="submit" class="w-full bg-zinc-900 hover:bg-orange-brand text-white font-bold py-3 rounded-xl transition-colors">SEND MESSAGE</button>
                 </form>
             </div>
             
@@ -2199,5 +2251,79 @@
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
     </script>
+
+    <script>
+        // Formspree integration for all Raptor order/contact forms
+        document.addEventListener('DOMContentLoaded', function () {
+            const forms = document.querySelectorAll('.raptor-order-form, .raptor-contact-form');
+
+            forms.forEach(function (form) {
+                form.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+
+                    const submitButton = form.querySelector('button[type="submit"], button:not([type])');
+                    const originalButtonText = submitButton ? submitButton.innerHTML : '';
+                    let statusBox = form.querySelector('[data-form-status]');
+
+                    if (!statusBox) {
+                        statusBox = document.createElement('div');
+                        statusBox.setAttribute('data-form-status', '');
+                        statusBox.className = 'mt-3 text-center text-sm font-bold rounded-xl px-4 py-3 hidden';
+                        form.appendChild(statusBox);
+                    }
+
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังส่งข้อมูล...';
+                    }
+
+                    statusBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700');
+                    statusBox.classList.add('bg-orange-50', 'text-orange-700');
+                    statusBox.textContent = 'กำลังส่งคำสั่งซื้อไปยังระบบ...';
+
+                    try {
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: new FormData(form),
+                            headers: { 'Accept': 'application/json' }
+                        });
+
+                        if (response.ok) {
+                            statusBox.classList.remove('bg-orange-50', 'text-orange-700', 'bg-red-50', 'text-red-700');
+                            statusBox.classList.add('bg-green-50', 'text-green-700');
+                            statusBox.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด';
+                            form.reset();
+
+                            const closeModalName = form.dataset.closeModal;
+                            if (closeModalName && typeof window[closeModalName] === 'function') {
+                                setTimeout(function () {
+                                    window[closeModalName]();
+                                }, 1200);
+                            }
+                        } else {
+                            let errorMessage = 'ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองใหม่อีกครั้ง';
+                            try {
+                                const data = await response.json();
+                                if (data && data.errors && data.errors.length) {
+                                    errorMessage = data.errors.map(error => error.message).join(', ');
+                                }
+                            } catch (jsonError) {}
+                            throw new Error(errorMessage);
+                        }
+                    } catch (error) {
+                        statusBox.classList.remove('bg-orange-50', 'text-orange-700', 'bg-green-50', 'text-green-700');
+                        statusBox.classList.add('bg-red-50', 'text-red-700');
+                        statusBox.textContent = error.message || 'เกิดข้อผิดพลาดในการส่งข้อมูล';
+                    } finally {
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                            submitButton.innerHTML = originalButtonText;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>
