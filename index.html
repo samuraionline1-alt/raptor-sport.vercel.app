@@ -1644,20 +1644,25 @@
                     <h2 class="text-2xl font-bold text-zinc-900">CONTACT US</h2>
                     <p class="text-xs text-gray-400">ติดต่อสอบถามข้อมูลเพิ่มเติมหรือสั่งซื้อยกลัง</p>
                 </div>
-                <form class="space-y-4 text-sm">
+                <form
+                    action="https://formspree.io/f/xjgzvoqy"
+                    method="POST"
+                    class="space-y-4 text-sm"
+                >
+                    <input type="hidden" name="_subject" value="New Raptor website inquiry">
                     <div>
                         <label class="block text-xs font-bold text-gray-600 mb-1">NAME</label>
-                        <input type="text" placeholder="ชื่อของคุณ" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500">
+                        <input type="text" name="name" placeholder="ชื่อของคุณ" required class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-600 mb-1">EMAIL / PHONE</label>
-                        <input type="text" placeholder="อีเมล หรือ เบอร์โทรศัพท์" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500">
+                        <input type="text" name="contact" placeholder="อีเมล หรือ เบอร์โทรศัพท์" required class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-600 mb-1">MESSAGE</label>
-                        <textarea rows="3" placeholder="พิมพ์ข้อความ..." class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500"></textarea>
+                        <textarea rows="3" name="message" placeholder="พิมพ์ข้อความ..." required class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500"></textarea>
                     </div>
-                    <button type="button" class="w-full bg-zinc-900 hover:bg-orange-brand text-white font-bold py-3 rounded-xl transition-colors">SEND MESSAGE</button>
+                    <button type="submit" class="w-full bg-zinc-900 hover:bg-orange-brand text-white font-bold py-3 rounded-xl transition-colors">SEND MESSAGE</button>
                 </form>
             </div>
             
