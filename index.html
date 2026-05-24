@@ -362,10 +362,22 @@
             </div>
 
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
-                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-glass-water text-5xl text-blue-400"></i></div>
+                <div class="bg-emerald-50 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openHerbalGelModal()">
+                    <img src="Gemini_Generated_Image_t15zqzt15zqzt15z.png" alt="Raptor Herbal Cooling Gel" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
+                    <span class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded animate-pulse">Herbal Recovery</span>
+                </div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
-                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Electrolyte Powder (เกลือแร่)</h3><p class="text-xs text-gray-400 mt-1">ช่วยรักษาสมดุลน้ำและป้องกันตะคริว</p></div>
-                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿45</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2 cursor-pointer hover:text-emerald-700" onclick="openHerbalGelModal()">RAPTOR HERBAL COOLING GEL</h3>
+                        <p class="text-xs text-gray-400 mt-1">เจลสมุนไพรสูตรเย็น ฟื้นฟูกล้ามเนื้อและลดอาการปวดเมื่อยระดับลึก</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <div>
+                            <span class="font-bold text-red-600 text-base">฿290</span>
+                            <span class="text-[10px] text-gray-400 line-through block">฿590</span>
+                        </div>
+                        <button onclick="openHerbalGelModal()" class="bg-emerald-600 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-zinc-900 transition-colors font-semibold">ดูข้อมูล / ซื้อ</button>
+                    </div>
                 </div>
             </div>
 
@@ -390,10 +402,22 @@
             </div>
 
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-md border-2 border-orange-500 overflow-hidden flex flex-col justify-between group transition-all transform hover:-translate-y-1 hover:scale-[1.02]">
-                <div class="bg-zinc-100 p-6 relative flex items-center justify-center h-48"><i class="fa-solid fa-shield-halved text-5xl text-red-500"></i></div>
+                <div class="bg-emerald-950 p-3 relative flex items-center justify-center h-48 cursor-pointer" onclick="openHerbalRollOnModal()">
+                    <img src="Gemini_Generated_Image_4tua4r4tua4r4tua.png" alt="RAPTOR HERBAL ROLL-ON" class="max-h-full w-auto object-contain group-hover:scale-105 transition-transform">
+                    <span class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded animate-pulse uppercase tracking-wider">Herb Series</span>
+                </div>
                 <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
-                    <div><h3 class="font-bold text-sm text-zinc-900 line-clamp-2">Raptor Joint Support (บำรุงข้อต่อ)</h3><p class="text-xs text-gray-400 mt-1">ลดการเสียดสีของข้อต่อกระดูกขณะเคลื่อนไหว</p></div>
-                    <div class="flex items-center justify-between pt-2"><span class="font-bold text-gray-900 text-base">฿420</span><button class="bg-zinc-950 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-orange-brand transition-colors"><i class="fa-solid fa-cart-plus"></i></button></div>
+                    <div>
+                        <h3 class="font-bold text-sm text-zinc-900 line-clamp-2 cursor-pointer hover:text-emerald-700" onclick="openHerbalRollOnModal()">RAPTOR HERBAL ROLL-ON</h3>
+                        <p class="text-xs text-gray-400 mt-1">โรลออนสมุนไพรสปอร์ต พกง่าย ใช้สะดวก เหมาะสำหรับผ่อนคลายหลังใช้งานร่างกาย</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <div>
+                            <span class="font-bold text-red-600 text-base">฿179</span>
+                            <span class="text-[10px] text-gray-400 line-through block">฿350</span>
+                        </div>
+                        <button onclick="openHerbalRollOnModal()" class="bg-emerald-600 text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-zinc-900 transition-colors font-semibold">ดูข้อมูล / ซื้อ</button>
+                    </div>
                 </div>
             </div>
 
@@ -1016,6 +1040,100 @@
         </div>
     </div>
 
+
+
+    <!-- Modal 10: Raptor Herbal Roll-On -->
+    <div id="herbalrollon-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
+        <div class="bg-[#07130d] text-white rounded-3xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-emerald-900/70 my-8">
+            <button onclick="closeHerbalRollOnModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-20 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <section class="relative grid md:grid-cols-2 gap-10 items-center p-8 md:p-14 overflow-hidden bg-[radial-gradient(circle_at_80%_20%,rgba(44,150,90,.35),transparent_35%),linear-gradient(135deg,#07130d,#102418_55%,#0b160f)]">
+                <div class="space-y-6 relative z-10">
+                    <span class="inline-block bg-white/10 border border-white/20 px-4 py-2 rounded-full text-emerald-100 text-xs font-bold tracking-widest uppercase">RAPTOR Sport Herb Series</span>
+                    <h2 class="text-4xl md:text-6xl font-black leading-[0.95] uppercase tracking-tight">RAPTOR<br><span class="text-[#d8c46a]">HERBAL ROLL-ON</span></h2>
+                    <div class="bg-gradient-to-r from-red-600 to-orange-500 rounded-xl p-4 flex justify-between items-center shadow-lg animate-pulse">
+                        <div>
+                            <p class="text-xs font-bold uppercase"><span class="animate-fire">🔥</span> FLASH SALE ด่วน!</p>
+                            <p class="text-[10px] opacity-90">ราคานี้เหลือเวลาจำกัดเท่านั้น</p>
+                        </div>
+                        <div class="text-xl font-mono font-bold" id="rollon-countdown">15:00</div>
+                    </div>
+                    <p class="text-emerald-50/85 text-base md:text-lg leading-relaxed">
+                        แร็พเตอร์ สปอร์ตเฮิร์บ โรลออนสมุนไพร ภาพลักษณ์สปอร์ตพรีเมี่ยม เหมาะสำหรับคนออกกำลังกาย นักกีฬา และคนที่ต้องการความรู้สึกผ่อนคลายหลังใช้งานร่างกาย
+                    </p>
+                    <div class="flex items-baseline gap-3">
+                        <span class="text-4xl font-extrabold text-red-400">฿179</span>
+                        <span class="text-sm text-emerald-100/50 line-through">฿350</span>
+                        <span class="bg-red-500/20 text-red-200 text-xs font-bold px-2 py-0.5 rounded">Flash Sale</span>
+                    </div>
+                    <a href="#rollon-order" class="inline-flex items-center justify-center bg-[#d8c46a] text-[#102418] px-8 py-4 rounded-full font-black hover:scale-105 transition-all shadow-lg">สั่งซื้อเลย <i class="fa-solid fa-arrow-right ml-2 text-xs"></i></a>
+                </div>
+                <div class="relative flex justify-center items-center">
+                    <div class="absolute w-[420px] h-[420px] bg-emerald-400 rounded-full blur-[120px] opacity-20"></div>
+                    <img src="Gemini_Generated_Image_4tua4r4tua4r4tua.png" alt="RAPTOR HERBAL ROLL-ON" class="relative z-10 w-full max-w-[430px] rounded-3xl shadow-2xl border border-white/10 object-contain">
+                </div>
+            </section>
+
+            <section class="bg-white text-[#102418] p-8 md:p-12 space-y-8">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h3 class="text-3xl md:text-4xl font-black uppercase tracking-tight">Herbal Sport Recovery</h3>
+                    <p class="text-slate-600 mt-2 text-sm">โรลออนสมุนไพรแบบพกพา ใช้ง่าย ไม่เลอะมือ เหมาะกับไลฟ์สไตล์นักกีฬาและคนแอคทีฟ</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-5">
+                    <div class="bg-emerald-50 rounded-3xl p-6 border border-emerald-100">
+                        <i class="fa-solid fa-leaf text-2xl text-emerald-600 mb-3"></i>
+                        <h4 class="font-bold text-lg">Herbal Comfort</h4>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">ให้ความรู้สึกผ่อนคลาย สดชื่น และสบายผิวหลังใช้งานร่างกายหรือออกกำลังกาย</p>
+                    </div>
+                    <div class="bg-emerald-50 rounded-3xl p-6 border border-emerald-100">
+                        <i class="fa-solid fa-person-running text-2xl text-emerald-600 mb-3"></i>
+                        <h4 class="font-bold text-lg">Sport Lifestyle</h4>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">ดีไซน์สำหรับพกติดกระเป๋ายิม ใช้งานง่ายก่อนหรือหลังทำกิจกรรมโดยไม่ต้องใช้มือสัมผัสเนื้อผลิตภัณฑ์</p>
+                    </div>
+                    <div class="bg-emerald-50 rounded-3xl p-6 border border-emerald-100">
+                        <i class="fa-solid fa-bottle-droplet text-2xl text-emerald-600 mb-3"></i>
+                        <h4 class="font-bold text-lg">Roll-On Control</h4>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">หัวลูกกลิ้งช่วยควบคุมปริมาณการใช้ได้ดี ทาเฉพาะจุดได้ง่าย และลดการเลอะเทอะระหว่างวัน</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-[#102418] p-8 md:p-12">
+                <h3 class="text-2xl font-bold text-center uppercase tracking-wider text-[#d8c46a] mb-2">Relaxation Performance</h3>
+                <p class="text-sm text-emerald-100/70 text-center mb-6">กราฟจำลองระดับความรู้สึกผ่อนคลายหลังใช้โรลออนสมุนไพร</p>
+                <div class="h-[260px] w-full relative bg-white/5 border border-white/10 rounded-3xl p-4">
+                    <canvas id="rollonPerformanceChart"></canvas>
+                </div>
+            </section>
+
+            <section id="rollon-order" class="bg-white text-slate-900 p-8 md:p-12">
+                <div class="max-w-xl mx-auto border-2 border-emerald-600 rounded-3xl p-6 shadow-md">
+                    <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm mb-6">
+                        <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-6">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
+                    <form class="space-y-4" onsubmit="alert('บันทึกการสั่งซื้อ RAPTOR HERBAL ROLL-ON สำเร็จ!'); closeHerbalRollOnModal(); return false;">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg py-3.5 rounded-xl shadow-md transition-all cursor-pointer">ยืนยันการสั่งซื้อ ฿179</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
     <!-- Modal 6: Raptor Cool Patch -->
     <div id="coolpatch-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
@@ -1093,7 +1211,7 @@
                     <h3 class="text-xl font-bold text-center mb-1 text-gray-900"><i class="fa-solid fa-chart-line text-blue-600 mr-1"></i> กราฟแสดงประสิทธิภาพการบรรเทาความปวด</h3>
                     <p class="text-xs text-gray-500 text-center mb-6">อัตราการลดลงของความตึงปวดและระดับความสบายตัวหลังติดแผ่นเจลแร็พเตอร์ (นาที)</p>
                     <div class="w-full h-[240px] relative">
-                        <canvas id="modalPatchOdorChart"></canvas>
+                        <canvas id="modalCoolPatchChart"></canvas>
                     </div>
                 </section>
                 <section class="bg-white rounded-2xl shadow-sm p-6 max-w-xl mx-auto border border-slate-100">
@@ -1278,6 +1396,133 @@
         </div>
     </div>
 
+
+    <!-- Modal 9: Raptor Herbal Cooling Gel - Full Landing Page -->
+    <div id="herbalgel-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
+        <div class="bg-slate-950 text-slate-100 rounded-3xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-slate-800 my-8">
+            <button onclick="closeHerbalGelModal()" class="absolute top-4 right-4 bg-black/60 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-20 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Header -->
+            <header class="sticky top-0 w-full z-10 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
+                <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-leaf text-white"></i>
+                        </div>
+                        <span class="font-bold text-lg tracking-widest uppercase">Raptor Herbal</span>
+                    </div>
+                    <a href="#herbal-order" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all">สั่งซื้อพรีเมียม</a>
+                </div>
+            </header>
+
+            <main class="max-w-5xl mx-auto px-6 py-10 space-y-16">
+                <!-- 1. Hero Section & Flash Sale -->
+                <section class="rounded-3xl p-8 md:p-16 grid md:grid-cols-2 gap-12 items-center bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800">
+                    <div class="space-y-6">
+                        <span class="text-emerald-500 font-bold tracking-[0.2em] uppercase text-sm">Professional Recovery</span>
+                        <h1 class="text-4xl md:text-5xl font-black leading-tight uppercase">Herbal<br><span class="text-emerald-500">Cooling Gel</span></h1>
+                        
+                        <!-- Flash Sale Banner -->
+                        <div class="bg-gradient-to-r from-red-600 to-orange-500 rounded-xl p-4 flex justify-between items-center shadow-lg animate-pulse">
+                            <div>
+                                <p class="text-xs font-bold uppercase"><span class="animate-fire">🔥</span> FLASH SALE ด่วน!</p>
+                                <p class="text-[10px] opacity-90">ราคานี้เหลือเวลาจำกัดเท่านั้น</p>
+                            </div>
+                            <div class="text-xl font-mono font-bold" id="herbal-countdown">15:00</div>
+                        </div>
+
+                        <p class="text-slate-400 leading-relaxed">
+                            ยกระดับการฟื้นฟูกล้ามเนื้อด้วยสารสกัดธรรมชาติระดับพรีเมียม ผสานนวัตกรรมความเย็นล้ำลึก ช่วยผ่อนคลายความตึงเครียดของเส้นเอ็นและกล้ามเนื้อในระดับเซลล์
+                        </p>
+                        <div class="flex gap-4 pt-4">
+                            <a href="#herbal-order" class="bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-900/20">สั่งซื้อสินค้าตอนนี้ (฿290)</a>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <img src="Gemini_Generated_Image_t15zqzt15zqzt15z.png" alt="Raptor Herbal Cooling Gel" class="relative z-10 w-full max-w-sm mx-auto drop-shadow-2xl rounded-2xl border border-slate-700">
+                    </div>
+                </section>
+
+                <!-- 2. Scientific Formulation -->
+                <section class="space-y-8">
+                    <h2 class="text-3xl font-bold text-center uppercase tracking-wider text-emerald-400">Scientific Formulation</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="glass-card p-8 rounded-2xl space-y-3">
+                            <i class="fa-solid fa-leaf text-2xl text-emerald-500"></i>
+                            <h4 class="font-bold text-lg">ไพล & พิมเสน</h4>
+                            <p class="text-sm text-slate-400">ผสานพลังสมุนไพรไทย ช่วยลดอาการอักเสบ ปวดบวม และกระตุ้นการไหลเวียนเลือดอย่างเป็นธรรมชาติ</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl space-y-3">
+                            <i class="fa-solid fa-droplet text-2xl text-blue-400"></i>
+                            <h4 class="font-bold text-lg">ว่านหางจระเข้ & เปปเปอร์มินต์</h4>
+                            <p class="text-sm text-slate-400">เพิ่มความชุ่มชื้น ปลอบประโลมผิว และมอบความเย็นที่ยาวนานโดยไม่ก่อให้เกิดการระคายเคือง</p>
+                        </div>
+                        <div class="glass-card p-8 rounded-2xl space-y-3">
+                            <i class="fa-solid fa-shield-halved text-emerald-500"></i>
+                            <h4 class="font-bold text-lg">ทองพันชั่ง</h4>
+                            <p class="text-sm text-slate-400">สารสกัดเข้มข้นช่วยดูแลสุขภาพผิว ยับยั้งการระคายเคือง เหมาะสำหรับผู้ที่มีกิจกรรมกลางแจ้งเป็นประจำ</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. Chart Section -->
+                <section class="glass-card p-8 rounded-3xl border border-slate-800">
+                    <h3 class="text-2xl font-bold mb-2 text-center uppercase tracking-wider text-emerald-400">Relief Efficiency Index</h3>
+                    <p class="text-sm text-slate-400 text-center mb-8">กราฟแสดงประสิทธิภาพระดับความผ่อนคลายสบายตัว (เทียบเป็นนาที)</p>
+                    <div class="h-80 w-full relative">
+                        <canvas id="herbalCoolingChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- 4. Testimonials & 5. Order Form -->
+                <section class="grid md:grid-cols-2 gap-10">
+                    <!-- Testimonials -->
+                    <div class="space-y-6">
+                        <h2 class="text-2xl font-bold uppercase tracking-wider">Trusted By Athletes</h2>
+                        <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                            <div class="flex text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-slate-300 italic mb-4">"เป็นเจลที่เย็นนานมากครับ ผมใช้ทาหลังซ้อมวิ่งหนักๆ ช่วยลดอาการระบมได้ดีสุดๆ แถมเนื้อเจลซึมไวมาก ไม่เลอะเสื้อผ้าเลยครับ"</p>
+                            <span class="font-bold text-emerald-400 text-sm">— คุณสมชาย, นักวิ่งมาราธอน</span>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                            <div class="flex text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-slate-300 italic mb-4">"เนื้อเจลใสกลิ่นอโรมาผ่อนคลายมากค่ะ ชอบใช้ทาหลังเล่นเวทหนักๆ คุ้มราคาและเห็นผลจริงค่ะ ไม่มีความรู้สึกแสบผิวเหมือนยี่ห้ออื่น"</p>
+                            <span class="font-bold text-emerald-400 text-sm">— คุณพัชรา, เทรนเนอร์ฟิตเนส</span>
+                        </div>
+                    </div>
+
+                    <!-- Order Form -->
+                    <div id="herbal-order" class="glass-card p-8 rounded-3xl border-2 border-emerald-600">
+                        <div class="text-center mb-8">
+                            <h2 class="text-2xl font-bold mb-2">จองสิทธิ์ราคาพิเศษ</h2>
+                            <p class="text-slate-400 text-sm">กรอกข้อมูลด้านล่างเพื่อรับสิทธิ์ราคาพิเศษ 290 บาท (จัดส่งด่วนฟรี)</p>
+                        </div>
+                        <form class="space-y-5" onsubmit="alert('บันทึกคำสั่งซื้อของคุณเรียบร้อยแล้ว'); closeHerbalGelModal(); return false;">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">ชื่อ-นามสกุลผู้รับ</label>
+                                <input type="text" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+                                <input type="tel" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">ที่อยู่สำหรับการจัดส่ง</label>
+                                <textarea required rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-xl font-bold text-lg uppercase tracking-wider transition-all shadow-lg shadow-emerald-950">ยืนยันคำสั่งซื้อ ฿290</button>
+                        </form>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="text-center py-10 text-slate-600 text-sm border-t border-slate-900">
+                &copy; 2026 Raptor Official Store | Performance & Therapy Innovation
+            </footer>
+        </div>
+    </div>
     <!-- Review Section -->
 
     <!-- Modal 8: Raptor Speed Water Charge -->
@@ -1452,6 +1697,8 @@
         let modalCoolPatchChartInstance = null;
         let modalTherapyOilChartInstance = null; // อินสแตนซ์สำหรับกราฟในโมดอลออยล์ธรรมชาติ
         let waterChargeChartInstance = null;
+        let herbalGelChartInstance = null;
+        let rollOnChartInstance = null;
 
         // ฟังก์ชันสั่งเปิดและวาดกราฟสำหรับโมดอลสินค้าใหม่ Raptor Sport & Therapy Oil
         function openTherapyOilModal() {
@@ -1545,6 +1792,106 @@
 
         function closeWaterChargeModal() {
             document.getElementById('watercharge-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+
+        function openHerbalGelModal() {
+            document.getElementById('herbalgel-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!herbalGelChartInstance) {
+                const ctx = document.getElementById('herbalCoolingChart').getContext('2d');
+                herbalGelChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0m', '15m', '30m', '60m', '120m', '180m'],
+                        datasets: [
+                            {
+                                label: 'ระดับความผ่อนคลาย Raptor Gel (%)',
+                                data: [10, 85, 95, 92, 88, 80],
+                                borderColor: '#059669',
+                                backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                                borderWidth: 4,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'ฟื้นฟูตามปกติ',
+                                data: [10, 15, 20, 30, 40, 50],
+                                borderColor: '#475569',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: '#cbd5e1' } } },
+                        scales: {
+                            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 },
+                            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                        }
+                    }
+                });
+            }
+        }
+
+        function closeHerbalGelModal() {
+            document.getElementById('herbalgel-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+
+        function openHerbalRollOnModal() {
+            document.getElementById('herbalrollon-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!rollOnChartInstance) {
+                const ctx = document.getElementById('rollonPerformanceChart').getContext('2d');
+                rollOnChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '5 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที'],
+                        datasets: [
+                            {
+                                label: 'ระดับความผ่อนคลายหลังใช้ RAPTOR ROLL-ON (%)',
+                                data: [10, 55, 82, 90, 86, 78],
+                                borderColor: '#d8c46a',
+                                backgroundColor: 'rgba(216, 196, 106, 0.12)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'พักตามปกติ',
+                                data: [10, 15, 25, 35, 45, 55],
+                                borderColor: '#94a3b8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: '#d7e6d9', font: { size: 10 } } } },
+                        scales: {
+                            y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#d7e6d9', callback: value => value + '%' } },
+                            x: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#d7e6d9' } }
+                        }
+                    }
+                });
+            }
+        }
+
+        function closeHerbalRollOnModal() {
+            document.getElementById('herbalrollon-modal').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
 
@@ -1833,11 +2180,15 @@
                 const fEl2 = document.getElementById("foot-countdown-2");
                 const coolEl1 = document.getElementById("cooling-countdown-1");
                 const energyEl1 = document.getElementById("energy-countdown-1");
+                const herbalEl1 = document.getElementById("herbal-countdown");
+                const rollonEl1 = document.getElementById("rollon-countdown");
                 
                 if (fEl1) fEl1.textContent = `${cMin}:${cSec}`;
                 if (fEl2) fEl2.textContent = `${cMin}:${cSec}`;
                 if (coolEl1) coolEl1.textContent = `${cMin}:${cSec}`;
                 if (energyEl1) energyEl1.textContent = `${cMin}:${cSec}`;
+                if (herbalEl1) herbalEl1.textContent = `${cMin}:${cSec}`;
+                if (rollonEl1) rollonEl1.textContent = `${cMin}:${cSec}`;
                 
                 flashSaleDuration = flashSaleDuration <= 0 ? 15 * 60 : flashSaleDuration - 1;
             }, 1000);
