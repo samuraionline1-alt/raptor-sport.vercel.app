@@ -73,37 +73,8 @@
             animation: fireMovement 1.4s ease-in-out infinite;
         }
     </style>
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;
-    n.push=n;
-    n.loaded=!0;
-    n.version='2.0';
-    n.queue=[];
-    t=b.createElement(e);
-    t.async=!0;
-    t.src=v;
-    s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}
-    (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-    fbq('init', '462184846324554');
-    fbq('track', 'PageView');
-    fbq('trackCustom', 'RAPTOR SPORT1');
-    fbq('trackCustom', 'RAPTOR_SPORT1');
-    </script>
-    <!-- End Meta Pixel Code -->
-
 </head>
 <body class="bg-gray-50 text-gray-800">
-    <noscript>
-        <img height="1" width="1" style="display:none"
-             src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
-             alt="" />
-    </noscript>
 
     <header class="fixed top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
@@ -461,26 +432,28 @@
                         <p class="text-xs text-gray-400 mt-1">แผ่นเจลบรรเทาปวดสูตรเย็นจัด ออกแบบมาเพื่อนักกีฬาโดยเฉพาะ</p>
                     </div>
                     <div class="flex items-center justify-between pt-2">
-                        <div class="flex items-center space-x-3">
-    <i class="fa-brands fa-line text-orange-brand w-4"></i>
-    <span class="text-zinc-300">LINE ID: <strong class="text-white">@raptor</strong></span>
-</div>
+                        <div>
+                            <span class="font-bold text-red-600 text-base">฿179</span>
+                            <span class="text-[10px] text-gray-400 line-through block">฿350</span>
+                        </div>
+                        <button onclick="openCoolPatchModal()" class="bg-orange-brand text-white text-xs px-2.5 py-1.5 rounded-lg hover:bg-zinc-900 transition-colors font-semibold">ดูข้อมูล / ซื้อ</button>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </section>
 
     <!-- Modal 1: Raptor Sport Warming Spray -->
-    <div class="flex flex-wrap gap-4 text-base pt-2">
-    <a href="https://www.tiktok.com/@raptor.global.imp?_r=1&_t=ZS-96e96teMngr" target="_blank" class="flex items-center gap-2 bg-zinc-800/60 hover:bg-zinc-800 border border-zinc-700/50 text-zinc-300 hover:text-white px-3 py-1.5 rounded-xl transition-all">
-        <i class="fa-brands fa-tiktok text-sm"></i> <span>TikTok</span>
-    </a>
-    <a href="https://www.facebook.com/raptorsportofficial?locale=th_TH" target="_blank" class="flex items-center gap-2 bg-zinc-800/60 hover:bg-zinc-800 border border-zinc-700/50 text-zinc-300 hover:text-blue-400 px-3 py-1.5 rounded-xl transition-all">
-        <i class="fa-brands fa-facebook text-sm"></i> <span>Facebook</span>
-    </a>
-    <a href="https://lin.ee/qtuszPa" target="_blank" class="flex items-center gap-2 bg-zinc-800/60 hover:bg-zinc-800 border border-zinc-700/50 text-zinc-300 hover:text-green-400 px-3 py-1.5 rounded-xl transition-all">
-        <i class="fa-brands fa-line text-sm"></i> <span>LINE</span>
-    </a>
-</div>
+    <div id="product-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
+        <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="bg-zinc-900 text-white px-6 py-4 flex items-center justify-between">
+                <h3 class="font-bold text-lg text-orange-brand tracking-wider"><i class="fa-solid fa-bolt-lightning"></i> RAPTOR SPORT PREMIUM</h3>
+                <span class="text-xs text-gray-400 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
+            </div>
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-10">
                 <section class="bg-white rounded-2xl shadow-sm p-6 grid md:grid-cols-2 gap-8 items-center">
                     <div class="flex flex-col items-center">
@@ -2279,78 +2252,6 @@
         mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
     </script>
 
-
-    <script>
-        // Meta Pixel helper and sales funnel tracking
-        function trackRaptorPixel(eventName, params, isCustomEvent) {
-            try {
-                if (typeof fbq === 'function') {
-                    if (isCustomEvent) {
-                        fbq('trackCustom', eventName, params || {});
-                    } else {
-                        fbq('track', eventName, params || {});
-                    }
-                }
-            } catch (error) {
-                console.warn('Meta Pixel tracking skipped:', error);
-            }
-        }
-
-        function getNumericPrice(priceText) {
-            if (!priceText) return 0;
-            const numberText = String(priceText).replace(/[^\d.]/g, '');
-            return Number(numberText || 0);
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const productTrackingMap = {
-                openProductModal: { name: 'RAPTOR SPORT WARMING SPRAY', price: '฿179' },
-                openCoolingModal: { name: 'RAPTOR SPORTS ICE COLD SPRAY', price: '฿179' },
-                openEnergyGelModal: { name: 'RAPTOR GO ENERGY GEL', price: '฿179' },
-                openDualActionModal: { name: 'RAPTOR DUAL ACTION PACK', price: '฿329' },
-                openTherapyOilModal: { name: 'RAPTOR SPORT & THERAPY OIL', price: '฿179' },
-                openWaterChargeModal: { name: 'RAPTOR SPEED WATER CHARGE', price: '฿490' },
-                openHerbalGelModal: { name: 'RAPTOR HERBAL COOLING GEL', price: '฿290' },
-                openFootSprayModal: { name: 'RAPTOR SPORT FOOT SPRAY', price: '฿179' },
-                openHerbalRollOnModal: { name: 'RAPTOR HERBAL ROLL-ON', price: '฿179' },
-                openCoolPatchModal: { name: 'RAPTOR COOL PATCH', price: '฿179' }
-            };
-
-            document.querySelectorAll('[onclick]').forEach(function (element) {
-                const onclickValue = element.getAttribute('onclick') || '';
-                const match = onclickValue.match(/(open[A-Za-z0-9_]+Modal)\s*\(/);
-                if (!match || !productTrackingMap[match[1]]) return;
-
-                element.addEventListener('click', function () {
-                    const item = productTrackingMap[match[1]];
-                    const params = {
-                        content_name: item.name,
-                        content_category: 'Raptor Sport Product',
-                        content_type: 'product',
-                        value: getNumericPrice(item.price),
-                        currency: 'THB'
-                    };
-                    trackRaptorPixel('ViewContent', params);
-                    trackRaptorPixel('RaptorProductView', params, true);
-                });
-            });
-
-            document.querySelectorAll('a[href*="order-form"], a[href*="#order"], a[href*="#modal-order-form"]').forEach(function (link) {
-                link.addEventListener('click', function () {
-                    const modal = link.closest('[id$="-modal"], #product-modal');
-                    const productTitle = modal ? (modal.querySelector('h1, h2, h3')?.textContent || 'Raptor Sport Product') : 'Raptor Sport Product';
-                    const params = {
-                        content_name: productTitle.trim(),
-                        content_category: 'Raptor Sport Checkout',
-                        currency: 'THB'
-                    };
-                    trackRaptorPixel('InitiateCheckout', params);
-                    trackRaptorPixel('RaptorInitiateCheckout', params, true);
-                });
-            });
-        });
-    </script>
-
     <script>
         // Formspree integration for all Raptor order/contact forms
         document.addEventListener('DOMContentLoaded', function () {
@@ -2380,19 +2281,6 @@
                     statusBox.classList.add('bg-orange-50', 'text-orange-700');
                     statusBox.textContent = 'กำลังส่งคำสั่งซื้อไปยังระบบ...';
 
-                    const productName = form.dataset.product || form.querySelector('input[name="product"]')?.value || 'Raptor Sport Product';
-                    const productPrice = form.dataset.price || form.querySelector('input[name="price"]')?.value || '';
-                    const pixelParams = {
-                        content_name: productName,
-                        content_category: 'Raptor Sport Order',
-                        content_type: 'product',
-                        value: getNumericPrice(productPrice),
-                        currency: 'THB'
-                    };
-
-                    trackRaptorPixel('InitiateCheckout', pixelParams);
-                    trackRaptorPixel('RaptorFormSubmitStarted', pixelParams, true);
-
                     try {
                         const response = await fetch(form.action, {
                             method: 'POST',
@@ -2404,11 +2292,6 @@
                             statusBox.classList.remove('bg-orange-50', 'text-orange-700', 'bg-red-50', 'text-red-700');
                             statusBox.classList.add('bg-green-50', 'text-green-700');
                             statusBox.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด';
-
-                            trackRaptorPixel('Lead', pixelParams);
-                            trackRaptorPixel('Purchase', pixelParams);
-                            trackRaptorPixel('RaptorOrderSubmitted', pixelParams, true);
-
                             form.reset();
 
                             const closeModalName = form.dataset.closeModal;
