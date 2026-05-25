@@ -76,25 +76,30 @@
     <!-- Meta Pixel Code -->
     <script>
     (function(w, d, s, u, pixelId) {
-        if (w.fbq) return;
-        var n = w.fbq = function() {
-            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-        };
-        if (!w._fbq) w._fbq = n;
-        n.push = n;
-        n.loaded = true;
-        n.version = '2.0';
-        n.queue = [];
+        var existingFbq = typeof w.fbq === 'function';
+        var n = w.fbq;
 
-        var js = d.createElement(s);
-        js.async = true;
-        js.src = u;
-        var ref = d.getElementsByTagName(s)[0];
-        ref.parentNode.insertBefore(js, ref);
+        if (!existingFbq) {
+            n = w.fbq = function() {
+                n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+            };
+            if (!w._fbq) w._fbq = n;
+            n.push = n;
+            n.loaded = true;
+            n.version = '2.0';
+            n.queue = [];
 
-        n('init', pixelId);
-        n('track', 'PageView');
-        n('trackCustom', 'RAPTOR SPORT1 RAPTOR_SPORT_LANDING_VIEW', {
+            var js = d.createElement(s);
+            js.async = true;
+            js.src = u;
+            var ref = d.getElementsByTagName(s)[0];
+            ref.parentNode.insertBefore(js, ref);
+        }
+
+        // Always initialize this Pixel ID even if fbq already exists from another integration.
+        w.fbq('init', pixelId);
+        w.fbq('track', 'PageView');
+        w.fbq('trackCustom', 'RAPTOR SPORT1 RAPTOR_SPORT_LANDING_VIEW', {
             page_path: w.location.pathname,
             page_title: d.title
         });
