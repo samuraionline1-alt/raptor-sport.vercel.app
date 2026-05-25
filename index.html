@@ -2223,6 +2223,45 @@
             document.body.style.overflow = 'auto';
         }
 
+        function attachModalTrackingWrappers() {
+            const productTrackingMap = {
+                openProductModal: { name: 'RAPTOR SPORT WARMING SPRAY', price: '฿179' },
+                openCoolingModal: { name: 'RAPTOR SPORTS ICE COLD SPRAY', price: '฿179' },
+                openEnergyGelModal: { name: 'RAPTOR GO ENERGY GEL', price: '฿179' },
+                openDualActionModal: { name: 'RAPTOR DUAL ACTION PACK', price: '฿329' },
+                openTherapyOilModal: { name: 'RAPTOR SPORT & THERAPY OIL', price: '฿179' },
+                openWaterChargeModal: { name: 'RAPTOR SPEED WATER CHARGE', price: '฿490' },
+                openHerbalGelModal: { name: 'RAPTOR HERBAL COOLING GEL', price: '฿290' },
+                openFootSprayModal: { name: 'RAPTOR SPORT FOOT SPRAY', price: '฿179' },
+                openHerbalRollOnModal: { name: 'RAPTOR HERBAL ROLL-ON', price: '฿179' },
+                openCoolPatchModal: { name: 'RAPTOR COOL PATCH', price: '฿179' }
+            };
+
+            Object.keys(productTrackingMap).forEach(function (fnName) {
+                const originalFn = window[fnName];
+                if (typeof originalFn !== 'function' || originalFn.__raptorWrapped) return;
+
+                const wrappedFn = function () {
+                    const item = productTrackingMap[fnName];
+                    const params = {
+                        content_name: item.name,
+                        content_category: 'Raptor Sport Product',
+                        content_type: 'product',
+                        value: getNumericPrice(item.price),
+                        currency: 'THB'
+                    };
+                    trackRaptorPixel('ViewContent', params);
+                    trackRaptorPixel('RaptorProductView', params, true);
+                    return originalFn.apply(this, arguments);
+                };
+
+                wrappedFn.__raptorWrapped = true;
+                window[fnName] = wrappedFn;
+            });
+        }
+
+        attachModalTrackingWrappers();
+
         function startCountdown() {
             let duration = 2 * 60 * 60; 
             let flashSaleDuration = 15 * 60;
@@ -2339,26 +2378,6 @@
                 openHerbalRollOnModal: { name: 'RAPTOR HERBAL ROLL-ON', price: '฿179' },
                 openCoolPatchModal: { name: 'RAPTOR COOL PATCH', price: '฿179' }
             };
-
-            document.querySelectorAll('[onclick]').forEach(function (element) {
-                const onclickValue = element.getAttribute('onclick') || '';
-                const match = onclickValue.match(/(open[A-Za-z0-9_]+Modal)\s*\(/);
-                if (!match || !productTrackingMap[match[1]]) return;
-
-                element.addEventListener('click', function () {
-                    const item = productTrackingMap[match[1]];
-                    const params = {
-                        content_name: item.name,
-                        content_category: 'Raptor Sport Product',
-                        content_type: 'product',
-                        value: getNumericPrice(item.price),
-                        currency: 'THB'
-                    };
-                    document.body.style.overflow = 'hidden'; 
-                    trackRaptorPixel('ViewContent', params);
-                    trackRaptorPixel('RaptorProductView', params, true);
-                });
-            });
 
             document.querySelectorAll('a[href*="order-form"], a[href*="#order"], a[href*="#modal-order-form"]').forEach(function (link) {
                 link.addEventListener('click', function () {
