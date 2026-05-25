@@ -73,6 +73,7 @@
             animation: fireMovement 1.4s ease-in-out infinite;
         }
     </style>
+    <!-- Meta Pixel Code -->
     <script>
     (function(w, d, s, u, pixelId) {
         if (w.fbq) return;
@@ -98,28 +99,18 @@
             page_title: d.title
         });
 
-        w.trackRaptorPixel = function(eventName, params, isCustomEvent) {
-            try {
-                if (typeof w.fbq === 'function') {
-                    var payload = params || {};
-                    var prefixedEventName = 'RAPTOR SPORT1 ' + eventName;
+        w.trackPixelEvent = function(method, eventName, params) {
+            if (typeof w.fbq !== 'function') return;
+            var safeParams = params || {};
+            var prefixedEventName = 'RAPTOR SPORT1 ' + eventName;
 
-                    if (isCustomEvent) {
-                        w.fbq('trackCustom', prefixedEventName, payload);
-                    } else {
-                        w.fbq('track', eventName, payload);
-                        w.fbq('trackCustom', prefixedEventName, payload);
-                    }
-                }
-            } catch (error) {
-                console.warn('Meta Pixel tracking skipped:', error);
+            if (method === 'trackCustom') {
+                w.fbq('trackCustom', prefixedEventName, safeParams);
+                return;
             }
-        };
 
-        w.getNumericPrice = function(priceText) {
-            if (!priceText) return 0;
-            var numberText = String(priceText).replace(/[^\d.]/g, '');
-            return Number(numberText || 0);
+            w.fbq('track', eventName, safeParams);
+            w.fbq('trackCustom', prefixedEventName, safeParams);
         };
 
         // Fallback beacon
@@ -129,7 +120,8 @@
         });
     })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js', '462184846324554');
     </script>
-    </head>
+    <!-- End Meta Pixel Code -->
+</head>
 <body class="bg-gray-50 text-gray-800">
     <noscript>
         <img height="1" width="1" style="display:none"
@@ -504,6 +496,7 @@
         </div>
     </section>
 
+    <!-- Modal 1: Raptor Sport Warming Spray -->
     <div id="product-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -637,6 +630,7 @@
         </div>
     </div>
 
+    <!-- Modal 2: Raptor Sport Cooling Spray -->
     <div id="cooling-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-slate-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-slate-200 my-8">
             <button onclick="closeCoolingModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -757,6 +751,7 @@
         </div>
     </div>
 
+    <!-- Modal 3: RAPTOR SPORT FOOT SPRAY -->
     <div id="footspray-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-slate-900 text-slate-100 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-emerald-800/50 my-8">
             <button onclick="closeFootSprayModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -850,7 +845,7 @@
                         <input type="hidden" name="product" value="RAPTOR SPORT FOOT SPRAY">
                         <input type="hidden" name="price" value="฿179">
                         <input type="hidden" name="payment_method" value="COD">
-                        <input type="hidden" name="source" value="RAPTOR SPORT FOOT SPRAY">
+                        <input type="hidden" name="source" value="Raptor Sport Official Store">
                         <div>
                             <label class="block text-sm font-bold text-slate-300 mb-1">ชื่อ-นามสกุลผู้รับ</label>
                             <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" name="customer_name">
@@ -870,6 +865,7 @@
         </div>
     </div>
 
+    <!-- Modal 4: Raptor Go Energy Gel -->
     <div id="energygel-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
             <button onclick="closeEnergyGelModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -982,6 +978,7 @@
         </div>
     </div>
 
+    <!-- Modal 5: Raptor Dual Action Pack -->
     <div id="dualaction-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
             <button onclick="closeDualActionModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -1050,7 +1047,7 @@
                         <div class="p-4 bg-slate-50 rounded-xl text-center border border-gray-200">
                             <div class="w-12 h-12 bg-slate-200 rounded-full flex items-center justify-center mx-auto text-slate-700 text-lg font-bold mb-2"><i class="fa-solid fa-shield-halved"></i></div>
                             <h4 class="font-bold text-sm text-gray-808">Non-Camphor Policy</h4>
-                            <p class="text-[11px] text-gray-500 mt-1">ยืนยันความปลอดภัยในสเปรย์สูตรเย็น ปราศจากสารการบูร ไม่แสบร้อน แสบตา หรือระคายเคืองในระยะยาว</p>
+                            <p class="text-[11px] text-gray-500 mt-1">ยืนยันความปลอดภัยในสเปรย์สูตรเย็น ปราศจากสารการบูร ไม่แสบร้อน แแสบตา หรือระคายเคืองในระยะยาว</p>
                         </div>
                     </div>
                 </section>
@@ -1120,6 +1117,7 @@
         </div>
     </div>
 
+    <!-- Modal 10: Raptor Herbal Roll-On -->
     <div id="herbalrollon-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-[#07130d] text-white rounded-3xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-emerald-900/70 my-8">
             <button onclick="closeHerbalRollOnModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-20 cursor-pointer">
@@ -1216,6 +1214,7 @@
         </div>
     </div>
 
+    <!-- Modal 6: Raptor Cool Patch -->
     <div id="coolpatch-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
             <button onclick="closeCoolPatchModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -1339,6 +1338,7 @@
         </div>
     </div>
 
+    <!-- Modal 7: Raptor Sport & Therapy Oil -->
     <div id="therapyoil-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
             <button onclick="closeTherapyOilModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -1473,12 +1473,14 @@
         </div>
     </div>
 
+    <!-- Modal 9: Raptor Herbal Cooling Gel - Full Landing Page -->
     <div id="herbalgel-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-slate-950 text-slate-100 rounded-3xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-slate-800 my-8">
             <button onclick="closeHerbalGelModal()" class="absolute top-4 right-4 bg-black/60 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-20 cursor-pointer">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
+            <!-- Header -->
             <header class="sticky top-0 w-full z-10 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
                 <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div class="flex items-center gap-2">
@@ -1492,11 +1494,13 @@
             </header>
 
             <main class="max-w-5xl mx-auto px-6 py-10 space-y-16">
+                <!-- 1. Hero Section & Flash Sale -->
                 <section class="rounded-3xl p-8 md:p-16 grid md:grid-cols-2 gap-12 items-center bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800">
                     <div class="space-y-6">
                         <span class="text-emerald-500 font-bold tracking-[0.2em] uppercase text-sm">Professional Recovery</span>
                         <h1 class="text-4xl md:text-5xl font-black leading-tight uppercase">Herbal<br><span class="text-emerald-500">Cooling Gel</span></h1>
                         
+                        <!-- Flash Sale Banner -->
                         <div class="bg-gradient-to-r from-red-600 to-orange-500 rounded-xl p-4 flex justify-between items-center shadow-lg animate-pulse">
                             <div>
                                 <p class="text-xs font-bold uppercase"><span class="animate-fire">🔥</span> FLASH SALE ด่วน!</p>
@@ -1517,6 +1521,7 @@
                     </div>
                 </section>
 
+                <!-- 2. Scientific Formulation -->
                 <section class="space-y-8">
                     <h2 class="text-3xl font-bold text-center uppercase tracking-wider text-emerald-400">Scientific Formulation</h2>
                     <div class="grid md:grid-cols-3 gap-6">
@@ -1538,6 +1543,7 @@
                     </div>
                 </section>
 
+                <!-- 3. Chart Section -->
                 <section class="glass-card p-8 rounded-3xl border border-slate-800">
                     <h3 class="text-2xl font-bold mb-2 text-center uppercase tracking-wider text-emerald-400">Relief Efficiency Index</h3>
                     <p class="text-sm text-slate-400 text-center mb-8">กราฟแสดงประสิทธิภาพระดับความผ่อนคลายสบายตัว (เทียบเป็นนาที)</p>
@@ -1546,7 +1552,9 @@
                     </div>
                 </section>
 
+                <!-- 4. Testimonials & 5. Order Form -->
                 <section class="grid md:grid-cols-2 gap-10">
+                    <!-- Testimonials -->
                     <div class="space-y-6">
                         <h2 class="text-2xl font-bold uppercase tracking-wider">Trusted By Athletes</h2>
                         <div class="glass-card p-6 rounded-2xl border border-slate-800">
@@ -1561,6 +1569,7 @@
                         </div>
                     </div>
 
+                    <!-- Order Form -->
                     <div id="herbal-order" class="glass-card p-8 rounded-3xl border-2 border-emerald-600">
                         <div class="text-center mb-8">
                             <h2 class="text-2xl font-bold mb-2">จองสิทธิ์ราคาพิเศษ</h2>
@@ -1596,6 +1605,7 @@
         </div>
     </div>
 
+    <!-- Modal 8: Raptor Speed Water Charge -->
     <div id="watercharge-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 overflow-y-auto p-4 sm:p-6 flex justify-center items-start pt-10">
         <div class="bg-gray-50 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden relative border border-gray-200 my-8">
             <button onclick="closeWaterChargeModal()" class="absolute top-4 right-4 bg-black/50 text-white hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10 cursor-pointer">
@@ -1711,6 +1721,7 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" class="py-24 max-w-4xl mx-auto px-6">
         <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden grid grid-cols-1 md:grid-cols-2">
             <div class="p-8 space-y-6">
@@ -1773,78 +1784,613 @@
         <p>&copy; 2026 RAPTOR SPORT WARMING SPRAY. All Rights Reserved.</p>
     </footer>
 
+    <!-- Scripts Section -->
     <script>
-        document.addEventListener('click', function (event) {
-            // 1. ViewContent Tracking System
-            var targetProductBtn = event.target.closest('[onclick*="openProductModal"], [onclick*="openCoolingModal"], [onclick*="openEnergyGelModal"], [onclick*="openDualActionModal"], [onclick*="openTherapyOilModal"], [onclick*="openWaterChargeModal"], [onclick*="openHerbalGelModal"], [onclick*="openFootSprayModal"], [onclick*="openHerbalRollOnModal"], [onclick*="openCoolPatchModal"]');
-            
-            if (targetProductBtn) {
-                var onclickValue = targetProductBtn.getAttribute('onclick') || '';
-                var match = onclickValue.match(/(open[A-Za-z5-9_]+Modal)\s*/);
-                
-                var productTrackingMap = {
-                    openProductModal: { name: 'RAPTOR SPORT WARMING SPRAY', price: '฿179' },
-                    openCoolingModal: { name: 'RAPTOR SPORTS ICE COLD SPRAY', price: '฿179' },
-                    openEnergyGelModal: { name: 'RAPTOR GO ENERGY GEL', price: '฿179' },
-                    openDualActionModal: { name: 'RAPTOR DUAL ACTION PACK', price: '฿329' },
-                    openTherapyOilModal: { name: 'RAPTOR SPORT & THERAPY OIL', price: '฿179' },
-                    openWaterChargeModal: { name: 'RAPTOR SPEED WATER CHARGE', price: '฿490' },
-                    openHerbalGelModal: { name: 'RAPTOR HERBAL COOLING GEL', price: '฿290' },
-                    openFootSprayModal: { name: 'RAPTOR SPORT FOOT SPRAY', price: '฿179' },
-                    openHerbalRollOnModal: { name: 'RAPTOR HERBAL ROLL-ON', price: '฿179' },
-                    openCoolPatchModal: { name: 'RAPTOR COOL PATCH', price: '฿179' }
-                };
+        let myChartInstance = null;
+        let coolingChartInstance = null;
+        let footSprayChartInstance = null;
+        let energyGelChartInstance = null;
+        let modalDualActionChartInstance = null;
+        let modalCoolPatchChartInstance = null;
+        let modalTherapyOilChartInstance = null; 
+        let waterChargeChartInstance = null;
+        let herbalGelChartInstance = null;
+        let rollOnChartInstance = null;
 
-                if (match && productTrackingMap[match[1]]) {
-                    var item = productTrackingMap[match[1]];
-                    var params = {
+        function openTherapyOilModal() {
+            document.getElementById('therapyoil-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            if (!modalTherapyOilChartInstance) {
+                const ctx = document.getElementById('modalTherapyOilChart').getContext('2d');
+                modalTherapyOilChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '5 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที'],
+                        datasets: [
+                            {
+                                label: 'เปอร์เซ็นต์การคลายตัวของกล้ามเนื้อสะสม (%)',
+                                data: [15, 68, 96, 92, 85, 70],
+                                borderColor: '#1e293b',
+                                backgroundColor: 'rgba(30, 41, 59, 0.08)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'พักฟื้นร่างกายตามปกติ',
+                                data: [15, 20, 28, 35, 45, 52],
+                                borderColor: '#94a3b8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
+                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
+                    }
+                });
+            }
+        }
+
+        function closeTherapyOilModal() {
+            document.getElementById('therapyoil-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+
+        function openWaterChargeModal() {
+            document.getElementById('watercharge-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!waterChargeChartInstance) {
+                const ctx = document.getElementById('waterChargeChartModal').getContext('2d');
+                waterChargeChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '20 นาที', '40 นาที', '60 นาที', '90 นาที', '120 นาที'],
+                        datasets: [
+                            {
+                                label: 'ดื่ม RAPTOR SPEED WATER CHARGE',
+                                data: [50, 95, 92, 90, 88, 85],
+                                borderColor: '#FF6B00',
+                                backgroundColor: 'rgba(255, 107, 0, 0.08)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'ดื่มน้ำเปล่าบริสุทธิ์ตามปกติ',
+                                data: [50, 65, 55, 45, 35, 20],
+                                borderColor: '#94a3b8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
+                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
+                    }
+                });
+            }
+        }
+
+        function closeWaterChargeModal() {
+            document.getElementById('watercharge-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+
+        function openHerbalGelModal() {
+            document.getElementById('herbalgel-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!herbalGelChartInstance) {
+                const ctx = document.getElementById('herbalCoolingChart').getContext('2d');
+                herbalGelChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0m', '15m', '30m', '60m', '120m', '180m'],
+                        datasets: [
+                            {
+                                label: 'ระดับความผ่อนคลาย Raptor Gel (%)',
+                                data: [10, 85, 95, 92, 88, 80],
+                                borderColor: '#059669',
+                                backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                                borderWidth: 4,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'ฟื้นฟูตามปกติ',
+                                data: [10, 15, 20, 30, 40, 50],
+                                borderColor: '#475569',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: '#cbd5e1' } } },
+                        scales: {
+                            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 },
+                            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                        }
+                    }
+                });
+            }
+        }
+
+        function closeHerbalGelModal() {
+            document.getElementById('herbalgel-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+
+        function openHerbalRollOnModal() {
+            document.getElementById('herbalrollon-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!rollOnChartInstance) {
+                const ctx = document.getElementById('rollonPerformanceChart').getContext('2d');
+                rollOnChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '5 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที'],
+                        datasets: [
+                            {
+                                label: 'ระดับความผ่อนคลายหลังใช้ RAPTOR ROLL-ON (%)',
+                                data: [10, 55, 82, 90, 86, 78],
+                                borderColor: '#d8c46a',
+                                backgroundColor: 'rgba(216, 196, 106, 0.12)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'พักตามปกติ',
+                                data: [10, 15, 25, 35, 45, 55],
+                                borderColor: '#94a3b8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: '#d7e6d9', font: { size: 10 } } } },
+                        scales: {
+                            y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#d7e6d9', callback: value => value + '%' } },
+                            x: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#d7e6d9' } }
+                        }
+                    }
+                });
+            }
+        }
+
+        function closeHerbalRollOnModal() {
+            document.getElementById('herbalrollon-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openCoolPatchModal() {
+            document.getElementById('coolpatch-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            if (!modalCoolPatchChartInstance) {
+                const ctx = document.getElementById('modalCoolPatchChart').getContext('2d');
+                modalCoolPatchChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที', '240 นาที'],
+                        datasets: [
+                            {
+                                label: 'ระดับความผ่อนคลายสบายตัว (%)',
+                                data: [10, 70, 95, 95, 90, 85],
+                                borderColor: '#2563eb',
+                                backgroundColor: 'rgba(37, 99, 235, 0.08)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'ไม่ได้รับการดูแล / ปล่อยให้หายเอง',
+                                data: [10, 15, 20, 25, 30, 40],
+                                borderColor: '#94a3b8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
+                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
+                    }
+                });
+            }
+        }
+
+        function closeCoolPatchModal() {
+            document.getElementById('coolpatch-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openDualActionModal() {
+            document.getElementById('dualaction-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            if (!modalDualActionChartInstance) {
+                const ctx = document.getElementById('modalDualActionChart').getContext('2d');
+                modalDualActionChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '10 นาที', '20 นาที', '40 นาที', '60 นาที', '120 นาที'],
+                        datasets: [
+                            {
+                                label: 'ใช้สูตรร้อน (ก่อน) + สูตรเย็น (หลัง)',
+                                data: [15, 75, 98, 95, 92, 85],
+                                borderColor: '#FF6B00',
+                                backgroundColor: 'rgba(255, 107, 0, 0.08)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'พักผ่อนกล้ามเนื้อตามปกติ',
+                                data: [15, 25, 35, 45, 55, 60],
+                                borderColor: '#94a3b8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: true, position: 'top' } },
+                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
+                    }
+                });
+            }
+        }
+
+        function closeDualActionModal() {
+            document.getElementById('dualaction-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openProductModal() {
+            document.getElementById('product-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!myChartInstance) {
+                const ctx = document.getElementById('efficiencyChart').getContext('2d');
+                myChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '5 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที'],
+                        datasets: [{
+                            label: 'ระดับการคลายกล้ามเนื้อ (%)',
+                            data: [10, 65, 95, 90, 85, 60],
+                            borderColor: '#FF6B00',
+                            backgroundColor: 'rgba(255, 107, 0, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                });
+            }
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openCoolingModal() {
+            document.getElementById('cooling-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!coolingChartInstance) {
+                const ctx = document.getElementById('coolingPerformanceChart').getContext('2d');
+                coolingChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['นาทีที่ 0', 'นาทีที่ 5', 'นาทีที่ 15', 'นาทีที่ 30', 'นาทีที่ 45', 'นาทีที่ 60'],
+                        datasets: [{
+                            label: 'ระดับความเย็นสะสม (%)',
+                            data: [100, 95, 90, 85, 70, 50],
+                            borderColor: '#2563eb',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } }
+                    }
+                });
+            }
+        }
+
+        function closeCoolingModal() {
+            document.getElementById('cooling-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openFootSprayModal() {
+            document.getElementById('footspray-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!footSprayChartInstance) {
+                const ctx = document.getElementById('footSprayChart').getContext('2d');
+                footSprayChartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['การระงับกลิ่นอับ', 'ความแห้งสบายฝ่าเท้า', 'ความสบายเท้าผ่อนคลาย'],
+                        datasets: [
+                            { label: 'ก่อนใช้สเปรย์', data: [25, 30, 15], backgroundColor: 'rgba(241, 94, 34, 0.4)', borderColor: '#f15e22', borderWidth: 1.5 },
+                            { label: 'หลังใช้ RAPTOR FOOT SPRAY', data: [98, 92, 95], backgroundColor: 'rgba(16, 185, 129, 0.7)', borderColor: '#10b981', borderWidth: 1.5 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { label: { color: '#cbd5e1', font: { size: 10 } } } },
+                        scales: { y: { beginAtZero: true, max: 100, ticks: { color: '#cbd5e1', callback: value => value + '%' } } }
+                    }
+                });
+            }
+        }
+
+        function closeFootSprayModal() {
+            document.getElementById('footspray-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openEnergyGelModal() {
+            document.getElementById('energygel-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (!energyGelChartInstance) {
+                const ctx = document.getElementById('energyPerformanceChart').getContext('2d');
+                energyGelChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0 นาที', '15 นาที', '30 นาที', '60 นาที', '90 นาที', '120 นาที'],
+                        datasets: [
+                            {
+                                label: 'เมื่อทาน RAPTOR GO',
+                                data: [40, 95, 90, 85, 88, 80],
+                                borderColor: '#FF6B00',
+                                backgroundColor: 'rgba(255, 107, 0, 0.1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'ไม่ได้ทานเจลพลังงาน',
+                                data: [40, 50, 45, 30, 20, 10],
+                                borderColor: '#94a3b8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: true, labels: { font: { size: 10 } } } },
+                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
+                    }
+                });
+            }
+        }
+
+        function closeEnergyGelModal() {
+            document.getElementById('energygel-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function startCountdown() {
+            let duration = 2 * 60 * 60; 
+            let flashSaleDuration = 15 * 60;
+            setInterval(function () {
+                let hours = parseInt(duration / 3600, 10).toString().padStart(2, "0");
+                let minutes = parseInt((duration % 3600) / 60, 10).toString().padStart(2, "0");
+                let seconds = parseInt(duration % 60, 10).toString().padStart(2, "0");
+
+                const hEl = document.getElementById("modal-hours");
+                const mEl = document.getElementById("modal-minutes");
+                const sEl = document.getElementById("modal-seconds");
+                if(hEl) hEl.textContent = hours;
+                if(mEl) mEl.textContent = minutes;
+                if(sEl) sEl.textContent = seconds;
+
+                const dhEl = document.getElementById("dual-hours");
+                const dmEl = document.getElementById("dual-minutes");
+                const dsEl = document.getElementById("dual-seconds");
+                if(dhEl) dhEl.textContent = hours;
+                if(dmEl) dmEl.textContent = minutes;
+                if(dsEl) dsEl.textContent = seconds;
+
+                const phEl = document.getElementById("patch-hours");
+                const pmEl = document.getElementById("patch-minutes");
+                const psEl = document.getElementById("patch-seconds");
+                if(phEl) phEl.textContent = hours;
+                if(pmEl) pmEl.textContent = minutes;
+                if(psEl) psEl.textContent = seconds;
+
+                const ohEl = document.getElementById("oil-hours");
+                const omEl = document.getElementById("oil-minutes");
+                const osEl = document.getElementById("oil-seconds");
+                if(ohEl) ohEl.textContent = hours;
+                if(omEl) omEl.textContent = minutes;
+                if(osEl) osEl.textContent = seconds;
+
+                const whEl = document.getElementById("water-hours");
+                const wmEl = document.getElementById("water-minutes");
+                const wsEl = document.getElementById("water-seconds");
+                if(whEl) whEl.textContent = hours;
+                if(wmEl) wmEl.textContent = minutes;
+                if(wsEl) wsEl.textContent = seconds;
+
+                if (--duration < 0) duration = 2 * 60 * 60; 
+
+                const cMin = Math.floor(flashSaleDuration / 60).toString().padStart(2, "0");
+                const cSec = (flashSaleDuration % 60).toString().padStart(2, "0");
+                
+                const fEl1 = document.getElementById("foot-countdown-1");
+                const fEl2 = document.getElementById("foot-countdown-2");
+                const coolEl1 = document.getElementById("cooling-countdown-1");
+                const energyEl1 = document.getElementById("energy-countdown-1");
+                const herbalEl1 = document.getElementById("herbal-countdown");
+                const rollonEl1 = document.getElementById("rollon-countdown");
+                
+                if (fEl1) fEl1.textContent = `${cMin}:${cSec}`;
+                if (fEl2) fEl2.textContent = `${cMin}:${cSec}`;
+                if (coolEl1) coolEl1.textContent = `${cMin}:${cSec}`;
+                if (energyEl1) energyEl1.textContent = `${cMin}:${cSec}`;
+                if (herbalEl1) herbalEl1.textContent = `${cMin}:${cSec}`;
+                if (rollonEl1) rollonEl1.textContent = `${cMin}:${cSec}`;
+                
+                flashSaleDuration = flashSaleDuration <= 0 ? 15 * 60 : flashSaleDuration - 1;
+            }, 1000);
+        }
+        window.onload = startCountdown;
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+    </script>
+
+
+    <script>
+        // Meta Pixel helper and sales funnel tracking
+        function trackRaptorPixel(eventName, params, isCustomEvent) {
+            try {
+                if (typeof fbq === 'function') {
+                    const payload = params || {};
+                    const prefixedEventName = `RAPTOR SPORT1 ${eventName}`;
+
+                    if (isCustomEvent) {
+                        fbq('trackCustom', prefixedEventName, payload);
+                    } else {
+                        fbq('track', eventName, payload);
+                        fbq('trackCustom', prefixedEventName, payload);
+                    }
+                }
+            } catch (error) {
+                console.warn('Meta Pixel tracking skipped:', error);
+            }
+        }
+
+        function getNumericPrice(priceText) {
+            if (!priceText) return 0;
+            const numberText = String(priceText).replace(/[^\d.]/g, '');
+            return Number(numberText || 0);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const productTrackingMap = {
+                openProductModal: { name: 'RAPTOR SPORT WARMING SPRAY', price: '฿179' },
+                openCoolingModal: { name: 'RAPTOR SPORTS ICE COLD SPRAY', price: '฿179' },
+                openEnergyGelModal: { name: 'RAPTOR GO ENERGY GEL', price: '฿179' },
+                openDualActionModal: { name: 'RAPTOR DUAL ACTION PACK', price: '฿329' },
+                openTherapyOilModal: { name: 'RAPTOR SPORT & THERAPY OIL', price: '฿179' },
+                openWaterChargeModal: { name: 'RAPTOR SPEED WATER CHARGE', price: '฿490' },
+                openHerbalGelModal: { name: 'RAPTOR HERBAL COOLING GEL', price: '฿290' },
+                openFootSprayModal: { name: 'RAPTOR SPORT FOOT SPRAY', price: '฿179' },
+                openHerbalRollOnModal: { name: 'RAPTOR HERBAL ROLL-ON', price: '฿179' },
+                openCoolPatchModal: { name: 'RAPTOR COOL PATCH', price: '฿179' }
+            };
+
+            document.querySelectorAll('[onclick]').forEach(function (element) {
+                const onclickValue = element.getAttribute('onclick') || '';
+                const match = onclickValue.match(/(open[A-Za-z0-9_]+Modal)\s*\(/);
+                if (!match || !productTrackingMap[match[1]]) return;
+
+                element.addEventListener('click', function () {
+                    const item = productTrackingMap[match[1]];
+                    const params = {
                         content_name: item.name,
                         content_category: 'Raptor Sport Product',
                         content_type: 'product',
-                        value: window.getNumericPrice(item.price),
+                        value: getNumericPrice(item.price),
                         currency: 'THB'
                     };
-                    window.trackRaptorPixel('ViewContent', params);
-                    window.trackRaptorPixel('RaptorProductView', params, true);
-                }
-            }
+                    document.body.style.overflow = 'hidden'; 
+                    trackRaptorPixel('ViewContent', params);
+                    trackRaptorPixel('RaptorProductView', params, true);
+                });
+            });
 
-            // 2. InitiateCheckout Anchor Tracking System
-            var targetCheckoutLink = event.target.closest('a[href*="order-form"], a[href*="#order"], a[href*="#modal-order-form"]');
-            if (targetCheckoutLink) {
-                var modal = targetCheckoutLink.closest('[id$="-modal"], #product-modal');
-                var productTitle = modal ? (modal.querySelector('h1, h2, h3')?.textContent || 'Raptor Sport Product') : 'Raptor Sport Product';
-                var checkoutParams = {
-                    content_name: productTitle.trim(),
-                    content_category: 'Raptor Sport Checkout',
-                    currency: 'THB'
-                };
-                window.trackRaptorPixel('InitiateCheckout', checkoutParams);
-                window.trackRaptorPixel('RaptorInitiateCheckout', checkoutParams, true);
-            }
-        });
+            document.querySelectorAll('a[href*="order-form"], a[href*="#order"], a[href*="#modal-order-form"]').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    const modal = link.closest('[id$="-modal"], #product-modal');
+                    const productTitle = modal ? (modal.querySelector('h1, h2, h3')?.textContent || 'Raptor Sport Product') : 'Raptor Sport Product';
+                    const params = {
+                        content_name: productTitle.trim(),
+                        content_category: 'Raptor Sport Checkout',
+                        currency: 'THB'
+                    };
+                    trackRaptorPixel('InitiateCheckout', params);
+                    trackRaptorPixel('RaptorInitiateCheckout', params, true);
+                });
+            });
 
-        // Scroll Tracking Sections
-        document.addEventListener('DOMContentLoaded', function () {
-            var reviewTracked = false;
-            var contactTracked = false;
+            // 👁️ [NEW DETAILED PIXEL TRACKING] - Tracking Sections on Scroll
+            let reviewTracked = false;
+            let contactTracked = false;
             window.addEventListener('scroll', function() {
-                var reviewsSection = document.getElementById('reviews');
-                var contactSection = document.getElementById('contact');
+                const reviewsSection = document.getElementById('reviews');
+                const contactSection = document.getElementById('contact');
                 
                 if (reviewsSection && !reviewTracked) {
-                    var rect = reviewsSection.getBoundingClientRect();
+                    const rect = reviewsSection.getBoundingClientRect();
                     if (rect.top <= window.innerHeight && rect.bottom >= 0) {
                         reviewTracked = true;
-                        window.trackRaptorPixel('RaptorReviewsSectionView', { page_section: 'Athlete Reviews' }, true);
+                        trackRaptorPixel('RaptorReviewsSectionView', { page_section: 'Athlete Reviews' }, true);
                     }
                 }
                 
                 if (contactSection && !contactTracked) {
-                    var rect = contactSection.getBoundingClientRect();
+                    const rect = contactSection.getBoundingClientRect();
                     if (rect.top <= window.innerHeight && rect.bottom >= 0) {
                         contactTracked = true;
-                        window.trackRaptorPixel('RaptorContactSectionView', { page_section: 'Contact Form & Address' }, true);
+                        trackRaptorPixel('RaptorContactSectionView', { page_section: 'Contact Form & Address' }, true);
                     }
                 }
             });
@@ -1852,95 +2398,97 @@
     </script>
 
     <script>
-        // Formspree submission loop integration with embedded pixel dispatchers
+        // Formspree integration for all Raptor order/contact forms
         document.addEventListener('DOMContentLoaded', function () {
-            // Intercept form submissions via capture routing to handle dynamic element environments
-            document.body.addEventListener('submit', async function (event) {
-                var form = event.target.closest('.raptor-order-form, .raptor-contact-form');
-                if (!form) return;
+            const forms = document.querySelectorAll('.raptor-order-form, .raptor-contact-form');
 
-                event.preventDefault();
+            forms.forEach(function (form) {
+                form.addEventListener('submit', async function (event) {
+                    event.preventDefault();
 
-                var submitButton = form.querySelector('button[type="submit"], button:not([type])');
-                var originalButtonText = submitButton ? submitButton.innerHTML : '';
-                var statusBox = form.querySelector('[data-form-status]');
+                    const submitButton = form.querySelector('button[type="submit"], button:not([type])');
+                    const originalButtonText = submitButton ? submitButton.innerHTML : '';
+                    let statusBox = form.querySelector('[data-form-status]');
 
-                if (!statusBox) {
-                    statusBox = document.createElement('div');
-                    statusBox.setAttribute('data-form-status', '');
-                    statusBox.className = 'mt-3 text-center text-sm font-bold rounded-xl px-4 py-3 hidden';
-                    form.appendChild(statusBox);
-                }
+                    if (!statusBox) {
+                        statusBox = document.createElement('div');
+                        statusBox.setAttribute('data-form-status', '');
+                        statusBox.className = 'mt-3 text-center text-sm font-bold rounded-xl px-4 py-3 hidden';
+                        form.appendChild(statusBox);
+                    }
 
-                if (submitButton) {
-                    submitButton.disabled = true;
-                    submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังส่งข้อมูล...';
-                }
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังส่งข้อมูล...';
+                    }
 
-                statusBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700');
-                statusBox.classList.add('bg-orange-50', 'text-orange-700');
-                statusBox.textContent = 'กำลังส่งคำสั่งซื้อไปยังระบบ...';
+                    statusBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700');
+                    statusBox.classList.add('bg-orange-50', 'text-orange-700');
+                    statusBox.textContent = 'กำลังส่งคำสั่งซื้อไปยังระบบ...';
 
-                var productName = form.dataset.product || form.querySelector('input[name="product"]')?.value || 'Raptor Sport Product';
-                var productPrice = form.dataset.price || form.querySelector('input[name="price"]')?.value || '';
-                var pixelParams = {
-                    content_name: productName,
-                    content_category: 'Raptor Sport Order',
-                    content_type: 'product',
-                    value: window.getNumericPrice(productPrice),
-                    currency: 'THB'
+                    const productName = form.dataset.product || form.querySelector('input[name="product"]')?.value || 'Raptor Sport Product';
+                    const productPrice = form.dataset.price || form.querySelector('input[name="price"]')?.value || '';
+                    const pixelParams = {
+                        content_name: productName,
+                        content_category: 'Raptor Sport Order',
+                        content_type: 'product',
+                        value: getNumericPrice(productPrice),
+                        currency: 'THB'
                     };
 
-                window.trackRaptorPixel('InitiateCheckout', pixelParams);
-                window.trackRaptorPixel('RaptorFormSubmitStarted', pixelParams, true);
+                    // Fire standard checkout and custom submit started pixels
+                    trackRaptorPixel('InitiateCheckout', pixelParams);
+                    trackRaptorPixel('RaptorFormSubmitStarted', pixelParams, true);
 
-                try {
-                    var response = await fetch(form.action, {
-                        method: 'POST',
-                        body: new FormData(form),
-                        headers: { 'Accept': 'application/json' }
-                    });
+                    try {
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: new FormData(form),
+                            headers: { 'Accept': 'application/json' }
+                        });
 
-                    if (response.ok) {
-                        statusBox.classList.remove('bg-orange-50', 'text-orange-700', 'bg-red-50', 'text-red-700');
-                        statusBox.classList.add('bg-green-50', 'text-green-700');
-                        statusBox.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด';
+                        if (response.ok) {
+                            statusBox.classList.remove('bg-orange-50', 'text-orange-700', 'bg-red-50', 'text-red-700');
+                            statusBox.classList.add('bg-green-50', 'text-green-700');
+                            statusBox.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด';
 
-                        window.trackRaptorPixel('Lead', pixelParams);
-                        window.trackRaptorPixel('Purchase', pixelParams);
-                        window.trackRaptorPixel('RaptorOrderSubmitted', pixelParams, true);
+                            // Complete standard conversion and custom submit success pixels
+                            trackRaptorPixel('Lead', pixelParams);
+                            trackRaptorPixel('Purchase', pixelParams);
+                            trackRaptorPixel('RaptorOrderSubmitted', pixelParams, true);
 
-                        form.reset();
+                            form.reset();
 
-                        var closeModalName = form.dataset.closeModal;
-                        if (closeModalName && typeof window[closeModalName] === 'function') {
-                            setTimeout(function () {
-                                window[closeModalName]();
-                                document.body.style.overflow = 'auto'; 
-                            }, 1200);
-                        } else {
-                            document.body.style.overflow = 'auto';
-                        }
-                    } else {
-                        var errorMessage = 'ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองใหม่อีกครั้ง';
-                        try {
-                            var data = await response.json();
-                            if (data && data.errors && data.errors.length) {
-                                errorMessage = data.errors.map(function(error) { return error.message; }).join(', ');
+                            const closeModalName = form.dataset.closeModal;
+                            if (closeModalName && typeof window[closeModalName] === 'function') {
+                                setTimeout(function () {
+                                    window[closeModalName]();
+                                    document.body.style.overflow = 'auto'; 
+                                }, 1200);
+                            } else {
+                                document.body.style.overflow = 'auto';
                             }
-                        } catch (jsonError) {}
-                        throw new Error(errorMessage);
+                        } else {
+                            let errorMessage = 'ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองใหม่อีกครั้ง';
+                            try {
+                                const data = await response.json();
+                                if (data && data.errors && data.errors.length) {
+                                    errorMessage = data.errors.map(error => error.message).join(', ');
+                                }
+                            } catch (jsonError) {}
+                            throw new Error(errorMessage);
+                        }
+                    } catch (error) {
+                        statusBox.classList.remove('bg-orange-50', 'text-orange-700', 'bg-green-50', 'text-green-700');
+                        statusBox.classList.add('bg-red-50', 'text-red-700');
+                        statusBox.textContent = error.message || 'เกิดข้อผิดพลาดในการส่งข้อมูล';
+                    } finally {
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                            submitButton.innerHTML = originalButtonText;
+                        }
                     }
-                } catch (error) {
-                    statusBox.classList.remove('bg-orange-50', 'text-orange-700', 'bg-green-50', 'text-green-700');
-                    statusBox.classList.add('bg-red-50', 'text-red-700');
-                    statusBox.textContent = error.message || 'เกิดข้อผิดพลาดในการส่งข้อมูล';
-                } finally {
-                    if (submitButton) {
-                        submitButton.disabled = false;
-                        submitButton.innerHTML = originalButtonText;
-                    }
-                }
+                });
             });
         });
     </script>
