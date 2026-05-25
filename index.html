@@ -92,8 +92,17 @@
 
     fbq('init', '462184846324554');
     fbq('track', 'PageView');
-    fbq('trackCustom', 'RAPTOR SPORT1');
-    fbq('trackCustom', 'RAPTOR_SPORT1');
+    fbq('trackCustom', 'RAPTOR_SPORT_LANDING_VIEW');
+
+    window.trackPixelEvent = function(method, eventName, params) {
+        if (typeof window.fbq !== 'function') return;
+        const safeParams = params || {};
+        if (method === 'trackCustom') {
+            window.fbq('trackCustom', eventName, safeParams);
+            return;
+        }
+        window.fbq('track', eventName, safeParams);
+    };
     </script>
     <!-- End Meta Pixel Code -->
 
@@ -2277,6 +2286,7 @@
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
     </script>
 
 
