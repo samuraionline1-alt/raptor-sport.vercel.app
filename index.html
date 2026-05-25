@@ -2300,20 +2300,23 @@
     <script>
         // Meta Pixel helper and sales funnel tracking
         function trackRaptorPixel(eventName, params, isCustomEvent) {
-            try {
-                if (typeof fbq === 'function') {
-                    const payload = params || {};
-                    const prefixedEventName = `RAPTOR SPORT1 ${eventName}`;
+            const payload = params || {};
 
-                    if (isCustomEvent) {
-                        fbq('trackCustom', prefixedEventName, payload);
-                    } else {
-                        fbq('track', eventName, payload);
-                        fbq('trackCustom', prefixedEventName, payload);
-                    }
+            // Prefer the bootstrap helper so events are queued safely even if Pixel script is still loading.
+            if (typeof window.trackPixelEvent === 'function') {
+                window.trackPixelEvent(isCustomEvent ? 'trackCustom' : 'track', eventName, payload);
+                return;
+            }
+
+            // Fallback: direct fbq call
+            if (typeof window.fbq === 'function') {
+                const prefixedEventName = `RAPTOR SPORT1 ${eventName}`;
+                if (isCustomEvent) {
+                    window.fbq('trackCustom', prefixedEventName, payload);
+                } else {
+                    window.fbq('track', eventName, payload);
+                    window.fbq('trackCustom', prefixedEventName, payload);
                 }
-            } catch (error) {
-                console.warn('Meta Pixel tracking skipped:', error);
             }
         }
 
