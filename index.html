@@ -91,9 +91,15 @@
     (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
     fbq('init', '462184846324554');
-    fbq('track', 'PageView');
-    fbq('trackCustom', 'RAPTOR SPORT1');
-    fbq('trackCustom', 'RAPTOR_SPORT1');
+    
+    // ตั้งหน่วงเวลาเล็กน้อยเพื่อให้เบราว์เซอร์จัดโครงสร้างหน้าเว็บเสร็จก่อน แล้วค่อยสั่งยิงสถิติ
+    window.addEventListener('load', function() {
+        if (typeof fbq === 'function') {
+            fbq('track', 'PageView');
+            fbq('trackCustom', 'RAPTOR SPORT1');
+            fbq('trackCustom', 'RAPTOR_SPORT1');
+        }
+    });
     </script>
     <!-- End Meta Pixel Code -->
 
