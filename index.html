@@ -94,7 +94,7 @@
 
         n('init', pixelId);
         n('track', 'PageView');
-        n('trackCustom', 'RAPTOR_SPORT_LANDING_VIEW', {
+        n('trackCustom', 'RAPTOR SPORT1 RAPTOR_SPORT_LANDING_VIEW', {
             page_path: w.location.pathname,
             page_title: d.title
         });
@@ -102,11 +102,15 @@
         w.trackPixelEvent = function(method, eventName, params) {
             if (typeof w.fbq !== 'function') return;
             var safeParams = params || {};
+            var prefixedEventName = 'RAPTOR SPORT1 ' + eventName;
+
             if (method === 'trackCustom') {
-                w.fbq('trackCustom', eventName, safeParams);
+                w.fbq('trackCustom', prefixedEventName, safeParams);
                 return;
             }
+
             w.fbq('track', eventName, safeParams);
+            w.fbq('trackCustom', prefixedEventName, safeParams);
         };
 
         // Fallback beacon: helps verify PageView even when fbq JS is delayed.
@@ -2307,10 +2311,14 @@
         function trackRaptorPixel(eventName, params, isCustomEvent) {
             try {
                 if (typeof fbq === 'function') {
+                    const payload = params || {};
+                    const prefixedEventName = `RAPTOR SPORT1 ${eventName}`;
+
                     if (isCustomEvent) {
-                        fbq('trackCustom', eventName, params || {});
+                        fbq('trackCustom', prefixedEventName, payload);
                     } else {
-                        fbq('track', eventName, params || {});
+                        fbq('track', eventName, payload);
+                        fbq('trackCustom', prefixedEventName, payload);
                     }
                 }
             } catch (error) {
