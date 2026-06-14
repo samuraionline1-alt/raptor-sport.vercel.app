@@ -113,7 +113,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
             <div class="hidden md:flex flex-shrink-0 items-center justify-center w-auto md:w-[20%]">
                 <a href="#home" class="flex items-center transform hover:scale-105 transition-transform duration-200">
                     <div class="logo-premium-shell flex justify-center items-center size-14">
-                        <video src="วิดีโอ 1.mp4" autoplay muted playsinline class="logo-premium-video"></video> 
+                        <video src="วิดีโอ 1.mp4" autoplay muted playsinline preload="auto" class="logo-premium-video"></video> 
                     </div>
                     <span class="hidden font-black text-2xl tracking-wider text-white">RAPTOR</span>
                 </a>
@@ -132,7 +132,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
                 <div class="flex items-center">
                     <a href="#home" class="flex items-center transform hover:scale-105 transition-transform duration-200">
                         <div class="logo-premium-shell flex justify-center items-center size-12">
-                            <video src="วิดีโอ 1.mp4" autoplay muted playsinline class="logo-premium-video"></video> 
+                            <video src="วิดีโอ 1.mp4" autoplay muted playsinline preload="auto" class="logo-premium-video"></video> 
                         </div>
                         <span class="hidden font-black text-xl tracking-wider text-zinc-900">RAPTOR</span>
                     </a>
@@ -2490,6 +2490,13 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+        document.querySelectorAll('.logo-premium-video').forEach((video) => {
+            video.addEventListener('ended', () => {
+                video.pause();
+                video.currentTime = 0;
+            });
+        });
 
     </script>
 
