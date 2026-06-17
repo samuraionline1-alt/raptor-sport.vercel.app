@@ -352,7 +352,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
             <div class="absolute bottom-7 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 backdrop-blur-md">
                 <button type="button" class="home-dot size-2.5 rounded-full bg-orange-400 transition-all" aria-label="หน้าโฮมหลัก" data-home-slide="0"></button>
                 <button type="button" class="home-dot size-2.5 rounded-full bg-white/35 transition-all" aria-label="หน้า Spline 3D" data-home-slide="1"></button>
-                <span class="ml-2 text-[11px] font-semibold uppercase tracking-widest text-white/70"><i class="fa-solid fa-left-right mr-1"></i> swipe</span>
+                <span class="ml-2 text-[11px] font-semibold uppercase tracking-widest text-white/70"><i class="fa-solid fa-hand-pointer mr-1"></i> tap / swipe</span>
             </div>
         </div>
     </section>
@@ -2809,7 +2809,9 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
             let startX = 0;
             let currentX = 0;
             let isDragging = false;
+            let lastGestureWasSwipe = false;
             const maxSlide = dots.length - 1;
+            const interactiveSelector = 'a, button, input, textarea, select, label, spline-viewer';
 
             function goToHomeSlide(index) {
                 currentSlide = Math.max(0, Math.min(maxSlide, index));
@@ -2836,10 +2838,23 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
             function onSwipeEnd() {
                 if (!isDragging) return;
                 const deltaX = currentX - startX;
-                if (Math.abs(deltaX) > 70) {
+                lastGestureWasSwipe = Math.abs(deltaX) > 70;
+                if (lastGestureWasSwipe) {
                     goToHomeSlide(currentSlide + (deltaX < 0 ? 1 : -1));
                 }
                 isDragging = false;
+            }
+
+            function shouldIgnoreTap(event) {
+                return event.target.closest(interactiveSelector) || window.getSelection().toString();
+            }
+
+            function goToSplineOnTap(event) {
+                if (currentSlide !== 0 || lastGestureWasSwipe || shouldIgnoreTap(event)) {
+                    lastGestureWasSwipe = false;
+                    return;
+                }
+                goToHomeSlide(1);
             }
 
             shell.addEventListener('touchstart', function (event) {
@@ -2861,6 +2876,8 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
             });
 
             window.addEventListener('mouseup', onSwipeEnd);
+
+            shell.addEventListener('click', goToSplineOnTap);
 
             dots.forEach(function (dot) {
                 dot.addEventListener('click', function () {
