@@ -111,6 +111,32 @@
             100% { transform: rotate(360deg) translateX(10px) rotate(-360deg); }
         }
 
+        @keyframes sportsEmojiDrift {
+            0% { transform: translate3d(-12vw, 18px, 0) rotate(-8deg) scale(.86); opacity: 0; }
+            12% { opacity: 1; }
+            50% { transform: translate3d(46vw, -28px, 0) rotate(8deg) scale(1.08); }
+            88% { opacity: 1; }
+            100% { transform: translate3d(108vw, 8px, 0) rotate(-4deg) scale(.96); opacity: 0; }
+        }
+
+        @keyframes sportsEmojiPulse {
+            0%, 100% { filter: drop-shadow(0 10px 24px rgba(255,107,0,.28)); }
+            50% { filter: drop-shadow(0 16px 34px rgba(251,191,36,.55)); }
+        }
+
+        .sports-emoji {
+            position: absolute;
+            left: 0;
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            animation: sportsEmojiDrift 8.5s linear infinite, sportsEmojiPulse 2.4s ease-in-out infinite;
+            will-change: transform, opacity, filter;
+        }
+
+        .sports-emoji:nth-child(2) { animation-delay: -1.6s, -.5s; top: 34%; }
+        .sports-emoji:nth-child(3) { animation-delay: -3.2s, -1s; top: 58%; }
+        .sports-emoji:nth-child(4) { animation-delay: -4.8s, -1.5s; top: 18%; }
+        .sports-emoji:nth-child(5) { animation-delay: -6.4s, -2s; top: 48%; }
+
         .athlete-card {
             animation: athleteFloat 5.5s ease-in-out infinite;
             box-shadow: 0 24px 80px rgba(255, 107, 0, .18), inset 0 1px 0 rgba(255,255,255,.12);
@@ -332,24 +358,38 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
 
                 <div id="spline-home" class="home-slide relative min-h-screen bg-[#050505] overflow-hidden">
                     <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,107,0,.22),transparent_30%),radial-gradient(circle_at_80%_24%,rgba(59,130,246,.22),transparent_32%),linear-gradient(135deg,#050505_0%,#111827_48%,#000_100%)]"></div>
-                    <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-zinc-950/55 via-transparent to-zinc-950/75"></div>
-                    <div class="absolute left-1/2 top-28 z-20 w-[min(92vw,760px)] -translate-x-1/2 text-center pointer-events-none">
+                    <spline-viewer class="absolute inset-x-0 top-0 z-10 block h-[72vh] w-full" url="https://prod.spline.design/d7z7M6rZgz33ewFs/scene.splinecode"></spline-viewer>
+                    <div class="absolute inset-x-0 top-0 z-20 h-[72vh] pointer-events-none bg-gradient-to-b from-zinc-950/20 via-transparent to-[#050505]"></div>
+
+                    <div class="absolute left-1/2 top-24 z-30 w-[min(92vw,720px)] -translate-x-1/2 text-center pointer-events-none">
                         <span class="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-black/45 px-4 py-2 text-xs font-bold uppercase tracking-[.3em] text-orange-200 backdrop-blur-md">
                             <i class="fa-solid fa-cube text-orange-400"></i>
                             Interactive 3D Raptor
                         </span>
-                        <h2 class="mt-5 text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-2xl">
-                            สัมผัสประสบการณ์ <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-200 to-white">3D</span>
-                        </h2>
-                        <p class="mt-3 text-sm sm:text-base text-zinc-200 drop-shadow-xl">
-                            ปัดมาหน้านี้เพื่อชมซีน Spline แบบเต็มหน้าจอ แล้วลากเพื่อหมุนหรือสำรวจรายละเอียดได้ทันที
-                        </p>
                     </div>
-                    <spline-viewer class="relative z-10 block h-screen w-full" url="https://prod.spline.design/d7z7M6rZgz33ewFs/scene.splinecode"></spline-viewer>
+
+                    <div class="absolute inset-x-0 bottom-0 z-30 min-h-[34vh] overflow-hidden border-t border-orange-400/20 bg-gradient-to-t from-black via-zinc-950/95 to-zinc-950/40 px-6 pb-16 pt-8 pointer-events-none">
+                        <div class="mx-auto max-w-5xl text-center">
+                            <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-2xl">
+                                สัมผัสประสบการณ์ <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-200 to-white">3D</span>
+                            </h2>
+                            <p class="mt-3 text-sm sm:text-base text-zinc-200 drop-shadow-xl">
+                                แตะครั้งเดียวเพื่อเข้าหน้า 3D ด้านบน แล้วสนุกต่อกับพลังนักกีฬาเคลื่อนไหวด้านล่าง
+                            </p>
+                        </div>
+
+                        <div class="relative mx-auto mt-6 h-28 max-w-6xl rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-sm">
+                            <span class="sports-emoji top-[12%]">🏃‍♂️</span>
+                            <span class="sports-emoji">⚽</span>
+                            <span class="sports-emoji">🚴‍♂️</span>
+                            <span class="sports-emoji">🏋️‍♂️</span>
+                            <span class="sports-emoji">🔥</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="absolute bottom-7 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 backdrop-blur-md">
+            <div class="absolute bottom-7 left-1/2 z-40 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 backdrop-blur-md">
                 <button type="button" class="home-dot size-2.5 rounded-full bg-orange-400 transition-all" aria-label="หน้าโฮมหลัก" data-home-slide="0"></button>
                 <button type="button" class="home-dot size-2.5 rounded-full bg-white/35 transition-all" aria-label="หน้า Spline 3D" data-home-slide="1"></button>
                 <span class="ml-2 text-[11px] font-semibold uppercase tracking-widest text-white/70"><i class="fa-solid fa-hand-pointer mr-1"></i> tap / swipe</span>
@@ -2854,6 +2894,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
                     lastGestureWasSwipe = false;
                     return;
                 }
+                document.getElementById('home').scrollIntoView({ block: 'start' });
                 goToHomeSlide(1);
             }
 
