@@ -1441,7 +1441,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
                             <p class="text-[11px] text-gray-500 mt-1">เนื้อเจลไฮโดรเจนกักเก็บความเย็นได้ยาวนาน ค่อยๆ ปล่อยความเย็นซึมลึกเข้าสู่ชั้นกล้ามเนื้อเพื่อลดการอักเสบ</p>
                         </div>
                         <div class="p-4 bg-blue-50/40 rounded-xl text-center border border-blue-100">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto text-blue-600 text-lg font-bold mb-2"><i class="fa-solid fa-child-muscle"></i></div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto text-blue-600 text-2xl font-bold mb-2" aria-hidden="true">💪</div>
                             <h4 class="font-bold text-sm text-gray-808">Muscle Relaxation</h4>
                             <p class="text-[11px] text-gray-500 mt-1">ช่วยลดอาการหดเกร็งตึงแน่นของใยกล้ามเนื้อสะสมหลังจากการฝึกซ้อมอย่างหนักได้อย่างตรงจุด</p>
                         </div>
@@ -1901,8 +1901,17 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
 
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
                 <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4">
-                        <img src="Shampoo RAPTOR3.png" alt="RAPTOR ICE DEFENSE SPORT SHAMPOO" class="max-h-[380px] object-contain rounded-lg">
+                    <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4 gap-4">
+                        <div class="w-full rounded-lg overflow-hidden shadow-md border border-blue-200 bg-black">
+                            <video
+                                class="w-full aspect-video object-cover"
+                                controls
+                                preload="metadata"
+                                poster="Shampoo RAPTOR3.png">
+                                <source src="RAPTOR SHAMPOO2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <img src="Shampoo RAPTOR3.png" alt="RAPTOR ICE DEFENSE SPORT SHAMPOO" class="max-h-[180px] object-contain rounded-lg">
                     </div>
                     <div class="flex flex-col justify-between space-y-4">
                         <div>
@@ -2646,13 +2655,15 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
             try {
                 if (typeof fbq === 'function') {
                     const payload = params || {};
-                    const prefixedEventName = `RAPTOR SPORT1 ${eventName}`;
+                    const productEventName = payload.content_name
+                        ? `${eventName}_${String(payload.content_name).replace(/[^A-Za-z0-9_]+/g, '_').replace(/^_+|_+$/g, '')}`
+                        : eventName;
 
                     if (isCustomEvent) {
-                        fbq('trackCustom', prefixedEventName, payload);
+                        fbq('trackCustom', productEventName, payload);
                     } else {
                         fbq('track', eventName, payload);
-                        fbq('trackCustom', prefixedEventName, payload);
+                        fbq('trackCustom', productEventName, payload);
                     }
                 }
             } catch (error) {
