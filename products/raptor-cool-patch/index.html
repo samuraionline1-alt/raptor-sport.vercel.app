@@ -34,14 +34,18 @@
         }
         .animate-fire { display: inline-block; animation: fireMovement 1.4s ease-in-out infinite; }
         .product-detail-content > div { margin-left: auto; margin-right: auto; }
+        .product-detail-content section:first-of-type { align-items: center; }
+        .product-detail-content section:first-of-type > div { min-width: 0; }
 
         .product-detail-content section:first-of-type img,
         .product-detail-content .product-main-image {
-            width: min(88vw, 430px) !important;
-            max-width: 100% !important;
-            height: clamp(320px, 62vh, 560px) !important;
-            max-height: 72vh !important;
+            display: block;
+            width: auto !important;
+            max-width: min(100%, 430px) !important;
+            height: auto !important;
+            max-height: clamp(300px, 58vh, 520px) !important;
             object-fit: contain !important;
+            object-position: center !important;
             margin-left: auto;
             margin-right: auto;
         }
@@ -50,6 +54,12 @@
             min-height: 220px;
             object-fit: cover;
         }
+        @media (min-width: 768px) {
+            .product-detail-content section:first-of-type img,
+            .product-detail-content .product-main-image {
+                max-height: 500px !important;
+            }
+        }
         @media (max-width: 640px) {
             .product-detail-content {
                 padding-top: 1.25rem;
@@ -57,11 +67,12 @@
             .product-detail-content section:first-of-type {
                 padding-left: 1rem !important;
                 padding-right: 1rem !important;
+                gap: 1.5rem !important;
             }
             .product-detail-content section:first-of-type img,
             .product-detail-content .product-main-image {
-                width: min(92vw, 360px) !important;
-                height: clamp(300px, 55vh, 460px) !important;
+                max-width: min(100%, 340px) !important;
+                max-height: 360px !important;
             }
         }
     </style>
@@ -78,7 +89,7 @@
     fbq('init', '462184846324554');
     fbq('track', 'PageView');
     fbq('track', 'ViewContent', {"content_ids":["raptor-cool-patch"],"content_name":"RAPTOR COOL PATCH","content_category":"Raptor Sport Product","content_type":"product","value":179,"currency":"THB"});
-    fbq('trackCustom', 'RAPTOR SPORT1 ProductPageView raptor-cool-patch', {"content_ids":["raptor-cool-patch"],"content_name":"RAPTOR COOL PATCH","content_category":"Raptor Sport Product","content_type":"product","value":179,"currency":"THB"});
+    fbq('trackCustom', 'ViewContent RAPTOR COOL PATCH', {"content_ids":["raptor-cool-patch"],"content_name":"RAPTOR COOL PATCH","content_category":"Raptor Sport Product","content_type":"product","value":179,"currency":"THB"});
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1" alt=""></noscript>
     <!-- End Meta Pixel Code -->
@@ -153,7 +164,7 @@
                         </div>
                         <div class="p-4 bg-blue-50/40 rounded-xl text-center border border-blue-100">
                             <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto text-blue-600 text-lg font-bold mb-2"><i class="fa-solid fa-child-muscle"></i></div>
-                            <h4 class="font-bold text-sm text-gray-808">Muscle Relaxation</h4>
+                            <h4 class="font-bold text-sm text-gray-808">💪 Muscle Relaxation ❄️</h4>
                             <p class="text-[11px] text-gray-500 mt-1">ช่วยลดอาการหดเกร็งตึงแน่นของใยกล้ามเนื้อสะสมหลังจากการฝึกซ้อมอย่างหนักได้อย่างตรงจุด</p>
                         </div>
                         <div class="p-4 bg-blue-50/40 rounded-xl text-center border border-blue-100">
