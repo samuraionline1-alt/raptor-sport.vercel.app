@@ -89,7 +89,7 @@
     fbq('init', '462184846324554');
     fbq('track', 'PageView');
     fbq('track', 'ViewContent', {"content_ids":["raptor-ice-defense-sport-shampoo"],"content_name":"RAPTOR ICE DEFENSE SPORT SHAMPOO","content_category":"Raptor Sport Product","content_type":"product","value":199,"currency":"THB"});
-    fbq('trackCustom', 'ViewContent RAPTOR ICE DEFENSE SPORT SHAMPOO', {"content_ids":["raptor-ice-defense-sport-shampoo"],"content_name":"RAPTOR ICE DEFENSE SPORT SHAMPOO","content_category":"Raptor Sport Product","content_type":"product","value":199,"currency":"THB"});
+    fbq('trackCustom', 'ViewContent_RAPTOR_ICE_DEFENSE_SPORT_SHAMPOO', {"content_ids":["raptor-ice-defense-sport-shampoo"],"content_name":"RAPTOR ICE DEFENSE SPORT SHAMPOO","content_category":"Raptor Sport Product","content_type":"product","value":199,"currency":"THB"});
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1" alt=""></noscript>
     <!-- End Meta Pixel Code -->
@@ -116,8 +116,17 @@
 
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
                 <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4">
-                        <img src="/Shampoo RAPTOR3.png" alt="RAPTOR ICE DEFENSE SPORT SHAMPOO" class="product-main-image max-h-[380px] object-contain rounded-lg">
+                    <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4 gap-4">
+                        <div class="w-full rounded-lg overflow-hidden shadow-md border border-blue-200 bg-black">
+                            <video
+                                class="w-full aspect-video object-cover"
+                                controls
+                                preload="metadata"
+                                poster="/Shampoo RAPTOR3.png">
+                                <source src="/RAPTOR SHAMPOO2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <img src="/Shampoo RAPTOR3.png" alt="RAPTOR ICE DEFENSE SPORT SHAMPOO" class="product-main-image max-h-[180px] object-contain rounded-lg">
                     </div>
                     <div class="flex flex-col justify-between space-y-4">
                         <div>
@@ -797,13 +806,15 @@
             try {
                 if (typeof fbq === 'function') {
                     const payload = params || {};
-                    const prefixedEventName = `RAPTOR SPORT1 ${eventName}`;
+                    const productEventName = payload.content_name
+                        ? `${eventName}_${String(payload.content_name).replace(/[^A-Za-z0-9_]+/g, '_').replace(/^_+|_+$/g, '')}`
+                        : eventName;
 
                     if (isCustomEvent) {
-                        fbq('trackCustom', prefixedEventName, payload);
+                        fbq('trackCustom', productEventName, payload);
                     } else {
                         fbq('track', eventName, payload);
-                        fbq('trackCustom', prefixedEventName, payload);
+                        fbq('trackCustom', productEventName, payload);
                     }
                 }
             } catch (error) {
