@@ -34,6 +34,36 @@
         }
         .animate-fire { display: inline-block; animation: fireMovement 1.4s ease-in-out infinite; }
         .product-detail-content > div { margin-left: auto; margin-right: auto; }
+
+        .product-detail-content section:first-of-type img,
+        .product-detail-content .product-main-image {
+            width: min(88vw, 430px) !important;
+            max-width: 100% !important;
+            height: clamp(320px, 62vh, 560px) !important;
+            max-height: 72vh !important;
+            object-fit: contain !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .product-detail-content section:first-of-type video {
+            width: 100% !important;
+            min-height: 220px;
+            object-fit: cover;
+        }
+        @media (max-width: 640px) {
+            .product-detail-content {
+                padding-top: 1.25rem;
+            }
+            .product-detail-content section:first-of-type {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .product-detail-content section:first-of-type img,
+            .product-detail-content .product-main-image {
+                width: min(92vw, 360px) !important;
+                height: clamp(300px, 55vh, 460px) !important;
+            }
+        }
     </style>
     <!-- Meta Pixel Code -->
     <script>
@@ -105,7 +135,7 @@
                         </div>
                     </div>
                     <div class="relative">
-                        <img src="/Gemini_Generated_Image_t15zqzt15zqzt15z.png" alt="Raptor Herbal Cooling Gel" class="relative z-10 w-full max-w-sm mx-auto drop-shadow-2xl rounded-2xl border border-slate-700">
+                        <img src="/Gemini_Generated_Image_t15zqzt15zqzt15z.png" alt="Raptor Herbal Cooling Gel" class="product-main-image relative z-10 w-full max-w-sm mx-auto drop-shadow-2xl rounded-2xl border border-slate-700">
                     </div>
                 </section>
 

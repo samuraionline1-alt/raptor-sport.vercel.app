@@ -34,6 +34,36 @@
         }
         .animate-fire { display: inline-block; animation: fireMovement 1.4s ease-in-out infinite; }
         .product-detail-content > div { margin-left: auto; margin-right: auto; }
+
+        .product-detail-content section:first-of-type img,
+        .product-detail-content .product-main-image {
+            width: min(88vw, 430px) !important;
+            max-width: 100% !important;
+            height: clamp(320px, 62vh, 560px) !important;
+            max-height: 72vh !important;
+            object-fit: contain !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .product-detail-content section:first-of-type video {
+            width: 100% !important;
+            min-height: 220px;
+            object-fit: cover;
+        }
+        @media (max-width: 640px) {
+            .product-detail-content {
+                padding-top: 1.25rem;
+            }
+            .product-detail-content section:first-of-type {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .product-detail-content section:first-of-type img,
+            .product-detail-content .product-main-image {
+                width: min(92vw, 360px) !important;
+                height: clamp(300px, 55vh, 460px) !important;
+            }
+        }
     </style>
     <!-- Meta Pixel Code -->
     <script>
@@ -75,7 +105,7 @@
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
                 <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="flex flex-col justify-center items-center bg-gradient-to-b from-orange-50 to-white rounded-xl p-4">
-                        <img src="/Gemini_Generated_Image_dihrcjdihrcjdihr.png" alt="Raptor Go Energy Gel" class="max-h-[380px] object-contain rounded-lg">
+                        <img src="/Gemini_Generated_Image_dihrcjdihrcjdihr.png" alt="Raptor Go Energy Gel" class="product-main-image max-h-[380px] object-contain rounded-lg">
                     </div>
                     <div class="space-y-4 flex flex-col justify-between">
                         <div>

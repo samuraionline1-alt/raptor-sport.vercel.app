@@ -34,6 +34,36 @@
         }
         .animate-fire { display: inline-block; animation: fireMovement 1.4s ease-in-out infinite; }
         .product-detail-content > div { margin-left: auto; margin-right: auto; }
+
+        .product-detail-content section:first-of-type img,
+        .product-detail-content .product-main-image {
+            width: min(88vw, 430px) !important;
+            max-width: 100% !important;
+            height: clamp(320px, 62vh, 560px) !important;
+            max-height: 72vh !important;
+            object-fit: contain !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .product-detail-content section:first-of-type video {
+            width: 100% !important;
+            min-height: 220px;
+            object-fit: cover;
+        }
+        @media (max-width: 640px) {
+            .product-detail-content {
+                padding-top: 1.25rem;
+            }
+            .product-detail-content section:first-of-type {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .product-detail-content section:first-of-type img,
+            .product-detail-content .product-main-image {
+                width: min(92vw, 360px) !important;
+                height: clamp(300px, 55vh, 460px) !important;
+            }
+        }
     </style>
     <!-- Meta Pixel Code -->
     <script>
@@ -91,7 +121,7 @@
                 </div>
                 <div class="relative flex justify-center items-center">
                     <div class="absolute w-[420px] h-[420px] bg-emerald-400 rounded-full blur-[120px] opacity-20"></div>
-                    <img src="/Gemini_Generated_Image_4tua4r4tua4r4tua.png" alt="RAPTOR HERBAL ROLL-ON" class="relative z-10 w-full max-w-[430px] rounded-3xl shadow-2xl border border-white/10 object-contain">
+                    <img src="/Gemini_Generated_Image_4tua4r4tua4r4tua.png" alt="RAPTOR HERBAL ROLL-ON" class="product-main-image relative z-10 w-full max-w-[430px] rounded-3xl shadow-2xl border border-white/10 object-contain">
                 </div>
             </section>
 

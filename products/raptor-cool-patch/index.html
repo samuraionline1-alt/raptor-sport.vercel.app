@@ -34,6 +34,36 @@
         }
         .animate-fire { display: inline-block; animation: fireMovement 1.4s ease-in-out infinite; }
         .product-detail-content > div { margin-left: auto; margin-right: auto; }
+
+        .product-detail-content section:first-of-type img,
+        .product-detail-content .product-main-image {
+            width: min(88vw, 430px) !important;
+            max-width: 100% !important;
+            height: clamp(320px, 62vh, 560px) !important;
+            max-height: 72vh !important;
+            object-fit: contain !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .product-detail-content section:first-of-type video {
+            width: 100% !important;
+            min-height: 220px;
+            object-fit: cover;
+        }
+        @media (max-width: 640px) {
+            .product-detail-content {
+                padding-top: 1.25rem;
+            }
+            .product-detail-content section:first-of-type {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .product-detail-content section:first-of-type img,
+            .product-detail-content .product-main-image {
+                width: min(92vw, 360px) !important;
+                height: clamp(300px, 55vh, 460px) !important;
+            }
+        }
     </style>
     <!-- Meta Pixel Code -->
     <script>
@@ -76,7 +106,7 @@
                 <section class="bg-white rounded-2xl shadow-sm p-6 grid md:grid-cols-2 gap-8 items-center">
                     <div class="flex flex-col items-center">
                         <div class="w-full max-w-[340px] aspect-square bg-gradient-to-b from-blue-50 to-indigo-50 rounded-2xl shadow-xl flex items-center justify-center p-2 relative overflow-hidden">
-                            <img src="/IMG_6951.PNG" alt="Raptor Cool Patch" class="max-h-full w-auto object-contain rounded-xl">
+                            <img src="/IMG_6951.PNG" alt="Raptor Cool Patch" class="product-main-image max-h-full w-auto object-contain rounded-xl">
                             <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow animate-pulse uppercase tracking-wider">New Item</span>
                         </div>
                         <p class="text-xs text-gray-400 mt-3"><i class="fa-solid fa-arrows-rotate text-blue-500"></i> สินค้าแท้ 100% ไฮโดรเจลพรีเมียมเกรดสปอร์ต ยืดหยุ่นสูง</p>
