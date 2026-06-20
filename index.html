@@ -2656,7 +2656,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
                 if (typeof fbq === 'function') {
                     const payload = params || {};
                     const productEventName = payload.content_name
-                        ? `${eventName}_${String(payload.content_name).replace(/[^A-Za-z0-9_]+/g, '_').replace(/^_+|_+$/g, '')}`
+                        ? `${eventName === 'ViewContent' ? 'Viewcontent' : eventName}_${String(payload.content_name).replace(/[^A-Za-z0-9_]+/g, '_').replace(/^_+|_+$/g, '')}`
                         : eventName;
 
                     if (isCustomEvent) {

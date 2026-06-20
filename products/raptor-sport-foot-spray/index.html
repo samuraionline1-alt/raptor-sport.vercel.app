@@ -89,7 +89,7 @@
     fbq('init', '462184846324554');
     fbq('track', 'PageView');
     fbq('track', 'ViewContent', {"content_ids":["raptor-sport-foot-spray"],"content_name":"RAPTOR SPORT FOOT SPRAY","content_category":"Raptor Sport Product","content_type":"product","value":179,"currency":"THB"});
-    fbq('trackCustom', 'ViewContent_RAPTOR_SPORT_FOOT_SPRAY', {"content_ids":["raptor-sport-foot-spray"],"content_name":"RAPTOR SPORT FOOT SPRAY","content_category":"Raptor Sport Product","content_type":"product","value":179,"currency":"THB"});
+    fbq('trackCustom', 'Viewcontent_RAPTOR_SPORT_FOOT_SPRAY', {"content_ids":["raptor-sport-foot-spray"],"content_name":"RAPTOR SPORT FOOT SPRAY","content_category":"Raptor Sport Product","content_type":"product","value":179,"currency":"THB"});
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1" alt=""></noscript>
     <!-- End Meta Pixel Code -->
@@ -790,7 +790,7 @@
                 if (typeof fbq === 'function') {
                     const payload = params || {};
                     const productEventName = payload.content_name
-                        ? `${eventName}_${String(payload.content_name).replace(/[^A-Za-z0-9_]+/g, '_').replace(/^_+|_+$/g, '')}`
+                        ? `${eventName === 'ViewContent' ? 'Viewcontent' : eventName}_${String(payload.content_name).replace(/[^A-Za-z0-9_]+/g, '_').replace(/^_+|_+$/g, '')}`
                         : eventName;
 
                     if (isCustomEvent) {
