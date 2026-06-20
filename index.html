@@ -89,6 +89,21 @@
 
         .home-swipe-shell:active { cursor: grabbing; }
 
+        @keyframes homeBgCycle {
+            0%, 29% { opacity: .35; transform: scale(1.02) translateX(0); }
+            33%, 96% { opacity: 0; transform: scale(1.06) translateX(-1.5%); }
+            100% { opacity: .35; transform: scale(1.02) translateX(0); }
+        }
+
+        .home-bg-rotator img {
+            animation: homeBgCycle 9s infinite;
+            opacity: 0;
+            transform-origin: center;
+        }
+
+        .home-bg-rotator img:nth-child(2) { animation-delay: 3s; }
+        .home-bg-rotator img:nth-child(3) { animation-delay: 6s; }
+
         @keyframes athleteFloat {
             0%, 100% { transform: translateY(0) rotate(-2deg); }
             50% { transform: translateY(-18px) rotate(2deg); }
@@ -223,7 +238,11 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
             <div id="home-slider" class="flex min-h-screen will-change-transform">
                 <div class="home-slide relative min-h-screen pt-32 pb-20 flex items-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="A_high-resolution,_cinematic_wide-angle_photograph_202605241101.jpeg" alt="Raptor Background Lab" class="w-full h-full object-cover opacity-35 filter brightness-90 contrast-105">
+            <div class="home-bg-rotator absolute inset-0">
+                <img src="A_high-resolution,_cinematic_wide-angle_photograph_202605241101.jpeg" alt="Raptor Background Lab" class="absolute inset-0 w-full h-full object-cover filter brightness-90 contrast-105">
+                <img src="2682ca0f-ef79-4054-8346-db1d5385e63f.png" alt="Raptor Sport home background" class="absolute inset-0 w-full h-full object-cover filter brightness-90 contrast-105">
+                <img src="ChatGPT Image Jun 20, 2026, 11_53_42 AM.png" alt="Raptor Sport action background" class="absolute inset-0 w-full h-full object-cover filter brightness-90 contrast-105">
+            </div>
             <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-zinc-950/40"></div>
             <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:40px_40px]"></div>
