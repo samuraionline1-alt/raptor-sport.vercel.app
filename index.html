@@ -89,6 +89,35 @@
 
         .home-swipe-shell:active { cursor: grabbing; }
 
+        .home-background-slider {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .home-background-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: translateX(100%) scale(1.03);
+            filter: brightness(1.12) contrast(1.08) saturate(1.08);
+            transition: opacity .9s ease, transform .9s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .home-background-slide.is-active {
+            opacity: .58;
+            transform: translateX(0) scale(1);
+        }
+
+        .home-background-slide.is-exiting {
+            opacity: 0;
+            transform: translateX(-14%) scale(1.02);
+        }
+
         @keyframes athleteFloat {
             0%, 100% { transform: translateY(0) rotate(-2deg); }
             50% { transform: translateY(-18px) rotate(2deg); }
@@ -222,10 +251,15 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
         <div id="home-swipe-shell" class="home-swipe-shell relative min-h-screen overflow-hidden">
             <div id="home-slider" class="flex min-h-screen will-change-transform">
                 <div class="home-slide relative min-h-screen pt-32 pb-20 flex items-center overflow-hidden">
+        <div class="home-background-slider" aria-hidden="true">
+            <img src="A_high-resolution,_cinematic_wide-angle_photograph_202605241101.jpeg" alt="" class="home-background-slide is-active">
+            <img src="ChatGPT Image Jun 20, 2026, 12_05_29 PM.png" alt="" class="home-background-slide">
+            <img src="ChatGPT Image Jun 20, 2026, 12_07_32 PM.png" alt="" class="home-background-slide">
+            <img src="ChatGPT Image Jun 20, 2026, 12_09_42 PM.png" alt="" class="home-background-slide">
+        </div>
         <div class="absolute inset-0 z-0">
-            <img src="A_high-resolution,_cinematic_wide-angle_photograph_202605241101.jpeg" alt="Raptor Background Lab" class="w-full h-full object-cover opacity-35 filter brightness-90 contrast-105">
-            <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-zinc-950/40"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/85 via-zinc-950/45 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/75 via-transparent to-zinc-950/20"></div>
             <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:40px_40px]"></div>
         </div>
 
@@ -2848,6 +2882,32 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
         });
     </script>
 
+
+    <script>
+
+        // Rotate the home hero background image, starting with the original image.
+        document.addEventListener('DOMContentLoaded', function () {
+            const backgroundSlides = Array.from(document.querySelectorAll('.home-background-slide'));
+            if (backgroundSlides.length <= 1) return;
+
+            let activeBackgroundSlide = 0;
+
+            setInterval(function () {
+                const previousSlide = backgroundSlides[activeBackgroundSlide];
+                activeBackgroundSlide = (activeBackgroundSlide + 1) % backgroundSlides.length;
+                const nextSlide = backgroundSlides[activeBackgroundSlide];
+
+                previousSlide.classList.remove('is-active');
+                previousSlide.classList.add('is-exiting');
+                nextSlide.classList.remove('is-exiting');
+                nextSlide.classList.add('is-active');
+
+                window.setTimeout(function () {
+                    previousSlide.classList.remove('is-exiting');
+                }, 950);
+            }, 4000);
+        });
+    </script>
 
     <script>
         // Swipe between the original home hero and the motivation home page
