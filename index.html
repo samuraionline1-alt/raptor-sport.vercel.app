@@ -2097,13 +2097,13 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
                 <div class="pt-4 border-t border-zinc-800">
                     <p class="text-[10px] text-zinc-500 mb-2">SHOP & FOLLOW VIA SOCIAL MEDIA</p>
                     <div class="flex flex-wrap gap-3 text-sm pt-1">
-                        <a href="https://www.tiktok.com/@raptor.global.imp?_r=1&_t=ZS-96e96teMngr" target="_blank" class="flex items-center gap-2 bg-zinc-800/60 hover:bg-zinc-800 border border-zinc-700/50 text-zinc-300 hover:text-white px-3 py-1.5 rounded-xl transition-all">
+                        <a href="https://www.tiktok.com/@raptor.global.imp?_r=1&_t=ZS-96e96teMngr" target="_blank" data-contact-pixel-button="tiktok" class="flex items-center gap-2 bg-zinc-800/60 hover:bg-zinc-800 border border-zinc-700/50 text-zinc-300 hover:text-white px-3 py-1.5 rounded-xl transition-all">
                             <i class="fa-brands fa-tiktok"></i> <span>TikTok</span>
                         </a>
-                        <a href="https://www.facebook.com/raptorsportofficial?locale=th_TH" target="_blank" class="flex items-center gap-2 bg-zinc-800/60 hover:bg-zinc-800 border border-zinc-700/50 text-zinc-300 hover:text-blue-400 px-3 py-1.5 rounded-xl transition-all">
+                        <a href="https://www.facebook.com/raptorsportofficial?locale=th_TH" target="_blank" data-contact-pixel-button="facebook" class="flex items-center gap-2 bg-zinc-800/60 hover:bg-zinc-800 border border-zinc-700/50 text-zinc-300 hover:text-blue-400 px-3 py-1.5 rounded-xl transition-all">
                             <i class="fa-brands fa-facebook"></i> <span>Facebook</span>
                         </a>
-                        <a href="https://lin.ee/qtuszPa" target="_blank" class="flex items-center gap-2 bg-zinc-800/60 hover:bg-zinc-800 border border-zinc-700/50 text-zinc-300 hover:text-green-400 px-3 py-1.5 rounded-xl transition-all">
+                        <a href="https://lin.ee/qtuszPa" target="_blank" data-contact-pixel-button="line chat" class="flex items-center gap-2 bg-zinc-800/60 hover:bg-zinc-800 border border-zinc-700/50 text-zinc-300 hover:text-green-400 px-3 py-1.5 rounded-xl transition-all">
                             <i class="fa-brands fa-line"></i> <span>LINE Chat</span>
                         </a>
                     </div>
@@ -2757,6 +2757,18 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
                     };
                     trackRaptorPixel('InitiateCheckout', params);
                     trackRaptorPixel('RaptorInitiateCheckout', params, true);
+                });
+            });
+
+            document.querySelectorAll('[data-contact-pixel-button]').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    const buttonName = button.dataset.contactPixelButton;
+                    trackRaptorPixel(`press button ${buttonName}`, {
+                        button_name: buttonName,
+                        button_text: button.textContent.trim(),
+                        button_url: button.href,
+                        page_section: 'Contact Social Buttons'
+                    }, true);
                 });
             });
 
