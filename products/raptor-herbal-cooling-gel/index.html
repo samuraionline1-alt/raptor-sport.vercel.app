@@ -222,6 +222,14 @@
                                 <label class="block text-xs font-bold text-slate-400 uppercase mb-2">ที่อยู่สำหรับการจัดส่ง</label>
                                 <textarea required rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="address"></textarea>
                             </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">จำนวนสินค้า</label>
+                                <input type="number" required min="1" value="1" inputmode="numeric" placeholder="เช่น 1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="quantity">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">รายละเอียดเพิ่มเติม</label>
+                                <textarea rows="3" placeholder="ระบุสี/รสชาติ/หมายเหตุการจัดส่ง หรือรายละเอียดอื่น ๆ" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="order_details"></textarea>
+                            </div>
                             <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-xl font-bold text-lg uppercase tracking-wider transition-all shadow-lg shadow-emerald-950">ยืนยันคำสั่งซื้อ ฿290</button>
                         </form>
                     </div>

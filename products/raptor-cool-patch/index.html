@@ -217,6 +217,14 @@
                         <div><label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label><input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name"></div>
                         <div><label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label><input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone"></div>
                         <div><label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label><textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address"></textarea></div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">จำนวนสินค้า</label>
+                            <input type="number" required min="1" value="1" inputmode="numeric" placeholder="เช่น 1" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="quantity">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">รายละเอียดเพิ่มเติม</label>
+                            <textarea rows="3" placeholder="ระบุสี/รสชาติ/หมายเหตุการจัดส่ง หรือรายละเอียดอื่น ๆ" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="order_details"></textarea>
+                        </div>
                         <div class="bg-gray-50 p-4 rounded-xl flex justify-between items-center text-sm border border-gray-100"><span class="font-bold text-gray-700">ยอดรวมทั้งสิ้น:</span><span class="text-xl font-black text-orange-brand">179 บาท (ส่งฟรีปลายทาง)</span></div>
                         <button type="submit" class="w-full bg-orange-brand text-white font-bold text-lg py-3.5 rounded-xl shadow-md hover:bg-orange-600 transition-all cursor-pointer">
                             ยืนยันการสั่งซื้อเลยตอนนี้
