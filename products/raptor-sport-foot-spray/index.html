@@ -819,6 +819,50 @@
             return Number(numberText || 0);
         }
 
+        function formatThaiBaht(amount) {
+            return `฿${Number(amount || 0).toLocaleString('th-TH', { maximumFractionDigits: 0 })}`;
+        }
+
+        function getOrderPricing(form) {
+            const unitPrice = getNumericPrice(form.dataset.price || form.querySelector('input[name="price"]')?.value || '');
+            const quantityInput = form.querySelector('input[name="quantity"]');
+            const quantity = Math.max(1, Number.parseInt(quantityInput?.value, 10) || 1);
+            const totalPrice = unitPrice * quantity;
+            return { unitPrice, quantity, totalPrice };
+        }
+
+        function updateOrderPriceByQuantity(form) {
+            if (!form.classList.contains('raptor-order-form')) return;
+
+            const { unitPrice, quantity, totalPrice } = getOrderPricing(form);
+            const priceInput = form.querySelector('input[name="price"]');
+            let totalInput = form.querySelector('input[name="total_price"]');
+            let summaryBox = form.querySelector('[data-order-price-summary]');
+
+            if (!totalInput) {
+                totalInput = document.createElement('input');
+                totalInput.type = 'hidden';
+                totalInput.name = 'total_price';
+                form.appendChild(totalInput);
+            }
+
+            if (!summaryBox) {
+                summaryBox = document.createElement('div');
+                summaryBox.setAttribute('data-order-price-summary', '');
+                summaryBox.className = 'rounded-xl border border-orange-200 bg-orange-50 px-4 py-3 text-sm font-bold text-orange-800';
+                const submitButton = form.querySelector('button[type="submit"], button:not([type])');
+                if (submitButton) {
+                    submitButton.insertAdjacentElement('beforebegin', summaryBox);
+                } else {
+                    form.appendChild(summaryBox);
+                }
+            }
+
+            if (priceInput && unitPrice) priceInput.value = formatThaiBaht(unitPrice);
+            totalInput.value = formatThaiBaht(totalPrice);
+            summaryBox.innerHTML = `ราคาพิเศษ ${formatThaiBaht(unitPrice)} × ${quantity} ชิ้น = <span class="text-lg text-red-600">${formatThaiBaht(totalPrice)}</span>`;
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const productTrackingMap = {
                 openProductModal: { name: 'RAPTOR SPORT WARMING SPRAY', price: '฿179' },
@@ -900,8 +944,14 @@
             const forms = document.querySelectorAll('.raptor-order-form, .raptor-contact-form');
 
             forms.forEach(function (form) {
+                updateOrderPriceByQuantity(form);
+                form.querySelector('input[name="quantity"]')?.addEventListener('input', function () {
+                    updateOrderPriceByQuantity(form);
+                });
+
                 form.addEventListener('submit', async function (event) {
                     event.preventDefault();
+                    updateOrderPriceByQuantity(form);
 
                     const submitButton = form.querySelector('button[type="submit"], button:not([type])');
                     const originalButtonText = submitButton ? submitButton.innerHTML : '';
@@ -925,12 +975,14 @@
 
                     const productName = form.dataset.product || form.querySelector('input[name="product"]')?.value || 'Raptor Sport Product';
                     const productPrice = form.dataset.price || form.querySelector('input[name="price"]')?.value || '';
+                    const orderPricing = getOrderPricing(form);
                     const pixelParams = {
                         content_name: productName,
                         content_category: 'Raptor Sport Order',
                         content_type: 'product',
-                        value: getNumericPrice(productPrice),
-                        currency: 'THB'
+                        value: orderPricing.totalPrice || getNumericPrice(productPrice),
+                        currency: 'THB',
+                        num_items: orderPricing.quantity
                     };
 
                     // Fire standard checkout and custom submit started pixels
