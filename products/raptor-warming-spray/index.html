@@ -844,7 +844,7 @@
         }
 
         function getOrderPricing(form) {
-            const unitPrice = getNumericPrice(form.dataset.price || form.querySelector('input[name="price"]')?.value || '');
+            const unitPrice = getNumericPrice(form.querySelector('input[name="price"]')?.value || form.dataset.price || '');
             const quantityInput = form.querySelector('input[name="quantity"]');
             const quantity = Math.max(1, Number.parseInt(quantityInput?.value, 10) || 1);
             const totalPrice = unitPrice * quantity;
