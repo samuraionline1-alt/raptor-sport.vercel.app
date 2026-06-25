@@ -957,7 +957,7 @@
                         if (response.ok) {
                             statusBox.classList.remove('bg-orange-50', 'text-orange-700', 'bg-red-50', 'text-red-700');
                             statusBox.classList.add('bg-green-50', 'text-green-700');
-                            statusBox.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด';
+                            statusBox.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว กำลังพาไปหน้าขอบคุณ...';
 
                             // Complete standard conversion and custom submit success pixels
                             trackRaptorPixel('Lead', pixelParams);
@@ -966,14 +966,18 @@
 
                             form.reset();
 
-                            const closeModalName = form.dataset.closeModal;
-                            if (closeModalName && typeof window[closeModalName] === 'function') {
-                                setTimeout(function () {
-                                    window[closeModalName]();
-                                    document.body.style.overflow = 'auto';
-                                }, 1200);
+                            if (form.classList.contains('raptor-order-form')) {
+                                window.location.href = '/thank-you.html';
                             } else {
-                                document.body.style.overflow = 'auto';
+                                const closeModalName = form.dataset.closeModal;
+                                if (closeModalName && typeof window[closeModalName] === 'function') {
+                                    setTimeout(function () {
+                                        window[closeModalName]();
+                                        document.body.style.overflow = 'auto';
+                                    }, 1200);
+                                } else {
+                                    document.body.style.overflow = 'auto';
+                                }
                             }
                         } else {
                             let errorMessage = 'ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองใหม่อีกครั้ง';

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="10; url=/">
+    <title>Thank you | Raptor Sport</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800;900&display=swap');
+        body { font-family: 'Kanit', sans-serif; }
+        .premium-glow { box-shadow: 0 30px 90px rgba(255, 107, 0, 0.24), 0 0 0 1px rgba(255, 255, 255, 0.12) inset; }
+        .float-soft { animation: floatSoft 3s ease-in-out infinite; }
+        .pulse-ring { animation: pulseRing 1.8s ease-out infinite; }
+        @keyframes floatSoft {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulseRing {
+            0% { transform: scale(0.88); opacity: 0.8; }
+            100% { transform: scale(1.35); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-hidden bg-slate-950 text-white">
+    <main class="relative flex min-h-screen items-center justify-center px-5 py-10">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,107,0,0.35),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.25),transparent_32%),linear-gradient(135deg,#020617,#111827_45%,#09090b)]"></div>
+        <div class="absolute left-8 top-12 text-5xl opacity-30 float-soft">🏆</div>
+        <div class="absolute right-10 top-20 text-4xl opacity-30 float-soft" style="animation-delay:.45s">✨</div>
+        <div class="absolute bottom-16 left-12 text-4xl opacity-30 float-soft" style="animation-delay:.9s">🚚</div>
+        <div class="absolute bottom-20 right-14 text-5xl opacity-30 float-soft" style="animation-delay:1.2s">⚡</div>
+
+        <section class="premium-glow relative z-10 w-full max-w-2xl rounded-[2rem] border border-white/10 bg-white/10 p-8 text-center backdrop-blur-xl md:p-12">
+            <div class="relative mx-auto mb-7 flex h-28 w-28 items-center justify-center">
+                <span class="pulse-ring absolute h-full w-full rounded-full bg-orange-400/40"></span>
+                <div class="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-orange-400 to-amber-300 text-5xl text-slate-950 shadow-2xl shadow-orange-500/30">✓</div>
+            </div>
+
+            <p class="mb-3 text-sm font-black uppercase tracking-[0.45em] text-orange-200">Raptor Sport Order</p>
+            <h1 class="mb-5 text-5xl font-black tracking-tight text-white md:text-7xl">Thank you</h1>
+            <p class="mx-auto max-w-xl text-2xl font-bold leading-relaxed text-slate-100 md:text-3xl">
+                ขอบคุณสำหรับการสั่งซื้อ<br>
+                ทางเราจะจัดส่งสินค้าภายใน 1-2 วัน
+            </p>
+
+            <div class="mt-8 grid gap-3 rounded-3xl border border-white/10 bg-slate-950/45 p-5 text-left text-sm text-slate-200 sm:grid-cols-3">
+                <div class="rounded-2xl bg-white/10 p-4 text-center"><span class="block text-2xl">📦</span><strong>แพ็กสินค้า</strong></div>
+                <div class="rounded-2xl bg-white/10 p-4 text-center"><span class="block text-2xl">🚀</span><strong>จัดส่งเร็ว</strong></div>
+                <div class="rounded-2xl bg-white/10 p-4 text-center"><span class="block text-2xl">💎</span><strong>บริการพรีเมียม</strong></div>
+            </div>
+
+            <p class="mt-7 text-sm font-semibold text-orange-100">
+                ระบบจะพากลับหน้าหลักอัตโนมัติภายใน <span id="countdown" class="text-xl font-black text-amber-300">10</span> วินาที
+            </p>
+            <a href="/" class="mt-5 inline-flex items-center justify-center rounded-full bg-orange-500 px-7 py-3 font-black text-white shadow-lg shadow-orange-500/30 transition hover:-translate-y-0.5 hover:bg-orange-400">
+                กลับหน้าหลักทันที <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+            </a>
+        </section>
+    </main>
+
+    <script>
+        let secondsLeft = 10;
+        const countdown = document.getElementById('countdown');
+        const timer = setInterval(function () {
+            secondsLeft -= 1;
+            if (countdown) countdown.textContent = secondsLeft;
+            if (secondsLeft <= 0) {
+                clearInterval(timer);
+                window.location.href = '/';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
