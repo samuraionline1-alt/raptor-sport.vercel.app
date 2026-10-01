@@ -5,7 +5,7 @@
 ## หลัง Deploy
 
 1. เพิ่มโดเมนจริงเป็น Property ใน Google Search Console และยืนยันความเป็นเจ้าของ
-2. ส่ง `https://raptor-sport.vercel.app/sitemap.xml` ในเมนู Sitemaps
+2. ส่ง `https://www.raptorthailand.com/sitemap.xml` ในเมนู Sitemaps
 3. ตรวจ URL หน้าแรกและหน้าสินค้าทุกหน้า แล้วกด Request indexing เฉพาะหน้าสำคัญ
 4. ตรวจรายงาน Product snippets, Core Web Vitals และ Page indexing ทุกสัปดาห์
 5. หากเปลี่ยนไปใช้โดเมนแบรนด์ ให้เปลี่ยน canonical, Open Graph, JSON-LD, robots.txt และ sitemap.xml ให้เป็นโดเมนเดียวกันทั้งหมดก่อนเปิดใช้งาน
