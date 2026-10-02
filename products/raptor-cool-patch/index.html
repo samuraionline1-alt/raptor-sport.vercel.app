@@ -244,14 +244,6 @@
                     </div>
                 </section>
 
-                <section class="bg-white rounded-2xl shadow-sm p-6">
-                    <h3 class="text-xl font-bold text-center mb-1 text-gray-900"><i class="fa-solid fa-chart-line text-blue-600 mr-1"></i> กราฟจำลองระดับการกระจายความเย็นต่อเนื่อง</h3>
-                    <p class="text-xs text-gray-500 text-center mb-6">เปรียบเทียบระดับความรู้สึกเย็นสบายผิวจากการทำงานของชั้นไฮโดรเจลตลอดระยะเวลา 240 นาที</p>
-                    <div class="w-full h-[240px] relative">
-                        <canvas id="modalCoolPatchChart"></canvas>
-                    </div>
-                    <p class="text-[10px] text-gray-400 text-center mt-4 leading-relaxed">*กราฟจำลองกลไกการส่งผ่านความเย็นทางกายภาพของแผ่นไฮโดรเจลในสภาวะปกติ ระยะเวลาและความรู้สึกเย็นขึ้นอยู่กับอุณหภูมิสภาพแวดล้อมและสภาพผิวของแต่ละบุคคล<br><span class="font-semibold">อ่านคำเตือนในฉลากและเอกสารกำกับเครื่องมือแพทย์ก่อนใช้</span></p>
-                </section>
                 <section class="bg-white rounded-2xl shadow-sm p-6 max-w-xl mx-auto border border-slate-100">
                     <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 tracking-tight">รีวิวจากผู้ใช้จริง</h3>
                     <div class="space-y-4">
@@ -311,7 +303,6 @@
         let footSprayChartInstance = null;
         let energyGelChartInstance = null;
         let modalDualActionChartInstance = null;
-        let modalCoolPatchChartInstance = null;
         let modalTherapyOilChartInstance = null;
         let waterChargeChartInstance = null;
         let herbalGelChartInstance = null;
@@ -559,43 +550,6 @@
         function openCoolPatchModal() {
             document.getElementById('coolpatch-modal').classList.remove('hidden');
             document.body.style.overflow = 'auto';
-
-            if (!modalCoolPatchChartInstance) {
-                const ctx = document.getElementById('modalCoolPatchChart').getContext('2d');
-                modalCoolPatchChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที', '240 นาที'],
-                        datasets: [
-                            {
-                                label: 'ระดับการส่งผ่านความเย็นของชั้นไฮโดรเจล (%)',
-                                data: [10, 70, 95, 95, 90, 85],
-                                borderColor: '#2563eb',
-                                backgroundColor: 'rgba(37, 99, 235, 0.08)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'เจลทั่วไปที่ระเหยไว',
-                                data: [10, 15, 20, 25, 30, 40],
-                                borderColor: '#94a3b8',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
-                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
-                    }
-                });
-            }
         }
 
         function closeCoolPatchModal() {
