@@ -81,9 +81,63 @@
       "returnMethod": "https://schema.org/ReturnByMail",
       "returnFees": "https://schema.org/FreeReturn"
     }
-  }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "3",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "j*****g"
+      },
+      "datePublished": "2026-08-14",
+      "reviewBody": "เป็นผลิตภัณฑ์สำหรับความมั่นใจขั้นสุดที่จะคอยช่วยระงับกลิ่นรองเท้า กลิ่นอับกลิ่นไม่พึงประสงค์อย่างมีประสิทธิภาพ วิธีใช้ให้เขย่ากระป๋องก่อน",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "phongphut"
+      },
+      "datePublished": "2026-05-20",
+      "reviewBody": "ประโยชน์: ดับกลิ่นรองเท้าได้ดีไม่ฉุนจนเกินไป เคล็ดลับจากผู้ใช้: เป็นสเปรย์ที่ใช้ดับกลิ่นรองเท้าได้ดี มีโอกาสได้ซื้อใหม่อีกหลายๆ ครั้ง",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "ผู้ซื้อยืนยันจาก Shopee"
+      },
+      "datePublished": "2026-09-28",
+      "reviewBody": "ร้านค้าจัดส่งสินค้าได้รวดเร็วมาก สินค้าดีมีคุณภาพตรงตามปกทุกอย่าง โอกาสหน้าคงได้อุดหนุนกันอีกเรื่อยๆ ครับ",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -265,25 +319,35 @@
                     <div class="w-full h-[240px] relative"><canvas id="footSprayChart"></canvas></div>
                 </section>
 
-                <section class="bg-slate-800 rounded-2xl p-6 border border-slate-700/50 max-w-xl mx-auto">
-                    <h3 class="text-xl font-bold text-center mb-6 text-white">รีวิวจากผู้ใช้จริง</h3>
-                    <div class="space-y-4">
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-bold text-sm text-slate-200">คุณบอย (นักฟุตบอล)</span>
-                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            </div>
-                            <p class="text-xs text-slate-400 leading-relaxed">"ต้องใส่สตั๊ดซ้อมบอลทุกวัน ปัญหาเรื่องกลิ่นอับแรงมาก พอได้สเปรย์ตัวนี้ฉีดก่อนใส่ถุงเท้าและฉีดในรองเท้า กลิ่นหายสนิท เท้าแห้งสบาย มั่นใจขึ้นเยอะครับ"</p>
-                        </div>
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-bold text-sm text-slate-200">คุณพลอย (สายแบดมินตัน)</span>
-                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            </div>
-                            <p class="text-xs text-slate-400 leading-relaxed">"ฉีดแล้วรู้สึกเย็นๆ แห้งสบายฝ่าเท้ามากค่ะ เหงื่อออกน้อยลงในรองเท้า แถมช่วยระงับกลิ่นอับชื้นได้ยาวนานตลอดวันเลย ดีงามมาก"</p>
-                        </div>
-                    </div>
-                </section>
+                <!-- reviews-seo:start -->
+  <section id="customer-reviews" class="reviews-section" aria-labelledby="customer-reviews-title">
+    <div class="reviews-inner">
+      <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
+      <p class="reviews-summary" aria-live="polite">⭐ 5.0/5.0 จากรีวิวผู้ซื้อจริง 3 รายการ</p>
+      <div class="reviews-list">
+        <article class="review-card">
+          <div class="review-card__top"><strong>j*****g</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
+          <span class="inline-flex items-center gap-1 text-[11px] text-orange-600 font-semibold bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200">✓ ผู้ซื้อจริงผ่าน Shopee Official Store</span>
+          <p>เป็นผลิตภัณฑ์สำหรับความมั่นใจขั้นสุดที่จะคอยช่วยระงับกลิ่นรองเท้า กลิ่นอับกลิ่นไม่พึงประสงค์อย่างมีประสิทธิภาพ วิธีใช้ให้เขย่ากระป๋องก่อน</p>
+          <time datetime="2026-08-14">14 สิงหาคม 2569</time>
+        </article>
+        <article class="review-card">
+          <div class="review-card__top"><strong>phongphut</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
+          <span class="inline-flex items-center gap-1 text-[11px] text-orange-600 font-semibold bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200">✓ ผู้ซื้อจริงผ่าน Shopee Official Store</span>
+          <p>ประโยชน์: ดับกลิ่นรองเท้าได้ดีไม่ฉุนจนเกินไป เคล็ดลับจากผู้ใช้: เป็นสเปรย์ที่ใช้ดับกลิ่นรองเท้าได้ดี มีโอกาสได้ซื้อใหม่อีกหลายๆ ครั้ง</p>
+          <time datetime="2026-05-20">20 พฤษภาคม 2569</time>
+        </article>
+        <article class="review-card">
+          <div class="review-card__top"><strong>ผู้ซื้อยืนยันจาก Shopee</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
+          <span class="inline-flex items-center gap-1 text-[11px] text-orange-600 font-semibold bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200">✓ ผู้ซื้อจริงผ่าน Shopee Official Store</span>
+          <p>ร้านค้าจัดส่งสินค้าได้รวดเร็วมาก สินค้าดีมีคุณภาพตรงตามปกทุกอย่าง โอกาสหน้าคงได้อุดหนุนกันอีกเรื่อยๆ ครับ</p>
+          <time datetime="2026-09-28">28 กันยายน 2569</time>
+        </article>
+      </div>
+      <div class="review-form-host"></div>
+    </div>
+  </section>
+<!-- reviews-seo:end -->
 
                 <section id="foot-order-form" class="bg-slate-800 rounded-2xl p-6 border-2 border-emerald-500 max-w-xl mx-auto space-y-6">
                     <div class="bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl p-3 shadow-md flex justify-between items-center">

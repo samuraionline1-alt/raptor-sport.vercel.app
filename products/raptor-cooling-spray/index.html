@@ -81,9 +81,63 @@
       "returnMethod": "https://schema.org/ReturnByMail",
       "returnFees": "https://schema.org/FreeReturn"
     }
-  }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "3",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "newiron"
+      },
+      "datePublished": "2026-03-31",
+      "reviewBody": "ความเย็น: ฉีดแล้วรู้สึกเย็นสดชื่นทันที ฟังก์ชั่น: ใช้งานง่าย พกพาสะดวก คุณภาพ: เนื้อสเปรย์ซึมเร็วไม่เหนียว ใช้งานแล้วกล้ามเนื้อรู้สึกดีขึ้นมาจริง เหมาะมากในช่วงที่อากาศร้อนแบบนี้ ราคาถูกกว่าแบรนด์ดัง แต่คุณภาพแทบไม่ต่างกันเลย",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "q01r3hfnla"
+      },
+      "datePublished": "2026-03-03",
+      "reviewBody": "จัดส่งไว ตรงปก ราคาไม่แพงมาก ใช้แล้วเย็นจริง ใช้สะดวกสบาย กระป๋องใหญ่ ความเย็น: ฉีดแล้วรู้สึกเย็นสดชื่น ฟังก์ชั่น: ใช้ง่าย คุณภาพ: เนื้อสเปรย์ซึมไว ไม่เหนอะหนะ ใช้งานสะดวก",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "p*****y"
+      },
+      "datePublished": "2025-10-13",
+      "reviewBody": "การใช้งาน: ใช้ดีฉีดแล้วเย็นทันที การใช้งานง่ายสะดวกดีขวดใหญ่ คุณภาพ: ดีใช้งานง่ายพกพาสะดวกฉีดปุ๊บลดการปวดทันทีเหมือนยาชาเฉพาะที่ การจัดส่งไม่นาน",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -320,25 +374,35 @@
                     <div class="w-full h-[240px] relative"><canvas id="coolingPerformanceChart"></canvas></div>
                 </section>
 
-                <section class="bg-white rounded-2xl shadow-sm p-6 max-w-xl mx-auto border border-slate-100">
-                    <h3 class="text-xl font-bold text-center mb-6 text-gray-900">รีวิวจากผู้ใช้จริง</h3>
-                    <div class="space-y-4">
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-bold text-sm text-slate-800">โค้ชเอก (ทีมฟุตบอลเยาวชน)</span>
-                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            </div>
-                            <p class="text-xs text-slate-600 leading-relaxed">"หลังแข่งเสร็จเด็กๆ กล้ามเนื้อล้าและบวมระบม ได้ตัวนี้ฉีดพ่นล็อกความเย็นทันที ช่วยลดการอักเสบได้ดีมาก รวดเร็วทันใจ ไร้กลิ่นฉุนการบูรครับ"</p>
-                        </div>
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-bold text-sm text-slate-800">คุณเมย์ (นักปั่นจักรยาน)</span>
-                                <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            </div>
-                            <p class="text-xs text-slate-600 leading-relaxed">"ปั่นทางไกลล้าขามากค่ะ ฉีดสเปรย์เย็นตัวนี้แล้วสบายตัวสุดๆ ละอองละเอียด แห้งไวมาก ไม่เหนียวเหนอะหนะผิวเลย แนะนำค่ะ"</p>
-                        </div>
-                    </div>
-                </section>
+                <!-- reviews-seo:start -->
+  <section id="customer-reviews" class="reviews-section" aria-labelledby="customer-reviews-title">
+    <div class="reviews-inner">
+      <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
+      <p class="reviews-summary" aria-live="polite">⭐ 5.0/5.0 จากรีวิวผู้ซื้อจริง 3 รายการ</p>
+      <div class="reviews-list">
+        <article class="review-card">
+          <div class="review-card__top"><strong>newiron</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
+          <span class="inline-flex items-center gap-1 text-[11px] text-orange-600 font-semibold bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200">✓ ผู้ซื้อจริงผ่าน Shopee Official Store</span>
+          <p>ความเย็น: ฉีดแล้วรู้สึกเย็นสดชื่นทันที ฟังก์ชั่น: ใช้งานง่าย พกพาสะดวก คุณภาพ: เนื้อสเปรย์ซึมเร็วไม่เหนียว ใช้งานแล้วกล้ามเนื้อรู้สึกดีขึ้นมาจริง เหมาะมากในช่วงที่อากาศร้อนแบบนี้ ราคาถูกกว่าแบรนด์ดัง แต่คุณภาพแทบไม่ต่างกันเลย</p>
+          <time datetime="2026-03-31">31 มีนาคม 2569</time>
+        </article>
+        <article class="review-card">
+          <div class="review-card__top"><strong>q01r3hfnla</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
+          <span class="inline-flex items-center gap-1 text-[11px] text-orange-600 font-semibold bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200">✓ ผู้ซื้อจริงผ่าน Shopee Official Store</span>
+          <p>จัดส่งไว ตรงปก ราคาไม่แพงมาก ใช้แล้วเย็นจริง ใช้สะดวกสบาย กระป๋องใหญ่ ความเย็น: ฉีดแล้วรู้สึกเย็นสดชื่น ฟังก์ชั่น: ใช้ง่าย คุณภาพ: เนื้อสเปรย์ซึมไว ไม่เหนอะหนะ ใช้งานสะดวก</p>
+          <time datetime="2026-03-03">3 มีนาคม 2569</time>
+        </article>
+        <article class="review-card">
+          <div class="review-card__top"><strong>p*****y</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
+          <span class="inline-flex items-center gap-1 text-[11px] text-orange-600 font-semibold bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200">✓ ผู้ซื้อจริงผ่าน Shopee Official Store</span>
+          <p>การใช้งาน: ใช้ดีฉีดแล้วเย็นทันที การใช้งานง่ายสะดวกดีขวดใหญ่ คุณภาพ: ดีใช้งานง่ายพกพาสะดวกฉีดปุ๊บลดการปวดทันทีเหมือนยาชาเฉพาะที่ การจัดส่งไม่นาน</p>
+          <time datetime="2025-10-13">13 ตุลาคม 2568</time>
+        </article>
+      </div>
+      <div class="review-form-host"></div>
+    </div>
+  </section>
+<!-- reviews-seo:end -->
 
                 <section id="cooling-order-form" class="bg-white rounded-2xl shadow-md p-6 border-2 border-blue-500 max-w-xl mx-auto space-y-6">
                     <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
