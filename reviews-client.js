@@ -78,10 +78,13 @@
     const section = document.createElement("section");
     section.id = "customer-reviews";
     section.className = "reviews-section";
+    section.setAttribute("aria-labelledby", "customer-reviews-title");
     section.innerHTML = `
       <div class="reviews-inner">
-        <h2>รีวิวจากผู้ซื้อจริง</h2>
-        <p class="reviews-summary" aria-live="polite">กำลังโหลดรีวิว...</p>
+        <div class="reviews-header">
+          <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
+          <p class="reviews-summary" aria-live="polite">กำลังโหลดรีวิว...</p>
+        </div>
         <div class="reviews-list"></div>
         <div class="review-form-host"></div>
       </div>`;
@@ -89,23 +92,54 @@
   }
 
   function formMarkup() {
-    const formCard = document.createElement("div");
-    formCard.className = "review-form-card";
-    formCard.innerHTML = `
+    const formArea = document.createElement("div");
+    formArea.className = "review-form-area";
+    formArea.innerHTML = `
+          <button class="review-form-toggle" type="button" aria-expanded="false" aria-controls="review-submission-form">✍️ เขียนรีวิวสินค้า</button>
+          <div class="review-form-card" id="review-submission-form" hidden>
           <h3>เขียนรีวิวสินค้า (ร่วมแบ่งปันประสบการณ์ใช้งานจริง)</h3>
           <form class="review-form">
-            <label>ชื่อผู้รีวิว<input name="reviewer_name" required maxlength="100" autocomplete="name"></label>
+            <div class="review-form-grid">
+              <label>ชื่อผู้รีวิว<input name="reviewer_name" required maxlength="100" autocomplete="name"></label>
+              <label>สั่งซื้อผ่านช่องทาง<select name="source_platform" required>
+                <option value="Website">เว็บไซต์ทางการ</option>
+                <option value="Shopee">Shopee</option>
+                <option value="TikTok Shop">TikTok Shop</option>
+                <option value="Lazada">Lazada</option>
+              </select></label>
+            </div>
             <fieldset><legend>เลือกคะแนน 1–5 ดาว</legend><div class="star-picker" role="radiogroup" aria-label="เลือกคะแนน 1–5 ดาว"></div></fieldset>
-            <label>สั่งซื้อผ่านช่องทาง<select name="source_platform" required>
-              <option value="Website">เว็บไซต์ทางการ</option>
-              <option value="Shopee">Shopee</option>
-              <option value="TikTok Shop">TikTok Shop</option>
-              <option value="Lazada">Lazada</option>
-            </select></label>
-            <label>ข้อความรีวิว<textarea name="comment" rows="4" required maxlength="2000"></textarea></label>
-            <button type="submit">ส่งรีวิว</button><p class="review-form-status" role="status"></p>
-          </form>`;
-    return formCard;
+            <label>ข้อความรีวิว<textarea name="comment" rows="3" required maxlength="2000"></textarea></label>
+            <div class="review-form-actions"><button type="submit">ส่งรีวิว</button><p class="review-form-status" role="status"></p></div>
+          </form>
+          </div>`;
+    return formArea;
+  }
+
+  function setupFormToggle(section) {
+    const toggle = section.querySelector(".review-form-toggle");
+    const card = section.querySelector(".review-form-card");
+    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    toggle.addEventListener("click", () => {
+      const opening = card.hidden;
+      toggle.setAttribute("aria-expanded", String(opening));
+      toggle.textContent = opening ? "✕ ปิดฟอร์มรีวิว" : "✍️ เขียนรีวิวสินค้า";
+      if (opening) {
+        card.hidden = false;
+        if (!reduceMotion) card.animate(
+          [{ opacity: 0, transform: "translateY(-8px)" }, { opacity: 1, transform: "translateY(0)" }],
+          { duration: 200, easing: "ease-out" }
+        );
+      } else if (reduceMotion) {
+        card.hidden = true;
+      } else {
+        const animation = card.animate(
+          [{ opacity: 1, transform: "translateY(0)" }, { opacity: 0, transform: "translateY(-8px)" }],
+          { duration: 160, easing: "ease-in" }
+        );
+        animation.addEventListener("finish", () => { card.hidden = true; }, { once: true });
+      }
+    });
   }
 
   function setupStars(section) {
@@ -132,6 +166,7 @@
     const host = section.querySelector(".review-form-host") || section.querySelector(".reviews-inner");
     host.replaceChildren(formMarkup());
     setupStars(section);
+    setupFormToggle(section);
 
     const summary = section.querySelector(".reviews-summary");
     try {

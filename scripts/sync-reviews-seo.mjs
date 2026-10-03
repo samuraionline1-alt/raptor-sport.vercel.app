@@ -11,6 +11,7 @@ const PRODUCT_SLUGS = [
   "raptor-cool-patch", "raptor-ice-defense-sport-shampoo"
 ];
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const seedFile = path.join(root, "data", "verified-reviews-seed.json");
 const START = "<!-- reviews-seo:start -->";
 const END = "<!-- reviews-seo:end -->";
 
@@ -42,7 +43,7 @@ function renderReviews(reviews) {
     const date = reviewDate(review);
     return `        <article class="review-card">
           <div class="review-card__top"><strong>${escapeHtml(review.reviewer_name)}</strong><span class="review-stars" aria-label="${rating} จาก 5 ดาว">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</span></div>
-          <span class="inline-flex items-center gap-1 text-[11px] text-orange-600 font-semibold bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200">✓ ผู้ซื้อจริงผ่าน Shopee Official Store</span>
+          <span class="review-badge">✓ ผู้ซื้อจริงจาก Shopee Official Store</span>
           <p>${escapeHtml(review.comment)}</p>
           <time datetime="${escapeHtml(date)}">${escapeHtml(thaiDate(date))}</time>
         </article>`;
@@ -56,8 +57,10 @@ function renderReviews(reviews) {
   return `${START}
   <section id="customer-reviews" class="reviews-section" aria-labelledby="customer-reviews-title">
     <div class="reviews-inner">
-      <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
-      <p class="reviews-summary" aria-live="polite">${summary}</p>
+      <div class="reviews-header">
+        <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
+        <p class="reviews-summary" aria-live="polite">${summary}</p>
+      </div>
       <div class="reviews-list">${cards ? `\n${cards}\n      ` : ""}</div>
       <div class="review-form-host"></div>
     </div>
@@ -88,7 +91,7 @@ function updateProductJsonLd(html, reviews, slug) {
     if (reviews.length) {
       const average = reviews.reduce((sum, review) => sum + Number(review.rating), 0) / reviews.length;
       product.aggregateRating = {
-        "@type": "AggregateRating", ratingValue: average.toFixed(1), reviewCount: reviews.length,
+        "@type": "AggregateRating", ratingValue: average.toFixed(1), reviewCount: String(reviews.length),
         bestRating: "5", worstRating: "1"
       };
       product.review = reviews.map((review) => ({
@@ -106,11 +109,19 @@ function updateProductJsonLd(html, reviews, slug) {
 }
 
 const endpoint = `${SUPABASE_URL}/rest/v1/product_reviews?is_approved=eq.true&order=reviewed_at.desc`;
-const response = await fetch(endpoint, {
-  headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
-});
-if (!response.ok) throw new Error(`Supabase review sync failed: ${response.status} ${await response.text()}`);
-const approvedReviews = await response.json();
+let approvedReviews;
+let usingSeed = false;
+try {
+  const response = await fetch(endpoint, {
+    headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+  approvedReviews = await response.json();
+} catch (error) {
+  usingSeed = true;
+  approvedReviews = JSON.parse(await readFile(seedFile, "utf8"));
+  console.warn(`Supabase review sync unavailable (${error.message}); using ${path.relative(root, seedFile)}.`);
+}
 if (!Array.isArray(approvedReviews)) throw new Error("Supabase returned an unexpected reviews response");
 
 const grouped = approvedReviews.reduce((map, review) => {
@@ -121,7 +132,8 @@ const grouped = approvedReviews.reduce((map, review) => {
 }, new Map());
 
 let changed = 0;
-for (const slug of PRODUCT_SLUGS) {
+const slugsToUpdate = usingSeed ? [...grouped.keys()] : PRODUCT_SLUGS;
+for (const slug of slugsToUpdate) {
   const filename = path.join(root, "products", slug, "index.html");
   const html = await readFile(filename, "utf8");
   const reviews = grouped.get(slug) || [];
