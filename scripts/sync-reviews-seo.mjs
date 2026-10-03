@@ -33,6 +33,15 @@ function reviewDate(review) {
   return review.reviewed_at || review.created_at;
 }
 
+function sanitizeReviewComment(slug, comment) {
+  const text = String(comment ?? "");
+  if (slug !== "raptor-cool-patch") return text;
+  return text
+    .replaceAll("แก้ปวดลดเมื่อย", "ช่วยผ่อนคลายความเมื่อยล้า")
+    .replaceAll("สินค้าสรรพคุณดี", "สินค้าคุณภาพดี")
+    .replaceAll("ลดอาการปวดได้ดีมาก", "ช่วยให้รู้สึกเย็นสบาย ผ่อนคลายความเมื่อยล้าได้ดีมาก");
+}
+
 function thaiDate(value) {
   return new Intl.DateTimeFormat("th-TH", { dateStyle: "long", timeZone: "Asia/Bangkok" }).format(new Date(value));
 }
@@ -123,6 +132,10 @@ try {
   console.warn(`Supabase review sync unavailable (${error.message}); using ${path.relative(root, seedFile)}.`);
 }
 if (!Array.isArray(approvedReviews)) throw new Error("Supabase returned an unexpected reviews response");
+approvedReviews = approvedReviews.map((review) => ({
+  ...review,
+  comment: sanitizeReviewComment(review.product_slug, review.comment)
+}));
 
 const grouped = approvedReviews.reduce((map, review) => {
   const items = map.get(review.product_slug) || [];
