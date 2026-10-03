@@ -6,7 +6,7 @@
   const API_URL = `${SUPABASE_URL}/rest/v1/product_reviews`;
   const PRODUCT_SLUGS = new Set([
     "raptor-warming-spray", "raptor-cooling-spray", "raptor-go-energy-gel",
-    "raptor-dual-action-pack", "raptor-sport-therapy-oil", "raptor-speed-water-charge",
+    "raptor-dual-action-pack", "raptor-sport-therapy-oil", "raptor-v-mix", "raptor-speed-water-charge",
     "raptor-herbal-cooling-gel", "raptor-sport-foot-spray", "raptor-herbal-roll-on",
     "raptor-cool-patch", "raptor-ice-defense-sport-shampoo"
   ]);
@@ -17,10 +17,19 @@
     Lazada: "✓ ผู้ซื้อจริงจาก Lazada"
   };
   const headers = { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` };
+  const V_MIX_SLUGS = ["raptor-v-mix", "raptor-speed-water-charge"];
 
   function productSlug() {
     const match = location.pathname.match(/^\/products\/([^/]+)/);
     return match && PRODUCT_SLUGS.has(match[1]) ? match[1] : null;
+  }
+
+  function reviewSlugs(slug) {
+    return V_MIX_SLUGS.includes(slug) ? V_MIX_SLUGS : [slug];
+  }
+
+  function submissionSlug(slug) {
+    return V_MIX_SLUGS.includes(slug) ? "raptor-v-mix" : slug;
   }
 
   function sanitizeReviewComment(slug, comment) {
@@ -179,7 +188,8 @@
 
     const summary = section.querySelector(".reviews-summary");
     try {
-      const query = `?product_slug=eq.${encodeURIComponent(slug)}&is_approved=eq.true&order=reviewed_at.desc,created_at.desc`;
+      const slugs = reviewSlugs(slug).map(encodeURIComponent).join(",");
+      const query = `?product_slug=in.(${slugs})&is_approved=eq.true&order=reviewed_at.desc,created_at.desc`;
       const response = await fetch(API_URL + query, { headers });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const fetchedReviews = await response.json();
@@ -213,7 +223,7 @@
         const response = await fetch(API_URL, {
           method: "POST",
           headers: { ...headers, "Content-Type": "application/json", Prefer: "return=minimal" },
-          body: JSON.stringify({ product_slug: slug, reviewer_name: fields.get("reviewer_name").trim(), rating: Number(fields.get("rating")), comment: fields.get("comment").trim(), source_platform: fields.get("source_platform"), is_verified: true, is_approved: false })
+          body: JSON.stringify({ product_slug: submissionSlug(slug), reviewer_name: fields.get("reviewer_name").trim(), rating: Number(fields.get("rating")), comment: fields.get("comment").trim(), source_platform: fields.get("source_platform"), is_verified: true, is_approved: false })
         });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         form.reset(); form.querySelector('[value="5"]').checked = true;

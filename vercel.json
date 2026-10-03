@@ -27,6 +27,11 @@
   ],
   "redirects": [
     {
+      "source": "/products/raptor-speed-water-charge/",
+      "destination": "/products/raptor-v-mix/",
+      "permanent": true
+    },
+    {
       "source": "/products/raptor-ice-cold-spray/",
       "destination": "/products/raptor-cooling-spray/",
       "permanent": true
