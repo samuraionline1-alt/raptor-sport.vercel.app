@@ -23,6 +23,15 @@
     return match && PRODUCT_SLUGS.has(match[1]) ? match[1] : null;
   }
 
+  function sanitizeReviewComment(slug, comment) {
+    const text = String(comment ?? "");
+    if (slug !== "raptor-cool-patch") return text;
+    return text
+      .replaceAll("แก้ปวดลดเมื่อย", "ช่วยผ่อนคลายความเมื่อยล้า")
+      .replaceAll("สินค้าสรรพคุณดี", "สินค้าคุณภาพดี")
+      .replaceAll("ลดอาการปวดได้ดีมาก", "ช่วยให้รู้สึกเย็นสบาย ผ่อนคลายความเมื่อยล้าได้ดีมาก");
+  }
+
   function findProduct(value) {
     if (Array.isArray(value)) return value.map(findProduct).find(Boolean);
     if (!value || typeof value !== "object") return null;
@@ -173,7 +182,11 @@
       const query = `?product_slug=eq.${encodeURIComponent(slug)}&is_approved=eq.true&order=reviewed_at.desc,created_at.desc`;
       const response = await fetch(API_URL + query, { headers });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const reviews = await response.json();
+      const fetchedReviews = await response.json();
+      const reviews = fetchedReviews.map((review) => ({
+        ...review,
+        comment: sanitizeReviewComment(slug, review.comment)
+      }));
       const list = section.querySelector(".reviews-list");
       list.replaceChildren();
       if (reviews.length) {
