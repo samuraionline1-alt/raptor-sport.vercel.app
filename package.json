@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "scripts": {
+    "sync-reviews": "node scripts/sync-reviews-seo.mjs"
+  }
+}
