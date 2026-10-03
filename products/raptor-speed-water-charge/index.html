@@ -40,14 +40,46 @@
   },
   "offers": {
     "@type": "Offer",
-    "url": "https://raptor-sport.vercel.app/products/raptor-speed-water-charge/",
+    "url": "https://www.raptorthailand.com/products/raptor-speed-water-charge/",
     "priceCurrency": "THB",
-    "price": "490",
-    "availability": "https://schema.org/InStock",
+    "price": "490.00",
+    "priceValidUntil": "2026-12-31",
     "itemCondition": "https://schema.org/NewCondition",
-    "seller": {
-      "@type": "Organization",
-      "name": "Raptor Sport"
+    "availability": "https://schema.org/InStock",
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "THB"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "TH"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 0,
+          "maxValue": 1,
+          "unitCode": "DAY"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 3,
+          "unitCode": "DAY"
+        }
+      }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "TH",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 7,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
     }
   }
 }
