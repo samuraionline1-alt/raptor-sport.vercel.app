@@ -43,7 +43,7 @@ function renderReviews(reviews) {
     const date = reviewDate(review);
     return `        <article class="review-card">
           <div class="review-card__top"><strong>${escapeHtml(review.reviewer_name)}</strong><span class="review-stars" aria-label="${rating} จาก 5 ดาว">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</span></div>
-          <span class="inline-flex items-center gap-1 text-[11px] text-orange-600 font-semibold bg-orange-50 px-2 py-0.5 rounded-full border border-orange-200">✓ ผู้ซื้อจริงผ่าน Shopee Official Store</span>
+          <span class="review-badge">✓ ผู้ซื้อจริงจาก Shopee Official Store</span>
           <p>${escapeHtml(review.comment)}</p>
           <time datetime="${escapeHtml(date)}">${escapeHtml(thaiDate(date))}</time>
         </article>`;
@@ -57,8 +57,10 @@ function renderReviews(reviews) {
   return `${START}
   <section id="customer-reviews" class="reviews-section" aria-labelledby="customer-reviews-title">
     <div class="reviews-inner">
-      <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
-      <p class="reviews-summary" aria-live="polite">${summary}</p>
+      <div class="reviews-header">
+        <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
+        <p class="reviews-summary" aria-live="polite">${summary}</p>
+      </div>
       <div class="reviews-list">${cards ? `\n${cards}\n      ` : ""}</div>
       <div class="review-form-host"></div>
     </div>
