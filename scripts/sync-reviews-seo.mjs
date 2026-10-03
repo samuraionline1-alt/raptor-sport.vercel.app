@@ -69,7 +69,7 @@ function renderReviews(reviews) {
     ? `⭐ ${average.toFixed(1)}/5.0 จากรีวิวผู้ซื้อจริง ${reviews.length} รายการ`
     : "ยังไม่มีรีวิวที่เผยแพร่ เป็นคนแรกที่แบ่งปันประสบการณ์กับสินค้านี้";
   return `${START}
-  <section id="customer-reviews" class="reviews-section" aria-labelledby="customer-reviews-title">
+  <section id="customer-reviews" class="reviews-section scroll-mt-24" aria-labelledby="customer-reviews-title">
     <div class="reviews-inner">
       <div class="reviews-header">
         <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
@@ -84,11 +84,26 @@ ${END}`;
 
 function updateVisibleReviews(html, reviews) {
   const section = renderReviews(reviews);
-  const current = new RegExp(`${START}[\\s\\S]*?${END}`);
-  if (current.test(html)) return html.replace(current, section);
-  const anchor = /<aside\b[^>]*aria-labelledby=["']related-products-title["']/i;
-  if (anchor.test(html)) return html.replace(anchor, `${section}\n$&`);
-  return html.replace(/<footer\b/i, `${section}\n<footer`);
+  const current = new RegExp(`\\s*${START}[\\s\\S]*?${END}\\s*`);
+  const currentMatch = current.exec(html);
+  const existingOrderForm = html.search(/<form\b[^>]*class=["'][^"']*\\braptor-order-form\\b/i);
+  if (currentMatch && currentMatch.index < existingOrderForm) {
+    return html.replace(current, `\n${section}\n`);
+  }
+  const withoutCurrent = html.replace(current, "\n");
+  const orderForm = withoutCurrent.search(/<form\b[^>]*class=["'][^"']*\\braptor-order-form\\b/i);
+  if (orderForm !== -1) {
+    const orderSection = withoutCurrent.lastIndexOf("<section", orderForm);
+    if (orderSection !== -1) {
+      const beforeSection = withoutCurrent.slice(0, orderSection);
+      const orderAnchor = beforeSection.match(/<div\b[^>]*id=["'][^"']*order-form-anchor[^"']*["'][^>]*><\/div>\s*$/i);
+      const insertionPoint = orderAnchor ? orderSection - orderAnchor[0].length : orderSection;
+      return `${withoutCurrent.slice(0, insertionPoint)}${section}\n${withoutCurrent.slice(insertionPoint)}`;
+    }
+  }
+  const relatedProducts = /<aside\b[^>]*aria-labelledby=["']related-products-title["']/i;
+  if (relatedProducts.test(withoutCurrent)) return withoutCurrent.replace(relatedProducts, `${section}\n$&`);
+  return withoutCurrent.replace(/<footer\b/i, `${section}\n<footer`);
 }
 
 function updateProductJsonLd(html, reviews, slug) {
