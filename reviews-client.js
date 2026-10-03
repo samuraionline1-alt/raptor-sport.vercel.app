@@ -39,7 +39,7 @@
     const product = findProduct(data);
     const average = reviews.reduce((sum, item) => sum + Number(item.rating), 0) / reviews.length;
     product.aggregateRating = { "@type": "AggregateRating", ratingValue: average.toFixed(1), reviewCount: reviews.length, bestRating: 5, worstRating: 1 };
-    product.review = reviews.slice(0, 5).map((item) => ({
+    product.review = reviews.map((item) => ({
       "@type": "Review",
       author: { "@type": "Person", name: item.reviewer_name },
       datePublished: item.reviewed_at || item.created_at,
@@ -83,23 +83,29 @@
         <h2>รีวิวจากผู้ซื้อจริง</h2>
         <p class="reviews-summary" aria-live="polite">กำลังโหลดรีวิว...</p>
         <div class="reviews-list"></div>
-        <details class="review-form-card">
-          <summary>เขียนรีวิวจากผู้ใช้จริง</summary>
+        <div class="review-form-host"></div>
+      </div>`;
+    return section;
+  }
+
+  function formMarkup() {
+    const formCard = document.createElement("div");
+    formCard.className = "review-form-card";
+    formCard.innerHTML = `
+          <h3>เขียนรีวิวสินค้า (ร่วมแบ่งปันประสบการณ์ใช้งานจริง)</h3>
           <form class="review-form">
-            <label>ชื่อของคุณ<input name="reviewer_name" required maxlength="100" autocomplete="name"></label>
-            <fieldset><legend>คะแนนความพึงพอใจ</legend><div class="star-picker" role="radiogroup" aria-label="คะแนนความพึงพอใจ"></div></fieldset>
-            <label>ช่องทางที่สั่งซื้อ<select name="source_platform" required>
-              <option value="Website">เว็บไซต์ทางการ (raptorthailand.com)</option>
-              <option value="Shopee">Shopee Official Store</option>
+            <label>ชื่อผู้รีวิว<input name="reviewer_name" required maxlength="100" autocomplete="name"></label>
+            <fieldset><legend>เลือกคะแนน 1–5 ดาว</legend><div class="star-picker" role="radiogroup" aria-label="เลือกคะแนน 1–5 ดาว"></div></fieldset>
+            <label>สั่งซื้อผ่านช่องทาง<select name="source_platform" required>
+              <option value="Website">เว็บไซต์ทางการ</option>
+              <option value="Shopee">Shopee</option>
               <option value="TikTok Shop">TikTok Shop</option>
               <option value="Lazada">Lazada</option>
             </select></label>
             <label>ข้อความรีวิว<textarea name="comment" rows="4" required maxlength="2000"></textarea></label>
             <button type="submit">ส่งรีวิว</button><p class="review-form-status" role="status"></p>
-          </form>
-        </details>
-      </div>`;
-    return section;
+          </form>`;
+    return formCard;
   }
 
   function setupStars(section) {
@@ -117,9 +123,14 @@
   async function init() {
     const slug = productSlug();
     if (!slug) return;
-    const section = sectionMarkup();
-    const anchor = document.querySelector("aside[aria-labelledby='related-products-title']") || document.querySelector("footer");
-    (anchor || document.body).insertAdjacentElement(anchor ? "beforebegin" : "beforeend", section);
+    let section = document.querySelector("#customer-reviews");
+    if (!section) {
+      section = sectionMarkup();
+      const anchor = document.querySelector("aside[aria-labelledby='related-products-title']") || document.querySelector("footer");
+      (anchor || document.body).insertAdjacentElement(anchor ? "beforebegin" : "beforeend", section);
+    }
+    const host = section.querySelector(".review-form-host") || section.querySelector(".reviews-inner");
+    host.replaceChildren(formMarkup());
     setupStars(section);
 
     const summary = section.querySelector(".reviews-summary");
@@ -129,6 +140,7 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const reviews = await response.json();
       const list = section.querySelector(".reviews-list");
+      list.replaceChildren();
       if (reviews.length) {
         const average = reviews.reduce((sum, item) => sum + Number(item.rating), 0) / reviews.length;
         summary.textContent = `⭐ ${average.toFixed(1)}/5.0 จากรีวิวผู้ซื้อจริง ${reviews.length} รายการ`;
@@ -158,7 +170,7 @@
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         form.reset(); form.querySelector('[value="5"]').checked = true;
         status.className = "review-form-status success";
-        status.textContent = "ขอบคุณสำหรับรีวิวครับ! ระบบได้รับข้อมูลเรียบร้อยแล้ว รีวิวของคุณจะแสดงผลหลังผ่านการตรวจสอบความถูกต้อง";
+        status.textContent = "ขอบคุณสำหรับรีวิวครับ! ระบบได้รับข้อมูลเรียบร้อยแล้ว รีวิวของคุณจะแสดงผลบนหน้าเว็บหลังผ่านการตรวจสอบ";
       } catch (error) {
         console.error("Unable to submit product review", error);
         status.className = "review-form-status error";
