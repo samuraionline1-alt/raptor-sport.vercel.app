@@ -6,10 +6,15 @@ const SUPABASE_URL = process.env.SUPABASE_URL || "https://jktnltfbyuvurhqmzhww.s
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_d1vo34cUZUX5F5PetGyVBg_rpEwqBbF";
 const PRODUCT_SLUGS = [
   "raptor-warming-spray", "raptor-cooling-spray", "raptor-go-energy-gel",
-  "raptor-dual-action-pack", "raptor-sport-therapy-oil", "raptor-speed-water-charge",
+  "raptor-dual-action-pack", "raptor-sport-therapy-oil", "raptor-v-mix",
   "raptor-herbal-cooling-gel", "raptor-sport-foot-spray", "raptor-herbal-roll-on",
   "raptor-cool-patch", "raptor-ice-defense-sport-shampoo"
 ];
+const REVIEW_SLUG_ALIASES = new Map([
+  ["raptor-v-mix", "raptor-v-mix"],
+  ["raptor-speed-water-charge", "raptor-v-mix"]
+]);
+const REVIEW_SLUGS = [...new Set([...PRODUCT_SLUGS, ...REVIEW_SLUG_ALIASES.keys()])];
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const seedFile = path.join(root, "data", "verified-reviews-seed.json");
 const START = "<!-- reviews-seo:start -->";
@@ -117,7 +122,7 @@ function updateProductJsonLd(html, reviews, slug) {
   return updated;
 }
 
-const endpoint = `${SUPABASE_URL}/rest/v1/product_reviews?is_approved=eq.true&order=reviewed_at.desc`;
+const endpoint = `${SUPABASE_URL}/rest/v1/product_reviews?product_slug=in.(${REVIEW_SLUGS.join(",")})&is_approved=eq.true&order=reviewed_at.desc`;
 let approvedReviews;
 let usingSeed = false;
 try {
@@ -138,9 +143,10 @@ approvedReviews = approvedReviews.map((review) => ({
 }));
 
 const grouped = approvedReviews.reduce((map, review) => {
-  const items = map.get(review.product_slug) || [];
+  const slug = REVIEW_SLUG_ALIASES.get(review.product_slug) || review.product_slug;
+  const items = map.get(slug) || [];
   items.push(review);
-  map.set(review.product_slug, items);
+  map.set(slug, items);
   return map;
 }, new Map());
 
