@@ -19,6 +19,24 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const seedFile = path.join(root, "data", "verified-reviews-seed.json");
 const START = "<!-- reviews-seo:start -->";
 const END = "<!-- reviews-seo:end -->";
+const GTM_ID = "GTM-TW2P4VN5";
+
+function ensureGtm(html) {
+  if (!html.includes(`googletagmanager.com/gtm.js?id='+i+dl`) || !html.includes(GTM_ID)) {
+    const snippet = `    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','${GTM_ID}');</script>
+    <!-- End Google Tag Manager -->`;
+    html = html.replace(/(<meta\s+name=["']viewport["'][^>]*>)/i, `$1\n${snippet}`);
+  }
+  if (!html.includes('src="/gtm-ecommerce.js"')) {
+    html = html.replace('</head>', '    <script src="/gtm-ecommerce.js" defer></script>\n</head>');
+  }
+  return html;
+}
 
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, (character) => ({
@@ -171,7 +189,7 @@ for (const slug of slugsToUpdate) {
   const filename = path.join(root, "products", slug, "index.html");
   const html = await readFile(filename, "utf8");
   const reviews = grouped.get(slug) || [];
-  const updated = updateVisibleReviews(updateProductJsonLd(html, reviews, slug), reviews);
+  const updated = ensureGtm(updateVisibleReviews(updateProductJsonLd(html, reviews, slug), reviews));
   if (updated !== html) {
     await writeFile(filename, updated);
     changed += 1;
