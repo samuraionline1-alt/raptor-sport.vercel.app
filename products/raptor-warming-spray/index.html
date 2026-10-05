@@ -385,13 +385,13 @@
       <div class="reviews-list">
         <article class="review-card">
           <div class="review-card__top"><strong>ผู้ซื้อยืนยันจาก Shopee</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
-          <span class="review-badge">✓ ผู้ซื้อจริงจาก Shopee Official Store</span>
+          <span class="review-badge">✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)</span>
           <p>สินค้ามีคุณภาพน่าใช้งานตรงตามที่โฆษณาไว้ทุกอย่าง ร้านค้าตอบแชทไว ขนส่งจัดส่งรวดเร็ว ใครกำลังมองหาสินค้าตอนนี้อยู่แนะนำเลยครับ ขอบคุณครับ</p>
           <time datetime="2026-09-24">24 กันยายน 2569</time>
         </article>
         <article class="review-card">
           <div class="review-card__top"><strong>big_piyanat</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
-          <span class="review-badge">✓ ผู้ซื้อจริงจาก Shopee Official Store</span>
+          <span class="review-badge">✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)</span>
           <p>ใช้ดี ลดอาการบวม และ บรรเทาความเจ็บปวดได้ดี คุณภาพ: ร้านส่งสินค้าไวมากครับ</p>
           <time datetime="2026-09-30">30 กันยายน 2569</time>
         </article>
@@ -412,17 +412,25 @@
                         <input type="hidden" name="price" value="฿179">
                         <input type="hidden" name="payment_method" value="COD">
                         <input type="hidden" name="source" value="Raptor Sport Official Store">
+                        <aside class="rounded-xl border border-orange-300 bg-orange-50 p-4 text-sm text-slate-700 shadow-sm" aria-label="สิทธิพิเศษเฉพาะการสั่งซื้อผ่านเว็บไซต์">
+                            <h4 class="font-bold text-orange-700">⚡ สิทธิพิเศษเฉพาะสั่งผ่านหน้าเว็บ Official เท่านั้น</h4>
+                            <ul class="mt-2 space-y-1 leading-relaxed">
+                                <li>✅ รับส่วนลดแพ็กเกจสุดคุ้ม (ประหยัดกว่าซื้อแยกในแอปทั่วไป)</li>
+                                <li>✅ สินค้าล็อตผลิตใหม่ล่าสุด ส่งตรงจากคลังบริษัท Raptor Global Import</li>
+                                <li>✅ ส่งฟรีด่วนพิเศษทุกออเดอร์ มีบริการเก็บเงินปลายทาง ไม่บวกเพิ่ม</li>
+                            </ul>
+                        </aside>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name">
+                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name" autocomplete="name">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone" pattern="^0[689][0-9]{8}$" maxlength="10" minlength="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10); this.setCustomValidity('')" oninvalid="this.setCustomValidity('กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)')"><p class="mt-1 text-xs text-slate-500">กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)</p>
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone" pattern="^0[689][0-9]{8}$" maxlength="10" minlength="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10); this.setCustomValidity('')" oninvalid="this.setCustomValidity('กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)')" autocomplete="tel"><p class="mt-1 text-xs text-slate-500">กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)</p>
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address"></textarea>
+                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address" autocomplete="street-address"></textarea>
                         </div>
                         <fieldset class="space-y-3" data-bundle-selector>
                             <legend class="block text-sm font-bold text-slate-700 mb-2">เลือกเซ็ตสุดคุ้ม</legend>
@@ -435,6 +443,9 @@
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
                                 <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_3" data-quantity="3" class="mt-1 accent-orange-500"><span class="flex-1"><strong class="block text-slate-900">เซ็ตนักกีฬาซ้อมหนัก 3 ชิ้น</strong><small class="text-emerald-700">คุ้มที่สุด + ส่งฟรี</small></span><strong data-bundle-price="tier_3" class="text-orange-600"></strong></span>
                             </label>
+                            <label class="block cursor-pointer rounded-xl border-2 border-orange-300 bg-orange-50/60 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-100">
+                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_6" data-quantity="6" class="mt-1 accent-orange-500"><span class="flex-1"><strong class="block text-slate-900">เซ็ตทีมกีฬา / ยกแพ็ก 6 ชิ้น (คุ้มสุดสำหรับทีมฟุตบอลและชมรมวิ่ง)</strong><small class="text-emerald-700">ลด 20% + ส่งฟรี</small></span><strong data-bundle-price="tier_6" class="text-orange-600"></strong></span>
+                            </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
                                 <span class="flex items-center gap-3"><input type="radio" name="bundle_tier_choice" value="custom" class="accent-orange-500"><span class="font-bold text-slate-900">กำหนดจำนวนเอง (มากกว่า 3)</span></span>
                                 <input type="number" min="4" value="4" inputmode="numeric" data-custom-quantity class="mt-3 hidden w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" aria-label="จำนวนสินค้าแบบกำหนดเอง">
@@ -442,10 +453,12 @@
                         </fieldset>
                         <input type="hidden" name="quantity" value="2">
                         <input type="hidden" name="bundle_tier" value="tier_2">
-                        <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-1">รายละเอียดเพิ่มเติม</label>
-                            <textarea rows="3" placeholder="ระบุสี/รสชาติ/หมายเหตุการจัดส่ง หรือรายละเอียดอื่น ๆ" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="order_details"></textarea>
-                        </div>
+                        <details class="text-sm text-slate-600">
+                            <summary class="cursor-pointer font-semibold text-orange-600 hover:underline">+ เพิ่มหมายเหตุถึงขนส่ง หรือขอใบกำกับภาษี (ถ้ามี)</summary>
+                            <div class="mt-3">
+                                <textarea rows="3" placeholder="ระบุสี/รสชาติ/หมายเหตุการจัดส่ง หรือรายละเอียดอื่น ๆ" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="order_details"></textarea>
+                            </div>
+                        </details>
                         <button type="submit" class="w-full bg-orange-brand text-white font-bold text-lg py-3.5 rounded-xl shadow-md hover:bg-orange-600 transition-all cursor-pointer">
                             ยืนยันการสั่งซื้อเลยตอนนี้
                         </button>
@@ -634,6 +647,7 @@
             let totalPrice = unitPrice * quantity;
             if (selectedTier === 'tier_2') totalPrice = Math.round(unitPrice * 2 * 0.92);
             if (selectedTier === 'tier_3') totalPrice = Math.round(unitPrice * 3 * 0.85);
+            if (selectedTier === 'tier_6') totalPrice = Math.round(unitPrice * 6 * 0.80);
             return { unitPrice, quantity, totalPrice, bundleTier: selectedTier };
         }
 
@@ -665,7 +679,7 @@
             }
 
             if (priceInput && unitPrice) priceInput.value = formatThaiBaht(unitPrice);
-            const tierPrices = { tier_1: unitPrice, tier_2: Math.round(unitPrice * 2 * 0.92), tier_3: Math.round(unitPrice * 3 * 0.85) };
+            const tierPrices = { tier_1: unitPrice, tier_2: Math.round(unitPrice * 2 * 0.92), tier_3: Math.round(unitPrice * 3 * 0.85), tier_6: Math.round(unitPrice * 6 * 0.80) };
             Object.entries(tierPrices).forEach(([tier, price]) => {
                 const priceLabel = form.querySelector(`[data-bundle-price="${tier}"]`);
                 if (priceLabel) priceLabel.textContent = formatThaiBaht(price);
