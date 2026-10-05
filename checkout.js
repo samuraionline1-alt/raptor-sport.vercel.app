@@ -64,14 +64,24 @@
 
     document.addEventListener('submit', async function (event) {
         var form = event.target;
-        if (!form.matches('.raptor-order-form') || form.querySelector('[name="payment_method"]:checked')?.value !== 'STRIPE') return;
+        if (!form.matches('.raptor-order-form')) return;
+        var order = details(form);
+        order.phone = RaptorOrders.cleanPhone(order.phone);
+        order.order_ref = RaptorOrders.createRef(order.phone);
+        order.total_price = order.totalPrice;
+        ['order_ref', 'phone', 'total_price'].forEach(function (key) {
+            var input = form.querySelector('[name="' + key + '"]');
+            if (!input) { input = document.createElement('input'); input.type = 'hidden'; input.name = key; form.appendChild(input); }
+            input.value = order[key];
+        });
+        RaptorOrders.save(order);
+        if (form.querySelector('[name="payment_method"]:checked')?.value !== 'STRIPE') return;
         event.preventDefault();
         event.stopImmediatePropagation();
 
         var button = form.querySelector('button[type="submit"], button:not([type])');
         var originalText = button?.textContent;
         if (button) { button.disabled = true; button.textContent = 'กำลังเปิดหน้าชำระเงิน...'; }
-        var order = details(form);
         var tracking = ecommerce(order);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ ecommerce: null });

@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 const STRIPE_ENDPOINT = 'https://api.stripe.com/v1/checkout/sessions';
 const SITE_ORIGIN = 'https://www.raptorthailand.com';
 
@@ -15,19 +16,19 @@ function cancelUrl(pageUrl) {
   return SITE_ORIGIN + '/';
 }
 
-function successUrl(body, totalPrice, product, quantity) {
-  if (body.is_wholesale === true) {
-    return `${SITE_ORIGIN}/wholesale/?payment=stripe_success&value=${encodeURIComponent(totalPrice)}&qty=${encodeURIComponent(quantity)}&session_id={CHECKOUT_SESSION_ID}`;
-  }
-  if (body.success_url) {
+function successUrl(body, totalPrice, product, quantity, orderRef, customerName, phone) {
+  let destination = SITE_ORIGIN + (body.is_wholesale === true ? '/wholesale/' : '/thank-you.html');
+  if (!body.is_wholesale && body.success_url) {
     try {
-      const url = new URL(body.success_url, SITE_ORIGIN);
-      if (url.origin === SITE_ORIGIN || url.hostname.endsWith('.vercel.app')) return url.toString();
-    } catch (_) {
-      // Ignore unsafe or invalid overrides and use the standard receipt page.
-    }
+      const override = new URL(body.success_url, SITE_ORIGIN);
+      if (override.origin === SITE_ORIGIN || override.hostname.endsWith('.vercel.app')) destination = override.toString();
+    } catch (_) {}
   }
-  return `${SITE_ORIGIN}/thank-you.html?payment=stripe_success&value=${encodeURIComponent(totalPrice)}&product=${encodeURIComponent(product)}&qty=${quantity}&session_id={CHECKOUT_SESSION_ID}`;
+  const url = new URL(destination);
+  Object.entries({ payment: 'stripe_success', value: totalPrice, product, qty: quantity,
+    order_ref: orderRef, customer_name: customerName, phone }).forEach(([key, value]) => url.searchParams.set(key, value));
+  url.searchParams.delete('session_id');
+  return url.toString() + '&session_id={CHECKOUT_SESSION_ID}';
 }
 
 export default async function handler(req, res) {
@@ -47,9 +48,14 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid product or total price' });
   }
 
+  const cleanPhone = safeText(body.phone, 50).replace(/[^0-9]/g, "");
+  const customerName = safeText(body.customer_name, 200);
+  const orderRef = safeText(body.order_ref, 100) || `RPT-${Date.now().toString().slice(-5)}-${cleanPhone.slice(-4)}-${randomUUID()}`;
   const metadata = {
-    customer_name: safeText(body.customer_name, 200),
-    phone: safeText(body.phone, 50),
+    order_ref: orderRef,
+    order_channel: body.is_wholesale === true ? "wholesale" : "retail",
+    customer_name: customerName,
+    phone: cleanPhone,
     address: safeText(body.address, 500),
     product,
     quantity: String(quantity),
@@ -61,11 +67,12 @@ export default async function handler(req, res) {
     'payment_method_types[0]': 'promptpay',
     'payment_method_types[1]': 'card',
     'line_items[0][price_data][currency]': 'thb',
-    'line_items[0][price_data][product_data][name]': product,
+    'line_items[0][price_data][product_data][name]': `[${orderRef}] ${product} (${safeText(body.bundleTier, 100) || quantity + ' ชิ้น'}) - ${customerName} (${cleanPhone})`,
+    'payment_intent_data[description]': `Order ${orderRef} | ลูกค้า: ${customerName} | โทร: ${cleanPhone} | สินค้า: ${product} (${quantity} ชิ้น)`,
     // The line item represents the complete bundle so Stripe charges the exact discounted total.
     'line_items[0][price_data][unit_amount]': String(Math.round(totalPrice * 100)),
     'line_items[0][quantity]': '1',
-    success_url: successUrl(body, totalPrice, product, quantity),
+    success_url: successUrl(body, totalPrice, product, quantity, orderRef, customerName, cleanPhone),
     cancel_url: cancelUrl(body.page_url)
   });
   const customerEmail = safeText(body.email, 254);
