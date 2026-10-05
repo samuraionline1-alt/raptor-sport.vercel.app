@@ -277,6 +277,8 @@
     <script src="/promo-config.js?v=receipt-20261005" defer></script>
     <script src="/promotions.js?v=receipt-20261005" defer></script>
     <script src="/checkout.js?v=promotions-20261005" defer></script>
+    <link rel="stylesheet" href="/sticky-order-bar.css">
+    <script src="/sticky-order-bar.js" defer></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <header class="sticky top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
@@ -987,7 +989,7 @@
     </aside>
 <script src="/product-image-zoom.js"></script>
     
-    <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" aria-label="ทางลัดสั่งซื้อ">
+    <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" data-sticky-order-bar aria-label="ทางลัดสั่งซื้อ">
         <a href="https://lin.ee/qtuszPa" data-contact-pixel-button="line chat" class="shrink-0 rounded-xl border border-zinc-700 px-3 py-2.5 text-center text-sm font-semibold text-white"><i class="fa-brands fa-line text-green-400"></i> สอบถามแอดมิน</a>
         <a href="#raptor-warming-spray-order-form" onclick="document.getElementById('raptor-warming-spray-order-form').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="flex-grow bg-[#FF6B00] text-white font-bold py-2.5 px-4 rounded-xl text-center">🛒 สั่งซื้อเก็บเงินปลายทาง (ส่งฟรี)</a>
     </div>

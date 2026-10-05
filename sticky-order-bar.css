@@ -1,0 +1,19 @@
+[data-sticky-order-bar] {
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+[data-sticky-order-bar][data-hidden] {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100%);
+}
+
+[data-sticky-order-bar][data-typing] {
+    transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-sticky-order-bar] {
+        transition: none;
+    }
+}
