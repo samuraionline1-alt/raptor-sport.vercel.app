@@ -54,8 +54,9 @@
                 ? 'ดำเนินการสแกน QR / ชำระเงินออนไลน์'
                 : 'ยืนยันการสั่งซื้อเก็บเงินปลายทาง';
         }
-        fieldset.addEventListener('change', updateButton);
+        fieldset.addEventListener('change', function () { updateButton(); if (window.RaptorPromotions) RaptorPromotions.update(form); });
         updateButton();
+        if (window.RaptorPromotions) RaptorPromotions.update(form);
     }
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -66,22 +67,23 @@
         var form = event.target;
         if (!form.matches('.raptor-order-form')) return;
         var order = details(form);
+        if (window.RaptorPromotions) Object.assign(order, RaptorPromotions.update(form));
         order.phone = RaptorOrders.cleanPhone(order.phone);
         order.order_ref = RaptorOrders.createRef(order.phone);
-        order.total_price = `฿${order.totalPrice}`;
+        order.total_price = order.totalPrice;
         order.price = order.total_price;
         order.bundle_tier = order.bundleTier;
         const { product, quantity, totalPrice, address } = order;
         const orderRef = order.order_ref, cleanPhone = order.phone, customerName = order.customer_name;
         const notes = order.order_details;
-        order.order_details = `รหัส: #${orderRef} | สินค้า: ${product} (จำนวน ${quantity} ชิ้น) | ยอดสุทธิ: ฿${totalPrice} | ลูกค้า: ${customerName} (${cleanPhone}) | ที่อยู่: ${address}`;
+        order.order_details = `รหัส: #${orderRef} | สินค้า: ${product} (จำนวน ${quantity} ชิ้น) | ของแถม: ${order.free_gifts || "ไม่มี"} | คูปอง: ${order.coupon_code || "ไม่มี"} | ยอดสุทธิ: ฿${totalPrice} | ลูกค้า: ${customerName} (${cleanPhone}) | ที่อยู่: ${address}`;
         form.addEventListener('formdata', function (event) {
             event.formData.set('bundle_tier', order.bundleTier);
             event.formData.set('bundle_tier_choice', order.bundleTier);
             event.formData.set('order_details', order.order_details);
             if (notes) event.formData.set('customer_notes', notes);
         }, { once: true });
-        ['order_ref', 'phone', 'price', 'total_price', 'bundle_tier'].forEach(function (key) {
+        ['order_ref', 'phone', 'price', 'total_price', 'bundle_tier', 'coupon_code', 'discount_amount', 'free_gifts'].forEach(function (key) {
             var input = form.querySelector('[name="' + key + '"]');
             if (!input) { input = document.createElement('input'); input.type = 'hidden'; input.name = key; form.appendChild(input); }
             input.value = order[key];

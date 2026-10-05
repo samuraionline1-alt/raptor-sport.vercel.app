@@ -241,8 +241,10 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
     <script src="/site-config.js"></script>
     <script src="/gtm-ecommerce.js" defer></script>
-    <script src="/order-context.js?v=order-ref-20261005" defer></script>
-    <script src="/checkout.js?v=order-ref-20261005" defer></script>
+    <script src="/order-context.js?v=promotions-20261005" defer></script>
+    <script src="/promo-config.js?v=promotions-20261005" defer></script>
+    <script src="/promotions.js?v=promotions-20261005" defer></script>
+    <script src="/checkout.js?v=promotions-20261005" defer></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <noscript>
@@ -989,6 +991,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
         }
 
         function getOrderPricing(form) {
+            if (form.classList.contains("raptor-order-form") && window.RaptorPromotions) return RaptorPromotions.pricing(form);
             const unitPrice = getNumericPrice(form.dataset.price || form.querySelector('input[name="price"]')?.value || '');
             const quantityInput = form.querySelector('input[name="quantity"]');
             const quantity = Math.max(1, Number.parseInt(quantityInput?.value, 10) || 1);
@@ -998,6 +1001,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
 
         function updateOrderPriceByQuantity(form) {
             if (!form.classList.contains('raptor-order-form')) return;
+            if (window.RaptorPromotions) { RaptorPromotions.update(form); return; }
 
             const { unitPrice, quantity, totalPrice } = getOrderPricing(form);
             const priceInput = form.querySelector('input[name="price"]');

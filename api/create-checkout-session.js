@@ -1,3 +1,4 @@
+import promoConfig from '../promo-config.js';
 const STRIPE_ENDPOINT = 'https://api.stripe.com/v1/checkout/sessions';
 const SITE_ORIGIN = 'https://www.raptorthailand.com';
 
@@ -42,7 +43,18 @@ export default async function handler(req, res) {
   const body = req.body || {};
   const product = safeText(body.product, 200);
   const quantity = Math.max(1, Math.floor(Number(body.quantity)) || 1);
-  const totalPrice = Number(body.totalPrice);
+  const totalPrice = Number(body.total_price ?? body.totalPrice);
+  let promotion = { coupon_code: '', discount_amount: 0, free_gifts: '' };
+  if (body.is_wholesale !== true && body.subtotal != null) {
+    const subtotal = Number(body.subtotal);
+    const tier = body.bundleTier === 'custom' ? 'tier_' + quantity : body.bundleTier;
+    promotion = promoConfig.calculate(subtotal, tier, body.coupon_code);
+    if (!Number.isFinite(subtotal) || subtotal <= 0 || promotion.couponError || Math.abs(promotion.totalPrice - totalPrice) > 0.001) {
+      return res.status(400).json({ error: 'Invalid promotion or discounted total' });
+    }
+  } else if (body.is_wholesale !== true && body.coupon_code) {
+    return res.status(400).json({ error: 'Missing bundle subtotal' });
+  }
   if (!product || !Number.isFinite(totalPrice) || totalPrice <= 0) {
     return res.status(400).json({ error: 'Invalid product or total price' });
   }
@@ -54,6 +66,9 @@ export default async function handler(req, res) {
   }
   const orderRef = body.order_ref;
   const metadata = {
+    coupon_code: promotion.coupon_code,
+    discount_amount: String(promotion.discount_amount),
+    free_gifts: safeText(promotion.free_gifts, 500),
     order_ref: orderRef,
     order_channel: body.is_wholesale === true ? "wholesale" : "retail",
     customer_name: customerName,
@@ -70,7 +85,7 @@ export default async function handler(req, res) {
     'payment_method_types[1]': 'card',
     'line_items[0][price_data][currency]': 'thb',
     'line_items[0][price_data][product_data][name]': `${product} (จำนวน ${quantity} ชิ้น)`,
-    'line_items[0][price_data][product_data][description]': `รหัสสั่งซื้อ: #${orderRef} | ผู้รับ: ${customerName} (${cleanPhone})`,
+    'line_items[0][price_data][product_data][description]': `รหัสสั่งซื้อ: #${orderRef} | ผู้รับ: ${customerName} (${cleanPhone})${promotion.free_gifts ? " | ของแถม: " + promotion.free_gifts : ""}${promotion.coupon_code ? " | คูปอง: " + promotion.coupon_code : ""}`,
     'payment_intent_data[description]': `[#${orderRef}] ${product} (${quantity} ชิ้น) - ลูกค้า: ${customerName} (${cleanPhone})`,
     // The line item represents the complete bundle so Stripe charges the exact discounted total.
     'line_items[0][price_data][unit_amount]': String(Math.round(totalPrice * 100)),

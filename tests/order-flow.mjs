@@ -1,7 +1,8 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import vm from 'node:vm';
+import { pathToFileURL } from 'node:url';
 import assert from 'node:assert/strict';
-const load = async path => (await import('data:text/javascript;base64,' + Buffer.from(readFileSync(path)).toString('base64'))).default;
+const load = async path => (await import(pathToFileURL(process.cwd() + '/' + path))).default;
 const checkout = await load('api/create-checkout-session.js');
 const confirm = await load('api/confirm-payment.js');
 process.env.STRIPE_SECRET_KEY = 'test-mocked-key';
@@ -48,7 +49,7 @@ context.location.search='?payment=stripe_success&session_id=cs_test_456&order_re
 context.location.search='';calls=[];await orders.confirm('retail');assert.equal(calls.length,0);
 for(const directory of readdirSync('products')) {
  const html=readFileSync(`products/${directory}/index.html`,'utf8');
- if(html.includes('<form')&&html.includes('raptor-order-form'))assert.ok(html.includes('/order-context.js?v=order-ref-20261005'));
+ if(html.includes('<form')&&html.includes('raptor-order-form'))assert.ok(html.includes('/order-context.js?v=promotions-20261005'));
 
 }
 for(const file of ['wholesale/index.html','thank-you.html']) {
@@ -72,7 +73,7 @@ context.window.location={};context.location.pathname='/products/test/';
 vm.runInNewContext(readFileSync('checkout.js','utf8'),context);
 await handler({target:form,preventDefault(){},stopImmediatePropagation(){}});
 assert.ok(fields.order_ref.value.startsWith('RPT-'));assert.equal(fields.phone.value,'0812345678');
-assert.equal(JSON.parse(storage.get('raptor_last_order')).total_price,'฿499');
+assert.equal(JSON.parse(storage.get('raptor_last_order')).total_price,499);
 const email=new Map();form.serialize({formData:email});
 assert.equal(email.get('bundle_tier_choice'),'เซ็ต 3 ชิ้น (฿499)');
 assert.ok(email.get('order_details').includes('#'+fields.order_ref.value));

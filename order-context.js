@@ -50,6 +50,9 @@
                     order_ref: ref, stripe_session_id: sessionId,
                     customer_name: receipt.customer_name, phone: receipt.phone,
                     address: receipt.address || order.address || '', product: receipt.product,
+                    coupon_code: receipt.coupon_code || "", discount_amount: receipt.discount_amount || 0,
+                    free_gifts: receipt.free_gifts || "", quantity: receipt.quantity,
+                    order_details: `รหัส: #${ref} | สินค้า: ${receipt.product} (จำนวน ${receipt.quantity || order.quantity || 1} ชิ้น) | ของแถม: ${receipt.free_gifts || "ไม่มี"} | คูปอง: ${receipt.coupon_code || "ไม่มี"} | ยอดสุทธิ: ฿${receipt.total_price} | ลูกค้า: ${receipt.customer_name} (${receipt.phone}) | ที่อยู่: ${receipt.address || order.address || ""}`,
                     total_price: receipt.total_price
                 };
                 var notification = await fetch('https://formspree.io/f/' + (channel === 'wholesale' ? 'xzdwqaar' : 'mvzyqnag'), {

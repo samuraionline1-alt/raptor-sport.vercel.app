@@ -302,8 +302,10 @@
 }
 </script>
     <script src="/gtm-ecommerce.js" defer></script>
-    <script src="/order-context.js?v=order-ref-20261005" defer></script>
-    <script src="/checkout.js?v=order-ref-20261005" defer></script>
+    <script src="/order-context.js?v=promotions-20261005" defer></script>
+    <script src="/promo-config.js?v=promotions-20261005" defer></script>
+    <script src="/promotions.js?v=promotions-20261005" defer></script>
+    <script src="/checkout.js?v=promotions-20261005" defer></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <header class="sticky top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
@@ -662,6 +664,7 @@
             return `฿${Number(amount || 0).toLocaleString('th-TH', { maximumFractionDigits: 0 })}`;
         }
         function getOrderPricing(form) {
+            if (form.classList.contains("raptor-order-form") && window.RaptorPromotions) return RaptorPromotions.pricing(form);
             const unitPrice = getNumericPrice(form.dataset.price || form.querySelector('input[name="price"]')?.value || '');
             const quantityInput = form.querySelector('input[name="quantity"]');
             const selectedTier = form.querySelector('input[name="bundle_tier_choice"]:checked')?.value || form.querySelector('input[name="bundle_tier"]')?.value || 'tier_1';
@@ -675,6 +678,7 @@
 
         function updateOrderPriceByQuantity(form) {
             if (!form.classList.contains('raptor-order-form')) return;
+            if (window.RaptorPromotions) { RaptorPromotions.update(form); return; }
 
             const { unitPrice, quantity, totalPrice } = getOrderPricing(form);
             const priceInput = form.querySelector('input[name="price"]');
