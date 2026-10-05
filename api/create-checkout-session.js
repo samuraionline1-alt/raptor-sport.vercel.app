@@ -15,6 +15,21 @@ function cancelUrl(pageUrl) {
   return SITE_ORIGIN + '/';
 }
 
+function successUrl(body, totalPrice, product, quantity) {
+  if (body.is_wholesale === true) {
+    return `${SITE_ORIGIN}/wholesale/?payment=stripe_success&value=${encodeURIComponent(totalPrice)}&qty=${encodeURIComponent(quantity)}&session_id={CHECKOUT_SESSION_ID}`;
+  }
+  if (body.success_url) {
+    try {
+      const url = new URL(body.success_url, SITE_ORIGIN);
+      if (url.origin === SITE_ORIGIN || url.hostname.endsWith('.vercel.app')) return url.toString();
+    } catch (_) {
+      // Ignore unsafe or invalid overrides and use the standard receipt page.
+    }
+  }
+  return `${SITE_ORIGIN}/thank-you.html?payment=stripe_success&value=${encodeURIComponent(totalPrice)}&product=${encodeURIComponent(product)}&qty=${quantity}&session_id={CHECKOUT_SESSION_ID}`;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -50,9 +65,11 @@ export default async function handler(req, res) {
     // The line item represents the complete bundle so Stripe charges the exact discounted total.
     'line_items[0][price_data][unit_amount]': String(Math.round(totalPrice * 100)),
     'line_items[0][quantity]': '1',
-    success_url: `${SITE_ORIGIN}/thank-you.html?payment=stripe_success&value=${encodeURIComponent(totalPrice)}&product=${encodeURIComponent(product)}&qty=${quantity}&session_id={CHECKOUT_SESSION_ID}`,
+    success_url: successUrl(body, totalPrice, product, quantity),
     cancel_url: cancelUrl(body.page_url)
   });
+  const customerEmail = safeText(body.email, 254);
+  if (customerEmail) params.set('customer_email', customerEmail);
   Object.entries(metadata).forEach(([key, value]) => {
     params.set(`metadata[${key}]`, value);
     params.set(`payment_intent_data[metadata][${key}]`, value);
