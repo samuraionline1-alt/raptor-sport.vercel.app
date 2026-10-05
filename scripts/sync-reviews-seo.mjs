@@ -75,7 +75,7 @@ function renderReviews(reviews) {
     const date = reviewDate(review);
     return `        <article class="review-card">
           <div class="review-card__top"><strong>${escapeHtml(review.reviewer_name)}</strong><span class="review-stars" aria-label="${rating} จาก 5 ดาว">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</span></div>
-          <span class="review-badge">✓ ผู้ซื้อจริงจาก Shopee Official Store</span>
+          <span class="review-badge">✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)</span>
           <p>${escapeHtml(review.comment)}</p>
           <time datetime="${escapeHtml(date)}">${escapeHtml(thaiDate(date))}</time>
         </article>`;
