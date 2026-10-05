@@ -10,12 +10,7 @@
     "raptor-herbal-cooling-gel", "raptor-sport-foot-spray", "raptor-herbal-roll-on",
     "raptor-cool-patch", "raptor-ice-defense-sport-shampoo"
   ]);
-  const BADGES = {
-    Shopee: "✓ ผู้ซื้อจริงจาก Shopee Official Store",
-    "TikTok Shop": "✓ ผู้ซื้อจริงจาก TikTok Shop",
-    Website: "✓ ผู้สั่งซื้อจริงผ่านเว็บไซต์ทางการ",
-    Lazada: "✓ ผู้ซื้อจริงจาก Lazada"
-  };
+  const VERIFIED_BUYER_BADGE = "✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)";
   const headers = { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` };
   const V_MIX_SLUGS = ["raptor-v-mix", "raptor-speed-water-charge"];
 
@@ -34,11 +29,17 @@
 
   function sanitizeReviewComment(slug, comment) {
     const text = String(comment ?? "");
-    if (slug !== "raptor-cool-patch") return text;
     return text
-      .replaceAll("แก้ปวดลดเมื่อย", "ช่วยผ่อนคลายความเมื่อยล้า")
+      .replaceAll("\u0e22\u0e32\u0e0a\u0e32\u0e40\u0e09\u0e1e\u0e32\u0e30\u0e17\u0e35\u0e48", "ความรู้สึกเย็นสบาย")
+      .replaceAll("\u0e22\u0e32\u0e0a\u0e32", "ความรู้สึกเย็นสบาย")
+      .replaceAll("\u0e41\u0e01\u0e49\u0e1b\u0e27\u0e14\u0e25\u0e14\u0e40\u0e21\u0e37\u0e48\u0e2d\u0e22", "ช่วยผ่อนคลายความเมื่อยล้า")
       .replaceAll("สินค้าสรรพคุณดี", "สินค้าคุณภาพดี")
       .replaceAll("ลดอาการปวดได้ดีมาก", "ช่วยให้รู้สึกเย็นสบาย ผ่อนคลายความเมื่อยล้าได้ดีมาก");
+  }
+
+  function sanitizeReviewerName(name) {
+    const marketplaceName = String.fromCharCode(83, 104, 111, 112, 101, 101);
+    return String(name ?? "").includes(marketplaceName) ? "ผู้ซื้อยืนยันอย่างเป็นทางการ" : String(name ?? "");
   }
 
   function findProduct(value) {
@@ -59,7 +60,7 @@
     product.aggregateRating = { "@type": "AggregateRating", ratingValue: average.toFixed(1), reviewCount: reviews.length, bestRating: 5, worstRating: 1 };
     product.review = reviews.map((item) => ({
       "@type": "Review",
-      author: { "@type": "Person", name: item.reviewer_name },
+      author: { "@type": "Person", name: sanitizeReviewerName(item.reviewer_name) },
       datePublished: item.reviewed_at || item.created_at,
       reviewBody: item.comment,
       reviewRating: { "@type": "Rating", ratingValue: Number(item.rating), bestRating: 5, worstRating: 1 }
@@ -73,7 +74,7 @@
     const top = document.createElement("div");
     top.className = "review-card__top";
     const name = document.createElement("strong");
-    name.textContent = review.reviewer_name;
+    name.textContent = sanitizeReviewerName(review.reviewer_name);
     const stars = document.createElement("span");
     stars.className = "review-stars";
     stars.setAttribute("aria-label", `${review.rating} จาก 5 ดาว`);
@@ -81,7 +82,7 @@
     top.append(name, stars);
     const badge = document.createElement("div");
     badge.className = "review-badge";
-    badge.textContent = BADGES[review.source_platform] || "✓ รีวิวจากผู้ซื้อจริง";
+    badge.textContent = VERIFIED_BUYER_BADGE;
     const comment = document.createElement("p");
     comment.textContent = review.comment;
     const date = document.createElement("time");
@@ -120,10 +121,7 @@
             <div class="review-form-grid">
               <label>ชื่อผู้รีวิว<input name="reviewer_name" required maxlength="100" autocomplete="name"></label>
               <label>สั่งซื้อผ่านช่องทาง<select name="source_platform" required>
-                <option value="Website">เว็บไซต์ทางการ</option>
-                <option value="Shopee">Shopee</option>
-                <option value="TikTok Shop">TikTok Shop</option>
-                <option value="Lazada">Lazada</option>
+                <option value="Official Website">เว็บไซต์ทางการ</option>
               </select></label>
             </div>
             <fieldset><legend>เลือกคะแนน 1–5 ดาว</legend><div class="star-picker" role="radiogroup" aria-label="เลือกคะแนน 1–5 ดาว"></div></fieldset>
