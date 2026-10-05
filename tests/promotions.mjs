@@ -12,6 +12,8 @@ assert.equal(config.calculate(139, 'tier_1', 'freegel').free_gifts, '');
 assert.equal(config.calculate(329, 'tier_2', 'FREEGEL').free_gifts, config.bundleGifts.tier_2.giftText + ' | ' + config.coupons.FREEGEL.extraGift);
 assert.equal(config.calculate(499, 'tier_3', 'bad').coupon_code, '');
 assert.equal(config.calculate(179, 'tier_1', '').free_gifts, '');
+assert.equal(config.calculate(859, 'tier_6', '').giftCount, 3);
+assert.equal(config.calculate(859, 'tier_6', 'FREEGEL').giftValue, 316);
 let params;
 process.env.STRIPE_SECRET_KEY = 'mock-key';
 global.fetch = async (_, options) => { params = new URLSearchParams(options.body); return { ok: true, json: async () => ({ url: 'https://checkout.stripe.com/test' }) }; };
@@ -31,7 +33,7 @@ await checkout({ method: 'POST', body: { product: 'Test', subtotal: 329, quantit
 assert.equal(invalid.code, 400);
 for (const path of ['index.html', ...readdirSync('products').map(dir => `products/${dir}/index.html`)]) {
  const html = readFileSync(path, 'utf8');
- assert.ok(html.includes('/promo-config.js?v=promotions-20261005'));
+ assert.ok(html.includes('/promo-config.js?v=receipt-20261005'));
  for (const match of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)) if (match[1].includes('function getOrderPricing') || match[1].includes('// Formspree integration')) new vm.Script(match[1]);
 }
 console.log('Promotion checks passed: coupon thresholds, normalization, gifts, exact Stripe totals, mismatched-total rejection, and all retail scripts.');
