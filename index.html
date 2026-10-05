@@ -241,6 +241,8 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
     <script src="/site-config.js"></script>
     <script src="/gtm-ecommerce.js" defer></script>
+    <script src="/order-context.js?v=order-ref-20261005" defer></script>
+    <script src="/checkout.js?v=order-ref-20261005" defer></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <noscript>
@@ -987,7 +989,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
         }
 
         function getOrderPricing(form) {
-            const unitPrice = getNumericPrice(form.querySelector('input[name="price"]')?.value || form.dataset.price || '');
+            const unitPrice = getNumericPrice(form.dataset.price || form.querySelector('input[name="price"]')?.value || '');
             const quantityInput = form.querySelector('input[name="quantity"]');
             const quantity = Math.max(1, Number.parseInt(quantityInput?.value, 10) || 1);
             const totalPrice = unitPrice * quantity;
@@ -1021,7 +1023,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
                 }
             }
 
-            if (priceInput && unitPrice) priceInput.value = formatThaiBaht(unitPrice);
+            if (priceInput && unitPrice) priceInput.value = formatThaiBaht(totalPrice);
             totalInput.value = formatThaiBaht(totalPrice);
             summaryBox.innerHTML = `ราคาพิเศษ ${formatThaiBaht(unitPrice)} × ${quantity} ชิ้น = <span class="text-lg text-red-600">${formatThaiBaht(totalPrice)}</span>`;
         }

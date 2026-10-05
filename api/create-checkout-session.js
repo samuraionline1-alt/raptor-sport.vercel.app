@@ -49,10 +49,10 @@ export default async function handler(req, res) {
 
   const cleanPhone = safeText(body.phone, 50).replace(/[^0-9]/g, "");
   const customerName = safeText(body.customer_name, 200);
-  const suppliedRef = safeText(body.order_ref, 100);
-  const orderRef = /^RPT-\d{4}-\d{4}$/.test(suppliedRef) && suppliedRef.endsWith(`-${cleanPhone.slice(-4)}`)
-    ? suppliedRef
-    : `RPT-${Date.now().toString().slice(-4)}-${cleanPhone.slice(-4)}`;
+  if (typeof body.order_ref !== 'string' || !body.order_ref || body.order_ref.length > 200) {
+    return res.status(400).json({ error: 'Missing or invalid order reference' });
+  }
+  const orderRef = body.order_ref;
   const metadata = {
     order_ref: orderRef,
     order_channel: body.is_wholesale === true ? "wholesale" : "retail",
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
     product,
     quantity: String(quantity),
     order_details: safeText(body.order_details, 500),
-    bundle_tier: `จำนวน ${quantity} ชิ้น`
+    bundle_tier: `เซ็ต ${quantity} ชิ้น (฿${totalPrice})`
   };
   const params = new URLSearchParams({
     mode: 'payment',

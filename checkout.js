@@ -11,14 +11,14 @@
 
     function details(form) {
         var quantity = Math.max(1, parseInt(form.querySelector('[name="quantity"]')?.value || '1', 10));
-        var unitPrice = numeric(form.querySelector('[name="price"]')?.value || form.dataset.price);
+        var unitPrice = numeric(form.dataset.price || form.querySelector('[name="price"]')?.value);
         var totalPrice = numeric(form.querySelector('[name="total_price"]')?.value) || unitPrice * quantity;
         return {
             product: form.querySelector('[name="product"]')?.value || form.dataset.product || 'Raptor Sport Product',
             unitPrice: unitPrice,
             quantity: quantity,
             totalPrice: totalPrice,
-            bundleTier: `จำนวน ${quantity} ชิ้น`,
+            bundleTier: `เซ็ต ${quantity} ชิ้น (฿${totalPrice})`,
             customer_name: form.querySelector('[name="customer_name"]')?.value || '',
             phone: form.querySelector('[name="phone"]')?.value || '',
             address: form.querySelector('[name="address"]')?.value || '',
@@ -68,8 +68,20 @@
         var order = details(form);
         order.phone = RaptorOrders.cleanPhone(order.phone);
         order.order_ref = RaptorOrders.createRef(order.phone);
-        order.total_price = order.totalPrice;
-        ['order_ref', 'phone', 'total_price'].forEach(function (key) {
+        order.total_price = `฿${order.totalPrice}`;
+        order.price = order.total_price;
+        order.bundle_tier = order.bundleTier;
+        const { product, quantity, totalPrice, address } = order;
+        const orderRef = order.order_ref, cleanPhone = order.phone, customerName = order.customer_name;
+        const notes = order.order_details;
+        order.order_details = `รหัส: #${orderRef} | สินค้า: ${product} (จำนวน ${quantity} ชิ้น) | ยอดสุทธิ: ฿${totalPrice} | ลูกค้า: ${customerName} (${cleanPhone}) | ที่อยู่: ${address}`;
+        form.addEventListener('formdata', function (event) {
+            event.formData.set('bundle_tier', order.bundleTier);
+            event.formData.set('bundle_tier_choice', order.bundleTier);
+            event.formData.set('order_details', order.order_details);
+            if (notes) event.formData.set('customer_notes', notes);
+        }, { once: true });
+        ['order_ref', 'phone', 'price', 'total_price', 'bundle_tier'].forEach(function (key) {
             var input = form.querySelector('[name="' + key + '"]');
             if (!input) { input = document.createElement('input'); input.type = 'hidden'; input.name = key; form.appendChild(input); }
             input.value = order[key];
