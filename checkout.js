@@ -18,7 +18,7 @@
             unitPrice: unitPrice,
             quantity: quantity,
             totalPrice: totalPrice,
-            bundleTier: form.querySelector('[name="bundle_tier"]')?.value || 'tier_1',
+            bundleTier: `จำนวน ${quantity} ชิ้น`,
             customer_name: form.querySelector('[name="customer_name"]')?.value || '',
             phone: form.querySelector('[name="phone"]')?.value || '',
             address: form.querySelector('[name="address"]')?.value || '',

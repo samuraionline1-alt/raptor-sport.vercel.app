@@ -1,4 +1,3 @@
-import { randomUUID } from 'node:crypto';
 const STRIPE_ENDPOINT = 'https://api.stripe.com/v1/checkout/sessions';
 const SITE_ORIGIN = 'https://www.raptorthailand.com';
 
@@ -50,7 +49,10 @@ export default async function handler(req, res) {
 
   const cleanPhone = safeText(body.phone, 50).replace(/[^0-9]/g, "");
   const customerName = safeText(body.customer_name, 200);
-  const orderRef = safeText(body.order_ref, 100) || `RPT-${Date.now().toString().slice(-5)}-${cleanPhone.slice(-4)}-${randomUUID()}`;
+  const suppliedRef = safeText(body.order_ref, 100);
+  const orderRef = /^RPT-\d{4}-\d{4}$/.test(suppliedRef) && suppliedRef.endsWith(`-${cleanPhone.slice(-4)}`)
+    ? suppliedRef
+    : `RPT-${Date.now().toString().slice(-4)}-${cleanPhone.slice(-4)}`;
   const metadata = {
     order_ref: orderRef,
     order_channel: body.is_wholesale === true ? "wholesale" : "retail",
@@ -60,15 +62,16 @@ export default async function handler(req, res) {
     product,
     quantity: String(quantity),
     order_details: safeText(body.order_details, 500),
-    bundle_tier: safeText(body.bundleTier, 100)
+    bundle_tier: `จำนวน ${quantity} ชิ้น`
   };
   const params = new URLSearchParams({
     mode: 'payment',
     'payment_method_types[0]': 'promptpay',
     'payment_method_types[1]': 'card',
     'line_items[0][price_data][currency]': 'thb',
-    'line_items[0][price_data][product_data][name]': `[${orderRef}] ${product} (${safeText(body.bundleTier, 100) || quantity + ' ชิ้น'}) - ${customerName} (${cleanPhone})`,
-    'payment_intent_data[description]': `Order ${orderRef} | ลูกค้า: ${customerName} | โทร: ${cleanPhone} | สินค้า: ${product} (${quantity} ชิ้น)`,
+    'line_items[0][price_data][product_data][name]': `${product} (จำนวน ${quantity} ชิ้น)`,
+    'line_items[0][price_data][product_data][description]': `รหัสสั่งซื้อ: #${orderRef} | ผู้รับ: ${customerName} (${cleanPhone})`,
+    'payment_intent_data[description]': `[#${orderRef}] ${product} (${quantity} ชิ้น) - ลูกค้า: ${customerName} (${cleanPhone})`,
     // The line item represents the complete bundle so Stripe charges the exact discounted total.
     'line_items[0][price_data][unit_amount]': String(Math.round(totalPrice * 100)),
     'line_items[0][quantity]': '1',

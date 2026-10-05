@@ -243,14 +243,14 @@
             const cleanPhone = RaptorOrders.cleanPhone(customer.phone);
             const orderRef = RaptorOrders.createRef(cleanPhone);
             const order = {order_ref:orderRef, customer_name:customer.name, phone:cleanPhone, address:customer.address,
-                product:`ใบสั่งซื้อราคาส่ง RAPTOR B2B (รวม ${currentOrderSnapshot.totalQty} ชิ้น)`, quantity:currentOrderSnapshot.totalQty, total_price:currentOrderSnapshot.grandTotal};
+                product:'ใบสั่งซื้อราคาส่ง RAPTOR B2B', quantity:currentOrderSnapshot.totalQty, total_price:currentOrderSnapshot.grandTotal};
             RaptorOrders.save(order);
             const payload = {...customer, ...order, payment_status:'Pending Online Payment (Stripe)', items:currentOrderSnapshot.lines.map(({id,name,qty,unitPrice}) => ({id,name,qty,unitPrice})), totalQty:currentOrderSnapshot.totalQty, subtotal:currentOrderSnapshot.subtotal, shippingCost:currentOrderSnapshot.shippingCost, vatCost:currentOrderSnapshot.vatCost, grandTotal:currentOrderSnapshot.grandTotal, _subject:'New RAPTOR B2B Wholesale Order & Tax Invoice'};
             try {
                 fetch('https://formspree.io/f/xzdwqaar', {method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(() => {});
                 if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', {value:currentOrderSnapshot.grandTotal,currency:'THB',content_name:'B2B Wholesale Checkout'});
                 window.dataLayer = window.dataLayer || []; window.dataLayer.push({event:'begin_wholesale_checkout',value:currentOrderSnapshot.grandTotal,currency:'THB'});
-                const checkoutResponse = await fetch('/api/create-checkout-session', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...order, product:`ใบสั่งซื้อราคาส่ง RAPTOR B2B (รวม ${currentOrderSnapshot.totalQty} ชิ้น)`,quantity:currentOrderSnapshot.totalQty,totalPrice:currentOrderSnapshot.grandTotal,bundleTier:`เรทตัวแทนจำหน่าย (รวมค่าส่ง ฿${currentOrderSnapshot.shippingCost} + VAT 7% ฿${currentOrderSnapshot.vatCost.toFixed(2)})`,customer_name:`${customer.name}${customer.tax_id ? ' (Tax ID: ' + customer.tax_id + ')' : ''}`,email:customer.email,phone:cleanPhone,address:customer.address,order_details:orderDetails,page_url:'https://www.raptorthailand.com/wholesale/',is_wholesale:true})});
+                const checkoutResponse = await fetch('/api/create-checkout-session', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...order, product:'ใบสั่งซื้อราคาส่ง RAPTOR B2B',quantity:currentOrderSnapshot.totalQty,totalPrice:currentOrderSnapshot.grandTotal,bundleTier:`จำนวน ${currentOrderSnapshot.totalQty} ชิ้น`,customer_name:customer.name,email:customer.email,phone:cleanPhone,address:customer.address,order_details:orderDetails,page_url:'https://www.raptorthailand.com/wholesale/',is_wholesale:true})});
                 const checkout = await checkoutResponse.json();
                 if (!checkoutResponse.ok || !checkout.url) throw new Error(checkout.error || 'ไม่สามารถเปิดหน้าชำระเงินได้ กรุณาลองอีกครั้ง');
                 window.location.assign(checkout.url);

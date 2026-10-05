@@ -7,7 +7,8 @@
     window.RaptorOrders = {
         cleanPhone: function (phone) { return String(phone || '').replace(/[^0-9]/g, ''); },
         createRef: function (phone) {
-            return 'RPT-' + Date.now().toString().slice(-5) + '-' + phone.slice(-4) + '-' + crypto.randomUUID();
+            var cleanPhone = this.cleanPhone(phone);
+            return `RPT-${Date.now().toString().slice(-4)}-${cleanPhone.slice(-4)}`;
         },
         save: function (order) {
             var json = JSON.stringify(order);
