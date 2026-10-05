@@ -84,11 +84,26 @@
 
         if (document.body.dataset.gtmPage === 'purchase') {
             try {
+                var query = new URLSearchParams(location.search);
+                var isStripe = query.get('payment') === 'stripe_success';
                 var storedOrder = sessionStorage.getItem(PENDING_ORDER_KEY);
-                if (!storedOrder) return;
-                var order = JSON.parse(storedOrder);
-                order.transaction_id = 'raptor-' + Date.now();
+                var order = storedOrder ? JSON.parse(storedOrder) : { currency: CURRENCY, items: [] };
+                var queryValue = numberFrom(query.get('value'));
+                if (isStripe && queryValue) order.value = queryValue;
+                if (!order.value) return;
+                var sessionId = query.get('session_id') || ('raptor-' + Date.now());
+                order.currency = CURRENCY;
+                order.transaction_id = sessionId;
+                var purchaseGuard = 'raptorPurchase:' + sessionId;
+                if (sessionStorage.getItem(purchaseGuard)) return;
                 pushEcommerce('purchase', order);
+                if (isStripe && typeof window.fbq === 'function') window.fbq('track', 'Purchase', {
+                    value: order.value,
+                    currency: CURRENCY,
+                    content_name: query.get('product') || order.items[0]?.item_name,
+                    num_items: Number(query.get('qty')) || order.items[0]?.quantity || 1
+                });
+                sessionStorage.setItem(purchaseGuard, '1');
                 sessionStorage.removeItem(PENDING_ORDER_KEY);
             } catch (error) {
                 // Ignore unavailable storage or malformed stale order data.
