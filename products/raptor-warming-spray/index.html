@@ -405,7 +405,7 @@
                         <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
                     </div>
                     <h3 class="text-xl font-bold text-center text-gray-900 mb-6">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-4 raptor-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR ELITE PRO สเปรย์สำหรับนักกีฬา สเปรย์สูตรวอร์มอัพ 250ml" data-price="฿179" data-close-modal="closeProductModal">
+                    <form class="space-y-4 raptor-order-form" id="raptor-warming-spray-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR ELITE PRO สเปรย์สำหรับนักกีฬา สเปรย์สูตรวอร์มอัพ 250ml" data-price="฿179" data-close-modal="closeProductModal">
                         <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR ELITE PRO สเปรย์สำหรับนักกีฬา สเปรย์สูตรวอร์มอัพ 250ml">
                         <input type="hidden" name="product" value="RAPTOR ELITE PRO สเปรย์สำหรับนักกีฬา สเปรย์สูตรวอร์มอัพ 250ml">
                         <input type="hidden" name="price" value="฿179">
@@ -417,16 +417,30 @@
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone">
+                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone" pattern="^0[689][0-9]{8}$" maxlength="10" minlength="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10); this.setCustomValidity('')" oninvalid="this.setCustomValidity('กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)')"><p class="mt-1 text-xs text-slate-500">กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)</p>
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
                             <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address"></textarea>
                         </div>
-                        <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-1">จำนวนสินค้า</label>
-                            <input type="number" required min="1" value="1" inputmode="numeric" placeholder="เช่น 1" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="quantity">
-                        </div>
+                        <fieldset class="space-y-3" data-bundle-selector>
+                            <legend class="block text-sm font-bold text-slate-700 mb-2">เลือกเซ็ตสุดคุ้ม</legend>
+                            <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
+                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_1" data-quantity="1" class="mt-1 accent-orange-500"><span class="flex-1"><strong class="block text-slate-900">เซ็ตทดลอง 1 ชิ้น</strong><small class="text-emerald-700">ส่งฟรีเก็บเงินปลายทาง</small></span><strong data-bundle-price="tier_1" class="text-orange-600"></strong></span>
+                            </label>
+                            <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
+                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_2" data-quantity="2" class="mt-1 accent-orange-500" checked><span class="flex-1"><strong class="block text-slate-900">เซ็ตสุดคุ้ม 2 ชิ้น (ขายดีที่สุด 🔥)</strong><small class="text-emerald-700">ประหยัดเพิ่ม + ส่งฟรี</small></span><strong data-bundle-price="tier_2" class="text-orange-600"></strong></span>
+                            </label>
+                            <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
+                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_3" data-quantity="3" class="mt-1 accent-orange-500"><span class="flex-1"><strong class="block text-slate-900">เซ็ตนักกีฬาซ้อมหนัก 3 ชิ้น</strong><small class="text-emerald-700">คุ้มที่สุด + ส่งฟรี</small></span><strong data-bundle-price="tier_3" class="text-orange-600"></strong></span>
+                            </label>
+                            <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
+                                <span class="flex items-center gap-3"><input type="radio" name="bundle_tier_choice" value="custom" class="accent-orange-500"><span class="font-bold text-slate-900">กำหนดจำนวนเอง (มากกว่า 3)</span></span>
+                                <input type="number" min="4" value="4" inputmode="numeric" data-custom-quantity class="mt-3 hidden w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" aria-label="จำนวนสินค้าแบบกำหนดเอง">
+                            </label>
+                        </fieldset>
+                        <input type="hidden" name="quantity" value="2">
+                        <input type="hidden" name="bundle_tier" value="tier_2">
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">รายละเอียดเพิ่มเติม</label>
                             <textarea rows="3" placeholder="ระบุสี/รสชาติ/หมายเหตุการจัดส่ง หรือรายละเอียดอื่น ๆ" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="order_details"></textarea>
@@ -434,6 +448,11 @@
                         <button type="submit" class="w-full bg-orange-brand text-white font-bold text-lg py-3.5 rounded-xl shadow-md hover:bg-orange-600 transition-all cursor-pointer">
                             ยืนยันการสั่งซื้อเลยตอนนี้
                         </button>
+                        <div class="grid grid-cols-3 gap-2 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center text-[11px] font-semibold leading-snug text-emerald-900" aria-label="ความมั่นใจในการสั่งซื้อ">
+                            <div>🛡️ ของแท้ 100% จากบริษัทผู้จัดจำหน่ายโดยตรง</div>
+                            <div>📋 มาตรฐานปลอดภัย 100% Anti-Doping</div>
+                            <div>📦 ส่งฟรี มีเก็บเงินปลายทาง เปิดเช็คของได้</div>
+                        </div>
                     </form>
                         <section class="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-left shadow-sm shipping-return-policy" aria-label="นโยบายการจัดส่งและคืนสินค้า">
                             <div class="space-y-4 text-sm leading-relaxed text-slate-700">
@@ -448,348 +467,15 @@
 
     <script>
         let myChartInstance = null;
-        let coolingChartInstance = null;
-        let footSprayChartInstance = null;
-        let energyGelChartInstance = null;
-        let modalDualActionChartInstance = null;
-        let modalCoolPatchChartInstance = null;
-        let modalTherapyOilChartInstance = null;
-        let waterChargeChartInstance = null;
-        let herbalGelChartInstance = null;
-        let rollOnChartInstance = null;
-        let shampooChartInstance = null;
-
-        function openShampooModal() {
-            document.getElementById('shampoo-modal').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
-            if (!shampooChartInstance) {
-                const ctx = document.getElementById('shampooPerformanceChart').getContext('2d');
-                shampooChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['ก่อนสระ', 'หลังสระทันที', 'ผ่านไป 2 ชม.', 'ผ่านไป 6 ชม.', 'ผ่านไป 12 ชม.'],
-                        datasets: [{
-                            label: 'ระดับความสะอาดและเย็นสดชื่น (%)',
-                            data: [15, 100, 95, 80, 70],
-                            borderColor: '#2563eb',
-                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'แชมพูทั่วไป',
-                            data: [15, 80, 60, 40, 25],
-                            borderColor: '#94a3b8',
-                            backgroundColor: 'transparent',
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            fill: false,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
-                        scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } }
-                    }
-                });
-            }
-        }
-
-        function closeShampooModal() {
-            document.getElementById('shampoo-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function openTherapyOilModal() {
-            document.getElementById('therapyoil-modal').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
-
-            if (!modalTherapyOilChartInstance) {
-                const ctx = document.getElementById('modalTherapyOilChart').getContext('2d');
-                modalTherapyOilChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0 นาที', '5 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที'],
-                        datasets: [
-                            {
-                                label: 'เปอร์เซ็นต์การคลายตัวของกล้ามเนื้อสะสม (%)',
-                                data: [15, 68, 96, 92, 85, 70],
-                                borderColor: '#1e293b',
-                                backgroundColor: 'rgba(30, 41, 59, 0.08)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'พักฟื้นร่างกายตามปกติ',
-                                data: [15, 20, 28, 35, 45, 52],
-                                borderColor: '#94a3b8',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
-                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
-                    }
-                });
-            }
-        }
-
-        function closeTherapyOilModal() {
-            document.getElementById('therapyoil-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
 
 
-        function openWaterChargeModal() {
-            document.getElementById('watercharge-modal').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
-            if (!waterChargeChartInstance) {
-                const ctx = document.getElementById('waterChargeChartModal').getContext('2d');
-                waterChargeChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0 นาที', '20 นาที', '40 นาที', '60 นาที', '90 นาที', '120 นาที'],
-                        datasets: [
-                            {
-                                label: 'ดื่ม RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์',
-                                data: [50, 95, 92, 90, 88, 85],
-                                borderColor: '#FF6B00',
-                                backgroundColor: 'rgba(255, 107, 0, 0.08)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'ดื่มน้ำเปล่าบริสุทธิ์ตามปกติ',
-                                data: [50, 65, 55, 45, 35, 20],
-                                borderColor: '#94a3b8',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
-                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
-                    }
-                });
-            }
-        }
-
-        function closeWaterChargeModal() {
-            document.getElementById('watercharge-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
 
 
-        function openHerbalGelModal() {
-            document.getElementById('herbalgel-modal').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
-            if (!herbalGelChartInstance) {
-                const ctx = document.getElementById('herbalCoolingChart').getContext('2d');
-                herbalGelChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0m', '15m', '30m', '60m', '120m', '180m'],
-                        datasets: [
-                            {
-                                label: 'ระดับความผ่อนคลาย Raptor Gel (%)',
-                                data: [10, 85, 95, 92, 88, 80],
-                                borderColor: '#059669',
-                                backgroundColor: 'rgba(5, 150, 105, 0.1)',
-                                borderWidth: 4,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'ฟื้นฟูตามปกติ',
-                                data: [10, 15, 20, 30, 40, 50],
-                                borderColor: '#475569',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#cbd5e1' } } },
-                        scales: {
-                            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 },
-                            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
-                        }
-                    }
-                });
-            }
-        }
-
-        function closeHerbalGelModal() {
-            document.getElementById('herbalgel-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
 
 
-        function openHerbalRollOnModal() {
-            document.getElementById('herbalrollon-modal').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
-            if (!rollOnChartInstance) {
-                const ctx = document.getElementById('rollonPerformanceChart').getContext('2d');
-                rollOnChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0 นาที', '5 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที'],
-                        datasets: [
-                            {
-                                label: 'ระดับความผ่อนคลายหลังใช้ RAPTOR ROLL-ON (%)',
-                                data: [10, 55, 82, 90, 86, 78],
-                                borderColor: '#d8c46a',
-                                backgroundColor: 'rgba(216, 196, 106, 0.12)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'พักตามปกติ',
-                                data: [10, 15, 25, 35, 45, 55],
-                                borderColor: '#94a3b8',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#d7e6d9', font: { size: 10 } } } },
-                        scales: {
-                            y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#d7e6d9', callback: value => value + '%' } },
-                            x: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#d7e6d9' } }
-                        }
-                    }
-                });
-            }
-        }
 
-        function closeHerbalRollOnModal() {
-            document.getElementById('herbalrollon-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
 
-        function openCoolPatchModal() {
-            document.getElementById('coolpatch-modal').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
 
-            if (!modalCoolPatchChartInstance) {
-                const ctx = document.getElementById('modalCoolPatchChart').getContext('2d');
-                modalCoolPatchChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที', '240 นาที'],
-                        datasets: [
-                            {
-                                label: 'ระดับความผ่อนคลายสบายตัว (%)',
-                                data: [10, 70, 95, 95, 90, 85],
-                                borderColor: '#2563eb',
-                                backgroundColor: 'rgba(37, 99, 235, 0.08)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'ไม่ได้รับการดูแล / ปล่อยให้หายเอง',
-                                data: [10, 15, 20, 25, 30, 40],
-                                borderColor: '#94a3b8',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
-                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
-                    }
-                });
-            }
-        }
-
-        function closeCoolPatchModal() {
-            document.getElementById('coolpatch-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function openDualActionModal() {
-            document.getElementById('dualaction-modal').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
-
-            if (!modalDualActionChartInstance) {
-                const ctx = document.getElementById('modalDualActionChart').getContext('2d');
-                modalDualActionChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0 นาที', '10 นาที', '20 นาที', '40 นาที', '60 นาที', '120 นาที'],
-                        datasets: [
-                            {
-                                label: 'ใช้สูตรร้อน (ก่อน) + สูตรเย็น (หลัง)',
-                                data: [15, 75, 98, 95, 92, 85],
-                                borderColor: '#FF6B00',
-                                backgroundColor: 'rgba(255, 107, 0, 0.08)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'พักผ่อนกล้ามเนื้อตามปกติ',
-                                data: [15, 25, 35, 45, 55, 60],
-                                borderColor: '#94a3b8',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: true, position: 'top' } },
-                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
-                    }
-                });
-            }
-        }
-
-        function closeDualActionModal() {
-            document.getElementById('dualaction-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
 
         function openProductModal() {
             document.getElementById('product-modal').classList.remove('hidden');
@@ -820,114 +506,8 @@
             document.body.style.overflow = 'auto';
         }
 
-        function openCoolingModal() {
-            document.getElementById('cooling-modal').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
-            if (!coolingChartInstance) {
-                const ctx = document.getElementById('coolingPerformanceChart').getContext('2d');
-                coolingChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['นาทีที่ 0', 'นาทีที่ 5', 'นาทีที่ 15', 'นาทีที่ 30', 'นาทีที่ 45', 'นาทีที่ 60'],
-                        datasets: [{
-                            label: 'ระดับความเย็นสะสม (%)',
-                            data: [100, 95, 90, 85, 70, 50],
-                            borderColor: '#2563eb',
-                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } }
-                    }
-                });
-            }
-        }
 
-        function closeCoolingModal() {
-            document.getElementById('cooling-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
 
-        function openFootSprayModal() {
-            document.getElementById('footspray-modal').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
-            if (!footSprayChartInstance) {
-                const ctx = document.getElementById('footSprayChart').getContext('2d');
-                footSprayChartInstance = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['การระงับกลิ่นอับ', 'ความแห้งสบายฝ่าเท้า', 'ความสบายเท้าผ่อนคลาย'],
-                        datasets: [
-                            { label: 'ก่อนใช้สเปรย์', data: [25, 30, 15], backgroundColor: 'rgba(241, 94, 34, 0.4)', borderColor: '#f15e22', borderWidth: 1.5 },
-                            { label: 'หลังใช้ RAPTOR FOOT SPRAY', data: [98, 92, 95], backgroundColor: 'rgba(16, 185, 129, 0.7)', borderColor: '#10b981', borderWidth: 1.5 }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { label: { color: '#cbd5e1', font: { size: 10 } } } },
-                        scales: { y: { beginAtZero: true, max: 100, ticks: { color: '#cbd5e1', callback: value => value + '%' } } }
-                    }
-                });
-            }
-        }
-
-        function closeFootSprayModal() {
-            document.getElementById('footspray-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function openEnergyGelModal() {
-            document.getElementById('energygel-modal').classList.remove('hidden');
-            document.body.style.overflow = 'auto';
-            if (!energyGelChartInstance) {
-                const ctx = document.getElementById('energyPerformanceChart').getContext('2d');
-                energyGelChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0 นาที', '15 นาที', '30 นาที', '60 นาที', '90 นาที', '120 นาที'],
-                        datasets: [
-                            {
-                                label: 'เมื่อทาน RAPTOR GO',
-                                data: [40, 95, 90, 85, 88, 80],
-                                borderColor: '#FF6B00',
-                                backgroundColor: 'rgba(255, 107, 0, 0.1)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'ไม่ได้ทานเจลพลังงาน',
-                                data: [40, 50, 45, 30, 20, 10],
-                                borderColor: '#94a3b8',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: true, labels: { font: { size: 10 } } } },
-                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
-                    }
-                });
-            }
-        }
-
-        function closeEnergyGelModal() {
-            document.getElementById('energygel-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
 
         function startCountdown() {
             let duration = 2 * 60 * 60;
@@ -1000,7 +580,9 @@
 
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        }
 
         document.querySelectorAll('.logo-premium-video').forEach((video) => {
             video.addEventListener('ended', () => {
@@ -1043,13 +625,15 @@
         function formatThaiBaht(amount) {
             return `฿${Number(amount || 0).toLocaleString('th-TH', { maximumFractionDigits: 0 })}`;
         }
-
         function getOrderPricing(form) {
             const unitPrice = getNumericPrice(form.querySelector('input[name="price"]')?.value || form.dataset.price || '');
             const quantityInput = form.querySelector('input[name="quantity"]');
+            const selectedTier = form.querySelector('input[name="bundle_tier_choice"]:checked')?.value || form.querySelector('input[name="bundle_tier"]')?.value || 'tier_1';
             const quantity = Math.max(1, Number.parseInt(quantityInput?.value, 10) || 1);
-            const totalPrice = unitPrice * quantity;
-            return { unitPrice, quantity, totalPrice };
+            let totalPrice = unitPrice * quantity;
+            if (selectedTier === 'tier_2') totalPrice = Math.round(unitPrice * 2 * 0.92);
+            if (selectedTier === 'tier_3') totalPrice = Math.round(unitPrice * 3 * 0.85);
+            return { unitPrice, quantity, totalPrice, bundleTier: selectedTier };
         }
 
         function updateOrderPriceByQuantity(form) {
@@ -1080,6 +664,11 @@
             }
 
             if (priceInput && unitPrice) priceInput.value = formatThaiBaht(unitPrice);
+            const tierPrices = { tier_1: unitPrice, tier_2: Math.round(unitPrice * 2 * 0.92), tier_3: Math.round(unitPrice * 3 * 0.85) };
+            Object.entries(tierPrices).forEach(([tier, price]) => {
+                const priceLabel = form.querySelector(`[data-bundle-price="${tier}"]`);
+                if (priceLabel) priceLabel.textContent = formatThaiBaht(price);
+            });
             totalInput.value = formatThaiBaht(totalPrice);
             summaryBox.innerHTML = `ราคาพิเศษ ${formatThaiBaht(unitPrice)} × ${quantity} ชิ้น = <span class="text-lg text-red-600">${formatThaiBaht(totalPrice)}</span>`;
         }
@@ -1165,10 +754,23 @@
             const forms = document.querySelectorAll('.raptor-order-form, .raptor-contact-form');
 
             forms.forEach(function (form) {
-                updateOrderPriceByQuantity(form);
-                form.querySelector('input[name="quantity"]')?.addEventListener('input', function () {
+                const quantityInput = form.querySelector('input[name="quantity"]');
+                const tierInput = form.querySelector('input[name="bundle_tier"]');
+                const customQuantity = form.querySelector('[data-custom-quantity]');
+                form.querySelectorAll('input[name="bundle_tier_choice"]').forEach(function (radio) {
+                    radio.addEventListener('change', function () {
+                        const isCustom = radio.value === 'custom';
+                        customQuantity?.classList.toggle('hidden', !isCustom);
+                        if (quantityInput) quantityInput.value = isCustom ? Math.max(4, Number.parseInt(customQuantity?.value, 10) || 4) : radio.dataset.quantity;
+                        if (tierInput) tierInput.value = radio.value;
+                        updateOrderPriceByQuantity(form);
+                    });
+                });
+                customQuantity?.addEventListener('input', function () {
+                    if (quantityInput) quantityInput.value = Math.max(4, Number.parseInt(customQuantity.value, 10) || 4);
                     updateOrderPriceByQuantity(form);
                 });
+                updateOrderPriceByQuantity(form);
 
                 form.addEventListener('submit', async function (event) {
                     event.preventDefault();
@@ -1364,7 +966,12 @@
         <div class="max-w-5xl mx-auto px-6 py-10"><h2 id="related-products-title" class="text-xl font-bold text-zinc-900 mb-5">ผลิตภัณฑ์ Raptor Sport ที่เกี่ยวข้อง</h2><ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3"><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-warming-spray/">RAPTOR ELITE PRO สเปรย์วอร์มอัพ 250 มล.</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cooling-spray/">RAPTOR SPORTS ICE COLD SPRAY สเปรย์เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-go-energy-gel/">RAPTOR GO ENERGY GEL เจลพลังงานนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-dual-action-pack/">RAPTOR DUAL ACTION PACK เซ็ตสเปรย์ร้อน-เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-therapy-oil/">RAPTOR SPORT &amp; THERAPY OIL น้ำมันนวดนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-v-mix/">RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-cooling-gel/">RAPTOR HERBAL COOLING GEL เจลสมุนไพรสูตรเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-foot-spray/">RAPTOR SPORT FOOT SPRAY สเปรย์ฉีดเท้า</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-roll-on/">RAPTOR HERBAL ROLL-ON โรลออนสมุนไพร</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cool-patch/">RAPTOR COOL PATCH แผ่นเจลประคบเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-ice-defense-sport-shampoo/">RAPTOR ICE DEFENSE SPORT SHAMPOO แชมพูสูตรเย็น</a></li></ul></div>
     </aside>
 <script src="/product-image-zoom.js"></script>
-    <footer class="bg-zinc-950 text-zinc-500 text-center px-6 py-6 text-xs border-t border-zinc-900">
+    
+    <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" aria-label="ทางลัดสั่งซื้อ">
+        <a href="https://lin.ee/qtuszPa" data-contact-pixel-button="line chat" class="shrink-0 rounded-xl border border-zinc-700 px-3 py-2.5 text-center text-sm font-semibold text-white"><i class="fa-brands fa-line text-green-400"></i> สอบถามแอดมิน</a>
+        <a href="#raptor-warming-spray-order-form" onclick="document.getElementById('raptor-warming-spray-order-form').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="flex-grow bg-[#FF6B00] text-white font-bold py-2.5 px-4 rounded-xl text-center">🛒 สั่งซื้อเก็บเงินปลายทาง (ส่งฟรี)</a>
+    </div>
+<footer class="bg-zinc-950 text-zinc-500 text-center px-6  text-xs border-t border-zinc-900 pb-24 pt-6 md:py-6">
         <p>&copy; 2026 RAPTOR SPORT. All Rights Reserved.</p>
         <p class="mt-2">จัดส่งฟรีทั่วประเทศ (1–3 วันทำการ) | รับประกันเปลี่ยน/คืนสินค้าฟรีภายใน 7 วันกรณีชำรุดเสียหายจากการขนส่ง</p>
     </footer>

@@ -1021,40 +1021,6 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            const productTrackingMap = {
-                openProductModal: { name: 'RAPTOR ELITE PRO  สเปรย์สำหรับนักกีฬา สเปรย์สูตรวอร์มอัพ 250ml', price: '฿179' },
-                openCoolingModal: { name: 'RAPTOR SPORTS ICE COLD SPRAY', price: '฿179' },
-                openEnergyGelModal: { name: 'RAPTOR GO ENERGY GEL', price: '฿79' },
-                openDualActionModal: { name: 'RAPTOR DUAL ACTION PACK', price: '฿329' },
-                openTherapyOilModal: { name: 'RAPTOR SPORT & THERAPY OIL', price: '฿179' },
-                openWaterChargeModal: { name: 'RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์', price: '฿490' },
-                openHerbalGelModal: { name: 'RAPTOR HERBAL COOLING GEL', price: '฿290' },
-                openFootSprayModal: { name: 'RAPTOR SPORT FOOT SPRAY', price: '฿179' },
-                openHerbalRollOnModal: { name: 'RAPTOR HERBAL ROLL-ON', price: '฿179' },
-                openCoolPatchModal: { name: 'RAPTOR COOL PATCH', price: '฿179' },
-                openShampooModal: { name: 'RAPTOR ICE DEFENSE SPORT SHAMPOO', price: '฿199' }
-            };
-
-            document.querySelectorAll('[onclick]').forEach(function (element) {
-                const onclickValue = element.getAttribute('onclick') || '';
-                const match = onclickValue.match(/(open[A-Za-z0-9_]+Modal)\s*\(/);
-                if (!match || !productTrackingMap[match[1]]) return;
-
-                element.addEventListener('click', function () {
-                    const item = productTrackingMap[match[1]];
-                    const params = {
-                        content_name: item.name,
-                        content_category: 'Raptor Sport Product',
-                        content_type: 'product',
-                        value: getNumericPrice(item.price),
-                        currency: 'THB'
-                    };
-                    document.body.style.overflow = 'hidden';
-                    trackRaptorPixel('ViewContent', params);
-                    trackRaptorPixel('RaptorProductView', params, true);
-                });
-            });
-
             document.querySelectorAll('a[href*="order-form"], a[href*="#order"], a[href*="#modal-order-form"]').forEach(function (link) {
                 link.addEventListener('click', function () {
                     const modal = link.closest('[id$="-modal"], #product-modal');

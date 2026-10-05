@@ -48,6 +48,7 @@
         var quantity = Math.max(1, parseInt(quantityField ? quantityField.value : '1', 10) || 1);
         var nameField = form.querySelector('[name="product"]');
         var priceField = form.querySelector('[name="price"]');
+        var totalField = form.querySelector('[name="total_price"]');
         var product = productJsonLd();
         var item = product ? itemFromProduct(product) : {
             item_id: form.dataset.productId || (nameField && nameField.value) || 'raptor-product',
@@ -57,7 +58,9 @@
         };
         item.quantity = quantity;
         if (!item.price) item.price = numberFrom(form.dataset.price || (priceField && priceField.value));
-        return { currency: CURRENCY, value: item.price * quantity, items: [item] };
+        var exactTotal = numberFrom(totalField && totalField.value) || (item.price * quantity);
+        item.price = exactTotal / quantity;
+        return { currency: CURRENCY, value: exactTotal, items: [item] };
     }
 
     document.addEventListener('DOMContentLoaded', function () {
