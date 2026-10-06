@@ -291,6 +291,21 @@
         }
         #herbal-order [aria-label="ความมั่นใจในการสั่งซื้อ"] > div,
         #herbal-order .shipping-return-policy { overflow-wrap: anywhere; }
+        @media (max-width: 479px) {
+            #herbal-order, #herbal-order form, #herbal-order fieldset,
+            #herbal-order [data-payment-selector], #herbal-order [data-payment-selector] label,
+            #herbal-order button[type="submit"],
+            #herbal-order [aria-label="ความมั่นใจในการสั่งซื้อ"],
+            #herbal-order [aria-label="ความมั่นใจในการสั่งซื้อ"] > div,
+            #herbal-order .shipping-return-policy {
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                box-sizing: border-box;
+                white-space: normal;
+                word-break: break-word;
+            }
+        }
         @media (min-width: 768px) {
             #herbal-order [aria-label="ความมั่นใจในการสั่งซื้อ"] {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1015,15 +1030,14 @@
                 onSwipeMove(event.clientX);
             });
 
-<section aria-labelledby="science"><h2 id="science" class="text-3xl font-black mb-4">กลไกการทำงานและจุดเด่นผลิตภัณฑ์</h2><p class="text-zinc-300 leading-8">เนื้อเจลสูตรเย็นกระจายตัวบนผิวได้ง่าย ผสานความรู้สึกเย็นกับสารสกัดสมุนไพรเพื่อการนวดผ่อนคลายกล้ามเนื้อหลังทำกิจกรรม สูตรเจลช่วยให้ทาเฉพาะบริเวณและซึมไว เหมาะกับการดูแลภายนอกโดยเป็นผลิตภัณฑ์ดูแลร่างกายนักกีฬาสำหรับใช้ภายนอก</p><div class="grid sm:grid-cols-3 gap-3 mt-6"><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">100% Anti-Doping Safe</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Fast Deep Absorption</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Sport Grade</span></div></section>
-<section aria-labelledby="faq"><h2 id="faq" class="text-3xl font-black mb-4">คำถามที่พบบ่อย (FAQ)</h2><div class="space-y-3"><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">ควรทาเจลช่วงไหน?</summary><p class="mt-3 text-zinc-300">เหมาะสำหรับนวดดูแลกล้ามเนื้อหลังออกกำลังกายหรือเมื่อรู้สึกเมื่อยล้าจากกิจกรรมทั่วไป</p></details><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">ใช้กับแผลหรือผิวระคายเคืองได้ไหม?</summary><p class="mt-3 text-zinc-300">ไม่ควรใช้บนแผลเปิด รอบดวงตา หรือผิวที่มีอาการระคายเคือง</p></details><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">เจลเหมาะกับการพกไปสนามหรือไม่?</summary><p class="mt-3 text-zinc-300">เหมาะสำหรับพกในกระเป๋ากีฬาและทาเฉพาะจุด โดยควรปิดฝาให้สนิทและเก็บพ้นความร้อน</p></details></div></section>
+            window.addEventListener('mouseup', onSwipeEnd);
+
             dots.forEach(function (dot) {
                 dot.addEventListener('click', function () {
                     goToHomeSlide(Number(dot.dataset.homeSlide || 0));
                 });
             });
 
-    <script src="/admin-shortcut.js"></script>
             goToHomeSlide(0);
         });
     </script>
@@ -1050,5 +1064,6 @@
     </aside>
 <script src="/product-image-zoom.js"></script>
     <script src="/reviews-client.js" defer></script>
+    <script src="/admin-shortcut.js"></script>
 </body>
 </html>
