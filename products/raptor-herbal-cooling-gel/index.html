@@ -235,12 +235,81 @@
     <script src="/gtm-ecommerce.js" defer></script>
     <script src="/order-context.js?v=line-20261006" defer></script>
     <script src="/promo-config.js?v=receipt-20261005" defer></script>
-    <link rel="stylesheet" href="/order-buttons.css?v=mobile-20261006">
+    <link rel="stylesheet" href="/order-buttons.css?v=summary-20261006">
     <script src="/promotions.js?v=summary-20261006" defer></script>
     <script src="/checkout.js?v=line-20261006" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
     <script src="/sticky-order-bar.js" defer></script>
-    <link rel="stylesheet" href="/product-layout.css?v=20261006">
+    <style id="herbal-gel-mobile-overflow-fix">
+        /* Only this product: preserve the original artwork, markup and checkout. */
+        #herbalgel-modal {
+            max-width: 100vw;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        #herbalgel-modal *, #herbalgel-modal *::before, #herbalgel-modal *::after {
+            box-sizing: border-box;
+        }
+        #herbalgel-modal :is(main, section, form, fieldset, .grid > *, .flex > *) {
+            min-width: 0;
+        }
+        #herbal-order, #herbal-order form, #herbal-order fieldset,
+        #herbal-order [data-payment-selector] label,
+        #herbal-order input:not([type="radio"]), #herbal-order textarea,
+        #herbal-order button[type="submit"], #herbal-order .shipping-return-policy {
+            width: 100%;
+            max-width: 100%;
+        }
+        #herbal-order { overflow-wrap: anywhere; }
+        #herbal-order fieldset { min-inline-size: 0; }
+        #herbal-order button { max-width: 100%; }
+        #herbal-order div:has(> [data-coupon-input]) { flex-wrap: wrap; }
+        #herbal-order [data-coupon-input] { flex-basis: 100% !important; width: 100% !important; }
+        #herbal-order .quick-coupon-ticket { flex-wrap: wrap; }
+        #herbal-order .coupon-action { white-space: normal; }
+
+        #herbal-order [data-payment-selector] label > span {
+            flex: 1;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+        #herbal-order [data-payment-selector] input { flex-shrink: 0; }
+        #herbal-order button[type="submit"], #herbal-order .order-submit-cta,
+        #herbal-order .cta-primary, #herbal-order .cta-gift {
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: normal;
+        }
+        #herbal-order button[type="submit"] { padding: 16px 12px; }
+        #herbal-order .cta-primary { font-size: 1.18rem; }
+        #herbal-order .cta-gift { font-size: 0.88rem; }
+        #herbal-order [aria-label="ความมั่นใจในการสั่งซื้อ"] {
+            width: 100%;
+            grid-template-columns: minmax(0, 1fr);
+        }
+        #herbal-order [aria-label="ความมั่นใจในการสั่งซื้อ"] > div,
+        #herbal-order .shipping-return-policy { overflow-wrap: anywhere; }
+        @media (min-width: 768px) {
+            #herbal-order [aria-label="ความมั่นใจในการสั่งซื้อ"] {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+        @media (max-width: 767px) {
+            #herbalgel-modal > div > header > div { padding: 16px; gap: 8px; flex-wrap: wrap; height: auto; }
+            #herbalgel-modal > div > main { padding-left: 16px; padding-right: 16px; }
+            #herbalgel-modal > div > main > section:not(#customer-reviews),
+            #herbal-order { padding: 16px; }
+            #herbalgel-modal > div > main > section:has(#herbal-order) { padding: 0; }
+            #herbalgel-modal .animate-pulse { flex-wrap: wrap; gap: 8px; }
+            #herbalgel-modal :is(h1, h2, h3, h4, p, a) { overflow-wrap: anywhere; }
+            #herbalgel-modal [data-sticky-order-bar] { flex-wrap: wrap; }
+            body:has(#herbalgel-modal) > header > div { padding-left: 16px; padding-right: 16px; gap: 8px; }
+            body:has(#herbalgel-modal) > header > div > a { font-size: 16px; letter-spacing: 0; }
+            body:has(#herbalgel-modal) > header nav { gap: 8px; font-size: 12px; }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <header class="sticky top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
@@ -257,15 +326,27 @@
         <ol class="flex flex-wrap items-center gap-2"><li><a class="hover:text-orange-600" href="/">หน้าแรก</a></li><li aria-hidden="true">/</li><li><a class="hover:text-orange-600" href="/#shop">สินค้าทั้งหมด</a></li><li aria-hidden="true">/</li><li class="text-zinc-800" aria-current="page">RAPTOR HERBAL COOLING GEL เจลสมุนไพรสูตรเย็น</li></ol>
     </nav>
 
-    <section id="herbalgel-modal" class="product-detail-content py-8 md:py-12"><div class="bg-slate-50 rounded-2xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-slate-200"><div class="bg-blue-900 text-white px-6 py-4 flex items-center justify-between">
-                <h3 class="font-bold text-lg tracking-wider">RAPTOR HERBAL COOLING GEL LAB</h3>
-                <span class="text-xs text-blue-100 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
-            </div><div class="max-w-4xl mx-auto px-4 py-6 space-y-8"><section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="bg-slate-50 rounded-2xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-slate-200">
-                        <img src="/raptor-herbal-cooling-gel.png" alt="Raptor Herbal Cooling Gel" class="product-main-image relative z-10 w-full max-w-sm mx-auto drop-shadow-2xl rounded-2xl border border-slate-100">
+    <section id="herbalgel-modal" class="product-detail-content py-8 md:py-12">
+        <div class="bg-slate-950 text-slate-100 rounded-3xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-slate-800">
+            <!-- Header -->
+            <header class="sticky top-0 w-full z-10 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
+                <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-leaf text-white"></i>
+                        </div>
+                        <span class="font-bold text-lg tracking-widest uppercase">Raptor Herbal</span>
                     </div>
-                    <div class="flex flex-col justify-between space-y-4">
+                    <a href="#herbal-order" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all">สั่งซื้อพรีเมียม</a>
+                </div>
+            </header>
+
+            <main class="max-w-5xl mx-auto px-6 py-10 space-y-16">
+                <!-- 1. Hero Section & Flash Sale -->
+                <section class="rounded-3xl p-8 md:p-16 grid md:grid-cols-2 gap-12 items-center bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800">
+                    <div class="space-y-6">
                         <span class="text-emerald-500 font-bold tracking-[0.2em] uppercase text-sm">Professional Recovery</span>
-                        <h1 class="text-2xl md:text-3xl font-bold text-blue-900 mb-2">Herbal<br><span class="text-emerald-500">Cooling Gel</span></h1>
+                        <h1 class="text-4xl md:text-5xl font-black leading-tight uppercase">Herbal<br><span class="text-emerald-500">Cooling Gel</span></h1>
 
                         <!-- Flash Sale Banner -->
                         <div class="bg-gradient-to-r from-red-600 to-orange-500 rounded-xl p-4 flex justify-between items-center shadow-lg animate-pulse">
@@ -276,58 +357,52 @@
                             <div class="text-xl font-mono font-bold" id="herbal-countdown">15:00</div>
                         </div>
 
-                        <p class="text-slate-600 leading-relaxed">
+                        <p class="text-slate-400 leading-relaxed">
                             ยกระดับการฟื้นฟูกล้ามเนื้อด้วยสารสกัดธรรมชาติระดับพรีเมียม ผสานนวัตกรรมความเย็นล้ำลึก ช่วยผ่อนคลายความตึงเครียดของเส้นเอ็นและกล้ามเนื้อในระดับเซลล์
                         </p>
                         <div class="flex gap-4 pt-4">
-                            <a href="#herbal-order" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold text-base py-3 px-6 rounded-xl shadow-md transition-all">สั่งซื้อสินค้าตอนนี้ (฿290)</a>
+                            <a href="#herbal-order" class="bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-900/20">สั่งซื้อสินค้าตอนนี้ (฿290)</a>
                         </div>
                     </div>
+                    <div class="relative">
+                        <img src="/raptor-herbal-cooling-gel.png" alt="Raptor Herbal Cooling Gel" class="product-main-image relative z-10 w-full max-w-sm mx-auto drop-shadow-2xl rounded-2xl border border-slate-700">
+                    </div>
+                </section>
 
-                </section><section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
-                    <h2 class="text-3xl font-bold text-center uppercase tracking-wider text-blue-900">Scientific Formulation</h2>
+                <!-- 2. Scientific Formulation -->
+                <section class="space-y-8">
+                    <h2 class="text-3xl font-bold text-center uppercase tracking-wider text-emerald-400">Scientific Formulation</h2>
                     <div class="grid md:grid-cols-3 gap-6">
-                        <div class="bg-white shadow-sm border border-slate-100 p-8 rounded-2xl space-y-3">
+                        <div class="glass-card p-8 rounded-2xl space-y-3">
                             <i class="fa-solid fa-leaf text-2xl text-emerald-500"></i>
-                            <h4 class="font-bold text-lg">ไพล &amp; พิมเสน</h4>
-                            <p class="text-sm text-slate-600">ผสานพลังสมุนไพรไทย ช่วยบรรเทาอาการปวดเมื่อยและลดความตึงเครียดของกล้ามเนื้อ พร้อมให้ความรู้สึกเย็นสบาย</p>
+                            <h4 class="font-bold text-lg">ไพล & พิมเสน</h4>
+                            <p class="text-sm text-slate-400">ผสานพลังสมุนไพรไทย ช่วยบรรเทาอาการปวดเมื่อยและลดความตึงเครียดของกล้ามเนื้อ พร้อมให้ความรู้สึกเย็นสบาย</p>
                         </div>
-                        <div class="bg-white shadow-sm border border-slate-100 p-8 rounded-2xl space-y-3">
+                        <div class="glass-card p-8 rounded-2xl space-y-3">
                             <i class="fa-solid fa-droplet text-2xl text-blue-400"></i>
-                            <h4 class="font-bold text-lg">ว่านหางจระเข้ &amp; เปปเปอร์มินต์</h4>
-                            <p class="text-sm text-slate-600">เพิ่มความชุ่มชื้น ปลอบประโลมผิว และมอบความเย็นที่ยาวนานโดยไม่ก่อให้เกิดการระคายเคือง</p>
+                            <h4 class="font-bold text-lg">ว่านหางจระเข้ & เปปเปอร์มินต์</h4>
+                            <p class="text-sm text-slate-400">เพิ่มความชุ่มชื้น ปลอบประโลมผิว และมอบความเย็นที่ยาวนานโดยไม่ก่อให้เกิดการระคายเคือง</p>
                         </div>
-                        <div class="bg-white shadow-sm border border-slate-100 p-8 rounded-2xl space-y-3">
+                        <div class="glass-card p-8 rounded-2xl space-y-3">
                             <i class="fa-solid fa-shield-halved text-emerald-500"></i>
                             <h4 class="font-bold text-lg">ทองพันชั่ง</h4>
-                            <p class="text-sm text-slate-600">สารสกัดเข้มข้นช่วยดูแลสุขภาพผิว ยับยั้งการระคายเคือง เหมาะสำหรับผู้ที่มีกิจกรรมกลางแจ้งเป็นประจำ</p>
+                            <p class="text-sm text-slate-400">สารสกัดเข้มข้นช่วยดูแลสุขภาพผิว ยับยั้งการระคายเคือง เหมาะสำหรับผู้ที่มีกิจกรรมกลางแจ้งเป็นประจำ</p>
                         </div>
                     </div>
-                </section><section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
-                    <h3 class="text-2xl font-bold mb-2 text-center uppercase tracking-wider text-blue-900">Relief Efficiency Index</h3>
-                    <p class="text-sm text-slate-600 text-center mb-8">กราฟแสดงประสิทธิภาพระดับความผ่อนคลายสบายตัว (เทียบเป็นนาที)</p>
+                </section>
+
+                <!-- 3. Chart Section -->
+                <section class="glass-card p-8 rounded-3xl border border-slate-800">
+                    <h3 class="text-2xl font-bold mb-2 text-center uppercase tracking-wider text-emerald-400">Relief Efficiency Index</h3>
+                    <p class="text-sm text-slate-400 text-center mb-8">กราฟแสดงประสิทธิภาพระดับความผ่อนคลายสบายตัว (เทียบเป็นนาที)</p>
                     <div class="h-80 w-full relative">
                         <canvas id="herbalCoolingChart"></canvas>
                     </div>
-                </section><section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
-                    <!-- Testimonials -->
-                    <div class="space-y-6">
-                        <h2 class="text-2xl font-bold uppercase tracking-wider">Trusted By Athletes</h2>
-                        <div class="bg-white shadow-sm border border-slate-100 p-6 rounded-2xl border border-slate-100">
-                            <div class="flex text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <p class="text-slate-600 italic mb-4">"เป็นเจลสมุนไพรสปอร์ตที่เย็นลึกยาวนานมากค่ะ ทาบำรุงและฟื้นฟูกล้ามเนื้อหลังฝึกซ้อมหนักๆ ช่วยลดอาการเมื่อยล้าสะสมระดับลึกได้ดีมาก เนื้อเจลซึมไวสุดๆ คุ้มราคาค่ะ"</p>
-                            <span class="font-bold text-emerald-400 text-sm">— คุณหนิง, นักวิ่งมินิมาราธอน</span>
-                        </div>
-                        <div class="bg-white shadow-sm border border-slate-100 p-6 rounded-2xl border border-slate-100">
-                            <div class="flex text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <p class="text-slate-600 italic mb-4">"กลิ่นหอมสมุนไพรอโรมาสดชื่นผ่อนคลายดีมากครับ เนื้อเจลใสทาแล้วเย็นสบายผิวอย่างต่อเนื่องยาวนาน ไม่แสบร้อนผิวเหมือนยาหม่องทั่วไปเลย ชอบมากครับ"</p>
-                            <span class="font-bold text-emerald-400 text-sm">— คุณป๊อป, คาร์ดิโอ/ฟิตเนส</span>
-                        </div>
-                    </div>
+                </section>
 
-                    <!-- Order Form -->
-
-                </section><section id="customer-reviews" class="reviews-section scroll-mt-24" aria-labelledby="customer-reviews-title">
+                <!-- 4. Testimonials & 5. Order Form -->
+                <!-- reviews-seo:start -->
+  <section id="customer-reviews" class="reviews-section scroll-mt-24" aria-labelledby="customer-reviews-title">
     <div class="reviews-inner">
       <div class="reviews-header">
         <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
@@ -336,7 +411,31 @@
       <div class="reviews-list"></div>
       <div class="review-form-host"></div>
     </div>
-  </section><section id="herbal-order" class="bg-white rounded-2xl shadow-md p-6 border-2 border-blue-500 max-w-xl mx-auto space-y-6"><div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษ ฿290 พร้อมจัดส่งฟรี</div><h3 class="text-xl font-bold text-center text-blue-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3><form class="space-y-4 raptor-order-form" id="raptor-herbal-cooling-gel-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR HERBAL COOLING GEL" data-price="฿290" data-close-modal="closeHerbalGelModal">
+  </section>
+<!-- reviews-seo:end -->
+                <section class="grid md:grid-cols-2 gap-10">
+                    <!-- Testimonials -->
+                    <div class="space-y-6">
+                        <h2 class="text-2xl font-bold uppercase tracking-wider">Trusted By Athletes</h2>
+                        <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                            <div class="flex text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-slate-300 italic mb-4">"เป็นเจลสมุนไพรสปอร์ตที่เย็นลึกยาวนานมากค่ะ ทาบำรุงและฟื้นฟูกล้ามเนื้อหลังฝึกซ้อมหนักๆ ช่วยลดอาการเมื่อยล้าสะสมระดับลึกได้ดีมาก เนื้อเจลซึมไวสุดๆ คุ้มราคาค่ะ"</p>
+                            <span class="font-bold text-emerald-400 text-sm">— คุณหนิง, นักวิ่งมินิมาราธอน</span>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                            <div class="flex text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-slate-300 italic mb-4">"กลิ่นหอมสมุนไพรอโรมาสดชื่นผ่อนคลายดีมากครับ เนื้อเจลใสทาแล้วเย็นสบายผิวอย่างต่อเนื่องยาวนาน ไม่แสบร้อนผิวเหมือนยาหม่องทั่วไปเลย ชอบมากครับ"</p>
+                            <span class="font-bold text-emerald-400 text-sm">— คุณป๊อป, คาร์ดิโอ/ฟิตเนส</span>
+                        </div>
+                    </div>
+
+                    <!-- Order Form -->
+                    <div id="herbal-order" class="glass-card p-8 rounded-3xl border-2 border-emerald-600">
+                        <div class="text-center mb-8">
+                            <h2 class="text-2xl font-bold mb-2">จองสิทธิ์ราคาพิเศษ</h2>
+                            <p class="text-slate-400 text-sm">กรอกข้อมูลด้านล่างเพื่อรับสิทธิ์ราคาพิเศษ 290 บาท (จัดส่งด่วนฟรี)</p>
+                        </div>
+                        <form class="space-y-5 raptor-order-form" id="raptor-herbal-cooling-gel-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR HERBAL COOLING GEL" data-price="฿290" data-close-modal="closeHerbalGelModal">
                         <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR HERBAL COOLING GEL">
                         <input type="hidden" name="product" value="RAPTOR HERBAL COOLING GEL">
                         <input type="hidden" name="price" value="฿290">
@@ -351,24 +450,24 @@
                             </ul>
                         </aside>
                             <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                                <input type="text" required="" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name" autocomplete="name">
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">ชื่อ-นามสกุลผู้รับ</label>
+                                <input type="text" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="customer_name" autocomplete="name">
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                                <input type="tel" required="" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone" pattern="^0[689][0-9]{8}$" maxlength="10" minlength="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10); this.setCustomValidity('')" oninvalid="this.setCustomValidity('กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)')" autocomplete="tel"><p class="mt-1 text-xs text-slate-500">กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)</p>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+                                <input type="tel" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="phone" pattern="^0[689][0-9]{8}$" maxlength="10" minlength="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10); this.setCustomValidity('')" oninvalid="this.setCustomValidity('กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)')" autocomplete="tel"><p class="mt-1 text-xs text-slate-500">กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)</p>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับการจัดส่ง</label>
-                                <textarea required="" rows="3" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address" autocomplete="street-address"></textarea>
+                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">ที่อยู่สำหรับการจัดส่ง</label>
+                                <textarea required rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="address" autocomplete="street-address"></textarea>
                             </div>
-                            <fieldset class="space-y-3" data-bundle-selector="">
+                            <fieldset class="space-y-3" data-bundle-selector>
                             <legend class="block text-sm font-bold text-slate-700 mb-2">เลือกเซ็ตสุดคุ้ม</legend>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
                                 <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_1" data-quantity="1" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตทดลอง 1 ชิ้น</strong><small class="text-emerald-700">ส่งฟรีเก็บเงินปลายทาง</small></span><strong data-bundle-price="tier_1" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
                             </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
-                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_2" data-quantity="2" class="mt-1 accent-orange-500" checked=""><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตสุดคุ้ม 2 ชิ้น (ขายดีที่สุด 🔥)</strong><small class="text-emerald-700">ประหยัดเพิ่ม + ส่งฟรี</small></span><strong data-bundle-price="tier_2" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
+                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_2" data-quantity="2" class="mt-1 accent-orange-500" checked><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตสุดคุ้ม 2 ชิ้น (ขายดีที่สุด 🔥)</strong><small class="text-emerald-700">ประหยัดเพิ่ม + ส่งฟรี</small></span><strong data-bundle-price="tier_2" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
                             </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
                                 <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_3" data-quantity="3" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตนักกีฬาซ้อมหนัก 3 ชิ้น</strong><small class="text-emerald-700">คุ้มที่สุด + ส่งฟรี</small></span><strong data-bundle-price="tier_3" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
@@ -378,12 +477,11 @@
                             </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
                                 <span class="flex items-center gap-3"><input type="radio" name="bundle_tier_choice" value="custom" class="accent-orange-500"><span class="font-bold text-slate-900">กำหนดจำนวนเอง (มากกว่า 3)</span></span>
-                                <input type="number" min="4" value="4" inputmode="numeric" data-custom-quantity="" class="mt-3 hidden w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" aria-label="จำนวนสินค้าแบบกำหนดเอง">
+                                <input type="number" min="4" value="4" inputmode="numeric" data-custom-quantity class="mt-3 hidden w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" aria-label="จำนวนสินค้าแบบกำหนดเอง">
                             </label>
                         </fieldset>
                         <input type="hidden" name="quantity" value="2">
-                        <input type="hidden" name="bundle_tier" value="tier_2">
-
+                        <input type="hidden" name="bundle_tier" value="tier_2">
                             <details class="text-sm text-slate-600">
                                 <summary class="cursor-pointer font-semibold text-orange-600 hover:underline">+ เพิ่มหมายเหตุถึงขนส่ง หรือขอใบกำกับภาษี (ถ้ามี)</summary>
                                 <div class="mt-3">
@@ -393,23 +491,37 @@
             <a class="transition hover:text-orange-400" href="/policies/#privacy">นโยบายความเป็นส่วนตัว (PDPA)</a>
             <a class="transition hover:text-orange-400" href="/policies/#terms">ข้อกำหนดการให้บริการ</a>
         </nav>
-                © 2026 Raptor Official Store | Performance &amp; Therapy Innovation <button type="button" tabindex="-1" aria-hidden="true" style="opacity: 0.35; cursor: default; margin-left: 0.35rem; padding: 0; border: 0; background: transparent; color: inherit; font: inherit;" onclick="window.location.href='/wholesale/'">🔒</button>
+                &copy; 2026 Raptor Official Store | Performance & Therapy Innovation <button type="button" tabindex="-1" aria-hidden="true" style="opacity: 0.35; cursor: default; margin-left: 0.35rem; padding: 0; border: 0; background: transparent; color: inherit; font: inherit;" onclick="window.location.href='/wholesale/'">🔒</button>
                                 </div>
                             </details>
-                            <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer px-4 whitespace-normal break-words">ยืนยันคำสั่งซื้อ</button>
+                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-xl font-bold text-lg uppercase tracking-wider transition-all shadow-lg shadow-emerald-950">ยืนยันคำสั่งซื้อ</button>
                         <div class="grid grid-cols-3 gap-2 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center text-[11px] font-semibold leading-snug text-emerald-900" aria-label="ความมั่นใจในการสั่งซื้อ">
                             <div>🛡️ ของแท้ 100% จากบริษัทผู้จัดจำหน่ายโดยตรง</div>
                             <div>📋 มาตรฐานปลอดภัย 100% Anti-Doping</div>
                             <div>📦 ส่งฟรี มีเก็บเงินปลายทาง เปิดเช็คของได้</div>
                         </div>
-                        </form><section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100" aria-label="นโยบายการจัดส่งและคืนสินค้า">
+                        </form>
+                        <section class="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-left shadow-sm shipping-return-policy" aria-label="นโยบายการจัดส่งและคืนสินค้า">
                             <div class="space-y-4 text-sm leading-relaxed text-slate-700">
                                 <p><strong class="text-slate-900">การจัดส่งฟรีด่วนพิเศษ:</strong> จัดส่งฟรีทั่วประเทศ รองรับเก็บเงินปลายทาง (COD) ได้รับสินค้าภายใน 1–3 วันทำการ</p>
                                 <p><strong class="text-slate-900">รับประกันเปลี่ยน/คืนสินค้าฟรีภายใน 7 วัน:</strong> สินค้าของแท้ 100% จาก Raptor Global Import Co., Ltd. หากชำรุดเสียหายจากการขนส่ง แจ้งเปลี่ยนหรือคืนสินค้าได้ฟรีภายใน 7 วัน (LINE ID: @raptor)</p>
                             </div>
-                        </section></section></div></div></section>
+                        </section>
+                    </div>
+                </section>
+            </main>
 
-
+            
+    <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" data-sticky-order-bar aria-label="ทางลัดสั่งซื้อ">
+        <a href="https://lin.ee/qtuszPa" data-contact-pixel-button="line chat" class="shrink-0 rounded-xl border border-zinc-700 px-3 py-2.5 text-center text-sm font-semibold text-white"><i class="fa-brands fa-line text-green-400"></i> สอบถามแอดมิน</a>
+        <a href="#raptor-herbal-cooling-gel-order-form" onclick="document.getElementById('raptor-herbal-cooling-gel-order-form').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="flex-grow bg-[#FF6B00] text-white font-bold py-2.5 px-4 rounded-xl text-center">🛒 สั่งซื้อเก็บเงินปลายทาง (ส่งฟรี)</a>
+    </div>
+<footer class="text-center  text-slate-600 text-sm border-t border-slate-900 pb-24 pt-6 md:py-6">
+                &copy; 2026 Raptor Official Store | Performance & Therapy Innovation
+                <p class="mt-2">จัดส่งฟรีทั่วประเทศ (1–3 วันทำการ) | รับประกันเปลี่ยน/คืนสินค้าฟรีภายใน 7 วันกรณีชำรุดเสียหายจากการขนส่ง</p>
+            </footer>
+        </div>
+    </section>
 
     <script>
 
@@ -903,18 +1015,15 @@
                 onSwipeMove(event.clientX);
             });
 
-
-
+<section aria-labelledby="science"><h2 id="science" class="text-3xl font-black mb-4">กลไกการทำงานและจุดเด่นผลิตภัณฑ์</h2><p class="text-zinc-300 leading-8">เนื้อเจลสูตรเย็นกระจายตัวบนผิวได้ง่าย ผสานความรู้สึกเย็นกับสารสกัดสมุนไพรเพื่อการนวดผ่อนคลายกล้ามเนื้อหลังทำกิจกรรม สูตรเจลช่วยให้ทาเฉพาะบริเวณและซึมไว เหมาะกับการดูแลภายนอกโดยเป็นผลิตภัณฑ์ดูแลร่างกายนักกีฬาสำหรับใช้ภายนอก</p><div class="grid sm:grid-cols-3 gap-3 mt-6"><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">100% Anti-Doping Safe</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Fast Deep Absorption</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Sport Grade</span></div></section>
+<section aria-labelledby="faq"><h2 id="faq" class="text-3xl font-black mb-4">คำถามที่พบบ่อย (FAQ)</h2><div class="space-y-3"><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">ควรทาเจลช่วงไหน?</summary><p class="mt-3 text-zinc-300">เหมาะสำหรับนวดดูแลกล้ามเนื้อหลังออกกำลังกายหรือเมื่อรู้สึกเมื่อยล้าจากกิจกรรมทั่วไป</p></details><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">ใช้กับแผลหรือผิวระคายเคืองได้ไหม?</summary><p class="mt-3 text-zinc-300">ไม่ควรใช้บนแผลเปิด รอบดวงตา หรือผิวที่มีอาการระคายเคือง</p></details><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">เจลเหมาะกับการพกไปสนามหรือไม่?</summary><p class="mt-3 text-zinc-300">เหมาะสำหรับพกในกระเป๋ากีฬาและทาเฉพาะจุด โดยควรปิดฝาให้สนิทและเก็บพ้นความร้อน</p></details></div></section>
             dots.forEach(function (dot) {
                 dot.addEventListener('click', function () {
                     goToHomeSlide(Number(dot.dataset.homeSlide || 0));
                 });
             });
 
-
-            goToHomeSlide(0);
-        });
-</script>
+    <script src="/admin-shortcut.js"></script>
             goToHomeSlide(0);
         });
     </script>
@@ -930,27 +1039,16 @@
         });
     </script>
 
-<main class="bg-slate-50 text-slate-700 py-16" aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"><div class="max-w-5xl mx-auto px-6 space-y-12">
-<section aria-labelledby="science"><h2 id="science" class="text-3xl font-black mb-4">กลไกการทำงานและจุดเด่นผลิตภัณฑ์</h2><p class="text-slate-600 leading-8">เนื้อเจลสูตรเย็นกระจายตัวบนผิวได้ง่าย ผสานความรู้สึกเย็นกับสารสกัดสมุนไพรเพื่อการนวดผ่อนคลายกล้ามเนื้อหลังทำกิจกรรม สูตรเจลช่วยให้ทาเฉพาะบริเวณและซึมไว เหมาะกับการดูแลภายนอกโดยไม่ใช่ยารักษาอาการบาดเจ็บ</p><div class="grid sm:grid-cols-3 gap-3 mt-6"><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">100% Anti-Doping Safe</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Fast Deep Absorption</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Sport Grade</span></div></section>
-<section aria-labelledby="how"><h2 id="how" class="text-3xl font-black mb-4">วิธีใช้งานเพื่อประสิทธิภาพสูงสุด</h2><ol class="list-decimal list-inside space-y-3 text-slate-600"><li class="pl-2">บีบเจลปริมาณพอเหมาะลงบนผิวสะอาดบริเวณที่เมื่อยล้า</li><li class="pl-2">นวดวนเบา ๆ ให้เจลกระจายและซึมเข้าสู่ผิว</li><li class="pl-2">ล้างมือหลังใช้ หลีกเลี่ยงแผลเปิดและหยุดใช้หากระคายเคือง</li></ol></section>
-<section aria-labelledby="spec"><h2 id="spec" class="text-3xl font-black mb-4">ข้อมูลจำเพาะและมาตรฐานความปลอดภัย</h2><div class="overflow-x-auto"><table class="w-full border-collapse text-left"><tbody><tr class="border-b border-slate-200"><th class="p-4 text-blue-900">ปริมาณสุทธิ/ขนาดบรรจุ</th><td class="p-4 text-slate-600">1 หลอด</td></tr><tr class="border-b border-slate-200"><th class="p-4 text-blue-900">กลไกสำคัญ/ส่วนประกอบเด่น</th><td class="p-4 text-slate-600">เจลให้ความรู้สึกเย็นและสารสกัดสมุนไพรสำหรับการนวดภายนอก</td></tr><tr class="border-b border-slate-200"><th class="p-4 text-blue-900">กีฬาเป้าหมาย</th><td class="p-4 text-slate-600">วิ่ง ฟิตเนส ฟุตบอล ปั่นจักรยาน และกิจกรรมกลางแจ้ง</td></tr><tr class="border-b border-slate-200"><th class="p-4 text-blue-900">มาตรฐานความปลอดภัย</th><td class="p-4 text-slate-600">100% Anti-Doping Safe; ใช้ตามคำแนะนำบนฉลาก</td></tr></tbody></table></div></section>
-<section aria-labelledby="faq"><h2 id="faq" class="text-3xl font-black mb-4">คำถามที่พบบ่อย (FAQ)</h2><div class="space-y-3"><details class="rounded-xl border border-slate-200 bg-white p-4"><summary class="cursor-pointer font-bold text-blue-900">ควรทาเจลช่วงไหน?</summary><p class="mt-3 text-slate-600">เหมาะสำหรับนวดดูแลกล้ามเนื้อหลังออกกำลังกายหรือเมื่อรู้สึกเมื่อยล้าจากกิจกรรมทั่วไป</p></details><details class="rounded-xl border border-slate-200 bg-white p-4"><summary class="cursor-pointer font-bold text-blue-900">ใช้กับแผลหรือผิวอักเสบได้ไหม?</summary><p class="mt-3 text-slate-600">ไม่ควรใช้บนแผลเปิด รอบดวงตา หรือผิวที่อักเสบและระคายเคือง</p></details><details class="rounded-xl border border-slate-200 bg-white p-4"><summary class="cursor-pointer font-bold text-blue-900">เจลเหมาะกับการพกไปสนามหรือไม่?</summary><p class="mt-3 text-slate-600">เหมาะสำหรับพกในกระเป๋ากีฬาและทาเฉพาะจุด โดยควรปิดฝาให้สนิทและเก็บพ้นความร้อน</p></details></div></section>
+<main class="bg-zinc-950 text-white py-16" aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"><div class="max-w-5xl mx-auto px-6 space-y-12">
+<section aria-labelledby="science"><h2 id="science" class="text-3xl font-black mb-4">กลไกการทำงานและจุดเด่นผลิตภัณฑ์</h2><p class="text-zinc-300 leading-8">เนื้อเจลสูตรเย็นกระจายตัวบนผิวได้ง่าย ผสานความรู้สึกเย็นกับสารสกัดสมุนไพรเพื่อการนวดผ่อนคลายกล้ามเนื้อหลังทำกิจกรรม สูตรเจลช่วยให้ทาเฉพาะบริเวณและซึมไว เหมาะกับการดูแลภายนอกโดยไม่ใช่ยารักษาอาการบาดเจ็บ</p><div class="grid sm:grid-cols-3 gap-3 mt-6"><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">100% Anti-Doping Safe</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Fast Deep Absorption</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Sport Grade</span></div></section>
+<section aria-labelledby="how"><h2 id="how" class="text-3xl font-black mb-4">วิธีใช้งานเพื่อประสิทธิภาพสูงสุด</h2><ol class="list-decimal list-inside space-y-3 text-zinc-300"><li class="pl-2">บีบเจลปริมาณพอเหมาะลงบนผิวสะอาดบริเวณที่เมื่อยล้า</li><li class="pl-2">นวดวนเบา ๆ ให้เจลกระจายและซึมเข้าสู่ผิว</li><li class="pl-2">ล้างมือหลังใช้ หลีกเลี่ยงแผลเปิดและหยุดใช้หากระคายเคือง</li></ol></section>
+<section aria-labelledby="spec"><h2 id="spec" class="text-3xl font-black mb-4">ข้อมูลจำเพาะและมาตรฐานความปลอดภัย</h2><div class="overflow-x-auto"><table class="w-full border-collapse text-left"><tbody><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">ปริมาณสุทธิ/ขนาดบรรจุ</th><td class="p-4 text-zinc-300">1 หลอด</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">กลไกสำคัญ/ส่วนประกอบเด่น</th><td class="p-4 text-zinc-300">เจลให้ความรู้สึกเย็นและสารสกัดสมุนไพรสำหรับการนวดภายนอก</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">กีฬาเป้าหมาย</th><td class="p-4 text-zinc-300">วิ่ง ฟิตเนส ฟุตบอล ปั่นจักรยาน และกิจกรรมกลางแจ้ง</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">มาตรฐานความปลอดภัย</th><td class="p-4 text-zinc-300">100% Anti-Doping Safe; ใช้ตามคำแนะนำบนฉลาก</td></tr></tbody></table></div></section>
+<section aria-labelledby="faq"><h2 id="faq" class="text-3xl font-black mb-4">คำถามที่พบบ่อย (FAQ)</h2><div class="space-y-3"><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">ควรทาเจลช่วงไหน?</summary><p class="mt-3 text-zinc-300">เหมาะสำหรับนวดดูแลกล้ามเนื้อหลังออกกำลังกายหรือเมื่อรู้สึกเมื่อยล้าจากกิจกรรมทั่วไป</p></details><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">ใช้กับแผลหรือผิวอักเสบได้ไหม?</summary><p class="mt-3 text-zinc-300">ไม่ควรใช้บนแผลเปิด รอบดวงตา หรือผิวที่อักเสบและระคายเคือง</p></details><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">เจลเหมาะกับการพกไปสนามหรือไม่?</summary><p class="mt-3 text-zinc-300">เหมาะสำหรับพกในกระเป๋ากีฬาและทาเฉพาะจุด โดยควรปิดฝาให้สนิทและเก็บพ้นความร้อน</p></details></div></section>
 </div></main>
     <aside class="bg-white border-t border-gray-200" aria-labelledby="related-products-title">
         <div class="max-w-5xl mx-auto px-6 py-10"><h2 id="related-products-title" class="text-xl font-bold text-zinc-900 mb-5">ผลิตภัณฑ์ Raptor Sport ที่เกี่ยวข้อง</h2><ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3"><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-warming-spray/">RAPTOR ELITE PRO สเปรย์วอร์มอัพ 250 มล.</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cooling-spray/">RAPTOR SPORTS ICE COLD SPRAY สเปรย์เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-go-energy-gel/">RAPTOR GO ENERGY GEL เจลพลังงานนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-dual-action-pack/">RAPTOR DUAL ACTION PACK เซ็ตสเปรย์ร้อน-เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-therapy-oil/">RAPTOR SPORT &amp; THERAPY OIL น้ำมันนวดนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-v-mix/">RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-cooling-gel/">RAPTOR HERBAL COOLING GEL เจลสมุนไพรสูตรเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-foot-spray/">RAPTOR SPORT FOOT SPRAY สเปรย์ฉีดเท้า</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-roll-on/">RAPTOR HERBAL ROLL-ON โรลออนสมุนไพร</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cool-patch/">RAPTOR COOL PATCH แผ่นเจลประคบเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-ice-defense-sport-shampoo/">RAPTOR ICE DEFENSE SPORT SHAMPOO แชมพูสูตรเย็น</a></li></ul></div>
     </aside>
 <script src="/product-image-zoom.js"></script>
     <script src="/reviews-client.js" defer></script>
-<script src="/admin-shortcut.js"></script>
-<footer class="bg-zinc-950 text-zinc-500 text-center px-6  text-xs border-t border-zinc-900 pb-24 pt-6 md:py-6">
-        <nav class="mx-auto mb-4 flex max-w-4xl flex-wrap justify-center gap-x-5 gap-y-3 text-xs" aria-label="นโยบายร้านค้า">
-            <a class="transition hover:text-orange-400" href="/policies/#shipping">นโยบายการจัดส่ง</a>
-            <a class="transition hover:text-orange-400" href="/policies/#returns">นโยบายการเปลี่ยน/คืนสินค้า</a>
-            <a class="transition hover:text-orange-400" href="/policies/#privacy">นโยบายความเป็นส่วนตัว (PDPA)</a>
-            <a class="transition hover:text-orange-400" href="/policies/#terms">ข้อกำหนดการให้บริการ</a>
-        </nav>
-        <p>&copy; 2026 RAPTOR SPORT. All Rights Reserved. <button type="button" tabindex="-1" aria-hidden="true" style="opacity: 0.35; cursor: default; margin-left: 0.35rem; padding: 0; border: 0; background: transparent; color: inherit; font: inherit;" onclick="window.location.href='/wholesale/'">🔒</button></p>
-        <p class="mt-2">จัดส่งฟรีทั่วประเทศ (1–3 วันทำการ) | รับประกันเปลี่ยน/คืนสินค้าฟรีภายใน 7 วันกรณีชำรุดเสียหายจากการขนส่ง</p>
-    </footer>
 </body>
 </html>
