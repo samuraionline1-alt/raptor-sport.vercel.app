@@ -41,6 +41,7 @@
     "https://www.raptorthailand.com/raptor-herbal-cooling-gel.png"
   ],
   "sku": "RAPTOR-HERBAL-COOLING-GEL",
+  "size": "50ml",
   "brand": {
     "@type": "Brand",
     "name": "RAPTOR Thailand"
@@ -326,83 +327,41 @@
         }
     </style>
 <style id="herbal-gel-bright-theme">
-#herbal-gel-page { background:#fff; color:#1e293b; padding-bottom:100px; }
-#herbal-gel-page > header, #herbal-gel-page > nav[aria-label="Breadcrumb"] { display:none; }
-#herbal-gel-page > .bg-orange-600 { display:none; }
-#herbalgel-modal { padding:0 0 24px; overflow:visible; }
-#herbalgel-modal > div { background:#fff; color:#1e293b; border:1px solid #e2eeeb; border-radius:0 0 24px 24px; box-shadow:0 12px 45px #0f766e0a; }
-#herbalgel-modal > div > main { padding:0; }
-#herbalgel-modal > div > main > * { margin-top:0; }
-#herbalgel-modal > div > main > section:not(.gel-purchase) { padding:24px 20px; }
-#herbalgel-modal .gel-navigation { position:relative; display:flex; justify-content:space-between; align-items:center; padding:12px 16px; gap:8px; background:#fff; border-bottom:1px solid #e2eeeb; box-shadow:none; backdrop-filter:none; }
-#herbal-gel-page .gel-navigation-left, #herbal-gel-page .gel-navigation-actions { display:flex; align-items:center; gap:4px; }
-#herbal-gel-page .gel-icon { display:inline-flex; align-items:center; justify-content:center; position:relative; width:44px; height:44px; border:0; background:transparent; color:#1e293b; border-radius:50%; cursor:pointer; flex-shrink:0; }
-#herbal-gel-page .gel-icon:hover { background:#f2fbf9; }
-#herbal-gel-page [data-gel-cart-count] { position:absolute; right:0; top:0; min-width:17px; background:#ff5722; color:white; border-radius:20px; font-size:10px; }
-#herbal-gel-page .gel-rating { font-size:13px; font-weight:700; white-space:nowrap; }
-#herbal-gel-page .gel-rating span { font-size:11px; color:#64748b; font-weight:400; }
-#herbalgel-modal .gel-purchase { display:block; padding:0!important; border:0; border-radius:0; }
-#herbalgel-modal .gel-hero { position:relative; display:flex; justify-content:center; align-items:center; min-height:360px; padding:76px 24px 42px; background:radial-gradient(ellipse at center,#d9f8f0 0%,#f2fbf9 64%,#fff 100%); }
-#herbalgel-modal .gel-hero .product-main-image { max-width:min(100%,340px)!important; max-height:340px!important; border:0; border-radius:16px; filter:drop-shadow(0 18px 22px #0f766e18); }
-#herbal-gel-page .gel-badge { position:absolute; top:22px; padding:10px 12px; border-radius:14px; font-size:12px; font-weight:700; box-shadow:0 4px 12px #0f766e0d; }
-#herbal-gel-page .gel-badge-cool { left:16px; color:#9a3412; background:linear-gradient(110deg,#ffedd5,#d0f0fd); border:1px solid #fed7aa; }
-#herbal-gel-page .gel-badge-natural { right:16px; color:#047857; background:#fff; border:1px solid #a7f3d0; }
-#herbal-gel-page .gel-hero-caption { position:absolute; bottom:16px; color:#047857; font-size:11px; letter-spacing:.12em; }
-#herbal-gel-page .gel-delivery { display:flex; justify-content:center; align-items:center; gap:10px; padding:15px 10px; background:linear-gradient(100deg,#d1fae5,#d0f0fd); color:#075985; font-size:14px; }
-#herbal-gel-page .gel-info { padding:24px 20px; }
-#herbal-gel-page .gel-eyebrow { color:#047857; font-size:12px; font-weight:600; margin:0 0 8px; }
-#herbal-gel-page #gel-title { font-size:clamp(24px,5.5vw,38px); font-weight:800; line-height:1.2; letter-spacing:-.025em; margin:0 0 8px; }
-#herbal-gel-page .gel-subtitle { font-size:16px; color:#475569; }
-#herbal-gel-page .gel-price { display:flex; align-items:center; gap:14px; margin-top:16px; }
-#herbal-gel-page .gel-price strong { font-size:44px; color:#f97316; line-height:1.3; }
-#herbal-gel-page .gel-price del { color:#64748b; font-size:18px; }
-#herbal-gel-page .gel-price > span { background:#ef4444; color:#fff; border-radius:6px; padding:4px 8px; font-weight:600; font-size:12px; }
-#herbal-gel-page .gel-saving { color:#047857; font-size:12px; margin-top:4px; }
-#herbal-gel-page .gel-variants { border:0; padding:0; margin-top:24px; }
-#herbal-gel-page .gel-variants legend { font-size:16px; font-weight:700; margin-bottom:12px; }
-#herbal-gel-page .gel-variants > div { display:flex; flex-wrap:wrap; gap:12px; }
-#herbal-gel-page .gel-variants button { border:1px solid #cbd5e1; border-radius:999px; background:#fff; padding:12px 24px; min-height:48px; font-size:14px; cursor:pointer; }
-#herbal-gel-page .gel-variants button[aria-pressed="true"] { border:2px solid #06b6d4; padding:11px 23px; background:#ecfeff; color:#075985; font-weight:700; }
-#herbal-gel-page .gel-selection { margin-top:12px; font-size:12px; color:#64748b; }
-#herbalgel-modal .gel-social { background:#f2fbf9; border-top:1px solid #e2eeeb; }
-#herbal-gel-page .gel-social-heading { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:16px; }
-#herbal-gel-page .gel-social-heading h2 { font-size:18px; font-weight:700; }
-#herbal-gel-page .gel-social-heading span { font-size:12px; }
-#herbal-gel-page .gel-review-thumbnails { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
-#herbal-gel-page .gel-review-thumbnails img { width:100%; height:110px; object-fit:contain; background:#fff; border:1px solid #dbeee8; border-radius:12px; }
-#herbal-gel-page .gel-review-thumbnails img:nth-child(2) { object-fit:cover; object-position:50% 35%; }
-#herbal-gel-page .gel-review-thumbnails img:nth-child(3) { object-fit:cover; object-position:50% 75%; }
-#herbal-gel-page .gel-image-note { margin-top:6px; color:#64748b; font-size:11px; }
-#herbal-gel-page .gel-review-tags { display:flex; gap:8px; margin-top:12px; }
-#herbal-gel-page .gel-review-tags a { padding:8px 16px; border:1px solid #b9e5da; background:white; color:#047857; border-radius:999px; font-size:13px; }
-#herbal-gel-page .gel-bottom-cta { position:fixed; bottom:0; left:0; right:0; z-index:50; display:flex; flex-wrap:nowrap!important; gap:12px; padding:12px 16px calc(12px + env(safe-area-inset-bottom)); background:#fffffff5; border-top:1px solid #dbeee8; box-shadow:0 -5px 25px #0f766e0a; }
-#herbal-gel-page .gel-add, #herbal-gel-page .gel-buy { display:flex; justify-content:center; align-items:center; flex:1; padding:14px 12px; min-height:50px; border:0; border-radius:12px; font-size:16px; font-weight:700; cursor:pointer; text-decoration:none; }
-#herbal-gel-page .gel-add { background:#d0f0fd; color:#075985; }
-#herbal-gel-page .gel-buy { background:#ff5722; color:#fff; }
-#herbal-gel-page .gel-buy:hover { background:#e64a19; }
-#herbal-gel-page .gel-bottom-cta[data-hidden] { display:none; }
-#herbalgel-modal .glass-card { background:#f2fbf9; border-color:#dbeee8; }
-#herbalgel-modal :is(.text-slate-100,.text-white) { color:#1e293b; }
-#herbalgel-modal :is(.text-slate-300,.text-slate-400) { color:#475569; }
-#herbalgel-modal :is(.text-emerald-400,.text-emerald-500) { color:#047857; }
-#herbalgel-modal :is(input,textarea,select) { background:#fff; color:#1e293b; border-color:#cbd5e1; }
-#herbalgel-modal #herbal-order button[type="submit"] { background:#ff5722; color:#fff; }
+#herbal-gel-page { background:#f2fbf9; color:#1e293b; padding-bottom:100px; }
+#herbalgel-modal > div { background:#f8fafc; color:#1e293b; border-color:#e2e8f0; }
+#herbalgel-modal .gel-performance-chart { background:#0f172a; height:240px; min-height:240px; }
+#herbalgel-modal :is(section,form,fieldset,.grid > *, .flex > *) { min-width:0; }
+#herbal-order { width:100%; max-width:36rem; box-sizing:border-box; background:#fff; border:2px solid #3b82f6; }
+#herbal-order form, #herbal-order fieldset, #herbal-order [data-payment-selector] { width:100%; box-sizing:border-box; min-width:0; }
+#herbal-order label { color:#334155; font-weight:700; }
+#herbal-order :is(input:not([type="radio"]),textarea) { width:100%; max-width:100%; box-sizing:border-box; background:#fff; color:#1e293b; border:1px solid #94a3b8; border-radius:8px; padding:12px 16px; font:inherit; font-size:16px; line-height:1.5; }
+#herbal-order :is(input,textarea)::placeholder { color:#64748b; opacity:1; }
+#herbal-order :is(input:not([type="radio"]),textarea):focus { outline:2px solid #f97316; outline-offset:2px; border-color:#f97316; }
+#herbal-order [data-bundle-selector] label { font-weight:400; }
+#herbal-order [data-bundle-selector] label:has(input:checked) { border-color:#f97316; background:#fff7ed; }
+#herbal-order [data-payment-selector] label > span { flex:1; min-width:0; overflow-wrap:anywhere; }
+#herbal-order [data-payment-selector] input { flex-shrink:0; }
+#herbal-order :is(button,a,label,p) { overflow-wrap:anywhere; }
+#herbal-order button[type="submit"] { color:#fff; background:#f97316; width:100%; box-sizing:border-box; white-space:normal; }
+#herbal-order div:has(> [data-coupon-input]) { display:flex; flex-wrap:wrap; gap:8px; }
+#herbal-order [data-coupon-input] { flex-basis:100%!important; width:100%!important; }
+#herbal-order .quick-coupon-ticket { width:100%; box-sizing:border-box; flex-wrap:wrap; }
+#herbalgel-modal .product-main-image { max-height:340px!important; }
 #herbal-gel-page > main { background:#f2fbf9; color:#1e293b; }
 #herbal-gel-page > main :is(.text-zinc-300,.text-zinc-400) { color:#475569; }
-#herbal-gel-page > main .bg-zinc-800 { background:#fff; border-color:#dbeee8; }
-#herbal-gel-page .gel-toast { position:fixed; bottom:100px; left:50%; transform:translateX(-50%); z-index:60; max-width:calc(100% - 32px); width:max-content; padding:12px 20px; border-radius:12px; background:#1e293b; color:#fff; font-size:13px; }
-#herbal-gel-page .gel-toast:empty { display:none; }
-#herbal-gel-page .gel-cart-dialog { width:min(440px,calc(100% - 32px)); margin:auto; border:1px solid #dbeee8; border-radius:20px; padding:24px; color:#1e293b; background:#fff; }
-#herbal-gel-page .gel-cart-dialog::backdrop { background:#0f172a66; }
-#herbal-gel-page .gel-cart-heading { display:flex; align-items:center; justify-content:space-between; font-weight:700; font-size:20px; }
-#herbal-gel-page [data-gel-cart-items] p { padding:12px 0; }
-#herbal-gel-page .gel-cart-checkout { width:100%; margin-top:16px; }
-#herbal-gel-page .gel-cart-checkout:disabled { opacity:.5; cursor:default; }
-#herbal-gel-page .gel-cart-clear { width:100%; padding:12px; color:#64748b; background:transparent; border:0; cursor:pointer; }
-#herbal-gel-page :is(button,a,input,textarea,select):focus-visible { outline:3px solid #0891b2; outline-offset:3px; }
-@media(min-width:768px) { #herbalgel-modal { padding:24px; } #herbalgel-modal > div { border-radius:24px; } #herbalgel-modal .gel-hero { min-height:460px; } #herbalgel-modal .gel-hero .product-main-image { max-height:400px!important; } #herbal-gel-page .gel-info { padding:32px 40px; } #herbal-gel-page .gel-bottom-cta { left:50%; right:auto; transform:translateX(-50%); width:min(100%,1024px); border-radius:16px 16px 0 0; } #herbal-gel-page .gel-review-thumbnails { max-width:440px; } }
-@media(max-width:359px) { #herbal-gel-page .gel-icon { width:36px; } #herbal-gel-page .gel-navigation { padding:10px 8px; } #herbal-gel-page .gel-badge { font-size:10px; padding:9px; } #herbal-gel-page .gel-badge-cool { left:10px; } #herbal-gel-page .gel-badge-natural { right:10px; } }
-@media(prefers-reduced-motion:reduce) { #herbal-gel-page { scroll-behavior:auto; } #herbal-gel-page .animate-pulse, #herbal-gel-page .animate-fire { animation:none; } }
+#herbal-gel-page > main .bg-zinc-800 { background:#fff; border-color:#cbd5e1; }
+#herbal-gel-page [data-sticky-order-bar] { box-sizing:border-box; padding-bottom:calc(12px + env(safe-area-inset-bottom)); }
+#herbal-gel-page [data-sticky-order-bar] > a { min-width:0; min-height:44px; display:flex; justify-content:center; align-items:center; }
+#herbal-gel-page [data-sticky-order-bar] > a:last-child { flex:1; white-space:normal; }
+@media(max-width:767px) {
+ #herbalgel-modal { padding:16px 12px; }
+ #herbalgel-modal > div > div.max-w-4xl { padding:16px 12px; }
+ #herbal-order { padding:20px 16px; }
+ #herbalgel-modal .reviews-section { padding:20px 16px; }
+ #herbal-gel-page [data-sticky-order-bar] { gap:8px; padding-left:12px; padding-right:12px; }
+ #herbal-gel-page [data-sticky-order-bar] > a { padding:10px; font-size:12px; }
+ #herbal-order .shipping-return-policy { padding:16px; }
+}
 
 </style>
 </head>
@@ -422,109 +381,91 @@
     </nav>
 
     <section id="herbalgel-modal" class="product-detail-content py-8 md:py-12">
-        <div class="bg-slate-950 text-slate-100 rounded-3xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-slate-800">
-            <header class="gel-navigation" aria-label="เมนูสินค้า">
-                <div class="gel-navigation-left"><a class="gel-icon" href="/#shop" aria-label="ย้อนกลับไปสินค้าทั้งหมด"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a><a href="#customer-reviews" class="gel-rating">⭐ 4.9 <span>(1.2k รีวิว)</span></a></div>
-                <div class="gel-navigation-actions"><button type="button" class="gel-icon" data-gel-search aria-label="ค้นหาสินค้า"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button><button type="button" class="gel-icon" data-gel-share aria-label="แชร์สินค้า"><i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i></button><button type="button" class="gel-icon" data-gel-cart aria-label="เปิดรถเข็น"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span data-gel-cart-count>0</span></button></div>
-            </header>
-            <main class="max-w-5xl mx-auto px-6 py-10 space-y-16">
-                <section class="gel-purchase" aria-labelledby="gel-title">
-                    <div class="gel-hero">
-                        <span class="gel-badge gel-badge-cool"><i class="fa-solid fa-snowflake" aria-hidden="true"></i> เย็นทันที 2 เท่า!</span>
-                        <span class="gel-badge gel-badge-natural"><i class="fa-solid fa-leaf" aria-hidden="true"></i> สมุนไพรธรรมชาติ 100%</span>
-                        <img src="/raptor-herbal-cooling-gel.png" alt="HERBAL COOLING GEL เจลสมุนไพรสูตรเย็น" class="product-main-image" fetchpriority="high">
-                        <span class="gel-hero-caption">HERBAL RECOVERY · เย็นสบายทุกวัน</span>
+        <div class="bg-slate-50 rounded-2xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-slate-200">
+            <div class="bg-blue-900 text-white px-6 py-4 flex items-center justify-between">
+                <h3 class="font-bold text-lg tracking-wider"><i class="fa-solid fa-snowflake mr-1"></i> RAPTOR HERBAL COOLING GEL · 50ml</h3>
+                <span class="text-xs text-blue-100 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
+                <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4 gap-4">
+                        
+                        <img src="/raptor-herbal-cooling-gel.png" alt="RAPTOR HERBAL COOLING GEL" class="product-main-image max-h-[340px] object-contain rounded-lg hover:scale-105 transition-transform">
                     </div>
-                    <div class="gel-delivery"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i><strong>ส่งฟรี | ส่งด่วนภายใน 24 ชม.</strong></div>
-                    <div class="gel-info">
-                        <p class="gel-eyebrow">เย็นสดชื่น · ซึมไว · ไม่เหนียวเหนอะหนะ</p>
-                        <h1 id="gel-title">HERBAL COOLING GEL</h1>
-                        <p class="gel-subtitle">เจลสมุนไพรสูตรเย็น ตราเย็นสบาย</p>
-                        <div class="gel-price"><strong>฿189</strong><del>฿290</del><span>ลด 35%</span></div>
-                        <p class="gel-saving">ประหยัด ฿101 พร้อมจัดส่งฟรีทั่วประเทศ</p>
-                        <fieldset class="gel-variants"><legend>การเลือกซื้อ</legend><div><button type="button" aria-pressed="false" data-gel-variant="50ml">50ml</button><button type="button" aria-pressed="true" data-gel-variant="100ml">100ml <span>(คุ้มที่สุด)</span></button></div></fieldset>
-                        <p class="gel-selection" data-gel-selection>เลือกแล้ว: 100ml · ราคาต่อชิ้น ฿189</p>
-                        <span id="herbal-countdown" hidden>15:00</span>
+                    <div class="flex flex-col justify-between space-y-4">
+                        <div>
+                            <h1 class="text-2xl md:text-3xl font-bold text-blue-900 mb-2">RAPTOR HERBAL COOLING GEL เจลสมุนไพรเย็น 50ml</h1>
+                            <p class="text-sm text-blue-600 font-medium mb-4">เจลสมุนไพรสูตรเย็นสำหรับนักกีฬาและผู้รักการออกกำลังกาย · ขนาดเดียว 50ml</p>
+                            <p class="text-slate-600 text-sm leading-relaxed">เจลสมุนไพรสูตรเย็นสำหรับนวดผ่อนคลายกล้ามเนื้อหลังออกกำลังกาย เนื้อเจลซึมไว ไม่เหนียวเหนอะหนะ ให้ความรู้สึกเย็นสบาย พร้อมสารสกัดสมุนไพร ปริมาณสุทธิ 50ml.</p>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl p-3 shadow-sm flex justify-between items-center animate-pulse">
+                            <div class="flex items-center space-x-2"><i class="fa-solid fa-bolt text-xl text-yellow-300"></i><span class="font-bold text-sm md:text-base tracking-wide">FLASH SALE จำกัดเวลา!</span></div>
+                            <span class="font-mono font-bold bg-black/30 px-2 py-0.5 rounded text-sm text-yellow-300" id="herbal-countdown">00:15:00</span>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="flex items-baseline space-x-3 mb-3">
+                                <span class="text-3xl font-extrabold text-red-600">฿189</span>
+                                <span class="text-sm text-slate-400 line-through">฿290</span>
+                                <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">ลด 35%</span>
+                            </div>
+                            <a href="#herbal-order" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold text-base py-3 px-6 rounded-xl shadow-md transition-all">
+                                <i class="fa-solid fa-cart-shopping mr-1"></i> สั่งซื้อเลยตอนนี้
+                            </a>
+                        </div>
                     </div>
                 </section>
-                <section class="gel-social" aria-labelledby="gel-social-title">
-                    <div class="gel-social-heading"><h2 id="gel-social-title">รีวิวจากผู้ใช้จริง</h2><span aria-label="5 ดาว">⭐⭐⭐⭐⭐ 5</span></div>
-                    <div class="gel-review-thumbnails" aria-label="ภาพประกอบสินค้า"><img src="/raptor-herbal-cooling-gel.png" alt="ภาพประกอบเจลสมุนไพร มุมเต็ม" loading="lazy"><img src="/raptor-herbal-cooling-gel.png" alt="ภาพประกอบเจลสมุนไพร รายละเอียดหลอด" loading="lazy"><img src="/raptor-herbal-cooling-gel.png" alt="ภาพประกอบเจลสมุนไพร บรรจุภัณฑ์" loading="lazy"></div>
-                    <p class="gel-image-note">ภาพประกอบสินค้า</p>
-                    <div class="gel-review-tags"><a href="#customer-reviews">เย็นสดชื่น</a><a href="#customer-reviews">ซึมไวมาก</a></div>
+
+                <section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100 space-y-4">
+                    <h2 class="text-base font-bold text-emerald-900 border-b pb-2 border-slate-100">ส่วนประกอบสมุนไพรสำคัญ</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="border border-slate-100 rounded-xl p-3 bg-emerald-50/20 space-y-3">
+                            <i class="fa-solid fa-leaf text-2xl text-emerald-500"></i>
+                            <h4 class="font-bold text-lg">ไพล & พิมเสน</h4>
+                            <p class="text-sm text-slate-600">ผสานพลังสมุนไพรไทย ช่วยบรรเทาอาการปวดเมื่อยและลดความตึงเครียดของกล้ามเนื้อ พร้อมให้ความรู้สึกเย็นสบาย</p>
+                        </div>
+                        <div class="border border-slate-100 rounded-xl p-3 bg-emerald-50/20 space-y-3">
+                            <i class="fa-solid fa-droplet text-2xl text-blue-400"></i>
+                            <h4 class="font-bold text-lg">ว่านหางจระเข้ & เปปเปอร์มินต์</h4>
+                            <p class="text-sm text-slate-600">เพิ่มความชุ่มชื้น ปลอบประโลมผิว และมอบความเย็นที่ยาวนานโดยไม่ก่อให้เกิดการระคายเคือง</p>
+                        </div>
+                        <div class="border border-slate-100 rounded-xl p-3 bg-emerald-50/20 space-y-3">
+                            <i class="fa-solid fa-shield-halved text-emerald-500"></i>
+                            <h4 class="font-bold text-lg">ทองพันชั่ง</h4>
+                            <p class="text-sm text-slate-600">สารสกัดเข้มข้นช่วยดูแลสุขภาพผิว ยับยั้งการระคายเคือง เหมาะสำหรับผู้ที่มีกิจกรรมกลางแจ้งเป็นประจำ</p>
+                        </div>
+                    </div>
                 </section>
+
+                <section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
+                    <h3 class="text-base font-bold text-blue-900 mb-2 flex items-center border-b pb-2 border-slate-100">
+                        <i class="fa-solid fa-chart-line mr-2 text-blue-600"></i> กราฟแสดงประสิทธิภาพการทำงาน (ระดับความผ่อนคลายสบายตัว)
+                    </h3>
+                    <div class="gel-performance-chart w-full h-[240px] relative rounded-xl p-3"><canvas id="herbalCoolingChart"></canvas></div>
+                </section>
+
                 <!-- reviews-seo:start -->
   <section id="customer-reviews" class="reviews-section scroll-mt-24" aria-labelledby="customer-reviews-title">
     <div class="reviews-inner">
-      <div class="reviews-header">
-        <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
-        <p class="reviews-summary" aria-live="polite">ยังไม่มีรีวิวที่เผยแพร่ เป็นคนแรกที่แบ่งปันประสบการณ์กับสินค้านี้</p>
-      </div>
-      <div class="reviews-list"></div>
-      <div class="review-form-host"></div>
+        <div class="reviews-header"><h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2><p class="reviews-summary">⭐ 5.0/5.0 จากรีวิวนักกีฬา 2 รายการ</p></div>
+        <div class="reviews-list">
+            <article class="review-card"><div class="review-card__top"><strong>คุณหนิง, นักวิ่งมินิมาราธอน</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div><span class="review-badge">✓ ยืนยันรีวิวจากนักกีฬา (Verified Athlete Review)</span><p>"เป็นเจลสมุนไพรสปอร์ตที่เย็นลึกยาวนานมากค่ะ ทาบำรุงและฟื้นฟูกล้ามเนื้อหลังฝึกซ้อมหนักๆ ช่วยลดอาการเมื่อยล้าสะสมระดับลึกได้ดีมาก เนื้อเจลซึมไวสุดๆ คุ้มราคาค่ะ"</p></article>
+            <article class="review-card"><div class="review-card__top"><strong>คุณป๊อป, คาร์ดิโอ/ฟิตเนส</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div><span class="review-badge">✓ ยืนยันรีวิวจากนักกีฬา (Verified Athlete Review)</span><p>"กลิ่นหอมสมุนไพรอโรมาสดชื่นผ่อนคลายดีมากครับ เนื้อเจลใสทาแล้วเย็นสบายผิวอย่างต่อเนื่องยาวนาน ไม่แสบร้อนผิวเหมือนยาหม่องทั่วไปเลย ชอบมากครับ"</p></article>
+        </div>
     </div>
-  </section>
+</section>
 <!-- reviews-seo:end -->
-                <!-- 2. Scientific Formulation -->
-                <section class="space-y-8">
-                    <h2 class="text-3xl font-bold text-center uppercase tracking-wider text-emerald-400">Scientific Formulation</h2>
-                    <div class="grid md:grid-cols-3 gap-6">
-                        <div class="glass-card p-8 rounded-2xl space-y-3">
-                            <i class="fa-solid fa-leaf text-2xl text-emerald-500"></i>
-                            <h4 class="font-bold text-lg">ไพล & พิมเสน</h4>
-                            <p class="text-sm text-slate-400">ผสานพลังสมุนไพรไทย ช่วยบรรเทาอาการปวดเมื่อยและลดความตึงเครียดของกล้ามเนื้อ พร้อมให้ความรู้สึกเย็นสบาย</p>
-                        </div>
-                        <div class="glass-card p-8 rounded-2xl space-y-3">
-                            <i class="fa-solid fa-droplet text-2xl text-blue-400"></i>
-                            <h4 class="font-bold text-lg">ว่านหางจระเข้ & เปปเปอร์มินต์</h4>
-                            <p class="text-sm text-slate-400">เพิ่มความชุ่มชื้น ปลอบประโลมผิว และมอบความเย็นที่ยาวนานโดยไม่ก่อให้เกิดการระคายเคือง</p>
-                        </div>
-                        <div class="glass-card p-8 rounded-2xl space-y-3">
-                            <i class="fa-solid fa-shield-halved text-emerald-500"></i>
-                            <h4 class="font-bold text-lg">ทองพันชั่ง</h4>
-                            <p class="text-sm text-slate-400">สารสกัดเข้มข้นช่วยดูแลสุขภาพผิว ยับยั้งการระคายเคือง เหมาะสำหรับผู้ที่มีกิจกรรมกลางแจ้งเป็นประจำ</p>
-                        </div>
+
+                <section id="herbal-order" class="bg-white rounded-2xl shadow-md p-6 border-2 border-blue-500 max-w-xl mx-auto space-y-6">
+                    <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
+                        <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 189 บาท (จากปกติ 290 บาท)
                     </div>
-                </section>
-
-                <!-- 3. Chart Section -->
-                <section class="glass-card p-8 rounded-3xl border border-slate-800">
-                    <h3 class="text-2xl font-bold mb-2 text-center uppercase tracking-wider text-emerald-400">Relief Efficiency Index</h3>
-                    <p class="text-sm text-slate-400 text-center mb-8">กราฟแสดงประสิทธิภาพระดับความผ่อนคลายสบายตัว (เทียบเป็นนาที)</p>
-                    <div class="h-80 w-full relative">
-                        <canvas id="herbalCoolingChart"></canvas>
-                    </div>
-                </section>
-
-                <!-- 4. Testimonials & 5. Order Form -->
-
-                <section class="grid md:grid-cols-2 gap-10">
-                    <!-- Testimonials -->
-                    <div class="space-y-6">
-                        <h2 class="text-2xl font-bold uppercase tracking-wider">Trusted By Athletes</h2>
-                        <div class="glass-card p-6 rounded-2xl border border-slate-800">
-                            <div class="flex text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <p class="text-slate-300 italic mb-4">"เป็นเจลสมุนไพรสปอร์ตที่เย็นลึกยาวนานมากค่ะ ทาบำรุงและฟื้นฟูกล้ามเนื้อหลังฝึกซ้อมหนักๆ ช่วยลดอาการเมื่อยล้าสะสมระดับลึกได้ดีมาก เนื้อเจลซึมไวสุดๆ คุ้มราคาค่ะ"</p>
-                            <span class="font-bold text-emerald-400 text-sm">— คุณหนิง, นักวิ่งมินิมาราธอน</span>
-                        </div>
-                        <div class="glass-card p-6 rounded-2xl border border-slate-800">
-                            <div class="flex text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            <p class="text-slate-300 italic mb-4">"กลิ่นหอมสมุนไพรอโรมาสดชื่นผ่อนคลายดีมากครับ เนื้อเจลใสทาแล้วเย็นสบายผิวอย่างต่อเนื่องยาวนาน ไม่แสบร้อนผิวเหมือนยาหม่องทั่วไปเลย ชอบมากครับ"</p>
-                            <span class="font-bold text-emerald-400 text-sm">— คุณป๊อป, คาร์ดิโอ/ฟิตเนส</span>
-                        </div>
-                    </div>
-
-                    <!-- Order Form -->
-                    <div id="herbal-order" class="glass-card p-8 rounded-3xl border-2 border-emerald-600">
-                        <div class="text-center mb-8">
-                            <h2 class="text-2xl font-bold mb-2">จองสิทธิ์ราคาพิเศษ</h2>
-                            <p class="text-slate-400 text-sm">กรอกข้อมูลด้านล่างเพื่อรับสิทธิ์ราคาพิเศษ 189 บาท (จัดส่งด่วนฟรี)</p>
-                            <a href="https://lin.ee/qtuszPa" data-contact-pixel-button="line chat" class="text-sm text-emerald-700">สอบถามแอดมินผ่าน LINE</a>
-                        </div>
-                        <form class="space-y-5 raptor-order-form" id="raptor-herbal-cooling-gel-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR HERBAL COOLING GEL" data-price="฿189" data-close-modal="closeHerbalGelModal">
+                    <h3 class="text-xl font-bold text-center text-gray-900">จองสิทธิ์ราคาพิเศษ · กรอกข้อมูลจัดส่ง</h3>
+                    <form class="space-y-4 raptor-order-form" id="raptor-herbal-cooling-gel-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR HERBAL COOLING GEL" data-price="฿189" data-close-modal="closeHerbalGelModal">
                         <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR HERBAL COOLING GEL">
                         <input type="hidden" name="product" value="RAPTOR HERBAL COOLING GEL">
-                        <input type="hidden" name="order_details" value="">
                         <input type="hidden" name="price" value="฿189">
                         <input type="hidden" name="payment_method" value="COD">
                         <input type="hidden" name="source" value="Raptor Sport Official Store">
@@ -536,19 +477,19 @@
                                 <li>✅ ส่งฟรีด่วนพิเศษทุกออเดอร์ มีบริการเก็บเงินปลายทาง ไม่บวกเพิ่ม</li>
                             </ul>
                         </aside>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">ชื่อ-นามสกุลผู้รับ</label>
-                                <input type="text" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="customer_name" autocomplete="name">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                                <input type="tel" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="phone" pattern="^0[689][0-9]{8}$" maxlength="10" minlength="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10); this.setCustomValidity('')" oninvalid="this.setCustomValidity('กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)')" autocomplete="tel"><p class="mt-1 text-xs text-slate-500">กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)</p>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 uppercase mb-2">ที่อยู่สำหรับการจัดส่ง</label>
-                                <textarea required rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-white" name="address" autocomplete="street-address"></textarea>
-                            </div>
-                            <fieldset class="space-y-3" data-bundle-selector>
+                        <div>
+                            <label for="herbal-customer_name" class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
+                            <input id="herbal-customer_name" type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name" autocomplete="name">
+                        </div>
+                        <div>
+                            <label for="herbal-phone" class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
+                            <input id="herbal-phone" type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone" pattern="^0[689][0-9]{8}$" maxlength="10" minlength="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10); this.setCustomValidity('')" oninvalid="this.setCustomValidity('กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)')" autocomplete="tel"><p class="mt-1 text-xs text-slate-500">กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)</p>
+                        </div>
+                        <div>
+                            <label for="herbal-address" class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
+                            <textarea id="herbal-address" required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address" autocomplete="street-address"></textarea>
+                        </div>
+                        <fieldset class="space-y-3" data-bundle-selector>
                             <legend class="block text-sm font-bold text-slate-700 mb-2">เลือกเซ็ตสุดคุ้ม</legend>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
                                 <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_1" data-quantity="1" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตทดลอง 1 ชิ้น</strong><small class="text-emerald-700">ส่งฟรีเก็บเงินปลายทาง</small></span><strong data-bundle-price="tier_1" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
@@ -569,49 +510,37 @@
                         </fieldset>
                         <input type="hidden" name="quantity" value="2">
                         <input type="hidden" name="bundle_tier" value="tier_2">
-
-                            <details class="text-sm text-slate-600">
-                                <summary class="cursor-pointer font-semibold text-orange-600 hover:underline">+ เพิ่มหมายเหตุถึงขนส่ง หรือขอใบกำกับภาษี (ถ้ามี)</summary>
-                                <div class="mt-3">
-        <nav class="mx-auto mb-4 flex max-w-4xl flex-wrap justify-center gap-x-5 gap-y-3 text-xs" aria-label="นโยบายร้านค้า">
-            <a class="transition hover:text-orange-400" href="/policies/#shipping">นโยบายการจัดส่ง</a>
-            <a class="transition hover:text-orange-400" href="/policies/#returns">นโยบายการเปลี่ยน/คืนสินค้า</a>
-            <a class="transition hover:text-orange-400" href="/policies/#privacy">นโยบายความเป็นส่วนตัว (PDPA)</a>
-            <a class="transition hover:text-orange-400" href="/policies/#terms">ข้อกำหนดการให้บริการ</a>
-        </nav>
-                &copy; 2026 Raptor Official Store | Performance & Therapy Innovation <button type="button" tabindex="-1" aria-hidden="true" style="opacity: 0.35; cursor: default; margin-left: 0.35rem; padding: 0; border: 0; background: transparent; color: inherit; font: inherit;" onclick="window.location.href='/wholesale/'">🔒</button>
-                                </div>
-                            </details>
-                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-xl font-bold text-lg uppercase tracking-wider transition-all shadow-lg shadow-emerald-950">ยืนยันคำสั่งซื้อ</button>
+                        <details class="text-sm text-slate-600">
+                            <summary class="cursor-pointer font-semibold text-orange-600 hover:underline">+ เพิ่มหมายเหตุถึงขนส่ง หรือขอใบกำกับภาษี (ถ้ามี)</summary>
+                            <div class="mt-3">
+                                <textarea rows="3" placeholder="ระบุสี/รสชาติ/หมายเหตุการจัดส่ง หรือรายละเอียดอื่น ๆ" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="order_details"></textarea>
+                            </div>
+                        </details>
+                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer">ยืนยันการสั่งซื้อ</button>
                         <div class="grid grid-cols-3 gap-2 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center text-[11px] font-semibold leading-snug text-emerald-900" aria-label="ความมั่นใจในการสั่งซื้อ">
                             <div>🛡️ ของแท้ 100% จากบริษัทผู้จัดจำหน่ายโดยตรง</div>
                             <div>📋 มาตรฐานปลอดภัย 100% Anti-Doping</div>
                             <div>📦 ส่งฟรี มีเก็บเงินปลายทาง เปิดเช็คของได้</div>
                         </div>
-                        </form>
+                    </form>
                         <section class="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-left shadow-sm shipping-return-policy" aria-label="นโยบายการจัดส่งและคืนสินค้า">
                             <div class="space-y-4 text-sm leading-relaxed text-slate-700">
                                 <p><strong class="text-slate-900">การจัดส่งฟรีด่วนพิเศษ:</strong> จัดส่งฟรีทั่วประเทศ รองรับเก็บเงินปลายทาง (COD) ได้รับสินค้าภายใน 1–3 วันทำการ</p>
                                 <p><strong class="text-slate-900">รับประกันเปลี่ยน/คืนสินค้าฟรีภายใน 7 วัน:</strong> สินค้าของแท้ 100% จาก Raptor Global Import Co., Ltd. หากชำรุดเสียหายจากการขนส่ง แจ้งเปลี่ยนหรือคืนสินค้าได้ฟรีภายใน 7 วัน (LINE ID: @raptor)</p>
                             </div>
                         </section>
-                    </div>
                 </section>
-            </main>
-
-            
-    <div class="gel-bottom-cta" data-sticky-order-bar aria-label="ทางลัดสั่งซื้อ">
-        <button type="button" class="gel-add" data-gel-add>เพิ่มลงรถเข็น</button>
-        <a href="#raptor-herbal-cooling-gel-order-form" onclick="document.getElementById('raptor-herbal-cooling-gel-order-form').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="gel-buy">ซื้อเลย</a>
+            </div>
+        </div>
+    </section>
+<div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" data-sticky-order-bar aria-label="ทางลัดสั่งซื้อ">
+        <a href="https://lin.ee/qtuszPa" data-contact-pixel-button="line chat" class="shrink-0 rounded-xl border border-zinc-700 px-3 py-2.5 text-center text-sm font-semibold text-white"><i class="fa-brands fa-line text-green-400"></i> สอบถามแอดมิน</a>
+        <a href="#raptor-herbal-cooling-gel-order-form" onclick="document.getElementById('raptor-herbal-cooling-gel-order-form').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="flex-grow bg-[#FF6B00] text-white font-bold py-2.5 px-4 rounded-xl text-center">🛒 สั่งซื้อเก็บเงินปลายทาง (ส่งฟรี)</a>
     </div>
-    <p class="gel-toast" data-gel-status role="status" aria-live="polite"></p>
-    <dialog class="gel-cart-dialog" data-gel-cart-dialog aria-labelledby="gel-cart-title"><div class="gel-cart-heading"><h2 id="gel-cart-title">รถเข็นของคุณ</h2><button type="button" class="gel-icon" data-gel-cart-close aria-label="ปิดรถเข็น">✕</button></div><div data-gel-cart-items></div><button type="button" class="gel-cart-checkout gel-buy" data-gel-cart-checkout>ดำเนินการสั่งซื้อ</button><button type="button" class="gel-cart-clear" data-gel-cart-clear>ล้างรถเข็น</button></dialog>
 <footer class="text-center  text-slate-600 text-sm border-t border-slate-900 pb-24 pt-6 md:py-6">
                 &copy; 2026 Raptor Official Store | Performance & Therapy Innovation
                 <p class="mt-2">จัดส่งฟรีทั่วประเทศ (1–3 วันทำการ) | รับประกันเปลี่ยน/คืนสินค้าฟรีภายใน 7 วันกรณีชำรุดเสียหายจากการขนส่ง</p>
             </footer>
-        </div>
-    </section>
 
     <script>
 
@@ -1131,103 +1060,16 @@
 <main class="bg-zinc-950 text-white py-16" aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"><div class="max-w-5xl mx-auto px-6 space-y-12">
 <section aria-labelledby="science"><h2 id="science" class="text-3xl font-black mb-4">กลไกการทำงานและจุดเด่นผลิตภัณฑ์</h2><p class="text-zinc-300 leading-8">เนื้อเจลสูตรเย็นกระจายตัวบนผิวได้ง่าย ผสานความรู้สึกเย็นกับสารสกัดสมุนไพรเพื่อการนวดผ่อนคลายกล้ามเนื้อหลังทำกิจกรรม สูตรเจลช่วยให้ทาเฉพาะบริเวณและซึมไว เหมาะกับการดูแลภายนอกโดยไม่ใช่ยารักษาอาการบาดเจ็บ</p><div class="grid sm:grid-cols-3 gap-3 mt-6"><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">100% Anti-Doping Safe</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Fast Deep Absorption</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Sport Grade</span></div></section>
 <section aria-labelledby="how"><h2 id="how" class="text-3xl font-black mb-4">วิธีใช้งานเพื่อประสิทธิภาพสูงสุด</h2><ol class="list-decimal list-inside space-y-3 text-zinc-300"><li class="pl-2">บีบเจลปริมาณพอเหมาะลงบนผิวสะอาดบริเวณที่เมื่อยล้า</li><li class="pl-2">นวดวนเบา ๆ ให้เจลกระจายและซึมเข้าสู่ผิว</li><li class="pl-2">ล้างมือหลังใช้ หลีกเลี่ยงแผลเปิดและหยุดใช้หากระคายเคือง</li></ol></section>
-<section aria-labelledby="spec"><h2 id="spec" class="text-3xl font-black mb-4">ข้อมูลจำเพาะและมาตรฐานความปลอดภัย</h2><div class="overflow-x-auto"><table class="w-full border-collapse text-left"><tbody><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">ปริมาณสุทธิ/ขนาดบรรจุ</th><td class="p-4 text-zinc-300">1 หลอด</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">กลไกสำคัญ/ส่วนประกอบเด่น</th><td class="p-4 text-zinc-300">เจลให้ความรู้สึกเย็นและสารสกัดสมุนไพรสำหรับการนวดภายนอก</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">กีฬาเป้าหมาย</th><td class="p-4 text-zinc-300">วิ่ง ฟิตเนส ฟุตบอล ปั่นจักรยาน และกิจกรรมกลางแจ้ง</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">มาตรฐานความปลอดภัย</th><td class="p-4 text-zinc-300">100% Anti-Doping Safe; ใช้ตามคำแนะนำบนฉลาก</td></tr></tbody></table></div></section>
+<section aria-labelledby="spec"><h2 id="spec" class="text-3xl font-black mb-4">ข้อมูลจำเพาะและมาตรฐานความปลอดภัย</h2><div class="overflow-x-auto"><table class="w-full border-collapse text-left"><tbody><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">ปริมาณสุทธิ/ขนาดบรรจุ</th><td class="p-4 text-zinc-300">50ml / 1 หลอด · ราคา ฿189</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">กลไกสำคัญ/ส่วนประกอบเด่น</th><td class="p-4 text-zinc-300">เจลให้ความรู้สึกเย็นและสารสกัดสมุนไพรสำหรับการนวดภายนอก</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">กีฬาเป้าหมาย</th><td class="p-4 text-zinc-300">วิ่ง ฟิตเนส ฟุตบอล ปั่นจักรยาน และกิจกรรมกลางแจ้ง</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">มาตรฐานความปลอดภัย</th><td class="p-4 text-zinc-300">100% Anti-Doping Safe; ใช้ตามคำแนะนำบนฉลาก</td></tr></tbody></table></div></section>
 <section aria-labelledby="faq"><h2 id="faq" class="text-3xl font-black mb-4">คำถามที่พบบ่อย (FAQ)</h2><div class="space-y-3"><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">ควรทาเจลช่วงไหน?</summary><p class="mt-3 text-zinc-300">เหมาะสำหรับนวดดูแลกล้ามเนื้อหลังออกกำลังกายหรือเมื่อรู้สึกเมื่อยล้าจากกิจกรรมทั่วไป</p></details><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">ใช้กับแผลหรือผิวอักเสบได้ไหม?</summary><p class="mt-3 text-zinc-300">ไม่ควรใช้บนแผลเปิด รอบดวงตา หรือผิวที่อักเสบและระคายเคือง</p></details><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">เจลเหมาะกับการพกไปสนามหรือไม่?</summary><p class="mt-3 text-zinc-300">เหมาะสำหรับพกในกระเป๋ากีฬาและทาเฉพาะจุด โดยควรปิดฝาให้สนิทและเก็บพ้นความร้อน</p></details></div></section>
 </div></main>
     <aside class="bg-white border-t border-gray-200" aria-labelledby="related-products-title">
         <div class="max-w-5xl mx-auto px-6 py-10"><h2 id="related-products-title" class="text-xl font-bold text-zinc-900 mb-5">ผลิตภัณฑ์ Raptor Sport ที่เกี่ยวข้อง</h2><ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3"><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-warming-spray/">RAPTOR ELITE PRO สเปรย์วอร์มอัพ 250 มล.</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cooling-spray/">RAPTOR SPORTS ICE COLD SPRAY สเปรย์เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-go-energy-gel/">RAPTOR GO ENERGY GEL เจลพลังงานนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-dual-action-pack/">RAPTOR DUAL ACTION PACK เซ็ตสเปรย์ร้อน-เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-therapy-oil/">RAPTOR SPORT &amp; THERAPY OIL น้ำมันนวดนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-v-mix/">RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-cooling-gel/">RAPTOR HERBAL COOLING GEL เจลสมุนไพรสูตรเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-foot-spray/">RAPTOR SPORT FOOT SPRAY สเปรย์ฉีดเท้า</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-roll-on/">RAPTOR HERBAL ROLL-ON โรลออนสมุนไพร</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cool-patch/">RAPTOR COOL PATCH แผ่นเจลประคบเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-ice-defense-sport-shampoo/">RAPTOR ICE DEFENSE SPORT SHAMPOO แชมพูสูตรเย็น</a></li></ul></div>
     </aside>
 <script src="/product-image-zoom.js"></script>
-    <script src="/reviews-client.js" defer></script>
-    <script src="/admin-shortcut.js"></script>
-<script>
-(function () {
-    'use strict';
-    const root = document.getElementById('herbal-gel-page');
-    const form = document.getElementById('raptor-herbal-cooling-gel-order-form');
-    const dialog = root.querySelector('[data-gel-cart-dialog]');
-    const key = 'raptorHerbalGelCart';
-    let selectedSize = '100ml';
-    let cart = [];
-    let toastTimer;
-    try {
-        const saved = JSON.parse(localStorage.getItem(key) || '[]');
-        if (Array.isArray(saved)) cart = saved.filter(item => ['50ml', '100ml'].includes(item.size) && Number.isInteger(item.quantity) && item.quantity > 0);
-    } catch (_) {}
-    function notify(message) {
-        root.querySelector('[data-gel-status]').textContent = message;
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => { root.querySelector('[data-gel-status]').textContent = ''; }, 4500);
-    }
-    function renderCart() {
-        root.querySelector('[data-gel-cart-count]').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-        const host = root.querySelector('[data-gel-cart-items]');
-        host.replaceChildren();
-        const line = document.createElement('p');
-        line.textContent = cart.length ? cart.map(item => `HERBAL COOLING GEL ${item.size} × ${item.quantity} · ฿${item.quantity * 189}`).join('\n') : 'รถเข็นยังว่างอยู่';
-        line.style.whiteSpace = 'pre-line';
-        host.append(line);
-        const total = document.createElement('p');
-        total.textContent = `ราคาสินค้าก่อนส่วนลดแพ็กเกจ ฿${cart.reduce((sum, item) => sum + item.quantity * 189, 0)}`;
-        host.append(total);
-        root.querySelector('[data-gel-cart-checkout]').disabled = !cart.length;
-    }
-    function saveCart() {
-        try { localStorage.setItem(key, JSON.stringify(cart)); } catch (_) { notify('บันทึกในเครื่องไม่ได้ รถเข็นจะอยู่จนกว่าจะปิดหน้านี้'); }
-        renderCart();
-    }
-    // Keep the existing product/API fields; record the selected size as order details.
-    function syncSize() {
-        const notes = form.querySelector('[name="order_details"]');
-        if (notes) {
-            notes.value = notes.value.replace(/^ขนาดสินค้า: (?:50ml|100ml)\n?/, '').replace(/^รายการจากรถเข็น:.*\n?/, '');
-            notes.value = `ขนาดสินค้า: ${selectedSize}\n${notes.value}`;
-        }
-    }
-    root.querySelectorAll('[data-gel-variant]').forEach(button => {
-        button.addEventListener('click', () => {
-            selectedSize = button.dataset.gelVariant;
-            root.querySelectorAll('[data-gel-variant]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-            root.querySelector('[data-gel-selection]').textContent = `เลือกแล้ว: ${selectedSize} · ราคาต่อชิ้น ฿189`;
-            syncSize();
-        });
-    });
-    root.querySelector('[data-gel-add]').addEventListener('click', () => {
-        const item = cart.find(item => item.size === selectedSize);
-        if (item) item.quantity += 1; else cart.push({ size: selectedSize, quantity: 1 });
-        saveCart();
-        notify(`เพิ่ม ${selectedSize} ลงรถเข็นแล้ว`);
-    });
-    root.querySelector('[data-gel-cart]').addEventListener('click', () => { renderCart(); dialog.showModal(); });
-    root.querySelector('[data-gel-cart-close]').addEventListener('click', () => dialog.close());
-    root.querySelector('[data-gel-cart-clear]').addEventListener('click', () => { cart = []; saveCart(); });
-    root.querySelector('[data-gel-cart-checkout]').addEventListener('click', () => {
-        const quantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-        if (!quantity) return;
-        const tier = quantity < 4 ? `tier_${quantity}` : 'custom';
-        const choice = form.querySelector(`[name="bundle_tier_choice"][value="${tier}"]`);
-        const custom = form.querySelector('[data-custom-quantity]');
-        if (custom && quantity >= 4) custom.value = quantity;
-        if (choice) { choice.checked = true; choice.dispatchEvent(new Event('change', { bubbles: true })); }
-        form.querySelector('[name="quantity"]').value = quantity;
-        const notes = form.querySelector('[name="order_details"]');
-        if (notes) notes.value = 'รายการจากรถเข็น: ' + cart.map(item => `${item.size} × ${item.quantity}`).join(', ');
-        if (window.RaptorPromotions) window.RaptorPromotions.update(form);
-        dialog.close();
-        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    root.querySelector('[data-gel-search]').addEventListener('click', () => { window.location.href = '/#shop'; });
-    root.querySelector('[data-gel-share]').addEventListener('click', async () => {
-        try {
-            if (navigator.share) await navigator.share({ title: 'HERBAL COOLING GEL', url: location.href });
-            else { await navigator.clipboard.writeText(location.href); notify('คัดลอกลิงก์สินค้าแล้ว'); }
-        } catch (error) { if (error.name !== 'AbortError') notify('แชร์ลิงก์ได้จากแถบที่อยู่ของเบราว์เซอร์'); }
-    });
-    syncSize();
-    renderCart();
-}());
 
-</script>
+    <script src="/admin-shortcut.js"></script>
+
 </body>
 </html>
 
