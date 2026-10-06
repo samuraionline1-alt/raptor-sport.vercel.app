@@ -1,3 +1,5 @@
+import { waitUntil } from '@vercel/functions';
+import { pushLine } from '../lib/line-notifications.js';
 import promoConfig from '../promo-config.js';
 const STRIPE_ENDPOINT = 'https://api.stripe.com/v1/checkout/sessions';
 const SITE_ORIGIN = 'https://www.raptorthailand.com';
@@ -25,7 +27,7 @@ function successUrl(body, totalPrice, product, quantity, orderRef, customerName,
     } catch (_) {}
   }
   const url = new URL(destination);
-  Object.entries({ payment: 'stripe_success', value: totalPrice, product, qty: quantity,
+  Object.entries({ payment: 'stripe_success', paid: '1', value: totalPrice, product, qty: quantity,
     order_ref: orderRef, customer_name: customerName, phone }).forEach(([key, value]) => url.searchParams.set(key, value));
   url.searchParams.delete('session_id');
   return url.toString() + '&session_id={CHECKOUT_SESSION_ID}';
@@ -77,6 +79,8 @@ export default async function handler(req, res) {
     product,
     quantity: String(quantity),
     order_details: safeText(body.order_details, 500),
+    note: safeText(body.note, 500),
+    page_url: safeText(body.page_url, 500),
     bundle_tier: `เซ็ต ${quantity} ชิ้น (฿${totalPrice})`
   };
   const params = new URLSearchParams({
@@ -113,6 +117,9 @@ export default async function handler(req, res) {
     if (!stripeResponse.ok || !session.url) {
       return res.status(stripeResponse.status || 502).json({ error: session.error?.message || 'Unable to create checkout session' });
     }
+    // Keep delivery alive after the response without delaying Stripe checkout.
+    waitUntil(pushLine({ ...metadata, total_price: totalPrice, event_type: 'checkout_initiated', payment_method: 'STRIPE', payment_status: 'รอสแกนชำระเงิน' })
+      .catch(() => console.error('LINE checkout notification could not be delivered')));
     return res.status(200).json({ url: session.url });
   } catch (_) {
     return res.status(502).json({ error: 'Unable to connect to Stripe' });

@@ -76,6 +76,8 @@
         const { product, quantity, totalPrice, address } = order;
         const orderRef = order.order_ref, cleanPhone = order.phone, customerName = order.customer_name;
         const notes = order.order_details;
+        order.note = notes;
+        order.payment_method = form.querySelector('[name="payment_method"]:checked')?.value || 'COD';
         order.order_details = `รหัส: #${orderRef} | สินค้า: ${product} (จำนวน ${quantity} ชิ้น) | ของแถม: ${order.free_gifts || "ไม่มี"} | คูปอง: ${order.coupon_code || "ไม่มี"} | ยอดสุทธิ: ฿${totalPrice} | ลูกค้า: ${customerName} (${cleanPhone}) | ที่อยู่: ${address}`;
         form.addEventListener('formdata', function (event) {
             event.formData.set('bundle_tier', order.bundleTier);
@@ -89,7 +91,10 @@
             input.value = order[key];
         });
         RaptorOrders.save(order);
-        if (form.querySelector('[name="payment_method"]:checked')?.value !== 'STRIPE') return;
+        if (order.payment_method !== 'STRIPE') {
+            RaptorOrders.notifyLine({ ...order, event_type: 'order_created', payment_status: 'รอเก็บเงินปลายทาง' }).catch(() => console.error('LINE COD notification could not be delivered'));
+            return;
+        }
         event.preventDefault();
         event.stopImmediatePropagation();
 

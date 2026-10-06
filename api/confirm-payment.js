@@ -22,6 +22,7 @@ export default async function handler(req, res) {
       phone: metadata.phone, address: metadata.address, product: metadata.product,
       quantity: metadata.quantity, coupon_code: metadata.coupon_code || "",
       discount_amount: Number(metadata.discount_amount || 0), free_gifts: metadata.free_gifts || "",
+      note: metadata.note || "", page_url: metadata.page_url || "",
       order_details: metadata.order_details || "", total_price: session.amount_total / 100 });
   } catch (_) { return res.status(502).json({ error: 'Unable to connect to Stripe' }); }
 }

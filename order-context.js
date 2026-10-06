@@ -16,6 +16,10 @@
             write('raptor_last_order', json);
             write('raptor_order_' + order.order_ref, json);
         },
+        notifyLine: async function (order) {
+            var response = await fetch('/api/notify-line', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order), keepalive: true });
+            if (!response.ok) throw new Error('LINE notification failed');
+        },
         confirm: async function (channel) {
             var query = new URLSearchParams(location.search);
             var ref = query.get('order_ref');
@@ -28,9 +32,10 @@
             var label = document.getElementById('order-reference');
             if (label && ref) label.textContent = 'รหัสคำสั่งซื้อ: ' + ref;
             var sessionId = query.get('session_id');
-            if (query.get('payment') !== 'stripe_success' || !sessionId) return;
+            if ((query.get('payment') !== 'stripe_success' && query.get('paid') !== '1') || !sessionId) return;
             var guard = 'paid_notified_' + sessionId;
-            if (read(guard) || inFlight.has(sessionId)) return;
+            var lineGuard = 'line_paid_notified_' + sessionId;
+            if ((read(guard) && read(lineGuard)) || inFlight.has(sessionId)) return;
             inFlight.add(sessionId);
             try {
                 var response = await fetch('/api/confirm-payment?session_id=' + encodeURIComponent(sessionId));
@@ -55,12 +60,18 @@
                     order_details: `รหัส: #${ref} | สินค้า: ${receipt.product} (จำนวน ${receipt.quantity || order.quantity || 1} ชิ้น) | ของแถม: ${receipt.free_gifts || "ไม่มี"} | คูปอง: ${receipt.coupon_code || "ไม่มี"} | ยอดสุทธิ: ฿${receipt.total_price} | ลูกค้า: ${receipt.customer_name} (${receipt.phone}) | ที่อยู่: ${receipt.address || order.address || ""}`,
                     total_price: receipt.total_price
                 };
-                var notification = await fetch('https://formspree.io/f/' + (channel === 'wholesale' ? 'xzdwqaar' : 'mvzyqnag'), {
-                    method: 'POST', headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload), keepalive: true
-                });
-                if (!notification.ok) throw new Error('Payment notification failed');
-                write(guard, '1');
+                var tasks = [];
+                if (!read(lineGuard)) tasks.push(this.notifyLine({ ...payload, event_type: 'payment_succeeded', payment_method: 'STRIPE', payment_status: 'ชำระเงินสำเร็จ (PAID)', note: receipt.note || order.note || '', page_url: receipt.page_url || order.page_url || '' }).then(() => write(lineGuard, '1')));
+                if (!read(guard)) tasks.push((async function () {
+                    var notification = await fetch('https://formspree.io/f/' + (channel === 'wholesale' ? 'xzdwqaar' : 'mvzyqnag'), {
+                        method: 'POST', headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload), keepalive: true
+                    });
+                    if (!notification.ok) throw new Error('Payment notification failed');
+                    write(guard, '1');
+                }()));
+                var results = await Promise.allSettled(tasks);
+                if (results.some(result => result.status === 'rejected')) throw new Error('Payment notification failed');
             } catch (error) {
                 console.error('Unable to send payment confirmation; reload to retry.', error);
             } finally { inFlight.delete(sessionId); }

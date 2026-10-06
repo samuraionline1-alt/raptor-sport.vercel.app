@@ -8,7 +8,7 @@
     <title>RAPTOR B2B Wholesale Portal</title>
     <meta name="description" content="พื้นที่สั่งซื้อสินค้าราคาส่งสำหรับตัวแทนจำหน่าย RAPTOR ที่ได้รับอนุมัติ">
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TW2P4VN5');</script>
-    <script src="/order-context.js?v=promotions-20261005"></script>
+    <script src="/order-context.js?v=line-20261006"></script>
     <script>
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '462184846324554'); fbq('track', 'PageView'); fbq('trackCustom', 'PageView whole sale RAPTOR');
@@ -247,14 +247,14 @@
             const bundleTier = `เซ็ต ${quantity} ชิ้น (฿${totalPrice})`;
             const orderDetails = `รหัส: #${orderRef} | สินค้า: ${product} (จำนวน ${quantity} ชิ้น) | ยอดสุทธิ: ฿${totalPrice} | ลูกค้า: ${customerName} (${cleanPhone}) | ที่อยู่: ${address}`;
             const order = {order_ref:orderRef, customer_name:customer.name, phone:cleanPhone, address:customer.address,
-                product:'ใบสั่งซื้อราคาส่ง RAPTOR B2B', quantity:currentOrderSnapshot.totalQty, total_price:currentOrderSnapshot.grandTotal};
+                product:product, note:customer.tax_id ? 'เลขประจำตัวผู้เสียภาษี: ' + customer.tax_id : '', payment_method:'STRIPE', page_url:window.location.href, quantity:currentOrderSnapshot.totalQty, total_price:currentOrderSnapshot.grandTotal};
             RaptorOrders.save(order);
             const payload = {...customer, ...order, price:`฿${totalPrice}`, total_price:`฿${totalPrice}`, bundle_tier:bundleTier, bundle_tier_choice:bundleTier, order_details:orderDetails, payment_status:'Pending Online Payment (Stripe)', items:currentOrderSnapshot.lines.map(({id,name,qty,unitPrice}) => ({id,name,qty,unitPrice})), totalQty:currentOrderSnapshot.totalQty, subtotal:currentOrderSnapshot.subtotal, shippingCost:currentOrderSnapshot.shippingCost, vatCost:currentOrderSnapshot.vatCost, grandTotal:currentOrderSnapshot.grandTotal, _subject:'New RAPTOR B2B Wholesale Order & Tax Invoice'};
             try {
                 fetch('https://formspree.io/f/xzdwqaar', {method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(() => {});
                 if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', {value:currentOrderSnapshot.grandTotal,currency:'THB',content_name:'B2B Wholesale Checkout'});
                 window.dataLayer = window.dataLayer || []; window.dataLayer.push({event:'begin_wholesale_checkout',value:currentOrderSnapshot.grandTotal,currency:'THB'});
-                const checkoutResponse = await fetch('/api/create-checkout-session', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...order, product:'ใบสั่งซื้อราคาส่ง RAPTOR B2B',quantity:currentOrderSnapshot.totalQty,totalPrice:currentOrderSnapshot.grandTotal,bundleTier:bundleTier,customer_name:customer.name,email:customer.email,phone:cleanPhone,address:customer.address,order_details:orderDetails,page_url:'https://www.raptorthailand.com/wholesale/',is_wholesale:true})});
+                const checkoutResponse = await fetch('/api/create-checkout-session', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...order, product:product,quantity:currentOrderSnapshot.totalQty,totalPrice:currentOrderSnapshot.grandTotal,bundleTier:bundleTier,customer_name:customer.name,email:customer.email,phone:cleanPhone,address:customer.address,order_details:orderDetails,page_url:'https://www.raptorthailand.com/wholesale/',is_wholesale:true})});
                 const checkout = await checkoutResponse.json();
                 if (!checkoutResponse.ok || !checkout.url) throw new Error(checkout.error || 'ไม่สามารถเปิดหน้าชำระเงินได้ กรุณาลองอีกครั้ง');
                 window.location.assign(checkout.url);
@@ -265,7 +265,7 @@
         ['cartModal','orderModal'].forEach(id => document.getElementById(id).addEventListener('click', event => { if (event.target.id === id) toggleModal(id, false); }));
         document.addEventListener('keydown', event => { if (event.key === 'Escape') { toggleModal('cartModal', false); toggleModal('orderModal', false); } });
         const paymentParams = new URLSearchParams(window.location.search);
-        if (paymentParams.get('payment') === 'stripe_success') {
+        if (paymentParams.get('payment') === 'stripe_success' || paymentParams.get('paid') === '1') {
             renderThankYouPage({grandTotal:paymentParams.get('value'),totalQty:paymentParams.get('qty')});
             const reference = document.createElement('p');
             reference.id = 'order-reference'; reference.className = 'mt-4 text-lg font-bold text-orange-300';

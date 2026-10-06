@@ -2,5 +2,8 @@
   "private": true,
   "scripts": {
     "sync-reviews": "node scripts/sync-reviews-seo.mjs"
+  },
+  "dependencies": {
+    "@vercel/functions": "^3.9.11"
   }
 }
