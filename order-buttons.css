@@ -29,7 +29,12 @@
     isolation: isolate;
     overflow: hidden;
     width: 100%;
-    padding: 16px 10px;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    padding: 16px 12px;
     border: 1px solid rgba(255, 255, 255, 0.28);
     border-top-color: rgba(255, 255, 255, 0.55);
     border-radius: 12px;
@@ -39,7 +44,7 @@
     animation: ctaPulseGlow 2.8s ease-in-out infinite;
     transition: transform 160ms ease, filter 160ms ease;
 }
-.order-submit-cta .cta-primary, .order-submit-cta .cta-gift { position: relative; z-index: 1; display: block; white-space: nowrap; }
+.order-submit-cta .cta-primary, .order-submit-cta .cta-gift { position: relative; z-index: 1; display: block; white-space: normal; overflow-wrap: anywhere; }
 .order-submit-cta .cta-primary { font-size: 1.18rem; font-weight: 900; line-height: 1.5; }
 .order-submit-cta .cta-gift { margin-top: 4px; font-size: 0.88rem; font-weight: 700; line-height: 1.5; color: #fef08a; }
 .raptor-order-form .order-submit-cta::after { content: ''; position: absolute; pointer-events: none; z-index: 0; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent); transform: skewX(-25deg); animation: ctaShimmerSweep 2.8s ease-in-out infinite; }
@@ -52,10 +57,7 @@
 @keyframes couponGiftBounce { 0%, 65%, 100% { transform: translateY(0); } 75% { transform: translateY(-3px); } 85% { transform: translateY(0); } 92% { transform: translateY(-1px); } }
 @keyframes ctaPulseGlow { 0%, 100% { box-shadow: 0 4px 14px rgba(234, 88, 12, 0.28); } 50% { box-shadow: 0 6px 22px rgba(234, 88, 12, 0.48), 0 0 0 3px rgba(251, 146, 60, 0.16); } }
 @keyframes ctaShimmerSweep { 0%, 35% { left: -60%; } 75%, 100% { left: 130%; } }
-@media (max-width: 380px) {
-    .order-submit-cta .cta-primary { font-size: clamp(0.8rem, 4.5vw, 1.18rem); }
-    .order-submit-cta .cta-gift { font-size: clamp(0.58rem, 3.05vw, 0.88rem); }
-}
+
 @media (prefers-reduced-motion: reduce) {
     .raptor-order-form .quick-coupon-ticket, .coupon-icon, .raptor-order-form .order-submit-cta, .raptor-order-form .order-submit-cta::after { animation: none; transition: none; }
     .raptor-order-form .order-submit-cta::after { display: none; }

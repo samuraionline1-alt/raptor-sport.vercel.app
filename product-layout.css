@@ -1,0 +1,41 @@
+/* Shared responsive shell for the cooling spray sports lab template. */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; }
+*, *::before, *::after { box-sizing: border-box; }
+.product-detail-content { padding-left: 16px; padding-right: 16px; }
+.product-detail-content *, main * { min-width: 0; }
+.product-detail-content > div { width: 100%; max-width: 64rem; }
+.product-detail-content > div > .max-w-4xl { width: 100%; max-width: 56rem; padding: 24px 16px; }
+.product-detail-content section, .product-detail-content form,
+.product-detail-content fieldset, .product-detail-content input:not([type="radio"]),
+.product-detail-content textarea, .product-detail-content button,
+.product-detail-content [data-payment-selector] label { max-width: 100%; }
+.product-detail-content form, .product-detail-content fieldset,
+.product-detail-content [data-payment-selector] label { width: 100%; }
+.product-detail-content fieldset { min-inline-size: 0; }
+.product-detail-content [data-payment-selector] label > span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.product-detail-content [data-payment-selector] input { flex-shrink: 0; }
+.product-detail-content [aria-label="ความมั่นใจในการสั่งซื้อ"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.product-detail-content [aria-label="ความมั่นใจในการสั่งซื้อ"] > div,
+.product-detail-content .shipping-return-policy { overflow-wrap: anywhere; }
+.product-detail-content .order-submit-cta, .product-detail-content .order-submit-cta span { white-space: normal; overflow-wrap: anywhere; }
+.product-detail-content section:first-of-type > div { overflow-wrap: anywhere; }
+.product-detail-content section:first-of-type .animate-pulse { flex-wrap: wrap; gap: 8px; color: white; }
+.product-detail-content section:first-of-type img { max-width: 100%; }
+@media (max-width: 640px) {
+    header > div { padding-left: 16px; padding-right: 16px; gap: 8px; }
+    header > div > a { font-size: 16px; letter-spacing: 0; }
+    header nav { gap: 8px; font-size: 12px; }
+    .product-detail-content > div > div:first-child { padding: 16px; }
+    .product-detail-content section { padding: 16px; }
+    .product-detail-content section:first-of-type { gap: 24px; }
+}
+/* Supplementary product facts use the same readable light cards. */
+main[aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"] { background: #f8fafc; color: #475569; }
+main[aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"] > div { max-width: 64rem; padding-left: 16px; padding-right: 16px; }
+main[aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"] section { background: #fff; border: 1px solid #f1f5f9; border-radius: 16px; padding: 24px; }
+main[aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"] h2 { color: #1e3a8a; font-size: 1.25rem; }
+.product-detail-content section:first-of-type h1 span { color: inherit; }
+.product-detail-content section:first-of-type p:not(.animate-pulse p) { color: #475569; }
+.product-detail-content > div > .max-w-4xl > section:not(:first-child):not(:has(form)):not(#customer-reviews) h2,
+.product-detail-content > div > .max-w-4xl > section:not(:first-child):not(:has(form)):not(#customer-reviews) h3 { color: #1e3a8a; font-size: 1rem; }

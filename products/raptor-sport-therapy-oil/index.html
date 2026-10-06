@@ -235,11 +235,12 @@
     <script src="/gtm-ecommerce.js" defer></script>
     <script src="/order-context.js?v=line-20261006" defer></script>
     <script src="/promo-config.js?v=receipt-20261005" defer></script>
-    <link rel="stylesheet" href="/order-buttons.css?v=summary-20261006">
+    <link rel="stylesheet" href="/order-buttons.css?v=mobile-20261006">
     <script src="/promotions.js?v=summary-20261006" defer></script>
     <script src="/checkout.js?v=line-20261006" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
     <script src="/sticky-order-bar.js" defer></script>
+    <link rel="stylesheet" href="/product-layout.css?v=20261006">
 </head>
 <body class="bg-gray-50 text-gray-800">
     <header class="sticky top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
@@ -256,24 +257,20 @@
         <ol class="flex flex-wrap items-center gap-2"><li><a class="hover:text-orange-600" href="/">หน้าแรก</a></li><li aria-hidden="true">/</li><li><a class="hover:text-orange-600" href="/#shop">สินค้าทั้งหมด</a></li><li aria-hidden="true">/</li><li class="text-zinc-800" aria-current="page">RAPTOR SPORT &amp; THERAPY OIL น้ำมันนวดนักกีฬา</li></ol>
     </nav>
 
-    <section id="therapyoil-modal" class="product-detail-content py-8 md:py-12">
-        <div class="bg-gray-50 rounded-2xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-gray-200">
-            <div class="bg-zinc-900 text-white px-6 py-4 flex items-center justify-between">
-                <h3 class="font-bold text-lg text-orange-brand tracking-wider"><i class="fa-solid fa-bolt-lightning"></i> RAPTOR SPORT PREMIUM</h3>
-                <span class="text-xs text-gray-400 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
-            </div>
-            <div class="max-w-4xl mx-auto px-4 py-6 space-y-10">
-                <section class="bg-white rounded-2xl shadow-sm p-6 grid md:grid-cols-2 gap-8 items-center">
-                    <div class="flex flex-col items-center">
-                        <div class="w-full max-w-[340px] aspect-square bg-gradient-to-b from-slate-900 to-slate-800 rounded-2xl shadow-xl flex items-center justify-center p-4 relative overflow-hidden">
-                            <img src="/raptor-sport-therapy-oil.png" alt="Raptor Sport & Therapy Oil" class="product-main-image max-h-full w-auto object-contain rounded-xl">
+    <section id="therapyoil-modal" class="product-detail-content py-8 md:py-12"><div class="bg-slate-50 rounded-2xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-slate-200"><div class="bg-blue-900 text-white px-6 py-4 flex items-center justify-between">
+                <h3 class="font-bold text-lg tracking-wider">RAPTOR SPORT &amp; THERAPY OIL LAB</h3>
+                <span class="text-xs text-blue-100 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
+            </div><div class="max-w-4xl mx-auto px-4 py-6 space-y-8"><section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6"><div class="bg-slate-50 rounded-2xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-slate-200">
+                        <div class="w-full max-w-[340px] aspect-square bg-gradient-to-b from-blue-50 to-slate-800 rounded-2xl shadow-xl flex items-center justify-center p-4 relative overflow-hidden">
+                            <img src="/raptor-sport-therapy-oil.png" alt="Raptor Sport &amp; Therapy Oil" class="product-main-image max-h-full w-auto object-contain rounded-xl">
                             <span class="absolute top-3 left-3 bg-orange-600 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow animate-pulse uppercase tracking-wider">Therapy Grade</span>
                         </div>
-                        <p class="text-xs text-gray-400 mt-3"><i class="fa-solid fa-leaf text-emerald-500"></i> Organic Natural 100% | หัวลูกกลิ้งเหล็ก Steel Rollerball 10 ml.</p>
+                        <p class="text-xs text-slate-600 mt-3"><i class="fa-solid fa-leaf text-emerald-500"></i> Organic Natural 100% | หัวลูกกลิ้งเหล็ก Steel Rollerball 10 ml.</p>
                     </div>
-                    <div class="space-y-4">
+
+                    <div class="flex flex-col justify-between space-y-4">
                         <span class="bg-slate-100 text-slate-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide border border-slate-200">Muscle Soothing Blend</span>
-                        <h1 class="text-3xl font-bold tracking-tight text-gray-900 uppercase">RAPTOR SPORT & THERAPY OIL</h1>
+                        <h1 class="text-2xl md:text-3xl font-bold text-blue-900 mb-2">RAPTOR SPORT &amp; THERAPY OIL</h1>
                         <p class="text-base text-gray-600 font-medium">แร็พเตอร์ มッサージ ออยล์ - น้ำมันนวดธรรมชาติ บรรเทาอาการปวดเมื่อยล้าสะสมของเส้นเอ็นและกล้ามเนื้อ</p>
                         <div class="border-t border-b border-gray-100 py-3 space-y-2">
                             <p class="text-gray-600 text-sm flex items-center"><i class="fa-solid fa-circle-dot text-slate-700 mr-2"></i><strong>STEEL ROLLERBALL:</strong> หัวลูกกลิ้งเหล็กพรีเมียม ช่วยนวดกดจุด กระจายตัวน้ำมันซึมลึกได้อย่างสม่ำเสมอ</p>
@@ -282,56 +279,52 @@
                         </div>
                         <div class="flex items-baseline space-x-3">
                             <span class="text-4xl font-extrabold text-red-600">฿179</span>
-                            <span class="text-sm text-gray-400 line-through">฿350</span>
+                            <span class="text-sm text-slate-600 line-through">฿350</span>
                             <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">-49% OFF</span>
                         </div>
                         <p class="text-xs text-slate-600 bg-slate-100 p-3 rounded border border-slate-200"><i class="fa-solid fa-circle-info"></i> กลิ่นหอมอโรมาธรรมชาติ ซึมซาบไว ไม่เหนียวเหนอะหนะผิว พกพาง่ายไปได้ทุกสนาม</p>
                     </div>
-                </section>
-                <section class="bg-gradient-to-r from-red-600 to-orange-500 rounded-2xl shadow-md p-6 text-white text-center relative overflow-hidden">
+                </section><section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
                     <div class="absolute -right-10 -top-10 text-white/10 text-9xl font-black rotate-12"><i class="fa-solid fa-bolt"></i></div>
                     <h3 class="text-xl font-bold uppercase tracking-wider flex justify-center items-center gap-2">
                         <i class="fa-solid fa-stopwatch animate-pulse"></i> <span class="animate-fire">🔥</span> Flash Sale ข้อเสนอเวลาจำกัด!
                     </h3>
                     <p class="text-sm text-orange-100 mt-1">ราคาพิเศษนี้จะสิ้นสุดในอีก</p>
                     <div class="flex justify-center space-x-3 my-4">
-                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="oil-hours" class="text-2xl font-bold">01</span><div class="text-[10px] text-gray-300">ชม.</div></div>
-                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="oil-minutes" class="text-2xl font-bold">45</span><div class="text-[10px] text-gray-300">นาที</div></div>
-                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="oil-seconds" class="text-2xl font-bold">30</span><div class="text-[10px] text-gray-300">วิ</div></div>
+                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="oil-hours" class="text-2xl font-bold">01</span><div class="text-[10px] text-slate-600">ชม.</div></div>
+                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="oil-minutes" class="text-2xl font-bold">45</span><div class="text-[10px] text-slate-600">นาที</div></div>
+                        <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="oil-seconds" class="text-2xl font-bold">30</span><div class="text-[10px] text-slate-600">วิ</div></div>
                     </div>
-                    <a href="#oil-order-form-anchor" class="inline-block w-full sm:w-auto bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-extrabold text-lg px-8 py-3 rounded-full transition-all transform hover:scale-105 shadow">
+                    <a href="#oil-order-form-anchor" class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold text-base py-3 px-6 rounded-xl shadow-md transition-all">
                         <i class="fa-solid fa-cart-shopping"></i> สั่งซื้อราคาพิเศษ 179 บาทเลยตอนนี้!
                     </a>
-                </section>
-                <section class="bg-white rounded-2xl shadow-sm p-6">
-                    <h3 class="text-xl font-bold text-center mb-6 border-b border-gray-100 pb-3 text-gray-900">ประสิทธิภาพจากส่วนผสมธรรมชาติ (Muscle Soothing Blend)</h3>
+                </section><section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
+                    <h3 class="text-xl font-bold text-center mb-6 border-b border-gray-100 pb-3 text-blue-900">ประสิทธิภาพจากส่วนผสมธรรมชาติ (Muscle Soothing Blend)</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="p-4 bg-slate-50 rounded-xl text-center border border-slate-200">
-                            <div class="w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center mx-auto text-lg font-bold mb-2"><i class="fa-solid fa-dna"></i></div>
+                            <div class="w-12 h-12 bg-white text-white rounded-full flex items-center justify-center mx-auto text-lg font-bold mb-2"><i class="fa-solid fa-dna"></i></div>
                             <h4 class="font-bold text-sm text-gray-808">Butea Superba (กวาวเครือแดง)</h4>
                             <p class="text-[11px] text-gray-500 mt-1">ช่วยกระตุ้นการไหลเวียนโลหิตบริเวณใยกล้ามเนื้อ เพิ่มความกระปรี้กระเปร่าและลดอาการตึงตัว</p>
                         </div>
                         <div class="p-4 bg-slate-50 rounded-xl text-center border border-slate-200">
-                            <div class="w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center mx-auto text-lg font-bold mb-2"><i class="fa-solid fa-kit-medical"></i></div>
+                            <div class="w-12 h-12 bg-white text-white rounded-full flex items-center justify-center mx-auto text-lg font-bold mb-2"><i class="fa-solid fa-kit-medical"></i></div>
                             <h4 class="font-bold text-sm text-gray-808">Cassumunar Ginger (ไพล)</h4>
                             <p class="text-[11px] text-gray-500 mt-1">สมุนไพรเอกลักษณ์ช่วยบรรเทาอาการปวดบวม ฟกช้ำ และช่วยลดความตึงเครียดของกล้ามเนื้อหลังออกกำลังกายอย่างหนัก</p>
                         </div>
                         <div class="p-4 bg-slate-50 rounded-xl text-center border border-slate-200">
-                            <div class="w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center mx-auto text-lg font-bold mb-2"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div class="w-12 h-12 bg-white text-white rounded-full flex items-center justify-center mx-auto text-lg font-bold mb-2"><i class="fa-solid fa-shield-halved"></i></div>
                             <h4 class="font-bold text-sm text-gray-808">Thong Pan Chang (ทองพันชั่ง)</h4>
                             <p class="text-[11px] text-gray-500 mt-1">ช่วยดูแลและบำรุงผิวพรรณ ลดการสะสมของสิ่งสกปรกและลดโอกาสการเกิดอาการระคายเคืองผิวหนัง</p>
                         </div>
                     </div>
-                </section>
-                <section class="bg-white rounded-2xl shadow-sm p-6">
-                    <h3 class="text-xl font-bold text-center mb-1 text-gray-900"><i class="fa-solid fa-chart-line text-slate-700 mr-1"></i> กราฟแสดงประสิทธิภาพการคลายเส้นและกล้ามเนื้อ</h3>
+                </section><section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
+                    <h3 class="text-xl font-bold text-center mb-1 text-blue-900"><i class="fa-solid fa-chart-line text-slate-700 mr-1"></i> กราฟแสดงประสิทธิภาพการคลายเส้นและกล้ามเนื้อ</h3>
                     <p class="text-xs text-gray-500 text-center mb-6">อัตราการลดลงของระดับความตึงเครียดของเส้นเอ็นหลังจากการนวดด้วยหัวลูกกลิ้งเหล็กแร็พเตอร์ (นาที)</p>
                     <div class="w-full h-[240px] relative">
                         <canvas id="modalTherapyOilChart"></canvas>
                     </div>
-                </section>
-                <section class="bg-white rounded-2xl shadow-sm p-6 max-w-xl mx-auto border border-slate-100">
-                    <h3 class="text-xl font-bold text-center mb-6 text-gray-900">รีวิวจากผู้ใช้จริง</h3>
+                </section><section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
+                    <h3 class="text-xl font-bold text-center mb-6 text-blue-900">รีวิวจากผู้ใช้จริง</h3>
                     <div class="space-y-4">
                         <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <div class="flex justify-between items-center mb-2">
@@ -348,10 +341,7 @@
                             <p class="text-xs text-slate-600 leading-relaxed">"พกง่ายมากค่ะ ชอบเอามานวดบ่ากับน่องขารู้สึกสบายขึ้นทันที เนื้อออยล์ธรรมชาติไม่เหนอะหนะตัว คุ้มราคามากค่ะ"</p>
                         </div>
                     </div>
-                </section>
-
-                <!-- reviews-seo:start -->
-  <section id="customer-reviews" class="reviews-section scroll-mt-24" aria-labelledby="customer-reviews-title">
+                </section><section id="customer-reviews" class="reviews-section scroll-mt-24" aria-labelledby="customer-reviews-title">
     <div class="reviews-inner">
       <div class="reviews-header">
         <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
@@ -360,15 +350,7 @@
       <div class="reviews-list"></div>
       <div class="review-form-host"></div>
     </div>
-  </section>
-<!-- reviews-seo:end -->
-                <div id="oil-order-form-anchor"></div>
-                <section class="bg-white rounded-2xl shadow-md border-2 border-[#FF6B00] p-6 max-w-xl mx-auto space-y-6">
-                    <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">
-                        <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 179 บาท (จากปกติ 350 บาท)
-                    </div>
-                    <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-4 raptor-order-form" id="raptor-sport-therapy-oil-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR SPORT &amp; THERAPY OIL" data-price="฿179" data-close-modal="closeTherapyOilModal">
+  </section><section id="raptor-sport-therapy-oil-order-form-section" class="bg-white rounded-2xl shadow-md p-6 border-2 border-blue-500 max-w-xl mx-auto space-y-6"><div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm">🔥 ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษ ฿179 พร้อมจัดส่งฟรี</div><h3 class="text-xl font-bold text-center text-blue-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3><form class="space-y-4 raptor-order-form" id="raptor-sport-therapy-oil-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR SPORT &amp; THERAPY OIL" data-price="฿179" data-close-modal="closeTherapyOilModal">
                         <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR SPORT &amp; THERAPY OIL">
                         <input type="hidden" name="product" value="RAPTOR SPORT &amp; THERAPY OIL">
                         <input type="hidden" name="price" value="฿179">
@@ -384,23 +366,23 @@
                         </aside>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                            <input type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name" autocomplete="name">
+                            <input type="text" required="" placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name" autocomplete="name">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-                            <input type="tel" required placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone" pattern="^0[689][0-9]{8}$" maxlength="10" minlength="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10); this.setCustomValidity('')" oninvalid="this.setCustomValidity('กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)')" autocomplete="tel"><p class="mt-1 text-xs text-slate-500">กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)</p>
+                            <input type="tel" required="" placeholder="เช่น 0987654321" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="phone" pattern="^0[689][0-9]{8}$" maxlength="10" minlength="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10); this.setCustomValidity('')" oninvalid="this.setCustomValidity('กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)')" autocomplete="tel"><p class="mt-1 text-xs text-slate-500">กรุณากรอกเบอร์โทรศัพท์มือถือ 10 หลัก (ขึ้นต้นด้วย 06, 08, 09)</p>
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address" autocomplete="street-address"></textarea>
+                            <textarea required="" rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address" autocomplete="street-address"></textarea>
                         </div>
-                        <fieldset class="space-y-3" data-bundle-selector>
+                        <fieldset class="space-y-3" data-bundle-selector="">
                             <legend class="block text-sm font-bold text-slate-700 mb-2">เลือกเซ็ตสุดคุ้ม</legend>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
                                 <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_1" data-quantity="1" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตทดลอง 1 ชิ้น</strong><small class="text-emerald-700">ส่งฟรีเก็บเงินปลายทาง</small></span><strong data-bundle-price="tier_1" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
                             </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
-                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_2" data-quantity="2" class="mt-1 accent-orange-500" checked><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตสุดคุ้ม 2 ชิ้น (ขายดีที่สุด 🔥)</strong><small class="text-emerald-700">ประหยัดเพิ่ม + ส่งฟรี</small></span><strong data-bundle-price="tier_2" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
+                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_2" data-quantity="2" class="mt-1 accent-orange-500" checked=""><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตสุดคุ้ม 2 ชิ้น (ขายดีที่สุด 🔥)</strong><small class="text-emerald-700">ประหยัดเพิ่ม + ส่งฟรี</small></span><strong data-bundle-price="tier_2" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
                             </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
                                 <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_3" data-quantity="3" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตนักกีฬาซ้อมหนัก 3 ชิ้น</strong><small class="text-emerald-700">คุ้มที่สุด + ส่งฟรี</small></span><strong data-bundle-price="tier_3" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
@@ -410,22 +392,23 @@
                             </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
                                 <span class="flex items-center gap-3"><input type="radio" name="bundle_tier_choice" value="custom" class="accent-orange-500"><span class="font-bold text-slate-900">กำหนดจำนวนเอง (มากกว่า 3)</span></span>
-                                <input type="number" min="4" value="4" inputmode="numeric" data-custom-quantity class="mt-3 hidden w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" aria-label="จำนวนสินค้าแบบกำหนดเอง">
+                                <input type="number" min="4" value="4" inputmode="numeric" data-custom-quantity="" class="mt-3 hidden w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" aria-label="จำนวนสินค้าแบบกำหนดเอง">
                             </label>
                         </fieldset>
                         <input type="hidden" name="quantity" value="2">
-                        <input type="hidden" name="bundle_tier" value="tier_2">
+                        <input type="hidden" name="bundle_tier" value="tier_2">
+
                         <details class="text-sm text-slate-600">
                             <summary class="cursor-pointer font-semibold text-orange-600 hover:underline">+ เพิ่มหมายเหตุถึงขนส่ง หรือขอใบกำกับภาษี (ถ้ามี)</summary>
                             <div class="mt-3">
                                 <textarea rows="3" placeholder="ระบุสี/รสชาติ/หมายเหตุการจัดส่ง หรือรายละเอียดอื่น ๆ" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="order_details"></textarea>
                             </div>
                         </details>
-                        <div data-order-price-summary class="bg-gray-50 p-4 rounded-xl flex justify-between items-center text-sm border border-gray-100">
+                        <div data-order-price-summary="" class="bg-gray-50 p-4 rounded-xl flex justify-between items-center text-sm border border-gray-100">
                             <span class="font-bold text-gray-700">ยอดรวมทั้งสิ้น:</span>
-                            <span class="text-xl font-black text-orange-brand">179 บาท (ส่งฟรีปลายทาง)</span>
+                            <span class="text-xl font-black text-blue-600">179 บาท (ส่งฟรีปลายทาง)</span>
                         </div>
-                        <button type="submit" class="w-full bg-orange-brand text-white font-bold text-lg py-3.5 rounded-xl shadow-md hover:bg-orange-600 transition-all cursor-pointer">
+                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition-all cursor-pointer px-4 whitespace-normal break-words">
                             ยืนยันการสั่งซื้อเลยตอนนี้
                         </button>
                         <div class="grid grid-cols-3 gap-2 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center text-[11px] font-semibold leading-snug text-emerald-900" aria-label="ความมั่นใจในการสั่งซื้อ">
@@ -433,17 +416,14 @@
                             <div>📋 มาตรฐานปลอดภัย 100% Anti-Doping</div>
                             <div>📦 ส่งฟรี มีเก็บเงินปลายทาง เปิดเช็คของได้</div>
                         </div>
-                    </form>
-                        <section class="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-left shadow-sm shipping-return-policy" aria-label="นโยบายการจัดส่งและคืนสินค้า">
+                    </form><section class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100" aria-label="นโยบายการจัดส่งและคืนสินค้า">
                             <div class="space-y-4 text-sm leading-relaxed text-slate-700">
                                 <p><strong class="text-slate-900">การจัดส่งฟรีด่วนพิเศษ:</strong> จัดส่งฟรีทั่วประเทศ รองรับเก็บเงินปลายทาง (COD) ได้รับสินค้าภายใน 1–3 วันทำการ</p>
                                 <p><strong class="text-slate-900">รับประกันเปลี่ยน/คืนสินค้าฟรีภายใน 7 วัน:</strong> สินค้าของแท้ 100% จาก Raptor Global Import Co., Ltd. หากชำรุดเสียหายจากการขนส่ง แจ้งเปลี่ยนหรือคืนสินค้าได้ฟรีภายใน 7 วัน (LINE ID: @raptor)</p>
                             </div>
-                        </section>
-                </section>
-            </div>
-        </div>
-    </section>
+                        </section></section></div></div></section>
+
+
 
     <script>
 
@@ -940,7 +920,7 @@
 
             dots.forEach(function (dot) {
                 dot.addEventListener('click', function () {
-<section aria-labelledby="science"><h2 id="science" class="text-3xl font-black mb-4">กลไกการทำงานและจุดเด่นผลิตภัณฑ์</h2><p class="text-zinc-300 leading-8">น้ำมันนวดเนื้อบางเบาทำงานร่วมกับหัวลูกกลิ้งเหล็กเพื่อช่วยกระจายแรงนวดเฉพาะจุดและให้ความรู้สึกผ่อนคลายบริเวณกล้ามเนื้อที่ตึงล้าจากการออกกำลังกาย เนื้อผลิตภัณฑ์เกลี่ยง่าย เหมาะสำหรับการดูแลร่างกายก่อนหรือหลังเล่นกีฬาโดยเน้นความสบายและการผ่อนคลายหลังเล่นกีฬา</p><div class="grid sm:grid-cols-3 gap-3 mt-6"><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">100% Anti-Doping Safe</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Fast Deep Absorption</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Sport Grade</span></div></section>
+
                 });
             });
 
@@ -950,33 +930,23 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.body.dataset.productPage = "raptor-sport-therapy-oil";
-            if (typeof openTherapyOilModal === 'function') {
-                openTherapyOilModal();
-        <nav class="mx-auto mb-4 flex max-w-4xl flex-wrap justify-center gap-x-5 gap-y-3 text-xs" aria-label="นโยบายร้านค้า">
-        <p>&copy; 2026 RAPTOR SPORT. All Rights Reserved. <button type="button" tabindex="-1" aria-hidden="true" style="opacity: 0.35; cursor: default; margin-left: 0.35rem; padding: 0; border: 0; background: transparent; color: inherit; font: inherit;" onclick="window.location.href='/wholesale/'">🔒</button></p>
-    <script src="/admin-shortcut.js"></script>
-            <a class="transition hover:text-orange-400" href="/policies/#returns">นโยบายการเปลี่ยน/คืนสินค้า</a>
-            <a class="transition hover:text-orange-400" href="/policies/#privacy">นโยบายความเป็นส่วนตัว (PDPA)</a>
-            <a class="transition hover:text-orange-400" href="/policies/#terms">ข้อกำหนดการให้บริการ</a>
-        </nav>
-                document.body.style.overflow = 'auto';
-            }
-        });
-    </script>
+ document.addEventListener('DOMContentLoaded', function () {
+ document.body.dataset.productPage = "raptor-sport-therapy-oil";
+ if (typeof openTherapyOilModal === 'function') { openTherapyOilModal(); document.body.style.overflow = 'auto'; }
+ });
+ </script>
 
-<main class="bg-zinc-950 text-white py-16" aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"><div class="max-w-5xl mx-auto px-6 space-y-12">
-<section aria-labelledby="science"><h2 id="science" class="text-3xl font-black mb-4">กลไกการทำงานและจุดเด่นผลิตภัณฑ์</h2><p class="text-zinc-300 leading-8">น้ำมันนวดเนื้อบางเบาทำงานร่วมกับหัวลูกกลิ้งเหล็กเพื่อช่วยกระจายแรงนวดเฉพาะจุดและให้ความรู้สึกผ่อนคลายบริเวณกล้ามเนื้อที่ตึงล้าจากการออกกำลังกาย เนื้อผลิตภัณฑ์เกลี่ยง่าย เหมาะสำหรับการดูแลร่างกายก่อนหรือหลังเล่นกีฬาโดยไม่กล่าวอ้างผลในการรักษาโรค</p><div class="grid sm:grid-cols-3 gap-3 mt-6"><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">100% Anti-Doping Safe</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Fast Deep Absorption</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Sport Grade</span></div></section>
-<section aria-labelledby="how"><h2 id="how" class="text-3xl font-black mb-4">วิธีใช้งานเพื่อประสิทธิภาพสูงสุด</h2><ol class="list-decimal list-inside space-y-3 text-zinc-300"><li class="pl-2">กลิ้งผลิตภัณฑ์บนผิวสะอาดบริเวณกล้ามเนื้อที่ต้องการดูแล</li><li class="pl-2">ใช้หัวลูกกลิ้งนวดวนเบา ๆ จนน้ำมันกระจายทั่วบริเวณ</li><li class="pl-2">ใช้ซ้ำตามต้องการภายนอกเท่านั้น และหยุดใช้หากเกิดการระคายเคือง</li></ol></section>
-<section aria-labelledby="spec"><h2 id="spec" class="text-3xl font-black mb-4">ข้อมูลจำเพาะและมาตรฐานความปลอดภัย</h2><div class="overflow-x-auto"><table class="w-full border-collapse text-left"><tbody><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">ปริมาณสุทธิ/ขนาดบรรจุ</th><td class="p-4 text-zinc-300">10 ml พร้อมหัวลูกกลิ้งเหล็ก</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">กลไกสำคัญ/ส่วนประกอบเด่น</th><td class="p-4 text-zinc-300">น้ำมันนวดจากส่วนผสมธรรมชาติและการนวดกดจุดด้วย Steel Rollerball</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">กีฬาเป้าหมาย</th><td class="p-4 text-zinc-300">วิ่ง เวทเทรนนิ่ง ปั่นจักรยาน และกิจกรรมที่ใช้กล้ามเนื้อต่อเนื่อง</td></tr><tr class="border-b border-zinc-700"><th class="p-4 text-orange-400">มาตรฐานความปลอดภัย</th><td class="p-4 text-zinc-300">100% Anti-Doping Safe; ใช้ตามคำแนะนำบนฉลาก</td></tr></tbody></table></div></section>
-<section aria-labelledby="faq"><h2 id="faq" class="text-3xl font-black mb-4">คำถามที่พบบ่อย (FAQ)</h2><div class="space-y-3"><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">ควรใช้ก่อนหรือหลังออกกำลังกาย?</summary><p class="mt-3 text-zinc-300">ใช้ได้ทั้งก่อนกิจกรรมเพื่อเตรียมการนวดกล้ามเนื้อ หรือหลังออกกำลังกายเพื่อให้ความรู้สึกผ่อนคลาย</p></details><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">หัวลูกกลิ้งเหล็กมีประโยชน์อย่างไร?</summary><p class="mt-3 text-zinc-300">ช่วยควบคุมปริมาณ กระจายน้ำมันสม่ำเสมอ และนวดเฉพาะจุดได้โดยไม่เลอะมือ</p></details><details class="rounded-xl border border-zinc-700 bg-zinc-800 p-4"><summary class="cursor-pointer font-bold text-orange-400">ใช้บนบริเวณใดได้บ้าง?</summary><p class="mt-3 text-zinc-300">ใช้ภายนอกบนกล้ามเนื้อ เช่น คอ บ่า ไหล่ แขน และขา โดยหลีกเลี่ยงใบหน้า แผลเปิด และผิวที่ระคายเคือง</p></details></div></section>
+<main class="bg-slate-50 text-slate-700 py-16" aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"><div class="max-w-5xl mx-auto px-6 space-y-12">
+<section aria-labelledby="science"><h2 id="science" class="text-3xl font-black mb-4">กลไกการทำงานและจุดเด่นผลิตภัณฑ์</h2><p class="text-slate-600 leading-8">น้ำมันนวดเนื้อบางเบาทำงานร่วมกับหัวลูกกลิ้งเหล็กเพื่อช่วยกระจายแรงนวดเฉพาะจุดและให้ความรู้สึกผ่อนคลายบริเวณกล้ามเนื้อที่ตึงล้าจากการออกกำลังกาย เนื้อผลิตภัณฑ์เกลี่ยง่าย เหมาะสำหรับการดูแลร่างกายก่อนหรือหลังเล่นกีฬาโดยไม่กล่าวอ้างผลในการรักษาโรค</p><div class="grid sm:grid-cols-3 gap-3 mt-6"><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">100% Anti-Doping Safe</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Fast Deep Absorption</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Sport Grade</span></div></section>
+<section aria-labelledby="how"><h2 id="how" class="text-3xl font-black mb-4">วิธีใช้งานเพื่อประสิทธิภาพสูงสุด</h2><ol class="list-decimal list-inside space-y-3 text-slate-600"><li class="pl-2">กลิ้งผลิตภัณฑ์บนผิวสะอาดบริเวณกล้ามเนื้อที่ต้องการดูแล</li><li class="pl-2">ใช้หัวลูกกลิ้งนวดวนเบา ๆ จนน้ำมันกระจายทั่วบริเวณ</li><li class="pl-2">ใช้ซ้ำตามต้องการภายนอกเท่านั้น และหยุดใช้หากเกิดการระคายเคือง</li></ol></section>
+<section aria-labelledby="spec"><h2 id="spec" class="text-3xl font-black mb-4">ข้อมูลจำเพาะและมาตรฐานความปลอดภัย</h2><div class="overflow-x-auto"><table class="w-full border-collapse text-left"><tbody><tr class="border-b border-slate-200"><th class="p-4 text-blue-900">ปริมาณสุทธิ/ขนาดบรรจุ</th><td class="p-4 text-slate-600">10 ml พร้อมหัวลูกกลิ้งเหล็ก</td></tr><tr class="border-b border-slate-200"><th class="p-4 text-blue-900">กลไกสำคัญ/ส่วนประกอบเด่น</th><td class="p-4 text-slate-600">น้ำมันนวดจากส่วนผสมธรรมชาติและการนวดกดจุดด้วย Steel Rollerball</td></tr><tr class="border-b border-slate-200"><th class="p-4 text-blue-900">กีฬาเป้าหมาย</th><td class="p-4 text-slate-600">วิ่ง เวทเทรนนิ่ง ปั่นจักรยาน และกิจกรรมที่ใช้กล้ามเนื้อต่อเนื่อง</td></tr><tr class="border-b border-slate-200"><th class="p-4 text-blue-900">มาตรฐานความปลอดภัย</th><td class="p-4 text-slate-600">100% Anti-Doping Safe; ใช้ตามคำแนะนำบนฉลาก</td></tr></tbody></table></div></section>
+<section aria-labelledby="faq"><h2 id="faq" class="text-3xl font-black mb-4">คำถามที่พบบ่อย (FAQ)</h2><div class="space-y-3"><details class="rounded-xl border border-slate-200 bg-white p-4"><summary class="cursor-pointer font-bold text-blue-900">ควรใช้ก่อนหรือหลังออกกำลังกาย?</summary><p class="mt-3 text-slate-600">ใช้ได้ทั้งก่อนกิจกรรมเพื่อเตรียมการนวดกล้ามเนื้อ หรือหลังออกกำลังกายเพื่อให้ความรู้สึกผ่อนคลาย</p></details><details class="rounded-xl border border-slate-200 bg-white p-4"><summary class="cursor-pointer font-bold text-blue-900">หัวลูกกลิ้งเหล็กมีประโยชน์อย่างไร?</summary><p class="mt-3 text-slate-600">ช่วยควบคุมปริมาณ กระจายน้ำมันสม่ำเสมอ และนวดเฉพาะจุดได้โดยไม่เลอะมือ</p></details><details class="rounded-xl border border-slate-200 bg-white p-4"><summary class="cursor-pointer font-bold text-blue-900">ใช้บนบริเวณใดได้บ้าง?</summary><p class="mt-3 text-slate-600">ใช้ภายนอกบนกล้ามเนื้อ เช่น คอ บ่า ไหล่ แขน และขา โดยหลีกเลี่ยงใบหน้า แผลเปิด และผิวที่ระคายเคือง</p></details></div></section>
 </div></main>
     <aside class="bg-white border-t border-gray-200" aria-labelledby="related-products-title">
         <div class="max-w-5xl mx-auto px-6 py-10"><h2 id="related-products-title" class="text-xl font-bold text-zinc-900 mb-5">ผลิตภัณฑ์ Raptor Sport ที่เกี่ยวข้อง</h2><ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3"><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-warming-spray/">RAPTOR ELITE PRO สเปรย์วอร์มอัพ 250 มล.</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cooling-spray/">RAPTOR SPORTS ICE COLD SPRAY สเปรย์เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-go-energy-gel/">RAPTOR GO ENERGY GEL เจลพลังงานนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-dual-action-pack/">RAPTOR DUAL ACTION PACK เซ็ตสเปรย์ร้อน-เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-therapy-oil/">RAPTOR SPORT &amp; THERAPY OIL น้ำมันนวดนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-v-mix/">RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-cooling-gel/">RAPTOR HERBAL COOLING GEL เจลสมุนไพรสูตรเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-foot-spray/">RAPTOR SPORT FOOT SPRAY สเปรย์ฉีดเท้า</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-roll-on/">RAPTOR HERBAL ROLL-ON โรลออนสมุนไพร</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cool-patch/">RAPTOR COOL PATCH แผ่นเจลประคบเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-ice-defense-sport-shampoo/">RAPTOR ICE DEFENSE SPORT SHAMPOO แชมพูสูตรเย็น</a></li></ul></div>
     </aside>
 <script src="/product-image-zoom.js"></script>
-    
+
     <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" data-sticky-order-bar aria-label="ทางลัดสั่งซื้อ">
         <a href="https://lin.ee/qtuszPa" data-contact-pixel-button="line chat" class="shrink-0 rounded-xl border border-zinc-700 px-3 py-2.5 text-center text-sm font-semibold text-white"><i class="fa-brands fa-line text-green-400"></i> สอบถามแอดมิน</a>
         <a href="#raptor-sport-therapy-oil-order-form" onclick="document.getElementById('raptor-sport-therapy-oil-order-form').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="flex-grow bg-[#FF6B00] text-white font-bold py-2.5 px-4 rounded-xl text-center">🛒 สั่งซื้อเก็บเงินปลายทาง (ส่งฟรี)</a>
@@ -986,5 +956,6 @@
         <p class="mt-2">จัดส่งฟรีทั่วประเทศ (1–3 วันทำการ) | รับประกันเปลี่ยน/คืนสินค้าฟรีภายใน 7 วันกรณีชำรุดเสียหายจากการขนส่ง</p>
     </footer>
     <script src="/reviews-client.js" defer></script>
+<script src="/admin-shortcut.js"></script>
 </body>
 </html>
