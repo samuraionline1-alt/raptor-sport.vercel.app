@@ -94,7 +94,7 @@
         event.stopImmediatePropagation();
 
         var button = form.querySelector('button[type="submit"], button:not([type])');
-        var originalText = button?.textContent;
+        var originalText = button?.innerHTML;
         if (button) { button.disabled = true; button.textContent = 'กำลังเปิดหน้าชำระเงิน...'; }
         var tracking = ecommerce(order);
         window.dataLayer = window.dataLayer || [];
@@ -113,7 +113,7 @@
             if (!response.ok || !data.url) throw new Error(data.error || 'ไม่สามารถเปิดหน้าชำระเงินได้');
             window.location.href = data.url;
         } catch (error) {
-            if (button) { button.disabled = false; button.textContent = originalText; }
+            if (button) { button.disabled = false; button.innerHTML = originalText; if (window.RaptorPromotions) RaptorPromotions.update(form); }
             alert(error.message || 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
         }
     }, true);

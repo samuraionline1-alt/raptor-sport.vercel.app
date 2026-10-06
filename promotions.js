@@ -51,11 +51,41 @@
         const divider = document.createElement('div');
         divider.style.cssText = 'border-top:1px solid #fed7aa;margin:8px 0'; summary.appendChild(divider);
         row('ยอดชำระสุทธิ', '฿' + order.totalPrice, 'font-size:1.35rem;font-weight:700;color:#ea580c').firstChild.style.fontWeight = '700';
-        if (submit && !submit.disabled) submit.textContent = (form.querySelector('[name="payment_method"]:checked')?.value === 'STRIPE' ? 'ชำระเงินออนไลน์' : 'ยืนยันสั่งซื้อเก็บเงินปลายทาง') + ' ฿' + order.totalPrice + (order.free_gifts ? ' • ' + order.free_gifts : '');
+        if (submit && !submit.disabled) {
+            submit.classList.add('order-submit-cta');
+            const action = document.createElement('span');
+            action.className = 'cta-primary';
+            action.textContent = (form.querySelector('[name="payment_method"]:checked')?.value === 'STRIPE' ? 'ชำระเงินออนไลน์' : 'สั่งซื้อเก็บเงินปลายทาง') + ' ฿' + order.totalPrice + ' ›';
+            submit.replaceChildren(action);
+            if (order.giftCount) {
+                const gift = document.createElement('span');
+                gift.className = 'cta-gift';
+                gift.textContent = '🎁 แถมฟรี! RAPTOR GO Energy Gel ' + order.giftCount + ' ซอง (มูลค่า ฿' + order.giftValue + ')';
+                submit.appendChild(gift);
+            }
+        }
         const message = form.querySelector('[data-coupon-status]');
         if (message) message.textContent = order.couponError || order.couponLabel;
         const quick = form.querySelector('[data-quick-coupon]');
-        if (quick) quick.hidden = order.subtotal < 250;
+        if (quick) {
+            const code = order.subtotal >= 450 ? 'RAPTOR50' : 'RAPTOR20';
+            const applied = order.coupon_code === code;
+            quick.hidden = order.subtotal < 250;
+            quick.dataset.coupon = code;
+            quick.classList.toggle('is-applied', applied);
+            quick.setAttribute('aria-pressed', String(applied));
+            quick.replaceChildren();
+            const icon = document.createElement('span');
+            icon.className = 'coupon-icon'; icon.textContent = applied ? '✅' : '🎁';
+            icon.setAttribute('aria-hidden', 'true');
+            const label = document.createElement('span'); label.className = 'coupon-label';
+            label.textContent = applied ? 'ใช้โค้ดส่วนลดเรียบร้อยแล้ว!' : code === 'RAPTOR50' ? 'กดรับส่วนลดเพิ่ม ฿50 สำหรับเซ็ตสุดคุ้ม!' : 'กดใช้โค้ดลดเพิ่ม ฿20 สำหรับเซ็ตแพ็กคู่';
+            quick.append(icon, label);
+            if (!applied) {
+                const badge = document.createElement('span'); badge.className = 'coupon-action';
+                badge.textContent = 'กดใช้โค้ด ›'; quick.appendChild(badge);
+            }
+        }
         return order;
     }
     window.RaptorPromotions = { pricing, update };
@@ -75,13 +105,13 @@
             });
             update(form);
             const box = document.createElement('div'); box.className = 'space-y-2 rounded-xl border border-slate-200 p-3';
-            box.innerHTML = '<div class="text-sm font-bold">โค้ดส่วนลด (ถ้ามี)</div><div style="display:flex;gap:8px;align-items:center"><input aria-label="โค้ดส่วนลด (ถ้ามี)" data-coupon-input type="text" autocomplete="off" placeholder="เช่น RAPTOR20" style="flex:1;min-width:0;width:0" class="rounded-lg border p-2"><button type="button" data-apply-coupon style="flex-shrink:0;white-space:nowrap" class="rounded-lg bg-orange-600 px-3 py-2 text-sm font-bold text-white">ใช้โค้ด</button> <button type="button" data-remove-coupon style="flex-shrink:0;white-space:nowrap" class="text-sm underline">ล้างโค้ด</button></div><button type="button" data-quick-coupon class="block rounded-full bg-orange-50 px-3 py-2 text-sm text-orange-800">🎁 กดใช้โค้ดลดเพิ่ม ฿20 สำหรับเซ็ตแพ็กคู่</button><p data-coupon-status role="status" aria-live="polite" class="text-sm text-emerald-700"></p>';
+            box.innerHTML = '<div class="text-sm font-bold">โค้ดส่วนลด (ถ้ามี)</div><div style="display:flex;gap:8px;align-items:center"><input aria-label="โค้ดส่วนลด (ถ้ามี)" data-coupon-input type="text" autocomplete="off" placeholder="เช่น RAPTOR20" style="flex:1;min-width:0;width:0" class="rounded-lg border p-2"><button type="button" data-apply-coupon style="flex-shrink:0;white-space:nowrap" class="rounded-lg bg-orange-600 px-3 py-2 text-sm font-bold text-white">ใช้โค้ด</button> <button type="button" data-remove-coupon style="flex-shrink:0;white-space:nowrap" class="text-sm underline">ล้างโค้ด</button></div><button type="button" data-quick-coupon class="quick-coupon-ticket">🎁 กดใช้โค้ดลดเพิ่ม ฿20 สำหรับเซ็ตแพ็กคู่</button><p data-coupon-status role="status" aria-live="polite" class="text-sm text-emerald-700"></p>';
             form.querySelector('[data-order-price-summary]').before(box);
             const input = box.querySelector('[data-coupon-input]');
             function apply() { form.dataset.appliedCoupon = input.value.trim().toUpperCase(); update(form); }
             box.querySelector('[data-apply-coupon]').addEventListener('click', apply);
             box.querySelector('[data-remove-coupon]').addEventListener('click', () => { input.value = ''; form.dataset.appliedCoupon = ''; update(form); });
-            box.querySelector('[data-quick-coupon]').addEventListener('click', () => { if (pricing(form).subtotal >= 250) { input.value = 'RAPTOR20'; apply(); } });
+            box.querySelector('[data-quick-coupon]').addEventListener('click', () => { if (pricing(form).subtotal >= 250) { input.value = pricing(form).subtotal >= 450 ? 'RAPTOR50' : 'RAPTOR20'; apply(); } });
             input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); apply(); } });
             form.addEventListener('change', () => update(form));
             form.addEventListener('input', event => { if (event.target !== input) update(form); });

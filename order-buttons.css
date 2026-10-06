@@ -1,0 +1,62 @@
+.raptor-order-form .quick-coupon-ticket {
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border: 1.5px dashed #f59e0b;
+    box-shadow: 0 3px 10px rgba(245, 158, 11, 0.18);
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    color: #9a3412;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-align: left;
+    animation: couponPulseGlow 2.8s ease-in-out infinite;
+    transition: transform 160ms ease;
+}
+.raptor-order-form .quick-coupon-ticket[hidden] { display: none; }
+.coupon-label { flex: 1; min-width: 0; }
+.coupon-icon { flex-shrink: 0; animation: couponGiftBounce 2.8s ease-in-out infinite; }
+.coupon-action { flex-shrink: 0; white-space: nowrap; background: #ea580c; color: #fff; padding: 3px 8px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; }
+.raptor-order-form .quick-coupon-ticket.is-applied { background: #f0fdf4; border-color: #22c55e; color: #15803d; box-shadow: 0 3px 10px rgba(34, 197, 94, 0.12); animation: none; }
+.quick-coupon-ticket.is-applied .coupon-icon { animation: none; }
+.raptor-order-form .order-submit-cta {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    padding: 16px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-top-color: rgba(255, 255, 255, 0.55);
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff6a00 0%, #ea580c 50%, #c2410c 100%);
+    color: #fff;
+    cursor: pointer;
+    animation: ctaPulseGlow 2.8s ease-in-out infinite;
+    transition: transform 160ms ease, filter 160ms ease;
+}
+.order-submit-cta .cta-primary, .order-submit-cta .cta-gift { position: relative; z-index: 1; display: block; white-space: nowrap; }
+.order-submit-cta .cta-primary { font-size: 1.18rem; font-weight: 900; line-height: 1.5; }
+.order-submit-cta .cta-gift { margin-top: 4px; font-size: 0.88rem; font-weight: 700; line-height: 1.5; color: #fef08a; }
+.raptor-order-form .order-submit-cta::after { content: ''; position: absolute; pointer-events: none; z-index: 0; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent); transform: skewX(-25deg); animation: ctaShimmerSweep 2.8s ease-in-out infinite; }
+.raptor-order-form .order-submit-cta:hover { filter: brightness(1.06); }
+.raptor-order-form .order-submit-cta:active, .raptor-order-form .quick-coupon-ticket:active { transform: translateY(1px); }
+.raptor-order-form .order-submit-cta:focus-visible, .raptor-order-form .quick-coupon-ticket:focus-visible { outline: 3px solid #ea580c; outline-offset: 4px; }
+.raptor-order-form .order-submit-cta:disabled { cursor: wait; animation: none; filter: saturate(0.65); }
+.raptor-order-form .order-submit-cta:disabled::after { animation: none; display: none; }
+@keyframes couponPulseGlow { 0%, 100% { box-shadow: 0 3px 10px rgba(245, 158, 11, 0.18); } 50% { box-shadow: 0 3px 14px rgba(245, 158, 11, 0.32), 0 0 0 2px rgba(245, 158, 11, 0.12); } }
+@keyframes couponGiftBounce { 0%, 65%, 100% { transform: translateY(0); } 75% { transform: translateY(-3px); } 85% { transform: translateY(0); } 92% { transform: translateY(-1px); } }
+@keyframes ctaPulseGlow { 0%, 100% { box-shadow: 0 4px 14px rgba(234, 88, 12, 0.28); } 50% { box-shadow: 0 6px 22px rgba(234, 88, 12, 0.48), 0 0 0 3px rgba(251, 146, 60, 0.16); } }
+@keyframes ctaShimmerSweep { 0%, 35% { left: -60%; } 75%, 100% { left: 130%; } }
+@media (max-width: 380px) {
+    .order-submit-cta .cta-primary { font-size: clamp(0.8rem, 4.5vw, 1.18rem); }
+    .order-submit-cta .cta-gift { font-size: clamp(0.58rem, 3.05vw, 0.88rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .raptor-order-form .quick-coupon-ticket, .coupon-icon, .raptor-order-form .order-submit-cta, .raptor-order-form .order-submit-cta::after { animation: none; transition: none; }
+    .raptor-order-form .order-submit-cta::after { display: none; }
+}
