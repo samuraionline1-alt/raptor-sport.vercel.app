@@ -60,3 +60,20 @@
     .raptor-order-form .quick-coupon-ticket, .coupon-icon, .raptor-order-form .order-submit-cta, .raptor-order-form .order-submit-cta::after { animation: none; transition: none; }
     .raptor-order-form .order-submit-cta::after { display: none; }
 }
+
+/* Keep receipt rows stacked even when legacy containers use flex utilities. */
+.raptor-order-form [data-order-price-summary] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    box-sizing: border-box;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+.raptor-order-form [data-order-price-summary] > * {
+    width: 100%;
+    box-sizing: border-box;
+}

@@ -32,7 +32,7 @@
         summary.style.fontWeight = '400';
         function row(label, value, valueStyle = '') {
             const line = document.createElement('div');
-            line.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:12px;margin:6px 0';
+            line.style.cssText = 'display:flex;justify-content:space-between;align-items:center;width:100%;gap:12px';
             const left = document.createElement('span'); left.textContent = label;
             const right = document.createElement('span'); right.textContent = value;
             right.style.cssText = 'text-align:right;flex-shrink:0;' + valueStyle;
@@ -44,12 +44,12 @@
         row('ค่าจัดส่ง', 'ส่งด่วนฟรี (฿0)', 'font-weight:700;color:#16a34a');
         if (order.giftCount) {
             const gift = document.createElement('div');
-            gift.style.cssText = 'background:#f0fdf4;border:1px dashed #86efac;color:#15803d;padding:6px 10px;border-radius:6px';
+            gift.style.cssText = 'width:100%;box-sizing:border-box;background:#f0fdf4;border:1px dashed #86efac;color:#15803d;padding:8px 12px;border-radius:8px;text-align:left';
             gift.textContent = '🎁 ของแถมฟรี: RAPTOR GO Energy Gel ' + order.giftCount + ' ซอง (มูลค่า ฿' + order.giftValue + ')';
             summary.appendChild(gift);
         }
         const divider = document.createElement('div');
-        divider.style.cssText = 'border-top:1px solid #fed7aa;margin:8px 0'; summary.appendChild(divider);
+        divider.style.cssText = 'width:100%;border-top:1px solid #fed7aa;margin:4px 0'; summary.appendChild(divider);
         row('ยอดชำระสุทธิ', '฿' + order.totalPrice, 'font-size:1.35rem;font-weight:700;color:#ea580c').firstChild.style.fontWeight = '700';
         if (submit && !submit.disabled) {
             submit.classList.add('order-submit-cta');
