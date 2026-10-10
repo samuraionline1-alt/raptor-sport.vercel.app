@@ -3,6 +3,12 @@ import { pushLine, lineMessage } from '../lib/line-notifications.js';
 import notify from '../api/notify-line.js';
 import checkout from '../api/create-checkout-session.js';
 const order = {order_ref:'RPT-line-test',event_type:'order_created',payment_method:'COD',payment_status:'รอเก็บเงินปลายทาง',product:'RAPTOR',quantity:2,total_price:309,coupon_code:'RAPTOR20',discount_amount:20,free_gifts:'Gel 1 ซอง',customer_name:'ทดสอบ',phone:'0812345678',address:'กรุงเทพ',note:'ภาษี 123',page_url:'https://www.raptorthailand.com/'};
+const productUrl = 'https://www.raptorthailand.com/products/raptor-cooling-spray/';
+const trackedOrder = {...order, page_url: `${productUrl}?fbclid=long-facebook-id&utm_source=fb&utm_medium=paid&utm_campaign=campaign`};
+assert.ok(lineMessage(trackedOrder).endsWith(`หน้าสั่งซื้อ: ${productUrl}`));
+assert.ok(lineMessage({...order, page_url: `${productUrl}?variant=spray&utm_source=fb&fbclid=tracking#checkout`}).endsWith(`หน้าสั่งซื้อ: ${productUrl}?variant=spray#checkout`));
+assert.ok(lineMessage({...order, page_url: 'invalid-url'}).endsWith('หน้าสั่งซื้อ: invalid-url'));
+assert.equal(trackedOrder.page_url, `${productUrl}?fbclid=long-facebook-id&utm_source=fb&utm_medium=paid&utm_campaign=campaign`);
 function res(){return{setHeader(){},status(code){this.code=code;return this},json(body){this.body=body;return this}}}
 process.env.LINE_CHANNEL_ACCESS_TOKEN='mock-line-token';process.env.LINE_ADMIN_USER_ID='admin-a, admin-b,admin-a';process.env.STRIPE_SECRET_KEY='mock-stripe';
 let pushes=[];
