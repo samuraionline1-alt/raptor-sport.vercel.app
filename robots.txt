@@ -1,3 +1,31 @@
+# Shared rules: named crawlers must retain the same sensitive-route blocks.
 User-agent: *
+User-agent: Googlebot
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: CCBot
+User-agent: Google-Extended
+User-agent: anthropic-ai
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
 Allow: /
+Allow: /products/
+
+# Block exact routes, query variants, and descendants without blocking assets
+# such as /checkout.js and /admin-shortcut.js used by public pages.
+Disallow: /checkout$
+Disallow: /checkout?
+Disallow: /checkout/
+Disallow: /cart$
+Disallow: /cart?
+Disallow: /cart/
+Disallow: /admin$
+Disallow: /admin?
+Disallow: /admin/
+Disallow: /api$
+Disallow: /api?
+Disallow: /api/
+
 Sitemap: https://www.raptorthailand.com/sitemap.xml
