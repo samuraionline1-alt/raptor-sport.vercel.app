@@ -42,6 +42,7 @@ for (const article of articles) {
 assert.ok((await read('index.html')).includes('href="/articles/"'));
 assert.ok((await read('products/raptor-cooling-spray/index.html')).includes('href="/articles/how-cooling-spray-works/"'));
 assert.equal(JSON.parse(await read('vercel.json')).buildCommand,'npm run build');
+assert.equal(JSON.parse(await read('vercel.json')).outputDirectory,'.');
 
 // Exercise new article discovery, escaping, removals and repeat builds in isolation.
 const fixture = await mkdtemp(path.join(tmpdir(),'raptor-articles-'));
