@@ -1,7 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "sync-reviews": "node scripts/sync-reviews-seo.mjs"
+    "sync-reviews": "node scripts/sync-reviews-seo.mjs",
+    "build": "node scripts/build-articles.mjs",
+    "build:articles": "node scripts/build-articles.mjs",
+    "test:articles": "node tests/articles.mjs"
   },
   "dependencies": {
     "@vercel/functions": "^3.9.11"

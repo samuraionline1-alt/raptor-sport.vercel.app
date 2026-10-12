@@ -39,3 +39,28 @@ order notifications are enabled until step 4 is deployed.
 
 Run `node tests/line-webhook.mjs` and `node tests/line-notifications.mjs` for mocked
 group setup and order delivery checks. These tests do not send live messages.
+
+## Article system
+
+This storefront uses static HTML rather than Next.js. `data/articles.json` is the
+single source for `/articles/` and `/articles/<slug>/`. Run `npm run build` after
+editing content; the Vercel build runs the same command automatically. Generated
+HTML includes content, canonical/social metadata, Article and FAQPage JSON-LD,
+and contextual product links without requiring browser JavaScript. Article
+sitemap entries are rebuilt from the same data while existing entries are retained.
+
+Add an entry with a unique lowercase hyphenated `slug`, `title`, `description`,
+`category`, `published`, `modified` (YYYY-MM-DD), `summary`, `sections`, and `faqs`.
+Sections contain unique `id`, `title`, and `paragraphs`; `productLink: true` adds
+an in-body cooling spray link, and `articleLink` links another article slug.
+FAQ entries contain `question` and `answer`; these generate both visible Q&A and
+schema so they remain identical. Update `modified` when making substantive edits.
+Edit the generator or `articles.css` for layout changes; do not edit generated pages.
+
+Run `npm run test:articles` to check structured data, content/link parity, route
+outputs, automatic sitemap additions/removals, safe escaping, and repeat builds.
+The article schema references the existing product entity and explicitly records
+that **RAPTOR Sport Cooling Spray ไม่มีส่วนผสมของการบูร (Camphor-Free)**;
+this claim is specific to this product. Publish only verified formulation facts.
+The byline is RAPTOR Thailand; no medical reviewer credentials are asserted.
+FAQ markup does not guarantee rich results or inclusion in Google AI Overviews.
