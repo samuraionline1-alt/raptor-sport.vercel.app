@@ -1,0 +1,34 @@
+{
+  "slug": "sample-energy-gel-guide",
+  "draft": true,
+  "title": "เจลพลังงานสำหรับนักกีฬา: อ่านฉลากก่อนเลือกใช้",
+  "description": "ตัวอย่างบทความสำหรับผลิตภัณฑ์ RAPTOR GO ENERGY GEL",
+  "excerpt": "เรียนรู้วิธีตรวจสอบข้อมูลผลิตภัณฑ์ก่อนเลือกใช้เจลพลังงาน",
+  "category": "โภชนาการกีฬา",
+  "published": "2026-10-12",
+  "modified": "2026-10-12",
+  "targetProductLink": "/products/raptor-go-energy-gel/",
+  "thumbnail": "/raptor-go-energy-gel.png",
+  "thumbnailAlt": "RAPTOR GO ENERGY GEL",
+  "summary": "ตรวจสอบส่วนประกอบและวิธีใช้จากฉลากผลิตภัณฑ์ก่อนใช้งาน",
+  "sections": [
+    {
+      "id": "read-label",
+      "title": "อ่านฉลากและข้อมูลผลิตภัณฑ์",
+      "paragraphs": [
+        "เริ่มจากตรวจสอบส่วนประกอบ ข้อมูลโภชนาการ และคำแนะนำการใช้ให้เหมาะกับความต้องการของคุณ"
+      ],
+      "productLink": true,
+      "items": [
+        "ตรวจสอบส่วนประกอบบนฉลาก",
+        "อ่านคำแนะนำการใช้และข้อควรระวัง"
+      ]
+    }
+  ],
+  "faqData": [
+    {
+      "question": "ดูข้อมูล RAPTOR GO ENERGY GEL ได้ที่ไหน?",
+      "answer": "ดูรายละเอียดบนหน้าผลิตภัณฑ์ RAPTOR GO ENERGY GEL และตรวจสอบฉลากปัจจุบันก่อนใช้"
+    }
+  ]
+}

@@ -42,25 +42,72 @@ group setup and order delivery checks. These tests do not send live messages.
 
 ## Article system
 
-This storefront uses static HTML rather than Next.js. `data/articles.json` is the
-single source for `/articles/` and `/articles/<slug>/`. Run `npm run build` after
-editing content; the Vercel build runs the same command automatically. Generated
-HTML includes content, canonical/social metadata, Article and FAQPage JSON-LD,
-and contextual product links without requiring browser JavaScript. Article
-sitemap entries are rebuilt from the same data while existing entries are retained.
+The storefront is a static Vercel site, not a Next.js application. Article routes
+are generated at build time from individual JSON files. There is no article copy
+in HTML templates and no manually maintained route list. The existing URLs remain
+`/articles/` and `/articles/<slug>/`, with full HTML and JSON-LD available to crawlers
+without browser JavaScript. Unknown slugs use the host's normal 404 behavior.
 
-Add an entry with a unique lowercase hyphenated `slug`, `title`, `description`,
-`category`, `published`, `modified` (YYYY-MM-DD), `summary`, `sections`, and `faqs`.
-Sections contain unique `id`, `title`, and `paragraphs`; `productLink: true` adds
-an in-body cooling spray link, and `articleLink` links another article slug.
-FAQ entries contain `question` and `answer`; these generate both visible Q&A and
-schema so they remain identical. Update `modified` when making substantive edits.
-Edit the generator or `articles.css` for layout changes; do not edit generated pages.
+### Add an article
 
-Run `npm run test:articles` to check structured data, content/link parity, route
-outputs, automatic sitemap additions/removals, safe escaping, and repeat builds.
-The article schema references the existing product entity and explicitly records
-that **RAPTOR Sport Cooling Spray ไม่มีส่วนผสมของการบูร (Camphor-Free)**;
-this claim is specific to this product. Publish only verified formulation facts.
-The byline is RAPTOR Thailand; no medical reviewer credentials are asserted.
-FAQ markup does not guarantee rich results or inclusion in Google AI Overviews.
+1. Copy `data/articles/sample-energy-gel-guide.json` to
+   `data/articles/your-article-slug.json`.
+2. Set `slug` to `your-article-slug` (lowercase letters/numbers separated by hyphens)
+   and edit the metadata and content. The filename must match the slug.
+3. Choose `targetProductLink`, such as `/products/raptor-go-energy-gel/`, and an
+   existing local image for `thumbnail`. Set meaningful `thumbnailAlt` text.
+4. Keep `draft: true` while writing. Set it to `false` or remove it when ready.
+5. Run `npm run build` and `npm run test:articles`, then commit and push the changes
+   to the production branch `main`. Vercel builds the routes, cards, metadata,
+   schemas and sitemap automatically on deployment.
+
+The sample is a draft and never appears in published routes, index or sitemap.
+Keep articles in `data/articles/`; never edit generated `articles/*/index.html`.
+Adding a file requires a build/deployment before it becomes live.
+
+### JSON fields
+
+| Field | Purpose |
+| --- | --- |
+| `slug` | Unique route identifier; must match filename |
+| `draft` | Optional boolean; `true` excludes the post from publication |
+| `title`, `description` | Page title, description and social metadata |
+| `excerpt` | Short text on the article card |
+| `category` | Visible category and Article schema section |
+| `published`, `modified` | Valid YYYY-MM-DD dates; modification cannot precede publication |
+| `targetProductLink` | Existing `/products/<slug>/` route used for contextual links and product entity |
+| `thumbnail`, `thumbnailAlt` | Local PNG/JPG/WebP/AVIF image path and descriptive alt text |
+| `summary` | Answer summary at the top of the article |
+| `sections` | Array of `{id, title, paragraphs}`; optional `items` produces a semantic list |
+| `sections[].productLink` | Optional boolean adding an in-body link to the selected product |
+| `sections[].articleLink` | Optional slug of another published article |
+| `faqData` | Optional array of `{question, answer}`; omit or use `[]` for no FAQ |
+
+FAQ data generates both visible Q&A and FAQPage JSON-LD in the head. Article
+JSON-LD is always generated, including canonical URL, dates, publisher, thumbnail
+and the selected product's entity reference. Titles, descriptions and body text
+are escaped; input is plain text, not executable HTML or MDX. Put new verified
+formulation facts in the corresponding product page, not in a global blog template.
+The camphor-free fact remains specific to RAPTOR cooling spray and is never added
+to unrelated products automatically.
+
+### Backend and scaling
+
+`lib/articles.mjs` exports `getAllArticles({root?, includeDrafts?})` and
+`getArticleBySlug(slug, options?)`. The loader validates article files, images,
+product routes, dates and related links. It reads Product metadata from each
+selected product page and caches repeated product reads during the load. There
+is no catalog size limit or SKU switch statement: adding another product page
+with valid Product JSON-LD allows articles to target it immediately.
+
+`scripts/build-articles.mjs` renders all published routes and a dark/orange
+responsive card grid. Related articles prioritize the same product and are limited
+to three. Removed or newly drafted posts have their generated pages and sitemap
+entries removed; existing non-article sitemap entries remain intact. Layout lives
+in the generator and `articles.css`, independently of article content.
+
+`npm run test:articles` verifies per-file discovery, additional products, optional
+FAQs, visible/schema consistency, draft exclusion, route links, thumbnails, safe
+escaping and repeatable sitemap updates. Formula or regulatory claims still need
+supporting evidence. No medical reviewer credentials are asserted, and structured
+data does not guarantee Google rich results or AI Overview inclusion.
