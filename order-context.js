@@ -6,8 +6,13 @@
     function saved(key) { try { return JSON.parse(read(key) || '{}'); } catch (_) { return {}; } }
     window.RaptorOrders = {
         cleanPhone: function (phone) { return String(phone || '').replace(/[^0-9]/g, ''); },
-        createRef: function (phone) {
-            return 'RPT-' + crypto.randomUUID();
+        createRef: function () {
+            var parts = new Intl.DateTimeFormat('en', { timeZone: 'Asia/Bangkok', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+            var date = ['year', 'month', 'day'].map(function (key) { return parts.find(function (part) { return part.type === key; }).value; }).join('');
+            var alphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+            var random = crypto.getRandomValues(new Uint8Array(8));
+            var suffix = Array.from(random, function (value) { return alphabet[value & 31]; }).join('');
+            return 'RPT-' + date + '-' + suffix;
         },
         save: function (order) {
             var json = JSON.stringify(order);

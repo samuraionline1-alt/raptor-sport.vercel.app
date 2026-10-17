@@ -1,3 +1,4 @@
+import { orderEmailHtml } from '../lib/email-notifications.js';
 import assert from 'node:assert/strict';
 import { recordAndNotify, deliverEmailEvent } from '../lib/order-store.js';
 import { withOrderDatabase, events } from './helpers/order-database.mjs';
@@ -24,6 +25,12 @@ assert.deepEqual(mail[0].body.to, ['samurai-top1@hotmail.com']);
 assert.equal(mail[0].body.from, 'RAPTOR Orders <orders@raptorthailand.com>');
 for (const field of ['RPT-email-test', 'Test buyer', '0812345678', 'Test address', 'Test product', '329']) assert.ok(mail[0].body.text.includes(field));
 assert.ok(mail[0].headers.get('Idempotency-Key'));
+const html = orderEmailHtml({ ...order, customer_name: '<img src=x onerror=alert(1)>', page_url: 'https://www.raptorthailand.com/products/test/?utm_source=fb&fbclid=tracking' });
+assert.ok(html.includes('>เปิดหน้าสั่งซื้อ</a>'));
+assert.ok(html.includes('href="https://www.raptorthailand.com/products/test/"'));
+assert.ok(!html.includes('<img'));
+assert.ok(!html.includes('fbclid'));
+assert.ok(!orderEmailHtml({ ...order, page_url: 'javascript:alert(1)' }).includes('<a '));
 await withOrderDatabase(() => recordAndNotify(order));
 assert.equal(mail.length, 1, 'Persistent sent marker must prevent duplicate email');
 const oldOrder = { ...order, order_ref: 'RPT-historical' };

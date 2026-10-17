@@ -38,6 +38,9 @@ const context={window:{},sessionStorage:{getItem:key=>storage.get(key),setItem:(
  fetch:async(url,options)=>{calls.push({url,options});if(url === '/api/notify-line')return{ok:!lineFail};if(url.startsWith('/api/'))return{ok:true,json:async()=>({payment_status:'paid',order_ref:'RPT-test',order_channel:'retail',customer_name:'Verified Name',phone:'0812345678',product:'Test',total_price:499,address:'Verified Address'})};return{ok:!fail};}};
 vm.runInNewContext(readFileSync('order-context.js','utf8'),context);
 const orders=context.window.RaptorOrders;
+assert.match(orders.createRef('0812345678'), /^RPT-\d{8}-[0-9A-HJKMNP-TV-Z]{8}$/);
+const refs = new Set(Array.from({length: 1000}, () => orders.createRef()));
+assert.equal(refs.size, 1000);
 orders.save({order_ref:'RPT-test',address:'Local Address'});
 orders.save({order_ref:'RPT-other',address:'Wrong Address'});
 assert.equal(JSON.parse(storage.get('raptor_order_RPT-test')).address,'Local Address');
@@ -53,7 +56,7 @@ lineFail=false;calls=[];await orders.confirm('retail');assert.equal(storage.get(
 context.location.search='';calls=[];await orders.confirm('retail');assert.equal(calls.length,0);
 for(const directory of readdirSync('products')) {
  const html=readFileSync(`products/${directory}/index.html`,'utf8');
- if(html.includes('<form')&&html.includes('raptor-order-form'))assert.ok(html.includes('/order-context.js?v=orders-20261017'));
+ if(html.includes('<form')&&html.includes('raptor-order-form'))assert.ok(html.includes('/order-context.js?v=order-ref-20261017'));
 
 }
 for(const file of ['wholesale/index.html','thank-you.html']) {
