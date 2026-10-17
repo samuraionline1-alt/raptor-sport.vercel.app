@@ -1,4 +1,5 @@
-import { pushLine } from '../lib/line-notifications.js';
+import { recordAndNotify } from '../lib/order-store.js';
+import createOrder from './orders.js';
 import confirmPayment from './confirm-payment.js';
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
@@ -14,11 +15,9 @@ export default async function handler(req, res) {
     });
     if (code !== 200 || receipt.order_ref !== order.order_ref) return res.status(409).json({ error: 'Payment is not confirmed' });
     order = { ...receipt, event_type: 'payment_succeeded', payment_method: 'STRIPE', payment_status: 'ชำระเงินสำเร็จ (PAID)', note: receipt.note || '', page_url: receipt.page_url || '' };
-  } else if (order.payment_method === 'STRIPE' && order.event_type === 'checkout_initiated') {
-    order = { ...order, payment_status: 'รอสแกนชำระเงิน' };
-  } else if (order.payment_method !== 'COD' || order.event_type !== 'order_created') {
-    return res.status(400).json({ error: 'Invalid order event' });
-  } else order = { ...order, payment_status: 'รอเก็บเงินปลายทาง' };
-  try { await pushLine(order); return res.status(200).json({ ok: true }); }
-  catch (_) { return res.status(502).json({ error: 'Unable to deliver LINE notification' }); }
+  } else if (order.payment_method === 'COD' && order.event_type === 'order_created') {
+    return createOrder(req, res);
+  } else return res.status(400).json({ error: 'Invalid order event' });
+  try { const delivery = await recordAndNotify(order); return res.status(200).json({ ok: true, ...delivery }); }
+  catch (_) { return res.status(502).json({ error: 'Unable to save payment confirmation' }); }
 }

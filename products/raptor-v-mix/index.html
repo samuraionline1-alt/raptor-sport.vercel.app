@@ -302,11 +302,11 @@
 }
 </script>
     <script src="/gtm-ecommerce.js" defer></script>
-    <script src="/order-context.js?v=line-20261006" defer></script>
+    <script src="/order-context.js?v=orders-20261017" defer></script>
     <script src="/promo-config.js?v=receipt-20261005" defer></script>
     <link rel="stylesheet" href="/order-buttons.css?v=summary-20261006">
     <script src="/promotions.js?v=summary-20261006" defer></script>
-    <script src="/checkout.js?v=line-20261006" defer></script>
+    <script src="/checkout.js?v=orders-20261017" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
     <script src="/sticky-order-bar.js" defer></script>
 </head>
@@ -425,7 +425,7 @@
                 <section id="water-order-form" class="bg-white rounded-2xl shadow-md border-2 border-[#FF6B00] p-6 max-w-xl mx-auto space-y-6">
                     <div class="bg-red-600 text-white p-3 rounded-xl text-center font-bold text-sm"><span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 490 บาท (จากปกติ 850 บาท)</div>
                     <h3 class="text-xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
-                    <form class="space-y-4 raptor-order-form" id="raptor-v-mix-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์" data-price="฿490" data-close-modal="closeVMixModal">
+                    <form class="space-y-4 raptor-order-form" id="raptor-v-mix-order-form" action="/api/orders" method="POST" data-product="RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์" data-price="฿490" data-close-modal="closeVMixModal">
                         <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์">
                         <input type="hidden" name="product" value="RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์">
                         <input type="hidden" name="price" value="฿490">

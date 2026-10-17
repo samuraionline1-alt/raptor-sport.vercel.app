@@ -1,7 +1,6 @@
 (function () {
     'use strict';
 
-    var FORM_ENDPOINT = 'https://formspree.io/f/mvzyqnag';
     var PENDING_ORDER_KEY = 'raptorPendingOrder';
 
     function numeric(value) {
@@ -66,10 +65,18 @@
     document.addEventListener('submit', async function (event) {
         var form = event.target;
         if (!form.matches('.raptor-order-form')) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        if (form.dataset.submitting === '1') return;
         var order = details(form);
         if (window.RaptorPromotions) Object.assign(order, RaptorPromotions.update(form));
         order.phone = RaptorOrders.cleanPhone(order.phone);
-        order.order_ref = RaptorOrders.createRef(order.phone);
+        var signature = JSON.stringify(order) + (form.querySelector('[name="payment_method"]:checked')?.value || 'COD');
+        if (form.dataset.orderSignature !== signature) {
+            form.dataset.orderSignature = signature;
+            form.dataset.orderRef = RaptorOrders.createRef(order.phone);
+        }
+        order.order_ref = form.dataset.orderRef;
         order.total_price = order.totalPrice;
         order.price = order.total_price;
         order.bundle_tier = order.bundleTier;
@@ -91,16 +98,10 @@
             input.value = order[key];
         });
         RaptorOrders.save(order);
-        if (order.payment_method !== 'STRIPE') {
-            RaptorOrders.notifyLine({ ...order, event_type: 'order_created', payment_status: 'รอเก็บเงินปลายทาง' }).catch(() => console.error('LINE COD notification could not be delivered'));
-            return;
-        }
-        event.preventDefault();
-        event.stopImmediatePropagation();
-
+        form.dataset.submitting = '1';
         var button = form.querySelector('button[type="submit"], button:not([type])');
         var originalText = button?.innerHTML;
-        if (button) { button.disabled = true; button.textContent = 'กำลังเปิดหน้าชำระเงิน...'; }
+        if (button) { button.disabled = true; button.textContent = order.payment_method === 'STRIPE' ? 'กำลังเปิดหน้าชำระเงิน...' : 'กำลังบันทึกคำสั่งซื้อ...'; }
         var tracking = ecommerce(order);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ ecommerce: null });
@@ -108,16 +109,16 @@
         if (typeof window.fbq === 'function') window.fbq('track', 'InitiateCheckout', { value: order.totalPrice, currency: 'THB', content_name: order.product, num_items: order.quantity });
         try { sessionStorage.setItem(PENDING_ORDER_KEY, JSON.stringify(tracking)); } catch (_) {}
 
-        var backup = new FormData(form);
-        backup.set('payment_status', 'Pending Online Payment (Stripe)');
-        fetch(FORM_ENDPOINT, { method: 'POST', body: backup, headers: { Accept: 'application/json' }, keepalive: true }).catch(function () {});
-
         try {
-            var response = await fetch('/api/create-checkout-session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order) });
+            var response = await fetch(order.payment_method === 'STRIPE' ? '/api/create-checkout-session' : '/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order) });
             var data = await response.json();
-            if (!response.ok || !data.url) throw new Error(data.error || 'ไม่สามารถเปิดหน้าชำระเงินได้');
-            window.location.href = data.url;
+            if (!response.ok || (order.payment_method === 'STRIPE' ? !data.url : !data.ok)) throw new Error(data.error || 'ไม่สามารถบันทึกคำสั่งซื้อได้');
+            if (order.payment_method === 'COD') {
+                if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: order.totalPrice, currency: 'THB', content_name: order.product, num_items: order.quantity });
+            }
+            window.location.href = data.url || '/thank-you.html?order_ref=' + encodeURIComponent(order.order_ref);
         } catch (error) {
+            form.dataset.submitting = '0';
             if (button) { button.disabled = false; button.innerHTML = originalText; if (window.RaptorPromotions) RaptorPromotions.update(form); }
             alert(error.message || 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
         }

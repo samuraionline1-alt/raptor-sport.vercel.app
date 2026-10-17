@@ -1,3 +1,4 @@
+import { withOrderDatabase } from './helpers/order-database.mjs';
 import assert from 'node:assert/strict';
 import config from '../promo-config.js';
 import checkout from '../api/create-checkout-session.js';
@@ -21,7 +22,7 @@ function response() { return { setHeader() {}, status(code) { this.code = code; 
 for (const code of ['raptor20', 'FREEGEL', '']) {
  const promo = config.calculate(329, 'tier_2', code);
  const res = response();
- await checkout({ method: 'POST', body: { product: 'Test', quantity: 2, bundleTier: 'tier_2', ...promo, total_price: promo.totalPrice, order_ref: 'RPT-promo', customer_name: 'Test' } }, res);
+ await withOrderDatabase(() => checkout({ method: 'POST', body: { product: 'Test', quantity: 2, bundleTier: 'tier_2', ...promo, total_price: promo.totalPrice, order_ref: 'RPT-promo-' + (code || 'none'), customer_name: 'Test', phone: '0812345678', address: 'Bangkok' } }, res));
  assert.equal(res.code, 200);
  assert.equal(params.get('line_items[0][price_data][unit_amount]'), String(promo.totalPrice * 100));
  assert.equal(params.get('metadata[free_gifts]'), promo.free_gifts);
@@ -29,7 +30,7 @@ for (const code of ['raptor20', 'FREEGEL', '']) {
  assert.ok(params.get('line_items[0][price_data][product_data][description]').includes(promo.free_gifts));
 }
 const invalid = response();
-await checkout({ method: 'POST', body: { product: 'Test', subtotal: 329, quantity: 2, bundleTier: 'tier_2', coupon_code: 'RAPTOR20', total_price: 1, order_ref: 'RPT-promo' } }, invalid);
+await withOrderDatabase(() => checkout({ method: 'POST', body: { product: 'Test', subtotal: 329, quantity: 2, bundleTier: 'tier_2', coupon_code: 'RAPTOR20', total_price: 1, order_ref: 'RPT-promo' } }, invalid));
 assert.equal(invalid.code, 400);
 for (const path of ['index.html', ...readdirSync('products').map(dir => `products/${dir}/index.html`)]) {
  const html = readFileSync(path, 'utf8');

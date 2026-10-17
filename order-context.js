@@ -7,9 +7,7 @@
     window.RaptorOrders = {
         cleanPhone: function (phone) { return String(phone || '').replace(/[^0-9]/g, ''); },
         createRef: function (phone) {
-            var cleanPhone = this.cleanPhone(phone);
-            const orderRef = 'RPT-' + Date.now().toString().slice(-4) + '-' + cleanPhone.slice(-4);
-            return orderRef;
+            return 'RPT-' + crypto.randomUUID();
         },
         save: function (order) {
             var json = JSON.stringify(order);
@@ -60,18 +58,11 @@
                     order_details: `รหัส: #${ref} | สินค้า: ${receipt.product} (จำนวน ${receipt.quantity || order.quantity || 1} ชิ้น) | ของแถม: ${receipt.free_gifts || "ไม่มี"} | คูปอง: ${receipt.coupon_code || "ไม่มี"} | ยอดสุทธิ: ฿${receipt.total_price} | ลูกค้า: ${receipt.customer_name} (${receipt.phone}) | ที่อยู่: ${receipt.address || order.address || ""}`,
                     total_price: receipt.total_price
                 };
-                var tasks = [];
-                if (!read(lineGuard)) tasks.push(this.notifyLine({ ...payload, event_type: 'payment_succeeded', payment_method: 'STRIPE', payment_status: 'ชำระเงินสำเร็จ (PAID)', note: receipt.note || order.note || '', page_url: receipt.page_url || order.page_url || '' }).then(() => write(lineGuard, '1')));
-                if (!read(guard)) tasks.push((async function () {
-                    var notification = await fetch('https://formspree.io/f/' + (channel === 'wholesale' ? 'xzdwqaar' : 'mvzyqnag'), {
-                        method: 'POST', headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload), keepalive: true
-                    });
-                    if (!notification.ok) throw new Error('Payment notification failed');
+                if (!read(lineGuard)) {
+                    await this.notifyLine({ ...payload, event_type: 'payment_succeeded', payment_method: 'STRIPE', payment_status: 'ชำระเงินสำเร็จ (PAID)', note: receipt.note || order.note || '', page_url: receipt.page_url || order.page_url || '' });
+                    write(lineGuard, '1');
                     write(guard, '1');
-                }()));
-                var results = await Promise.allSettled(tasks);
-                if (results.some(result => result.status === 'rejected')) throw new Error('Payment notification failed');
+                }
             } catch (error) {
                 console.error('Unable to send payment confirmation; reload to retry.', error);
             } finally { inFlight.delete(sessionId); }

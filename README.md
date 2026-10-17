@@ -2,7 +2,53 @@
 
 Edit `promo-config.js` to change the announcement, bundle gifts, and coupons. Coupon codes are case-insensitive; `minOrder` applies to the bundle subtotal before the coupon. Only one coupon applies at a time. Existing bundle discounts remain 8% for two pieces, 15% for three, and 20% for six. Gifts for other tiers can be added to `bundleGifts` using the matching `tier_N` key.
 
-Deploy config edits with the site so browser and checkout API use the same promotions. Promotion scripts revalidate their cache on each visit. Retail COD, pending online, and verified paid Formspree notifications include coupon and gift details. Wholesale orders do not use retail coupons.
+Deploy config edits with the site so browser and checkout API use the same promotions. Promotion scripts revalidate their cache on each visit. Retail COD, pending online, and verified paid Supabase orders and LINE notifications include coupon and gift details. Wholesale orders do not use retail coupons.
+
+## Supabase order migration (prepare database before deploying)
+
+1. In the existing Supabase project, open SQL Editor and run
+   `supabase/migrations/20261017_orders.sql` once. It creates `raptor_orders`,
+   `raptor_line_events`, and a transactional recording function. Both tables use
+   RLS with no anonymous/authenticated access. Only the server service role can
+   access customer data. The existing reviews table is untouched.
+2. In Vercel project **raptor-sport**, configure Production `SUPABASE_URL` and
+   Secret `SUPABASE_SERVICE_ROLE_KEY`. The latter accepts a new `sb_secret_`
+   secret key or the legacy service_role JWT. Never expose it to the browser.
+3. In the existing Stripe account, create an event destination for
+   `https://www.raptorthailand.com/api/stripe-webhook`. Select
+   `checkout.session.completed` and `checkout.session.async_payment_succeeded`.
+   Save its signing secret as Secret `STRIPE_WEBHOOK_SECRET` in Vercel Production.
+   Keep the existing Stripe and LINE credentials. Checkout now uses the payment
+   methods enabled in Stripe Dashboard; ensure cards and PromptPay are enabled.
+4. Deploy only after the SQL and configuration are ready. Verify a clearly
+   identified COD order appears in Supabase and its notification arrives in LINE.
+   Test online payments in a Stripe sandbox, including a paid webhook delivered
+   without opening the success page. Mock checks alone do not verify live keys,
+   database setup, LINE membership or LINE quota.
+
+The server commits the order and LINE queue entry before acknowledging COD or
+returning a Stripe payment URL. LINE failures do not erase or reject saved
+orders. Inspect `raptor_line_events.status`, `attempts`, and `last_error` in
+Supabase. HTTP_401 suggests LINE credentials; HTTP_429 can indicate quota/rate
+limits; HTTP_400 can indicate a request/recipient issue. These codes require
+further investigation, not automatic credential replacement.
+
+Stripe retries paid webhooks when LINE delivery fails. COD/pending notifications
+can be retried using `node scripts/retry-line.mjs` on a trusted server configured
+with the Supabase and LINE environment variables. This script is **manual**;
+no recurring retry job is configured. LINE deduplicates matching retry keys for
+24 hours; a retry after that window, or an uncertain delivery followed by a
+database outage, can produce a duplicate. Inspect long-pending events first.
+
+Order flows no longer use Formspree. The contact form still uses Formspree, and
+the nine historical Over Limit submissions must be exported/recovered separately;
+this migration does not retrieve them.
+
+Run `node tests/supabase-orders.mjs`, `node tests/order-flow.mjs`,
+`node tests/line-notifications.mjs`, `node tests/line-webhook.mjs`,
+`node tests/promotions.mjs`, and `node tests/product-scripts.mjs` for mocked
+regression checks. The SQL still needs validation against the target Supabase
+database before production deployment.
 
 Run `node tests/order-flow.mjs` and `node tests/promotions.mjs` to verify order and promotion behavior without making live payments or sending notifications.
 

@@ -1,5 +1,5 @@
-import { waitUntil } from '@vercel/functions';
-import { pushLine } from '../lib/line-notifications.js';
+import { recordAndNotify } from '../lib/order-store.js';
+import { validOrder } from './orders.js';
 import promoConfig from '../promo-config.js';
 const STRIPE_ENDPOINT = 'https://api.stripe.com/v1/checkout/sessions';
 const SITE_ORIGIN = 'https://www.raptorthailand.com';
@@ -43,6 +43,7 @@ export default async function handler(req, res) {
   }
 
   const body = req.body || {};
+  if (!validOrder({ ...body, phone: String(body.phone || '').replace(/[^0-9]/g, ''), total_price: body.total_price ?? body.totalPrice })) return res.status(400).json({ error: 'ข้อมูลคำสั่งซื้อไม่ครบถ้วน' });
   const product = safeText(body.product, 200);
   const quantity = Math.max(1, Math.floor(Number(body.quantity)) || 1);
   const totalPrice = Number(body.total_price ?? body.totalPrice);
@@ -85,8 +86,6 @@ export default async function handler(req, res) {
   };
   const params = new URLSearchParams({
     mode: 'payment',
-    'payment_method_types[0]': 'promptpay',
-    'payment_method_types[1]': 'card',
     'line_items[0][price_data][currency]': 'thb',
     'line_items[0][price_data][product_data][name]': `${product} (จำนวน ${quantity} ชิ้น)`,
     'line_items[0][price_data][product_data][description]': `รหัสสั่งซื้อ: #${orderRef} | ผู้รับ: ${customerName} (${cleanPhone})${promotion.free_gifts ? " | ของแถม: " + promotion.free_gifts : ""}${promotion.coupon_code ? " | คูปอง: " + promotion.coupon_code : ""}`,
@@ -109,7 +108,8 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Idempotency-Key': `checkout-${orderRef}`
       },
       body: params.toString()
     });
@@ -117,11 +117,10 @@ export default async function handler(req, res) {
     if (!stripeResponse.ok || !session.url) {
       return res.status(stripeResponse.status || 502).json({ error: session.error?.message || 'Unable to create checkout session' });
     }
-    // Keep delivery alive after the response without delaying Stripe checkout.
-    waitUntil(pushLine({ ...metadata, total_price: totalPrice, event_type: 'checkout_initiated', payment_method: 'STRIPE', payment_status: 'รอสแกนชำระเงิน' })
-      .catch(() => console.error('LINE checkout notification could not be delivered')));
-    return res.status(200).json({ url: session.url });
+    // Do not return a payment URL until the order and LINE event are durable.
+    const delivery = await recordAndNotify({ ...metadata, quantity, total_price: totalPrice, stripe_session_id: session.id || '', event_type: 'checkout_initiated', payment_method: 'STRIPE', payment_status: 'รอสแกนชำระเงิน' });
+    return res.status(200).json({ url: session.url, ...delivery });
   } catch (_) {
-    return res.status(502).json({ error: 'Unable to connect to Stripe' });
+    return res.status(502).json({ error: 'ไม่สามารถเตรียมคำสั่งซื้อได้ กรุณาลองอีกครั้ง' });
   }
 }

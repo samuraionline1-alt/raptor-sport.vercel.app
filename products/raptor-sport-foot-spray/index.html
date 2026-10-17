@@ -287,11 +287,11 @@
 }
 </script>
     <script src="/gtm-ecommerce.js" defer></script>
-    <script src="/order-context.js?v=line-20261006" defer></script>
+    <script src="/order-context.js?v=orders-20261017" defer></script>
     <script src="/promo-config.js?v=receipt-20261005" defer></script>
     <link rel="stylesheet" href="/order-buttons.css?v=summary-20261006">
     <script src="/promotions.js?v=summary-20261006" defer></script>
-    <script src="/checkout.js?v=line-20261006" defer></script>
+    <script src="/checkout.js?v=orders-20261017" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
     <script src="/sticky-order-bar.js" defer></script>
 </head>
@@ -407,7 +407,7 @@
                         <span id="foot-countdown-2" class="font-mono font-bold bg-black/40 px-2 py-0.5 rounded text-sm text-yellow-300">00:15:00</span>
                     </div>
                     <h3 class="text-xl font-bold text-center text-white">กรอกรายละเอียดเพื่อจัดส่งด่วนฟรี</h3>
-                    <form class="space-y-4 text-slate-200 raptor-order-form" id="raptor-sport-foot-spray-order-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="RAPTOR SPORT FOOT SPRAY" data-price="฿179" data-close-modal="closeFootSprayModal">
+                    <form class="space-y-4 text-slate-200 raptor-order-form" id="raptor-sport-foot-spray-order-form" action="/api/orders" method="POST" data-product="RAPTOR SPORT FOOT SPRAY" data-price="฿179" data-close-modal="closeFootSprayModal">
                         <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR SPORT FOOT SPRAY">
                         <input type="hidden" name="product" value="RAPTOR SPORT FOOT SPRAY">
                         <input type="hidden" name="price" value="฿179">
