@@ -6,6 +6,33 @@ Deploy config edits with the site so browser and checkout API use the same promo
 
 ## Supabase order migration (prepare database before deploying)
 
+### Order email notifications
+
+Resend is installed through Vercel Marketplace and the sender domain must be
+verified. Production uses integration-provided `RESEND_API_KEY` and
+`RESEND_EMAIL_DOMAIN`, plus `ORDER_NOTIFICATION_EMAIL` for the owner's recipient.
+The sender is `RAPTOR Orders <orders@<verified-domain>>`. COD, online checkout,
+and verified paid events each have distinct subjects and idempotency keys.
+Email and LINE run independently after database persistence.
+
+`ORDER_NOTIFICATIONS_FROM` is a fixed ISO timestamp marking when new notifications
+were enabled. Orders created before it are excluded from both channels, including
+old Stripe sessions delivered later. Do not move this timestamp during redeploys.
+Historical Formspree orders have already been handled manually; do not replay them.
+
+The existing `raptor_line_events.payload.email_delivery` stores the provider ID
+and `sent_at`, or a sanitized `last_error`. No further SQL migration is needed.
+The sent marker records provider acceptance, not confirmed inbox delivery.
+For a manual retry use `node scripts/retry-email.mjs` with the original cutoff
+and production service credentials on a trusted server. No scheduled email retry
+job is configured. Resend idempotency protects concurrent retries within its
+24-hour window; inspect ambiguous deliveries older than that before retrying.
+
+`ORDER_EMAIL_SEND_TEST=1` enables a single setup email during a production build.
+Remove that temporary variable after confirming provider acceptance. Never send
+real customer data in setup checks. Run `node tests/email-notifications.mjs` for
+recipient, failure independence, deduplication, and historical-cutoff checks.
+
 1. In the existing Supabase project, open SQL Editor and run
    `supabase/migrations/20261017_orders.sql` once. It creates `raptor_orders`,
    `raptor_line_events`, and a transactional recording function. Both tables use

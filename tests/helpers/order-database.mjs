@@ -14,10 +14,14 @@ export async function withOrderDatabase(run) {
     if (url.endsWith('/rpc/raptor_record_order')) {
       const order = body.p_order;
       const key = order.order_ref + ':' + order.event_type;
-      if (!events.has(key)) events.set(key, { order_ref: order.order_ref, event_type: order.event_type, status: 'pending', attempts: 0, payload: order });
+      if (!events.has(key)) events.set(key, { order_ref: order.order_ref, event_type: order.event_type, status: 'pending', attempts: 0, payload: order, created_at: new Date().toISOString() });
       return { ok: true, status: 200, json: async () => null };
     }
     const query = new URL(url).searchParams;
+    if (url.includes('/raptor_orders?')) {
+      const event = [...events.values()].find(event => event.order_ref === query.get('order_ref')?.slice(3));
+      return { ok: true, status: 200, json: async () => event ? [{ created_at: event.created_at }] : [] };
+    }
     const key = query.get('order_ref')?.slice(3) + ':' + query.get('event_type')?.slice(3);
     const row = events.get(key);
     assert.ok(row, 'Notification must only be sent after its order is recorded');

@@ -118,7 +118,9 @@ export default async function handler(req, res) {
       return res.status(stripeResponse.status || 502).json({ error: session.error?.message || 'Unable to create checkout session' });
     }
     // Do not return a payment URL until the order and LINE event are durable.
-    const delivery = await recordAndNotify({ ...metadata, quantity, total_price: totalPrice, stripe_session_id: session.id || '', event_type: 'checkout_initiated', payment_method: 'STRIPE', payment_status: 'รอสแกนชำระเงิน' });
+    const delivery = await recordAndNotify({ ...metadata, quantity, total_price: totalPrice, stripe_session_id: session.id || '',
+      ...(session.created ? { order_created_at: new Date(session.created * 1000).toISOString() } : {}),
+      event_type: 'checkout_initiated', payment_method: 'STRIPE', payment_status: 'รอสแกนชำระเงิน' });
     return res.status(200).json({ url: session.url, ...delivery });
   } catch (_) {
     return res.status(502).json({ error: 'ไม่สามารถเตรียมคำสั่งซื้อได้ กรุณาลองอีกครั้ง' });

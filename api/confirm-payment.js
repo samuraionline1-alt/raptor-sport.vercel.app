@@ -18,6 +18,7 @@ export default async function handler(req, res) {
     }
     const metadata = session.metadata;
     return res.status(200).json({ payment_status: 'paid', order_ref: metadata.order_ref,
+      ...(session.created ? { order_created_at: new Date(session.created * 1000).toISOString() } : {}),
       order_channel: metadata.order_channel, customer_name: metadata.customer_name,
       phone: metadata.phone, address: metadata.address, product: metadata.product,
       quantity: metadata.quantity, coupon_code: metadata.coupon_code || "",
