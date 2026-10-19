@@ -1,6 +1,7 @@
 (function () {
     'use strict';
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const compactScreen = matchMedia('(max-width: 640px)');
     let chartPromise;
     const watchedCharts = new WeakSet();
     function loadCharts() {
@@ -36,8 +37,8 @@
         document.documentElement.classList.toggle('page-paused', document.hidden);
     });
     document.addEventListener('DOMContentLoaded', function () {
-        // Stop decorative animation work outside the viewport.
-        if ('IntersectionObserver' in window) {
+        // Mobile/reduced-motion CSS already stops decoration; avoid extra observer layout work.
+        if ('IntersectionObserver' in window && !compactScreen.matches && !reducedMotion.matches) {
             const observer = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) { entry.target.classList.toggle('motion-paused', !entry.isIntersecting); });
             });
@@ -50,10 +51,10 @@
         function stop() { clearTimeout(timer); }
         function schedule() {
             stop();
-            if (!document.hidden && visible && !reducedMotion.matches) timer = setTimeout(advance, 5000);
+            if (!document.hidden && visible && !reducedMotion.matches && !compactScreen.matches) timer = setTimeout(advance, 5000);
         }
         async function advance() {
-            if (busy || document.hidden || !visible || reducedMotion.matches) return;
+            if (busy || document.hidden || !visible || reducedMotion.matches || compactScreen.matches) return;
             busy = true;
             const nextIndex = (active + 1) % slides.length;
             const next = slides[nextIndex];
@@ -64,7 +65,7 @@
                     delete next.dataset.src;
                 }
                 await next.decode();
-                if (!document.hidden && visible && !reducedMotion.matches) {
+                if (!document.hidden && visible && !reducedMotion.matches && !compactScreen.matches) {
                     slides[active].classList.remove('is-active');
                     next.classList.add('is-active'); active = nextIndex;
                 }
@@ -77,6 +78,7 @@
         }
         document.addEventListener('visibilitychange', schedule);
         reducedMotion.addEventListener('change', schedule);
+        compactScreen.addEventListener('change', schedule);
         schedule();
     });
 }());

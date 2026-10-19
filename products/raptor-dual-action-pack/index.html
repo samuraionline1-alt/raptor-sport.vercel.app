@@ -157,9 +157,9 @@
   ]
 }
     </script>
-    <link rel="stylesheet" href="/assets/site.css?v=performance-20261019">
+    <link rel="stylesheet" href="/assets/site.css?v=a11y-20261019">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/vendor/icons.css?v=a11y-20261019">
     <link rel="stylesheet" href="/product-image-zoom.css">
     <style>
         body { font-family: 'Kanit', sans-serif; }
@@ -269,21 +269,24 @@
   ]
 }
     </script>
-    <script src="/site-config.js"></script>
-    <link rel="stylesheet" href="/reviews.css">
+    <script src="/site-config.js" defer></script>
+    <link rel="stylesheet" href="/reviews.css?v=lighthouse-20261019">
     <script src="/gtm-ecommerce.js" defer></script>
     <script src="/order-context.js?v=order-ref-20261017" defer></script>
     <script src="/promo-config.js?v=receipt-20261005" defer></script>
-    <link rel="stylesheet" href="/order-buttons.css?v=payment-layout-20261019">
-    <script src="/promotions.js?v=summary-20261006" defer></script>
+    <link rel="stylesheet" href="/order-buttons.css?v=lighthouse-20261019">
+    <script src="/promotions.js?v=lighthouse-20261019" defer></script>
     <script src="/checkout.js?v=payment-layout-20261019" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
     <script src="/sticky-order-bar.js?v=performance-20261019" defer></script>
-<link rel="stylesheet" href="/performance.css?v=performance-20261019">
-<script src="/performance.js?v=performance-20261019" defer></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap">
+<link rel="stylesheet" href="/performance.css?v=a11y-20261019">
+<script src="/performance.js?v=a11y-20261019" defer></script>
+
+
+<link rel="stylesheet" href="/assets/vendor/kanit.css?v=a11y-20261019">
+<link rel="icon" type="image/webp" href="/assets/optimized/raptor-logo-still.webp">
+<link rel="preload" href="/assets/vendor/kanit-943218ba72a5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/vendor/kanit-20ee1ffc0cbc.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <header class="sticky top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
@@ -296,15 +299,15 @@
             </nav>
         </div>
     </header>
-    <nav aria-label="Breadcrumb" class="max-w-5xl mx-auto px-6 pt-5 text-sm text-zinc-500">
+    <nav aria-label="Breadcrumb" class="max-w-5xl mx-auto px-6 pt-5 text-sm text-zinc-600">
         <ol class="flex flex-wrap items-center gap-2"><li><a class="hover:text-orange-600" href="/">หน้าแรก</a></li><li aria-hidden="true">/</li><li><a class="hover:text-orange-600" href="/#shop">สินค้าทั้งหมด</a></li><li aria-hidden="true">/</li><li class="text-zinc-800" aria-current="page">RAPTOR DUAL ACTION PACK เซ็ตสเปรย์ร้อน-เย็น</li></ol>
     </nav>
 
     <section id="dualaction-modal" class="product-detail-content py-8 md:py-12">
         <div class="bg-gray-50 rounded-2xl max-w-5xl w-full shadow-2xl overflow-hidden relative border border-gray-200">
             <div class="bg-zinc-900 text-white px-6 py-4 flex items-center justify-between">
-                <h3 class="font-bold text-lg text-orange-brand tracking-wider"><i class="fa-solid fa-bolt-lightning"></i> RAPTOR SPORT PREMIUM</h3>
-                <span class="text-xs text-gray-400 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
+                <h2 class="font-bold text-lg text-orange-brand tracking-wider"><i class="fa-solid fa-bolt-lightning"></i> RAPTOR SPORT PREMIUM</h2>
+                <span class="text-xs text-gray-600 hidden sm:inline">รายละเอียดและโปรโมชั่นพิเศษทางการ</span>
             </div>
 
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-10">
@@ -312,9 +315,9 @@
                     <div class="flex flex-col items-center">
                         <div class="w-full max-w-[340px] aspect-square bg-gradient-to-br from-orange-50 to-blue-50 rounded-2xl shadow-lg flex items-center justify-center p-2 relative overflow-hidden">
                             <img src="/assets/optimized/raptor-dual-action-pack-960.webp" alt="RAPTOR DUAL ACTION PACK" class="product-main-image max-h-full w-auto object-contain rounded-xl" width="1254" height="1254" decoding="async" srcset="/assets/optimized/raptor-dual-action-pack-480.webp 480w, /assets/optimized/raptor-dual-action-pack-960.webp 960w, /assets/optimized/raptor-dual-action-pack-1254.webp 1254w" sizes="(max-width: 640px) 90vw, 430px" fetchpriority="high" data-zoom-src="/assets/optimized/raptor-dual-action-pack-1254.webp">
-                            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow animate-pulse uppercase tracking-wider">Combo Pack</span>
+                            <span class="absolute top-3 left-3 bg-red-700 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow  uppercase tracking-wider">Combo Pack</span>
                         </div>
-                        <p class="text-xs text-gray-400 mt-3"><i class="fa-solid fa-circle-check text-orange-brand"></i> สินค้าแท้ 100% บรรจุวอร์มอัพ 250ml + สูตรเย็น 250ml</p>
+                        <p class="text-xs text-gray-600 mt-3"><i class="fa-solid fa-circle-check text-orange-brand"></i> สินค้าแท้ 100% บรรจุวอร์มอัพ 250ml + สูตรเย็น 250ml</p>
                     </div>
                     <div class="space-y-4">
                         <span class="bg-orange-100 text-orange-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Value Set</span>
@@ -326,7 +329,7 @@
                         </div>
                         <div class="flex items-baseline space-x-3">
                             <span class="text-4xl font-extrabold text-red-600">฿329</span>
-                            <span class="text-sm text-gray-400 line-through">฿700</span>
+                            <span class="text-sm text-gray-600 line-through">฿700</span>
                             <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">-53% OFF</span>
                         </div>
                         <p class="text-xs text-amber-600 bg-amber-50 p-3 rounded border border-amber-200"><i class="fa-solid fa-circle-info"></i> ซึมไว ไม่เหนียวเหนอะหนะ การันตีสูตรพรีเมียมไร้การบูรในสเปรย์เย็น อ่อนโยนต่อผิวพรรณ</p>
@@ -335,9 +338,9 @@
 
                 <section class="bg-gradient-to-r from-red-600 to-orange-500 rounded-2xl shadow-md p-6 text-white text-center relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 text-white/10 text-9xl font-black rotate-12"><i class="fa-solid fa-bolt"></i></div>
-                    <h3 class="text-xl font-bold uppercase tracking-wider flex justify-center items-center gap-2">
-                        <i class="fa-solid fa-stopwatch animate-pulse"></i> Flash Sale ข้อเสนอเวลาจำกัด!
-                    </h3>
+                    <h2 class="text-xl font-bold uppercase tracking-wider flex justify-center items-center gap-2">
+                        <i class="fa-solid fa-stopwatch "></i> Flash Sale ข้อเสนอเวลาจำกัด!
+                    </h2>
                     <p class="text-sm text-orange-100 mt-1">ราคาพิเศษนี้จะสิ้นสุดในอีก</p>
                     <div class="flex justify-center space-x-3 my-4">
                         <div class="bg-black/40 px-3 py-2 rounded-lg min-w-[50px]"><span id="dual-hours" class="text-2xl font-bold">01</span><div class="text-[10px] text-gray-300">ชม.</div></div>
@@ -350,28 +353,28 @@
                 </section>
 
                 <section class="bg-white rounded-2xl shadow-sm p-6">
-                    <h3 class="text-xl font-bold text-center mb-6 border-b border-gray-100 pb-3 text-gray-900">ระบบการดูแลแบบครบวงจร (Dual Action System)</h3>
+                    <h2 class="text-xl font-bold text-center mb-6 border-b border-gray-100 pb-3 text-gray-900">ระบบการดูแลแบบครบวงจร (Dual Action System)</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="p-4 bg-orange-50/40 rounded-xl text-center border border-orange-100">
                             <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto text-orange-brand text-lg font-bold mb-2"><i class="fa-solid fa-fire"></i></div>
-                            <h4 class="font-bold text-sm text-gray-808">Pre-Match Warm Up</h4>
+                            <h3 class="font-bold text-sm text-gray-808">Pre-Match Warm Up</h3>
                             <p class="text-[11px] text-gray-500 mt-1">สูตรร้อนช่วยเตรียมความพร้อมให้เส้นใยกล้ามเนื้อ เพิ่มความยืดหยุ่น ลดความเสี่ยงในการบาดเจ็บฉับพลัน</p>
                         </div>
                         <div class="p-4 bg-blue-50/40 rounded-xl text-center border border-blue-100">
                             <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto text-blue-600 text-lg font-bold mb-2"><i class="fa-solid fa-snowflake"></i></div>
-                            <h4 class="font-bold text-sm text-gray-808">Post-Match Recovery</h4>
+                            <h3 class="font-bold text-sm text-gray-808">Post-Match Recovery</h3>
                             <p class="text-[11px] text-gray-500 mt-1">สูตรเย็นจัดช่วยบรรเทาอาการล้าสะสม สยบความร้อนใต้ชั้นผิว บล็อกอาการปวดเมื่อยและความตึงเครียดของกล้ามเนื้อหลังจบเกมได้ดีเยี่ยม</p>
                         </div>
                         <div class="p-4 bg-slate-50 rounded-xl text-center border border-gray-200">
                             <div class="w-12 h-12 bg-slate-200 rounded-full flex items-center justify-center mx-auto text-slate-700 text-lg font-bold mb-2"><i class="fa-solid fa-shield-halved"></i></div>
-                            <h4 class="font-bold text-sm text-gray-808">Non-Camphor Policy</h4>
+                            <h3 class="font-bold text-sm text-gray-808">Non-Camphor Policy</h3>
                             <p class="text-[11px] text-gray-500 mt-1">ยืนยันความปลอดภัยในสเปรย์สูตรเย็น ปราศจากสารการบูร ไม่แสบร้อน แแสบตา หรือระคายเคืองในระยะยาว</p>
                         </div>
                     </div>
                 </section>
 
                 <section class="bg-white rounded-2xl shadow-sm p-6">
-                    <h3 class="text-xl font-bold text-center mb-1 text-gray-900">กราฟเปรียบเทียบระดับการฟื้นฟูกล้ามเนื้อ</h3>
+                    <h2 class="text-xl font-bold text-center mb-1 text-gray-900">กราฟเปรียบเทียบระดับการฟื้นฟูกล้ามเนื้อ</h2>
                     <p class="text-xs text-gray-500 text-center mb-6">ความพร้อมและเปอร์เซ็นต์ความผ่อนคลายของกล้ามเนื้อเมื่อใช้ร่วมกันทั้งสูตรร้อนและเย็น (นาที)</p>
                     <div class="relative w-full max-w-[500px] mx-auto h-[250px]">
                         <canvas id="modalDualActionChart"></canvas>
@@ -387,13 +390,13 @@
       </div>
       <div class="reviews-list">
         <article class="review-card">
-          <div class="review-card__top"><strong>big_piyanat</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
+          <div class="review-card__top"><strong>big_piyanat</strong><span role="img" class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
           <span class="review-badge">✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)</span>
           <p>ใช้ดี ลดอาการบวม และ บรรเทาความเจ็บปวดได้ดี คุณภาพ: ร้านส่งสินค้าไวมากครับ</p>
           <time datetime="2026-09-30">30 กันยายน 2569</time>
         </article>
         <article class="review-card">
-          <div class="review-card__top"><strong>ผู้ซื้อยืนยันอย่างเป็นทางการ</strong><span class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
+          <div class="review-card__top"><strong>ผู้ซื้อยืนยันอย่างเป็นทางการ</strong><span role="img" class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div>
           <span class="review-badge">✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)</span>
           <p>สินค้ามีคุณภาพน่าใช้งานตรงตามที่โฆษณาไว้ทุกอย่าง ร้านค้าตอบแชทไว ขนส่งจัดส่งรวดเร็ว ใครกำลังมองหาสินค้าตอนนี้อยู่แนะนำเลยครับ ขอบคุณครับ</p>
           <time datetime="2026-09-24">24 กันยายน 2569</time>
@@ -406,10 +409,10 @@
 
                 <div id="dual-order-form-anchor"></div>
                 <section class="bg-white rounded-2xl shadow-md border-2 border-[#FF6B00] p-6 max-w-xl mx-auto space-y-6">
-                    <div class="bg-red-600 text-white p-4 rounded-xl text-center font-bold text-base shadow-sm">
+                    <div class="bg-red-700 text-white p-4 rounded-xl text-center font-bold text-base shadow-sm">
                         <i class="fa-solid fa-fire animate-bounce mr-1"></i> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 329 บาท (จากปกติ 700 บาท)
                     </div>
-                    <h3 class="text-2xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h3>
+                    <h2 class="text-2xl font-bold text-center text-gray-900">กรอกข้อมูลเพื่อจัดส่งปลายทาง</h2>
                     <form class="space-y-5 raptor-order-form" id="raptor-dual-action-pack-order-form" action="/api/orders" method="POST" data-product="RAPTOR DUAL ACTION PACK" data-price="฿329" data-close-modal="closeDualActionModal">
                         <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR DUAL ACTION PACK">
                         <input type="hidden" name="product" value="RAPTOR DUAL ACTION PACK">
@@ -417,7 +420,7 @@
                         <input type="hidden" name="payment_method" value="COD">
                         <input type="hidden" name="source" value="Raptor Sport Official Store">
                         <aside class="rounded-xl border border-orange-300 bg-orange-50 p-4 text-sm text-slate-700 shadow-sm" aria-label="สิทธิพิเศษเฉพาะการสั่งซื้อผ่านเว็บไซต์">
-                            <h4 class="font-bold text-orange-700">⚡ สิทธิพิเศษเฉพาะสั่งผ่านหน้าเว็บ Official เท่านั้น</h4>
+                            <h3 class="font-bold text-orange-700">⚡ สิทธิพิเศษเฉพาะสั่งผ่านหน้าเว็บ Official เท่านั้น</h3>
                             <ul class="mt-2 space-y-1 leading-relaxed">
                                 <li>✅ รับส่วนลดแพ็กเกจสุดคุ้ม (ประหยัดกว่าซื้อแยกในแอปทั่วไป)</li>
                                 <li>✅ สินค้าล็อตผลิตใหม่ล่าสุด ส่งตรงจากคลังบริษัท Raptor Global Import</li>
@@ -439,16 +442,16 @@
                         <fieldset class="space-y-3" data-bundle-selector>
                             <legend class="block text-sm font-bold text-slate-700 mb-2">เลือกเซ็ตสุดคุ้ม</legend>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
-                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_1" data-quantity="1" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตทดลอง 1 ชิ้น</strong><small class="text-emerald-700">ส่งฟรีเก็บเงินปลายทาง</small></span><strong data-bundle-price="tier_1" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
+                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_1" data-quantity="1" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตทดลอง 1 ชิ้น</strong><small class="text-emerald-700">ส่งฟรีเก็บเงินปลายทาง</small></span><strong data-bundle-price="tier_1" class="text-orange-800 shrink-0 whitespace-nowrap text-right" style="color:#9a3412;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
                             </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
-                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_2" data-quantity="2" class="mt-1 accent-orange-500" checked><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตสุดคุ้ม 2 ชิ้น (ขายดีที่สุด 🔥)</strong><small class="text-emerald-700">ประหยัดเพิ่ม + ส่งฟรี</small></span><strong data-bundle-price="tier_2" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
+                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_2" data-quantity="2" class="mt-1 accent-orange-500" checked><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตสุดคุ้ม 2 ชิ้น (ขายดีที่สุด 🔥)</strong><small class="text-emerald-700">ประหยัดเพิ่ม + ส่งฟรี</small></span><strong data-bundle-price="tier_2" class="text-orange-800 shrink-0 whitespace-nowrap text-right" style="color:#9a3412;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
                             </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
-                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_3" data-quantity="3" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตนักกีฬาซ้อมหนัก 3 ชิ้น</strong><small class="text-emerald-700">คุ้มที่สุด + ส่งฟรี</small></span><strong data-bundle-price="tier_3" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
+                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_3" data-quantity="3" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตนักกีฬาซ้อมหนัก 3 ชิ้น</strong><small class="text-emerald-700">คุ้มที่สุด + ส่งฟรี</small></span><strong data-bundle-price="tier_3" class="text-orange-800 shrink-0 whitespace-nowrap text-right" style="color:#9a3412;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
                             </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-orange-300 bg-orange-50/60 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-100">
-                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_6" data-quantity="6" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตทีมกีฬา / ยกแพ็ก 6 ชิ้น (คุ้มสุดสำหรับทีมฟุตบอลและชมรมวิ่ง)</strong><small class="text-emerald-700">ลด 20% + ส่งฟรี</small></span><strong data-bundle-price="tier_6" class="text-orange-600 shrink-0 whitespace-nowrap text-right" style="color:#ea580c;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
+                                <span class="flex items-start gap-3"><input type="radio" name="bundle_tier_choice" value="tier_6" data-quantity="6" class="mt-1 accent-orange-500"><span class="flex-1 min-w-0"><strong class="block text-slate-900">เซ็ตทีมกีฬา / ยกแพ็ก 6 ชิ้น (คุ้มสุดสำหรับทีมฟุตบอลและชมรมวิ่ง)</strong><small class="text-emerald-700">ลด 20% + ส่งฟรี</small></span><strong data-bundle-price="tier_6" class="text-orange-800 shrink-0 whitespace-nowrap text-right" style="color:#9a3412;flex-shrink:0;text-align:right;white-space:nowrap"></strong></span>
                             </label>
                             <label class="block cursor-pointer rounded-xl border-2 border-slate-200 p-3 transition has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
                                 <span class="flex items-center gap-3"><input type="radio" name="bundle_tier_choice" value="custom" class="accent-orange-500"><span class="font-bold text-slate-900">กำหนดจำนวนเอง (มากกว่า 3)</span></span>
@@ -458,7 +461,7 @@
                         <input type="hidden" name="quantity" value="2">
                         <input type="hidden" name="bundle_tier" value="tier_2">
                         <details class="text-sm text-slate-600">
-                            <summary class="cursor-pointer font-semibold text-orange-600 hover:underline">+ เพิ่มหมายเหตุถึงขนส่ง หรือขอใบกำกับภาษี (ถ้ามี)</summary>
+                            <summary class="cursor-pointer font-semibold text-orange-800 hover:underline">+ เพิ่มหมายเหตุถึงขนส่ง หรือขอใบกำกับภาษี (ถ้ามี)</summary>
                             <div class="mt-3">
                                 <textarea rows="3" placeholder="ระบุสี/รสชาติ/หมายเหตุการจัดส่ง หรือรายละเอียดอื่น ๆ" class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all" name="order_details"></textarea>
                             </div>
@@ -470,7 +473,7 @@
                         <button type="submit" class="w-full bg-orange-brand text-white font-bold text-lg py-4 rounded-xl shadow-md transition-all transform active:scale-98 cursor-pointer hover:bg-orange-600">
                             <i class="fa-solid fa-circle-check mr-1"></i> ยืนยันการสั่งซื้อเลยตอนนี้
                         </button>
-                        <div class="grid grid-cols-3 gap-2 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center text-[11px] font-semibold leading-snug text-emerald-900" aria-label="ความมั่นใจในการสั่งซื้อ">
+                        <div role="group" class="grid grid-cols-3 gap-2 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center text-[11px] font-semibold leading-snug text-emerald-900" aria-label="ความมั่นใจในการสั่งซื้อ">
                             <div>🛡️ ของแท้ 100% จากบริษัทผู้จัดจำหน่ายโดยตรง</div>
                             <div>📋 มาตรฐานปลอดภัย 100% Anti-Doping</div>
                             <div>📦 ส่งฟรี มีเก็บเงินปลายทาง เปิดเช็คของได้</div>
@@ -624,7 +627,7 @@
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+            mobileMenuBtn.addEventListener('click', () => { const closed = mobileMenu.classList.toggle('hidden'); mobileMenuBtn.setAttribute('aria-expanded', String(!closed)); mobileMenuBtn.setAttribute('aria-label', closed ? 'เปิดเมนูหลัก' : 'ปิดเมนูหลัก'); });
         }
 
         document.querySelectorAll('.logo-premium-video').forEach((video) => {
@@ -1002,18 +1005,18 @@
     </aside>
 <script src="/product-image-zoom.js?v=performance-20261019"></script>
 
-    <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" data-sticky-order-bar aria-label="ทางลัดสั่งซื้อ">
+    <div role="group" class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" data-sticky-order-bar aria-label="ทางลัดสั่งซื้อ">
         <a href="https://lin.ee/qtuszPa" data-contact-pixel-button="line chat" class="shrink-0 rounded-xl border border-zinc-700 px-3 py-2.5 text-center text-sm font-semibold text-white"><i class="fa-brands fa-line text-green-400"></i> สอบถามแอดมิน</a>
         <a href="#raptor-dual-action-pack-order-form" onclick="document.getElementById('raptor-dual-action-pack-order-form').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="flex-grow bg-[#FF6B00] text-white font-bold py-2.5 px-4 rounded-xl text-center">🛒 สั่งซื้อเก็บเงินปลายทาง (ส่งฟรี)</a>
     </div>
-<footer class="bg-zinc-950 text-zinc-500 text-center px-6  text-xs border-t border-zinc-900 pb-24 pt-6 md:py-6">
+<footer class="bg-zinc-950 text-zinc-400 text-center px-6  text-xs border-t border-zinc-900 pb-24 pt-6 md:py-6">
         <nav class="mx-auto mb-4 flex max-w-4xl flex-wrap justify-center gap-x-5 gap-y-3 text-xs" aria-label="นโยบายร้านค้า">
             <a class="transition hover:text-orange-400" href="/policies/#shipping">นโยบายการจัดส่ง</a>
             <a class="transition hover:text-orange-400" href="/policies/#returns">นโยบายการเปลี่ยน/คืนสินค้า</a>
             <a class="transition hover:text-orange-400" href="/policies/#privacy">นโยบายความเป็นส่วนตัว (PDPA)</a>
             <a class="transition hover:text-orange-400" href="/policies/#terms">ข้อกำหนดการให้บริการ</a>
         </nav>
-        <p>&copy; 2026 RAPTOR SPORT. All Rights Reserved. <button type="button" tabindex="-1" aria-hidden="true" style="opacity: 0.35; cursor: default; margin-left: 0.35rem; padding: 0; border: 0; background: transparent; color: inherit; font: inherit;" onclick="window.location.href='/wholesale/'">🔒</button></p>
+        <p>&copy; 2026 RAPTOR SPORT. All Rights Reserved. <button type="button" style="opacity: 0.35; cursor: default; margin-left: 0.35rem; padding: 0; border: 0; background: transparent; color: inherit; font: inherit;" onclick="window.location.href='/wholesale/'" aria-label="เข้าสู่ระบบตัวแทนจำหน่าย">🔒</button></p>
         <p class="mt-2">จัดส่งฟรีทั่วประเทศ (1–3 วันทำการ) | รับประกันเปลี่ยน/คืนสินค้าฟรีภายใน 7 วันกรณีชำรุดเสียหายจากการขนส่ง</p>
     </footer>
     <script src="/reviews-client.js" defer></script>

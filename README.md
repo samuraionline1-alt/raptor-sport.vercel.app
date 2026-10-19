@@ -201,3 +201,11 @@ Run `npm run test:performance` after rebuilding CSS.
 loads subsequent home backgrounds one at a time. It pauses the background slider
 when the page is hidden or the hero is offscreen, and respects reduced motion.
 Bump the asset query versions in affected HTML when changing cached CSS/JS.
+
+### Lighthouse accessibility and first-load follow-up (2026-10-19)
+
+- Kanit and the Font Awesome glyphs used by retail templates are self-hosted in `assets/vendor/`; their license files are included. `scripts/vendor-fonts.py` optionally regenerates them (Python fontTools + brotli). Normal builds do not fetch fonts.
+- Static navigation logos replace decorative video downloads; product demos retain controls and load only when requested. Mobile decorative animations/background autoplay are disabled, with the desktop carousel retained.
+- Menu controls expose their name and expanded state. Rating graphics have an image role; hidden-focusable admin shortcuts are named. Review, checkout, badge and footer colors meet the automated contrast checks.
+- Non-fingerprinted assets revalidate after a day; content-hashed font files retain immutable caching. Shared stylesheet/script references are versioned for this release.
+- Verification: build, article/performance checks, product-script parsing, promotion/order-flow tests; Lighthouse accessibility passed on the homepage and cooling-spray page. Cloud Lighthouse blocks analytics domains at its proxy, so console-related Best Practices results from that environment do not represent a production analytics failure.
