@@ -77,3 +77,61 @@
     width: 100%;
     box-sizing: border-box;
 }
+
+/* Keep payment headings and wrapped Thai text fully inside their cards. */
+.raptor-order-form [data-payment-selector] {
+    box-sizing: border-box;
+    display: grid;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fafc;
+    color: #1e293b;
+}
+.raptor-order-form [data-payment-selector] .payment-selector-title {
+    position: static;
+    margin: 0 0 2px;
+    padding: 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.75;
+    color: #1e293b;
+}
+.raptor-order-form [data-payment-selector] .payment-selector-option {
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+    margin: 0;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+    color: #1e293b;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.75;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+.raptor-order-form [data-payment-selector] .payment-selector-radio {
+    flex: 0 0 auto;
+    width: 14px;
+    height: 14px;
+    margin: 5px 0 0;
+    accent-color: #f97316;
+}
+.raptor-order-form [data-payment-selector] .payment-selector-option > span {
+    flex: 1;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+.raptor-order-form [data-payment-selector] .payment-selector-option:focus-within {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+}

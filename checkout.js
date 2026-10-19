@@ -39,21 +39,24 @@
         var oldField = form.querySelector('input[type="hidden"][name="payment_method"]');
         if (oldField) oldField.remove();
         if (form.querySelector('[data-payment-selector]')) return;
-        var fieldset = document.createElement('fieldset');
-        fieldset.dataset.paymentSelector = '';
-        fieldset.className = 'space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-4';
-        fieldset.innerHTML = '<legend class="px-1 text-sm font-bold text-slate-800">เลือกวิธีชำระเงิน</legend>' +
-            '<label class="flex cursor-pointer gap-3 rounded-lg bg-white p-3 text-sm text-slate-800 shadow-sm"><input class="mt-1 accent-orange-500" type="radio" name="payment_method" value="COD" checked><span><strong>🚚 เก็บเงินปลายทาง (COD)</strong><br>รับของก่อนจ่ายเงินที่หน้าบ้าน</span></label>' +
-            '<label class="flex cursor-pointer gap-3 rounded-lg bg-white p-3 text-sm text-slate-800 shadow-sm"><input class="mt-1 accent-orange-500" type="radio" name="payment_method" value="STRIPE"><span><strong>📲 สแกน QR PromptPay / บัตรเครดิต</strong><br>ชำระออนไลน์ปลอดภัย 100% (ไม่ต้องรอรับสายขนส่ง)</span></label>';
+        // Keep the visible heading inside the panel; native legends sit on its border.
+        var paymentSelector = document.createElement('div');
+        paymentSelector.setAttribute('role', 'radiogroup');
+        paymentSelector.setAttribute('aria-label', 'เลือกวิธีชำระเงิน');
+        paymentSelector.dataset.paymentSelector = '';
+        paymentSelector.className = 'payment-selector';
+        paymentSelector.innerHTML = '<p class="payment-selector-title" aria-hidden="true">เลือกวิธีชำระเงิน</p>' +
+            '<label class="payment-selector-option"><input class="payment-selector-radio" type="radio" name="payment_method" value="COD" checked><span><strong>🚚 เก็บเงินปลายทาง (COD)</strong><br>รับของก่อนจ่ายเงินที่หน้าบ้าน</span></label>' +
+            '<label class="payment-selector-option"><input class="payment-selector-radio" type="radio" name="payment_method" value="STRIPE"><span><strong>📲 สแกน QR PromptPay / บัตรเครดิต</strong><br>ชำระออนไลน์ปลอดภัย 100% (ไม่ต้องรอรับสายขนส่ง)</span></label>';
         var button = form.querySelector('button[type="submit"], button:not([type])');
-        button?.insertAdjacentElement('beforebegin', fieldset);
+        button?.insertAdjacentElement('beforebegin', paymentSelector);
         function updateButton() {
             if (!button || button.disabled) return;
             button.textContent = form.querySelector('[name="payment_method"]:checked')?.value === 'STRIPE'
                 ? 'ดำเนินการสแกน QR / ชำระเงินออนไลน์'
                 : 'ยืนยันการสั่งซื้อเก็บเงินปลายทาง';
         }
-        fieldset.addEventListener('change', function () { updateButton(); if (window.RaptorPromotions) RaptorPromotions.update(form); });
+        paymentSelector.addEventListener('change', function () { updateButton(); if (window.RaptorPromotions) RaptorPromotions.update(form); });
         updateButton();
         if (window.RaptorPromotions) RaptorPromotions.update(form);
     }
