@@ -432,7 +432,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
         </div>
                 </div>
 
-                <div id="inspiration-home" class="home-slide relative min-h-screen pt-32 pb-20 flex items-center overflow-hidden bg-[#050505]">
+                <div id="inspiration-home" aria-hidden="true" inert class="home-slide relative min-h-screen pt-32 pb-20 flex items-center overflow-hidden bg-[#050505]">
                     <div class="absolute inset-0 z-0">
                         <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,107,0,.28),transparent_32%),radial-gradient(circle_at_78%_28%,rgba(59,130,246,.22),transparent_30%),linear-gradient(135deg,#050505_0%,#111827_50%,#000_100%)]"></div>
                         <div class="absolute inset-0 opacity-40 bg-[linear-gradient(115deg,transparent_0%,rgba(255,255,255,.08)_42%,transparent_46%,transparent_100%)]"></div>
@@ -1214,6 +1214,11 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
 
             function goToHomeSlide(index) {
                 currentSlide = Math.max(0, Math.min(maxSlide, index));
+                slider.querySelectorAll('.home-slide').forEach((slide, slideIndex) => {
+                    const inactive = slideIndex !== currentSlide;
+                    slide.setAttribute('aria-hidden', String(inactive));
+                    slide.inert = inactive;
+                });
                 slider.style.transform = `translateX(-${currentSlide * 100}%)`;
                 dots.forEach(function (dot, dotIndex) {
                     const isActive = dotIndex === currentSlide;

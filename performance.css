@@ -26,3 +26,6 @@ header { backdrop-filter: none !important; background-color: #111827; }
   .athlete-card, .quick-coupon-ticket, .order-submit-cta { animation: none !important; }
   .home-background-slide { filter: none !important; }
 }
+
+/* A slide that cannot be seen or focused need not lay out its decorative contents. */
+.home-slide[aria-hidden="true"] { content-visibility: hidden; contain-intrinsic-size: 0 100vh; }

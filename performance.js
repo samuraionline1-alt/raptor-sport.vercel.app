@@ -37,8 +37,8 @@
         document.documentElement.classList.toggle('page-paused', document.hidden);
     });
     document.addEventListener('DOMContentLoaded', function () {
-        // Stop decorative animation work outside the viewport.
-        if ('IntersectionObserver' in window) {
+        // Mobile/reduced-motion CSS already stops decoration; avoid extra observer layout work.
+        if ('IntersectionObserver' in window && !compactScreen.matches && !reducedMotion.matches) {
             const observer = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) { entry.target.classList.toggle('motion-paused', !entry.isIntersecting); });
             });
