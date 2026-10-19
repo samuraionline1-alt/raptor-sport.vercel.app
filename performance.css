@@ -29,3 +29,8 @@ header { backdrop-filter: none !important; background-color: #111827; }
 
 /* A slide that cannot be seen or focused need not lay out its decorative contents. */
 .home-slide[aria-hidden="true"] { content-visibility: hidden; contain-intrinsic-size: 0 100vh; }
+
+@media (max-width: 640px) {
+  #home-slider { will-change: auto; }
+  #home [class*="backdrop-blur"] { backdrop-filter: none !important; }
+}
