@@ -187,12 +187,11 @@
   ]
 }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/assets/site.css?v=performance-20261019">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/product-image-zoom.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
         body { font-family: 'Kanit', sans-serif; }
         .text-orange-brand { color: #FF6B00; }
         .bg-orange-brand { background-color: #FF6B00; }
@@ -308,7 +307,12 @@
     <script src="/promotions.js?v=summary-20261006" defer></script>
     <script src="/checkout.js?v=payment-layout-20261019" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
-    <script src="/sticky-order-bar.js" defer></script>
+    <script src="/sticky-order-bar.js?v=performance-20261019" defer></script>
+<link rel="stylesheet" href="/performance.css?v=performance-20261019">
+<script src="/performance.js?v=performance-20261019" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap">
 </head>
 <body class="bg-gray-50 text-gray-800">
     <header class="sticky top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
@@ -340,11 +344,11 @@
                                 class="w-full aspect-video object-cover"
                                 controls
                                 preload="metadata"
-                                poster="/raptor-ice-defense-sport-shampoo.png">
+                                poster="/assets/optimized/raptor-ice-defense-sport-shampoo-960.webp">
                                 <source src="/raptor-ice-defense-sport-shampoo-demo.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <img src="/raptor-ice-defense-sport-shampoo.png" alt="RAPTOR ICE DEFENSE SPORT SHAMPOO" class="product-main-image max-h-[180px] object-contain rounded-lg">
+                        <img src="/assets/optimized/raptor-ice-defense-sport-shampoo-960.webp" alt="RAPTOR ICE DEFENSE SPORT SHAMPOO" class="product-main-image max-h-[180px] object-contain rounded-lg" width="1254" height="1254" decoding="async" srcset="/assets/optimized/raptor-ice-defense-sport-shampoo-480.webp 480w, /assets/optimized/raptor-ice-defense-sport-shampoo-960.webp 960w, /assets/optimized/raptor-ice-defense-sport-shampoo-1254.webp 1254w" sizes="(max-width: 640px) 90vw, 430px" fetchpriority="high" data-zoom-src="/assets/optimized/raptor-ice-defense-sport-shampoo-1254.webp">
                     </div>
                     <div class="flex flex-col justify-between space-y-4">
                         <div>
@@ -532,40 +536,42 @@
         function openShampooModal() {
             document.getElementById('shampoo-modal').classList.remove('hidden');
             document.body.style.overflow = 'auto';
-            if (!shampooChartInstance) {
-                const ctx = document.getElementById('shampooPerformanceChart').getContext('2d');
-                shampooChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['ก่อนสระ', 'หลังสระทันที', 'ผ่านไป 2 ชม.', 'ผ่านไป 6 ชม.', 'ผ่านไป 12 ชม.'],
-                        datasets: [{
-                            label: 'ระดับความสะอาดและเย็นสดชื่น (%)',
-                            data: [15, 100, 95, 80, 70],
-                            borderColor: '#2563eb',
-                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                            borderWidth: 3,
-                            fill: true,
-                            tension: 0.4
+            RaptorPerformance.observeChart('shampooPerformanceChart', function () {
+                if (!shampooChartInstance) {
+                    const ctx = document.getElementById('shampooPerformanceChart').getContext('2d');
+                    shampooChartInstance = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['ก่อนสระ', 'หลังสระทันที', 'ผ่านไป 2 ชม.', 'ผ่านไป 6 ชม.', 'ผ่านไป 12 ชม.'],
+                            datasets: [{
+                                label: 'ระดับความสะอาดและเย็นสดชื่น (%)',
+                                data: [15, 100, 95, 80, 70],
+                                borderColor: '#2563eb',
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'แชมพูทั่วไป',
+                                data: [15, 80, 60, 40, 25],
+                                borderColor: '#94a3b8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                fill: false,
+                                tension: 0.4
+                            }]
                         },
-                        {
-                            label: 'แชมพูทั่วไป',
-                            data: [15, 80, 60, 40, 25],
-                            borderColor: '#94a3b8',
-                            backgroundColor: 'transparent',
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            fill: false,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
-                        scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } }
-                    }
-                });
-            }
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 } } } },
+                            scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } }
+                        }
+                    });
+                }
+            });
         }
 
         function closeShampooModal() {
@@ -795,27 +801,16 @@
             });
 
             // 👁️ [NEW DETAILED PIXEL TRACKING] - Tracking Sections on Scroll
-            let reviewTracked = false;
-            let contactTracked = false;
-            window.addEventListener('scroll', function() {
-                const reviewsSection = document.getElementById('reviews');
-                const contactSection = document.getElementById('contact');
-
-                if (reviewsSection && !reviewTracked) {
-                    const rect = reviewsSection.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-                        reviewTracked = true;
-                        trackRaptorPixel('RaptorReviewsSectionView', { page_section: 'Athlete Reviews' }, true);
+            [['reviews', 'RaptorReviewsSectionView', 'Athlete Reviews'], ['contact', 'RaptorContactSectionView', 'Contact Form & Address']].forEach(function (entry) {
+                const section = document.getElementById(entry[0]);
+                if (!section || !('IntersectionObserver' in window)) return;
+                const observer = new IntersectionObserver(function (items) {
+                    if (items.some(function (item) { return item.isIntersecting; })) {
+                        trackRaptorPixel(entry[1], { page_section: entry[2] }, true);
+                        observer.disconnect();
                     }
-                }
-
-                if (contactSection && !contactTracked) {
-                    const rect = contactSection.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-                        contactTracked = true;
-                        trackRaptorPixel('RaptorContactSectionView', { page_section: 'Contact Form & Address' }, true);
-                    }
-                }
+                });
+                observer.observe(section);
             });
         });
     </script>
@@ -1028,7 +1023,7 @@
             }
         });
     </script>
-    
+
     <main class="bg-zinc-950 text-white py-16" aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"><div class="max-w-5xl mx-auto px-6 space-y-12">
 <section aria-labelledby="science"><h2 id="science" class="text-3xl font-black mb-4">กลไกการทำงานและจุดเด่นผลิตภัณฑ์</h2><p class="text-zinc-300 leading-8">แชมพูสปอร์ตสูตรเมนทอลช่วยทำความสะอาดเหงื่อ ความมัน และสิ่งสกปรกจากเส้นผมและหนังศีรษะ พร้อมให้ความรู้สึกเย็นสดชื่นหลังออกกำลังกาย Wheat Protein ช่วยดูแลเส้นผมในขั้นตอนการสระ โดยควรใช้ตามปกติและหลีกเลี่ยงการสัมผัสดวงตา</p><div class="grid sm:grid-cols-3 gap-3 mt-6"><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">100% Anti-Doping Safe</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Fast Deep Absorption</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Sport Grade</span></div></section>
 <section aria-labelledby="how"><h2 id="how" class="text-3xl font-black mb-4">วิธีใช้งานเพื่อประสิทธิภาพสูงสุด</h2><ol class="list-decimal list-inside space-y-3 text-zinc-300"><li class="pl-2">ชโลมเส้นผมและหนังศีรษะให้เปียกทั่ว</li><li class="pl-2">เทแชมพูปริมาณพอเหมาะ นวดเบา ๆ ให้เกิดฟอง</li><li class="pl-2">ล้างออกด้วยน้ำสะอาดให้หมด และสระซ้ำเมื่อจำเป็น</li></ol></section>
@@ -1038,8 +1033,8 @@
     <aside class="bg-white border-t border-gray-200" aria-labelledby="related-products-title">
         <div class="max-w-5xl mx-auto px-6 py-10"><h2 id="related-products-title" class="text-xl font-bold text-zinc-900 mb-5">ผลิตภัณฑ์ Raptor Sport ที่เกี่ยวข้อง</h2><ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3"><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-warming-spray/">RAPTOR ELITE PRO สเปรย์วอร์มอัพ 250 มล.</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cooling-spray/">RAPTOR SPORTS ICE COLD SPRAY สเปรย์เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-go-energy-gel/">RAPTOR GO ENERGY GEL เจลพลังงานนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-dual-action-pack/">RAPTOR DUAL ACTION PACK เซ็ตสเปรย์ร้อน-เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-therapy-oil/">RAPTOR SPORT &amp; THERAPY OIL น้ำมันนวดนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-v-mix/">RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-cooling-gel/">RAPTOR HERBAL COOLING GEL เจลสมุนไพรสูตรเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-foot-spray/">RAPTOR SPORT FOOT SPRAY สเปรย์ฉีดเท้า</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-roll-on/">RAPTOR HERBAL ROLL-ON โรลออนสมุนไพร</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cool-patch/">RAPTOR COOL PATCH แผ่นเจลประคบเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-ice-defense-sport-shampoo/">RAPTOR ICE DEFENSE SPORT SHAMPOO แชมพูสูตรเย็น</a></li></ul></div>
     </aside>
-<script src="/product-image-zoom.js"></script>
-    
+<script src="/product-image-zoom.js?v=performance-20261019"></script>
+
     <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" data-sticky-order-bar aria-label="ทางลัดสั่งซื้อ">
         <a href="https://lin.ee/qtuszPa" data-contact-pixel-button="line chat" class="shrink-0 rounded-xl border border-zinc-700 px-3 py-2.5 text-center text-sm font-semibold text-white"><i class="fa-brands fa-line text-green-400"></i> สอบถามแอดมิน</a>
         <a href="#raptor-ice-defense-sport-shampoo-order-form" onclick="document.getElementById('raptor-ice-defense-sport-shampoo-order-form').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="flex-grow bg-[#FF6B00] text-white font-bold py-2.5 px-4 rounded-xl text-center">🛒 สั่งซื้อเก็บเงินปลายทาง (ส่งฟรี)</a>

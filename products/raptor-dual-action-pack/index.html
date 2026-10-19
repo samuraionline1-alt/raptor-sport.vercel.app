@@ -157,12 +157,11 @@
   ]
 }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/assets/site.css?v=performance-20261019">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/product-image-zoom.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
         body { font-family: 'Kanit', sans-serif; }
         .text-orange-brand { color: #FF6B00; }
         .bg-orange-brand { background-color: #FF6B00; }
@@ -279,7 +278,12 @@
     <script src="/promotions.js?v=summary-20261006" defer></script>
     <script src="/checkout.js?v=payment-layout-20261019" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
-    <script src="/sticky-order-bar.js" defer></script>
+    <script src="/sticky-order-bar.js?v=performance-20261019" defer></script>
+<link rel="stylesheet" href="/performance.css?v=performance-20261019">
+<script src="/performance.js?v=performance-20261019" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap">
 </head>
 <body class="bg-gray-50 text-gray-800">
     <header class="sticky top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
@@ -307,7 +311,7 @@
                 <section class="bg-white rounded-2xl shadow-sm p-6 grid md:grid-cols-2 gap-8 items-center">
                     <div class="flex flex-col items-center">
                         <div class="w-full max-w-[340px] aspect-square bg-gradient-to-br from-orange-50 to-blue-50 rounded-2xl shadow-lg flex items-center justify-center p-2 relative overflow-hidden">
-                            <img src="/raptor-dual-action-pack.png" alt="RAPTOR DUAL ACTION PACK" class="product-main-image max-h-full w-auto object-contain rounded-xl">
+                            <img src="/assets/optimized/raptor-dual-action-pack-960.webp" alt="RAPTOR DUAL ACTION PACK" class="product-main-image max-h-full w-auto object-contain rounded-xl" width="1254" height="1254" decoding="async" srcset="/assets/optimized/raptor-dual-action-pack-480.webp 480w, /assets/optimized/raptor-dual-action-pack-960.webp 960w, /assets/optimized/raptor-dual-action-pack-1254.webp 1254w" sizes="(max-width: 640px) 90vw, 430px" fetchpriority="high" data-zoom-src="/assets/optimized/raptor-dual-action-pack-1254.webp">
                             <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 rounded shadow animate-pulse uppercase tracking-wider">Combo Pack</span>
                         </div>
                         <p class="text-xs text-gray-400 mt-3"><i class="fa-solid fa-circle-check text-orange-brand"></i> สินค้าแท้ 100% บรรจุวอร์มอัพ 250ml + สูตรเย็น 250ml</p>
@@ -499,42 +503,44 @@
             document.getElementById('dualaction-modal').classList.remove('hidden');
             document.body.style.overflow = 'auto';
 
-            if (!modalDualActionChartInstance) {
-                const ctx = document.getElementById('modalDualActionChart').getContext('2d');
-                modalDualActionChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0 นาที', '10 นาที', '20 นาที', '40 นาที', '60 นาที', '120 นาที'],
-                        datasets: [
-                            {
-                                label: 'ใช้สูตรร้อน (ก่อน) + สูตรเย็น (หลัง)',
-                                data: [15, 75, 98, 95, 92, 85],
-                                borderColor: '#FF6B00',
-                                backgroundColor: 'rgba(255, 107, 0, 0.08)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'พักผ่อนกล้ามเนื้อตามปกติ',
-                                data: [15, 25, 35, 45, 55, 60],
-                                borderColor: '#94a3b8',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: true, position: 'top' } },
-                        scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
-                    }
-                });
-            }
+            RaptorPerformance.observeChart('modalDualActionChart', function () {
+                if (!modalDualActionChartInstance) {
+                    const ctx = document.getElementById('modalDualActionChart').getContext('2d');
+                    modalDualActionChartInstance = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['0 นาที', '10 นาที', '20 นาที', '40 นาที', '60 นาที', '120 นาที'],
+                            datasets: [
+                                {
+                                    label: 'ใช้สูตรร้อน (ก่อน) + สูตรเย็น (หลัง)',
+                                    data: [15, 75, 98, 95, 92, 85],
+                                    borderColor: '#FF6B00',
+                                    backgroundColor: 'rgba(255, 107, 0, 0.08)',
+                                    borderWidth: 3,
+                                    fill: true,
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'พักผ่อนกล้ามเนื้อตามปกติ',
+                                    data: [15, 25, 35, 45, 55, 60],
+                                    borderColor: '#94a3b8',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2,
+                                    borderDash: [5, 5],
+                                    fill: false,
+                                    tension: 0.4
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: true, position: 'top' } },
+                            scales: { y: { min: 0, max: 100, ticks: { callback: value => value + '%' } } }
+                        }
+                    });
+                }
+            });
         }
 
         function closeDualActionModal() {
@@ -763,27 +769,16 @@
             });
 
             // 👁️ [NEW DETAILED PIXEL TRACKING] - Tracking Sections on Scroll
-            let reviewTracked = false;
-            let contactTracked = false;
-            window.addEventListener('scroll', function() {
-                const reviewsSection = document.getElementById('reviews');
-                const contactSection = document.getElementById('contact');
-
-                if (reviewsSection && !reviewTracked) {
-                    const rect = reviewsSection.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-                        reviewTracked = true;
-                        trackRaptorPixel('RaptorReviewsSectionView', { page_section: 'Athlete Reviews' }, true);
+            [['reviews', 'RaptorReviewsSectionView', 'Athlete Reviews'], ['contact', 'RaptorContactSectionView', 'Contact Form & Address']].forEach(function (entry) {
+                const section = document.getElementById(entry[0]);
+                if (!section || !('IntersectionObserver' in window)) return;
+                const observer = new IntersectionObserver(function (items) {
+                    if (items.some(function (item) { return item.isIntersecting; })) {
+                        trackRaptorPixel(entry[1], { page_section: entry[2] }, true);
+                        observer.disconnect();
                     }
-                }
-
-                if (contactSection && !contactTracked) {
-                    const rect = contactSection.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-                        contactTracked = true;
-                        trackRaptorPixel('RaptorContactSectionView', { page_section: 'Contact Form & Address' }, true);
-                    }
-                }
+                });
+                observer.observe(section);
             });
         });
     </script>
@@ -995,7 +990,7 @@
             }
         });
     </script>
-    
+
 <main class="bg-zinc-950 text-white py-16" aria-label="ข้อมูลผลิตภัณฑ์เชิงลึก"><div class="max-w-5xl mx-auto px-6 space-y-12">
 <section aria-labelledby="science"><h2 id="science" class="text-3xl font-black mb-4">กลไกการทำงานและจุดเด่นผลิตภัณฑ์</h2><p class="text-zinc-300 leading-8">ระบบดูแลสองจังหวะ: สเปรย์วอร์มอัพส่งเสริม micro-circulation และความพร้อมของเส้นใยกล้ามเนื้อก่อนลงสนาม ส่วนสเปรย์เย็น Camphor-Free ใช้ความเย็นจากเมนทอลเพื่อดูแลอาการปวดบวมหลังจบเกม</p><div class="grid sm:grid-cols-3 gap-3 mt-6"><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">100% Anti-Doping Safe</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Fast Deep Absorption</span><span class="rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center font-bold">Sport Grade</span></div></section>
 <section aria-labelledby="how"><h2 id="how" class="text-3xl font-black mb-4">วิธีใช้งานเพื่อประสิทธิภาพสูงสุด</h2><ol class="list-decimal list-inside space-y-3 text-zinc-300"><li class="pl-2">ก่อนแข่ง: ฉีดสูตรวอร์มอัพห่าง 10–15 ซม. ก่อน 10–15 นาที</li><li class="pl-2">ระหว่างแข่ง: ไม่ฉีดทับบริเวณแผลเปิด</li><li class="pl-2">หลังแข่งหรือปะทะ: ใช้สูตรเย็นห่างผิว 15–20 ซม.</li></ol></section>
@@ -1005,8 +1000,8 @@
     <aside class="bg-white border-t border-gray-200" aria-labelledby="related-products-title">
         <div class="max-w-5xl mx-auto px-6 py-10"><h2 id="related-products-title" class="text-xl font-bold text-zinc-900 mb-5">ผลิตภัณฑ์ Raptor Sport ที่เกี่ยวข้อง</h2><ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3"><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-warming-spray/">RAPTOR ELITE PRO สเปรย์วอร์มอัพ 250 มล.</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cooling-spray/">RAPTOR SPORTS ICE COLD SPRAY สเปรย์เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-go-energy-gel/">RAPTOR GO ENERGY GEL เจลพลังงานนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-dual-action-pack/">RAPTOR DUAL ACTION PACK เซ็ตสเปรย์ร้อน-เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-therapy-oil/">RAPTOR SPORT &amp; THERAPY OIL น้ำมันนวดนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-v-mix/">RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-cooling-gel/">RAPTOR HERBAL COOLING GEL เจลสมุนไพรสูตรเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-foot-spray/">RAPTOR SPORT FOOT SPRAY สเปรย์ฉีดเท้า</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-roll-on/">RAPTOR HERBAL ROLL-ON โรลออนสมุนไพร</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cool-patch/">RAPTOR COOL PATCH แผ่นเจลประคบเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-ice-defense-sport-shampoo/">RAPTOR ICE DEFENSE SPORT SHAMPOO แชมพูสูตรเย็น</a></li></ul></div>
     </aside>
-<script src="/product-image-zoom.js"></script>
-    
+<script src="/product-image-zoom.js?v=performance-20261019"></script>
+
     <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" data-sticky-order-bar aria-label="ทางลัดสั่งซื้อ">
         <a href="https://lin.ee/qtuszPa" data-contact-pixel-button="line chat" class="shrink-0 rounded-xl border border-zinc-700 px-3 py-2.5 text-center text-sm font-semibold text-white"><i class="fa-brands fa-line text-green-400"></i> สอบถามแอดมิน</a>
         <a href="#raptor-dual-action-pack-order-form" onclick="document.getElementById('raptor-dual-action-pack-order-form').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="flex-grow bg-[#FF6B00] text-white font-bold py-2.5 px-4 rounded-xl text-center">🛒 สั่งซื้อเก็บเงินปลายทาง (ส่งฟรี)</a>

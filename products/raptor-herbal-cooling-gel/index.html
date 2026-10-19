@@ -119,12 +119,11 @@
   ]
 }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/assets/site.css?v=performance-20261019">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/product-image-zoom.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
         body { font-family: 'Kanit', sans-serif; }
         .text-orange-brand { color: #FF6B00; }
         .bg-orange-brand { background-color: #FF6B00; }
@@ -240,7 +239,7 @@
     <script src="/promotions.js?v=summary-20261006" defer></script>
     <script src="/checkout.js?v=payment-layout-20261019" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
-    <script src="/sticky-order-bar.js" defer></script>
+    <script src="/sticky-order-bar.js?v=performance-20261019" defer></script>
     <style id="herbal-gel-mobile-overflow-fix">
         /* Only this product: preserve the original artwork, markup and checkout. */
         #herbalgel-modal {
@@ -364,6 +363,11 @@
 }
 
 </style>
+<link rel="stylesheet" href="/performance.css?v=performance-20261019">
+<script src="/performance.js?v=performance-20261019" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap">
 </head>
 <body id="herbal-gel-page" class="bg-gray-50 text-gray-800">
     <header class="sticky top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
@@ -390,8 +394,8 @@
             <div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
                 <section class="bg-white rounded-2xl shadow-sm p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="flex flex-col justify-center items-center bg-gradient-to-b from-blue-50 to-white rounded-xl p-4 gap-4">
-                        
-                        <img src="/raptor-herbal-cooling-gel.png" alt="RAPTOR HERBAL COOLING GEL" class="product-main-image max-h-[340px] object-contain rounded-lg hover:scale-105 transition-transform">
+
+                        <img src="/assets/optimized/raptor-herbal-cooling-gel-960.webp" alt="RAPTOR HERBAL COOLING GEL" class="product-main-image max-h-[340px] object-contain rounded-lg hover:scale-105 transition-transform" width="2048" height="2048" decoding="async" srcset="/assets/optimized/raptor-herbal-cooling-gel-480.webp 480w, /assets/optimized/raptor-herbal-cooling-gel-960.webp 960w, /assets/optimized/raptor-herbal-cooling-gel-1600.webp 1600w" sizes="(max-width: 640px) 90vw, 430px" fetchpriority="high" data-zoom-src="/assets/optimized/raptor-herbal-cooling-gel-1600.webp">
                     </div>
                     <div class="flex flex-col justify-between space-y-4">
                         <div>
@@ -557,45 +561,47 @@
         function openHerbalGelModal() {
             document.getElementById('herbalgel-modal').classList.remove('hidden');
             document.body.style.overflow = 'auto';
-            if (!herbalGelChartInstance) {
-                const ctx = document.getElementById('herbalCoolingChart').getContext('2d');
-                herbalGelChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0m', '15m', '30m', '60m', '120m', '180m'],
-                        datasets: [
-                            {
-                                label: 'ระดับความผ่อนคลาย Raptor Gel (%)',
-                                data: [10, 85, 95, 92, 88, 80],
-                                borderColor: '#059669',
-                                backgroundColor: 'rgba(5, 150, 105, 0.1)',
-                                borderWidth: 4,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'ฟื้นฟูตามปกติ',
-                                data: [10, 15, 20, 30, 40, 50],
-                                borderColor: '#475569',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
+            RaptorPerformance.observeChart('herbalCoolingChart', function () {
+                if (!herbalGelChartInstance) {
+                    const ctx = document.getElementById('herbalCoolingChart').getContext('2d');
+                    herbalGelChartInstance = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['0m', '15m', '30m', '60m', '120m', '180m'],
+                            datasets: [
+                                {
+                                    label: 'ระดับความผ่อนคลาย Raptor Gel (%)',
+                                    data: [10, 85, 95, 92, 88, 80],
+                                    borderColor: '#059669',
+                                    backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                                    borderWidth: 4,
+                                    fill: true,
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'ฟื้นฟูตามปกติ',
+                                    data: [10, 15, 20, 30, 40, 50],
+                                    borderColor: '#475569',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2,
+                                    borderDash: [5, 5],
+                                    fill: false,
+                                    tension: 0.4
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { labels: { color: '#cbd5e1' } } },
+                            scales: {
+                                y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 },
+                                x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
                             }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#cbd5e1' } } },
-                        scales: {
-                            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' }, min: 0, max: 100 },
-                            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
                         }
-                    }
-                });
-            }
+                    });
+                }
+            });
         }
 
         function closeHerbalGelModal() {
@@ -824,27 +830,16 @@
             });
 
             // 👁️ [NEW DETAILED PIXEL TRACKING] - Tracking Sections on Scroll
-            let reviewTracked = false;
-            let contactTracked = false;
-            window.addEventListener('scroll', function() {
-                const reviewsSection = document.getElementById('reviews');
-                const contactSection = document.getElementById('contact');
-
-                if (reviewsSection && !reviewTracked) {
-                    const rect = reviewsSection.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-                        reviewTracked = true;
-                        trackRaptorPixel('RaptorReviewsSectionView', { page_section: 'Athlete Reviews' }, true);
+            [['reviews', 'RaptorReviewsSectionView', 'Athlete Reviews'], ['contact', 'RaptorContactSectionView', 'Contact Form & Address']].forEach(function (entry) {
+                const section = document.getElementById(entry[0]);
+                if (!section || !('IntersectionObserver' in window)) return;
+                const observer = new IntersectionObserver(function (items) {
+                    if (items.some(function (item) { return item.isIntersecting; })) {
+                        trackRaptorPixel(entry[1], { page_section: entry[2] }, true);
+                        observer.disconnect();
                     }
-                }
-
-                if (contactSection && !contactTracked) {
-                    const rect = contactSection.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-                        contactTracked = true;
-                        trackRaptorPixel('RaptorContactSectionView', { page_section: 'Contact Form & Address' }, true);
-                    }
-                }
+                });
+                observer.observe(section);
             });
         });
     </script>
@@ -1066,7 +1061,7 @@
     <aside class="bg-white border-t border-gray-200" aria-labelledby="related-products-title">
         <div class="max-w-5xl mx-auto px-6 py-10"><h2 id="related-products-title" class="text-xl font-bold text-zinc-900 mb-5">ผลิตภัณฑ์ Raptor Sport ที่เกี่ยวข้อง</h2><ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3"><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-warming-spray/">RAPTOR ELITE PRO สเปรย์วอร์มอัพ 250 มล.</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cooling-spray/">RAPTOR SPORTS ICE COLD SPRAY สเปรย์เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-go-energy-gel/">RAPTOR GO ENERGY GEL เจลพลังงานนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-dual-action-pack/">RAPTOR DUAL ACTION PACK เซ็ตสเปรย์ร้อน-เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-therapy-oil/">RAPTOR SPORT &amp; THERAPY OIL น้ำมันนวดนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-v-mix/">RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-cooling-gel/">RAPTOR HERBAL COOLING GEL เจลสมุนไพรสูตรเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-foot-spray/">RAPTOR SPORT FOOT SPRAY สเปรย์ฉีดเท้า</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-roll-on/">RAPTOR HERBAL ROLL-ON โรลออนสมุนไพร</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cool-patch/">RAPTOR COOL PATCH แผ่นเจลประคบเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-ice-defense-sport-shampoo/">RAPTOR ICE DEFENSE SPORT SHAMPOO แชมพูสูตรเย็น</a></li></ul></div>
     </aside>
-<script src="/product-image-zoom.js"></script>
+<script src="/product-image-zoom.js?v=performance-20261019"></script>
 
     <script src="/admin-shortcut.js"></script>
 

@@ -1,0 +1,12 @@
+/* Reduce repaints during scrolling while retaining the existing dark navigation. */
+header { backdrop-filter: none !important; background-color: #111827; }
+.motion-paused, .motion-paused::before, .motion-paused::after,
+.page-paused *, .page-paused *::before, .page-paused *::after { animation-play-state: paused !important; }
+@media (max-width: 640px) {
+    .animate-fire { filter: none !important; }
+    .home-background-slide { transition: opacity .45s ease !important; transform: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}

@@ -2,12 +2,18 @@
   "private": true,
   "scripts": {
     "sync-reviews": "node scripts/sync-reviews-seo.mjs",
-    "build": "node scripts/build-articles.mjs && node scripts/check-order-services.mjs",
+    "build": "node scripts/build-articles.mjs && npm run build:css && node scripts/check-order-services.mjs",
     "build:articles": "node scripts/build-articles.mjs",
-    "test:articles": "node tests/articles.mjs"
+    "test:articles": "node tests/articles.mjs",
+    "build:css": "tailwindcss -i ./styles/site.css -o ./assets/site.css --minify",
+    "test:performance": "node tests/performance.mjs"
   },
   "dependencies": {
     "@vercel/functions": "^3.9.11",
     "resend": "^6.34.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.1.18",
+    "tailwindcss": "4.1.18"
   }
 }

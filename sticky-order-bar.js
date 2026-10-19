@@ -40,22 +40,28 @@
         });
     }
 
-    document.addEventListener('focusin', update);
+    let frame;
+    function scheduleUpdate() {
+        if (frame) return;
+        frame = requestAnimationFrame(function () { frame = null; update(); });
+    }
+
+    document.addEventListener('focusin', scheduleUpdate);
     document.addEventListener('focusout', function () {
         // Wait until focus moves to the next element before deciding to show the bar.
         window.setTimeout(update, 0);
     });
     if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(update, { threshold: 0 });
+        const observer = new IntersectionObserver(scheduleUpdate, { threshold: 0 });
         forms.forEach(function (form) { observer.observe(form); });
     }
     // Scroll also handles returning above the form after it has left the viewport.
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
     window.addEventListener('pageshow', update);
     if (viewport) {
-        viewport.addEventListener('resize', update);
-        viewport.addEventListener('scroll', update, { passive: true });
+        viewport.addEventListener('resize', scheduleUpdate);
+        viewport.addEventListener('scroll', scheduleUpdate, { passive: true });
     }
     update();
 }());

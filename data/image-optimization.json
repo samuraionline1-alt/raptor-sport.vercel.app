@@ -1,0 +1,332 @@
+{
+  "raptor-sport-hero-bg.jpeg": {
+    "width": 2752,
+    "height": 1536,
+    "originalBytes": 3233175,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-sport-hero-bg-480.webp",
+        "bytes": 21752
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-sport-hero-bg-960.webp",
+        "bytes": 70208
+      },
+      {
+        "width": 1600,
+        "url": "/assets/optimized/raptor-sport-hero-bg-1600.webp",
+        "bytes": 163600
+      }
+    ]
+  },
+  "raptor-athlete-action-1.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 1864477,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-athlete-action-1-480.webp",
+        "bytes": 12478
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-athlete-action-1-960.webp",
+        "bytes": 42380
+      },
+      {
+        "width": 1600,
+        "url": "/assets/optimized/raptor-athlete-action-1-1600.webp",
+        "bytes": 90806
+      }
+    ]
+  },
+  "raptor-athlete-action-2.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 1816155,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-athlete-action-2-480.webp",
+        "bytes": 9400
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-athlete-action-2-960.webp",
+        "bytes": 31986
+      },
+      {
+        "width": 1600,
+        "url": "/assets/optimized/raptor-athlete-action-2-1600.webp",
+        "bytes": 71052
+      }
+    ]
+  },
+  "raptor-athlete-action-3.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 1968356,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-athlete-action-3-480.webp",
+        "bytes": 10580
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-athlete-action-3-960.webp",
+        "bytes": 36026
+      },
+      {
+        "width": 1600,
+        "url": "/assets/optimized/raptor-athlete-action-3-1600.webp",
+        "bytes": 80374
+      }
+    ]
+  },
+  "raptor-sport-cooling-spray.png": {
+    "width": 2048,
+    "height": 2048,
+    "originalBytes": 7679182,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-sport-cooling-spray-480.webp",
+        "bytes": 41666
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-sport-cooling-spray-960.webp",
+        "bytes": 109426
+      },
+      {
+        "width": 1600,
+        "url": "/assets/optimized/raptor-sport-cooling-spray-1600.webp",
+        "bytes": 219760
+      }
+    ]
+  },
+  "raptor-elite-pro-warming-spray-250ml.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 747270,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-elite-pro-warming-spray-250ml-480.webp",
+        "bytes": 59394
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-elite-pro-warming-spray-250ml-960.webp",
+        "bytes": 170812
+      },
+      {
+        "width": 1254,
+        "url": "/assets/optimized/raptor-elite-pro-warming-spray-250ml-1254.webp",
+        "bytes": 272796
+      }
+    ]
+  },
+  "raptor-go-energy-gel.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2119135,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-go-energy-gel-480.webp",
+        "bytes": 42556
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-go-energy-gel-960.webp",
+        "bytes": 113480
+      },
+      {
+        "width": 1254,
+        "url": "/assets/optimized/raptor-go-energy-gel-1254.webp",
+        "bytes": 160232
+      }
+    ]
+  },
+  "raptor-dual-action-pack.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 401614,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-dual-action-pack-480.webp",
+        "bytes": 19926
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-dual-action-pack-960.webp",
+        "bytes": 54912
+      },
+      {
+        "width": 1254,
+        "url": "/assets/optimized/raptor-dual-action-pack-1254.webp",
+        "bytes": 88430
+      }
+    ]
+  },
+  "raptor-sport-therapy-oil.png": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 1440025,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-sport-therapy-oil-480.webp",
+        "bytes": 17286
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-sport-therapy-oil-960.webp",
+        "bytes": 40572
+      },
+      {
+        "width": 1024,
+        "url": "/assets/optimized/raptor-sport-therapy-oil-1024.webp",
+        "bytes": 43768
+      }
+    ]
+  },
+  "raptor-v-mix-electrolyte-drink.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 1972078,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-v-mix-electrolyte-drink-480.webp",
+        "bytes": 39626
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-v-mix-electrolyte-drink-960.webp",
+        "bytes": 109250
+      },
+      {
+        "width": 1254,
+        "url": "/assets/optimized/raptor-v-mix-electrolyte-drink-1254.webp",
+        "bytes": 154868
+      }
+    ]
+  },
+  "raptor-herbal-cooling-gel.png": {
+    "width": 2048,
+    "height": 2048,
+    "originalBytes": 7690953,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-herbal-cooling-gel-480.webp",
+        "bytes": 41172
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-herbal-cooling-gel-960.webp",
+        "bytes": 115420
+      },
+      {
+        "width": 1600,
+        "url": "/assets/optimized/raptor-herbal-cooling-gel-1600.webp",
+        "bytes": 242400
+      }
+    ]
+  },
+  "raptor-sport-foot-spray.png": {
+    "width": 2048,
+    "height": 2048,
+    "originalBytes": 7136402,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-sport-foot-spray-480.webp",
+        "bytes": 31844
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-sport-foot-spray-960.webp",
+        "bytes": 88186
+      },
+      {
+        "width": 1600,
+        "url": "/assets/optimized/raptor-sport-foot-spray-1600.webp",
+        "bytes": 181352
+      }
+    ]
+  },
+  "raptor-herbal-roll-on.png": {
+    "width": 2048,
+    "height": 2048,
+    "originalBytes": 6329596,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-herbal-roll-on-480.webp",
+        "bytes": 29358
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-herbal-roll-on-960.webp",
+        "bytes": 72228
+      },
+      {
+        "width": 1600,
+        "url": "/assets/optimized/raptor-herbal-roll-on-1600.webp",
+        "bytes": 138592
+      }
+    ]
+  },
+  "raptor-cool-patch.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2019984,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-cool-patch-480.webp",
+        "bytes": 35270
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-cool-patch-960.webp",
+        "bytes": 100936
+      },
+      {
+        "width": 1254,
+        "url": "/assets/optimized/raptor-cool-patch-1254.webp",
+        "bytes": 150350
+      }
+    ]
+  },
+  "raptor-ice-defense-sport-shampoo.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2057128,
+    "variants": [
+      {
+        "width": 480,
+        "url": "/assets/optimized/raptor-ice-defense-sport-shampoo-480.webp",
+        "bytes": 52364
+      },
+      {
+        "width": 960,
+        "url": "/assets/optimized/raptor-ice-defense-sport-shampoo-960.webp",
+        "bytes": 152590
+      },
+      {
+        "width": 1254,
+        "url": "/assets/optimized/raptor-ice-defense-sport-shampoo-1254.webp",
+        "bytes": 224898
+      }
+    ]
+  }
+}

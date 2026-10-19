@@ -118,12 +118,11 @@
   ]
 }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/assets/site.css?v=performance-20261019">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/product-image-zoom.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
         body { font-family: 'Kanit', sans-serif; }
         .text-orange-brand { color: #FF6B00; }
         .bg-orange-brand { background-color: #FF6B00; }
@@ -239,7 +238,12 @@
     <script src="/promotions.js?v=summary-20261006" defer></script>
     <script src="/checkout.js?v=payment-layout-20261019" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
-    <script src="/sticky-order-bar.js" defer></script>
+    <script src="/sticky-order-bar.js?v=performance-20261019" defer></script>
+<link rel="stylesheet" href="/performance.css?v=performance-20261019">
+<script src="/performance.js?v=performance-20261019" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap">
 </head>
 <body class="bg-gray-50 text-gray-800">
     <header class="sticky top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
@@ -281,7 +285,7 @@
                 </div>
                 <div class="relative flex justify-center items-center">
                     <div class="absolute w-[420px] h-[420px] bg-emerald-400 rounded-full blur-[120px] opacity-20"></div>
-                    <img src="/raptor-herbal-roll-on.png" alt="RAPTOR HERBAL ROLL-ON" class="product-main-image relative z-10 w-full max-w-[430px] rounded-3xl shadow-2xl border border-white/10 object-contain">
+                    <img src="/assets/optimized/raptor-herbal-roll-on-960.webp" alt="RAPTOR HERBAL ROLL-ON" class="product-main-image relative z-10 w-full max-w-[430px] rounded-3xl shadow-2xl border border-white/10 object-contain" width="2048" height="2048" decoding="async" srcset="/assets/optimized/raptor-herbal-roll-on-480.webp 480w, /assets/optimized/raptor-herbal-roll-on-960.webp 960w, /assets/optimized/raptor-herbal-roll-on-1600.webp 1600w" sizes="(max-width: 640px) 90vw, 430px" fetchpriority="high" data-zoom-src="/assets/optimized/raptor-herbal-roll-on-1600.webp">
                 </div>
             </section>
 
@@ -456,45 +460,47 @@
         function openHerbalRollOnModal() {
             document.getElementById('herbalrollon-modal').classList.remove('hidden');
             document.body.style.overflow = 'auto';
-            if (!rollOnChartInstance) {
-                const ctx = document.getElementById('rollonPerformanceChart').getContext('2d');
-                rollOnChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['0 นาที', '5 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที'],
-                        datasets: [
-                            {
-                                label: 'ระดับความผ่อนคลายหลังใช้ RAPTOR ROLL-ON (%)',
-                                data: [10, 55, 82, 90, 86, 78],
-                                borderColor: '#d8c46a',
-                                backgroundColor: 'rgba(216, 196, 106, 0.12)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'พักตามปกติ',
-                                data: [10, 15, 25, 35, 45, 55],
-                                borderColor: '#94a3b8',
-                                backgroundColor: 'transparent',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                fill: false,
-                                tension: 0.4
+            RaptorPerformance.observeChart('rollonPerformanceChart', function () {
+                if (!rollOnChartInstance) {
+                    const ctx = document.getElementById('rollonPerformanceChart').getContext('2d');
+                    rollOnChartInstance = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['0 นาที', '5 นาที', '15 นาที', '30 นาที', '60 นาที', '120 นาที'],
+                            datasets: [
+                                {
+                                    label: 'ระดับความผ่อนคลายหลังใช้ RAPTOR ROLL-ON (%)',
+                                    data: [10, 55, 82, 90, 86, 78],
+                                    borderColor: '#d8c46a',
+                                    backgroundColor: 'rgba(216, 196, 106, 0.12)',
+                                    borderWidth: 3,
+                                    fill: true,
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'พักตามปกติ',
+                                    data: [10, 15, 25, 35, 45, 55],
+                                    borderColor: '#94a3b8',
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2,
+                                    borderDash: [5, 5],
+                                    fill: false,
+                                    tension: 0.4
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { labels: { color: '#d7e6d9', font: { size: 10 } } } },
+                            scales: {
+                                y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#d7e6d9', callback: value => value + '%' } },
+                                x: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#d7e6d9' } }
                             }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#d7e6d9', font: { size: 10 } } } },
-                        scales: {
-                            y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#d7e6d9', callback: value => value + '%' } },
-                            x: { grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { color: '#d7e6d9' } }
                         }
-                    }
-                });
-            }
+                    });
+                }
+            });
         }
 
         function closeHerbalRollOnModal() {
@@ -723,27 +729,16 @@
             });
 
             // 👁️ [NEW DETAILED PIXEL TRACKING] - Tracking Sections on Scroll
-            let reviewTracked = false;
-            let contactTracked = false;
-            window.addEventListener('scroll', function() {
-                const reviewsSection = document.getElementById('reviews');
-                const contactSection = document.getElementById('contact');
-
-                if (reviewsSection && !reviewTracked) {
-                    const rect = reviewsSection.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-                        reviewTracked = true;
-                        trackRaptorPixel('RaptorReviewsSectionView', { page_section: 'Athlete Reviews' }, true);
+            [['reviews', 'RaptorReviewsSectionView', 'Athlete Reviews'], ['contact', 'RaptorContactSectionView', 'Contact Form & Address']].forEach(function (entry) {
+                const section = document.getElementById(entry[0]);
+                if (!section || !('IntersectionObserver' in window)) return;
+                const observer = new IntersectionObserver(function (items) {
+                    if (items.some(function (item) { return item.isIntersecting; })) {
+                        trackRaptorPixel(entry[1], { page_section: entry[2] }, true);
+                        observer.disconnect();
                     }
-                }
-
-                if (contactSection && !contactTracked) {
-                    const rect = contactSection.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-                        contactTracked = true;
-                        trackRaptorPixel('RaptorContactSectionView', { page_section: 'Contact Form & Address' }, true);
-                    }
-                }
+                });
+                observer.observe(section);
             });
         });
     </script>
@@ -966,8 +961,8 @@
     <aside class="bg-white border-t border-gray-200" aria-labelledby="related-products-title">
         <div class="max-w-5xl mx-auto px-6 py-10"><h2 id="related-products-title" class="text-xl font-bold text-zinc-900 mb-5">ผลิตภัณฑ์ Raptor Sport ที่เกี่ยวข้อง</h2><ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3"><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-warming-spray/">RAPTOR ELITE PRO สเปรย์วอร์มอัพ 250 มล.</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cooling-spray/">RAPTOR SPORTS ICE COLD SPRAY สเปรย์เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-go-energy-gel/">RAPTOR GO ENERGY GEL เจลพลังงานนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-dual-action-pack/">RAPTOR DUAL ACTION PACK เซ็ตสเปรย์ร้อน-เย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-therapy-oil/">RAPTOR SPORT &amp; THERAPY OIL น้ำมันนวดนักกีฬา</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-v-mix/">RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-cooling-gel/">RAPTOR HERBAL COOLING GEL เจลสมุนไพรสูตรเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-sport-foot-spray/">RAPTOR SPORT FOOT SPRAY สเปรย์ฉีดเท้า</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-herbal-roll-on/">RAPTOR HERBAL ROLL-ON โรลออนสมุนไพร</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-cool-patch/">RAPTOR COOL PATCH แผ่นเจลประคบเย็น</a></li><li><a class="text-sm text-zinc-600 hover:text-orange-600 hover:underline" href="/products/raptor-ice-defense-sport-shampoo/">RAPTOR ICE DEFENSE SPORT SHAMPOO แชมพูสูตรเย็น</a></li></ul></div>
     </aside>
-<script src="/product-image-zoom.js"></script>
-    
+<script src="/product-image-zoom.js?v=performance-20261019"></script>
+
     <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 px-4 py-3 flex items-center justify-between gap-3 shadow-2xl" data-sticky-order-bar aria-label="ทางลัดสั่งซื้อ">
         <a href="https://lin.ee/qtuszPa" data-contact-pixel-button="line chat" class="shrink-0 rounded-xl border border-zinc-700 px-3 py-2.5 text-center text-sm font-semibold text-white"><i class="fa-brands fa-line text-green-400"></i> สอบถามแอดมิน</a>
         <a href="#raptor-herbal-roll-on-order-form" onclick="document.getElementById('raptor-herbal-roll-on-order-form').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="flex-grow bg-[#FF6B00] text-white font-bold py-2.5 px-4 rounded-xl text-center">🛒 สั่งซื้อเก็บเงินปลายทาง (ส่งฟรี)</a>

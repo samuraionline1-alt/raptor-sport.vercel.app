@@ -34,7 +34,7 @@
         });
 
         return function open(sourceImage) {
-            largeImage.src = sourceImage.currentSrc || sourceImage.src;
+            largeImage.src = sourceImage.dataset.zoomSrc || sourceImage.currentSrc || sourceImage.src;
             largeImage.alt = sourceImage.alt || 'ภาพสินค้า';
             hint.textContent = 'แตะที่ภาพเพื่อขยายเพิ่ม';
             dialog.showModal();

@@ -184,3 +184,20 @@ FAQs, visible/schema consistency, draft exclusion, route links, thumbnails, safe
 escaping and repeatable sitemap updates. Formula or regulatory claims still need
 supporting evidence. No medical reviewer credentials are asserted, and structured
 data does not guarantee Google rich results or AI Overview inclusion.
+
+## Storefront performance
+
+`npm run build` now compiles Tailwind CSS locally into `assets/site.css`; the retail
+pages do not compile styles in visitors' browsers. Keep complete utility class
+names in HTML/JS so Tailwind can discover dynamically inserted checkout styles.
+
+Retail image variants live in `assets/optimized/` (480, 960 and 1600 pixels wide).
+The original images remain available for social previews. Update `srcset`, image
+width/height and `data/image-optimization.json` when replacing product images;
+keep the 960px variants below 200 kB. Product zoom uses the largest variant.
+Run `npm run test:performance` after rebuilding CSS.
+
+`performance.js` loads Chart.js when a visible chart approaches the viewport and
+loads subsequent home backgrounds one at a time. It pauses the background slider
+when the page is hidden or the hero is offscreen, and respects reduced motion.
+Bump the asset query versions in affected HTML when changing cached CSS/JS.
