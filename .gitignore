@@ -1,2 +1,4 @@
 node_modules/
 work/
+~partytown/
+tracking-worker-bootstrap.js

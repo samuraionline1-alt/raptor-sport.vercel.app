@@ -209,3 +209,18 @@ Bump the asset query versions in affected HTML when changing cached CSS/JS.
 - Menu controls expose their name and expanded state. Rating graphics have an image role; hidden-focusable admin shortcuts are named. Review, checkout, badge and footer colors meet the automated contrast checks.
 - Non-fingerprinted assets revalidate after a day; content-hashed font files retain immutable caching. Shared stylesheet/script references are versioned for this release.
 - Verification: build, article/performance checks, product-script parsing, promotion/order-flow tests; Lighthouse accessibility passed on the homepage and cooling-spray page. Cloud Lighthouse blocks analytics domains at its proxy, so console-related Best Practices results from that environment do not represent a production analytics failure.
+
+### Draft: tracking workers (not yet released)
+
+`@qwik.dev/partytown` 1.0.1 moves the GTM container, its Google tag, and the Meta Pixel into a worker. Checkout scripts remain on the main thread. Page-specific IDs/events remain in their templates. Canonical adapters are in `tracking-queue.js` and `tracking-meta.js`; `npm run build:tracking` refreshes their inline copies and emits the versioned same-origin worker assets/bootstrap.
+
+Early events are queued before the bridge loads. `dataLayer.push` and `fbq` preserve their native behavior as well as forwarding into the worker. The native fallback replays early Meta events after initializing the pixel. The thank-you page now explicitly initializes the same Meta Pixel so its queued Purchase has a receiver. The service worker is scoped only to `/~partytown/1.0.1/`; it does not control storefront navigation or checkout APIs.
+
+`/api/tracking-script` proxies only public Google/Meta JavaScript at validated hosts/paths. It does not proxy event collection, cookies, arbitrary URLs, redirects or POSTs. It uses a 1 MiB limit and short vendor-script freshness. Do not increase freshness to a year: tag/config changes must still propagate.
+
+Verification:
+- `npm run test:tracking` covers proxy validation, redirect/content/size rejection, early-event forwarding, native fallback and duplicate prevention.
+- `python tests/tracking-browser-fixture.py` serves a localhost-only fixture at `http://127.0.0.1:8767/test-tracking`. It uses local mock vendors that each do 500 ms of work and record mock events in `work/tracking-mock-events.jsonl` or `/__test/results`. No real analytics events are sent. A Lighthouse run of this fixture delivered Google purchase and Meta PageView/Purchase once, with TBT 10 ms. This is an integration test, **not a storefront performance score**.
+- Build, image/reference budgets, articles, product scripts and order/promotion tests also pass.
+
+Before production release, validate the preview with actual GTM/GA4 and Meta Test Events. The cloud test network blocks these vendors, so it cannot prove real vendor receipt or produce a representative full-tracking performance score. Do not publish solely on the mock Lighthouse result. Partytown documents that GA4's automatic page-exit `user_engagement` event is unreliable in a worker; click/form tags relying on synchronous preventDefault also need review. Those trade-offs must be accepted or those tags kept on the main thread. See https://partytown.qwik.dev/trade-offs/.

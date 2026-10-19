@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script>/* raptor-queue:start */
+// Inlined before any page scripts: save early calls until the worker bridge is installed.
+window.dataLayer = window.dataLayer || [];
+window.RaptorTracking = window.RaptorTracking || { pendingMeta: [], workerReady: false };
+window.fbq = window.fbq || function () {
+    if (!window.RaptorTracking.workerReady) window.RaptorTracking.pendingMeta.push(Array.from(arguments));
+};
+/* raptor-queue:end */</script>
+<script type="text/partytown">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -221,20 +229,48 @@
         }
     </style>
     <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+    <script type="text/partytown">
+    /* raptor-meta:start */
+// Executes in the worker, or natively when Partytown falls back on an unsupported browser.
+(function (w, d) {
+    'use strict';
+    w.RaptorInitMetaPixel = function () {
+        if (!w.fbq || !w.fbq.loaded) {
+            const fbq = function () {
+                if (fbq.callMethod) fbq.callMethod.apply(fbq, arguments);
+                else fbq.queue.push(arguments);
+            };
+            w.fbq = fbq;
+            if (!w._fbq) w._fbq = fbq;
+            fbq.push = fbq;
+            fbq.loaded = true;
+            fbq.version = '2.0';
+            fbq.queue = [];
+            const script = d.createElement('script');
+            script.async = true;
+            script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+            d.head.appendChild(script);
+        }
+    };
+    w.RaptorReplayMetaQueue = function () {
+        // The worker already receives forwarded calls. Only native fallback replays the saved copy.
+        if (d.currentScript && String(d.currentScript.type).startsWith('text/partytown')) return;
+        const tracking = w.RaptorTracking;
+        if (!tracking) return;
+        const pending = tracking.pendingMeta.splice(0);
+        tracking.workerReady = true;
+        pending.forEach(function (args) { w.fbq.apply(w, args); });
+    };
+}(window, document));
+/* raptor-meta:end */
+window.RaptorInitMetaPixel();
     fbq('init', '462184846324554');
     fbq('track', 'PageView');
     fbq('track', 'ViewContent', {"content_ids":["raptor-warming-spray"],"content_name":"RAPTOR ELITE PRO สเปรย์สำหรับนักกีฬา สเปรย์สูตรวอร์มอัพ 250ml","content_category":"Raptor Sport Product","content_type":"product","value":179,"currency":"THB"});
     fbq('trackCustom', 'Viewcontent_RAPTOR_ELITE_PRO_WARMING_SPRAY', {"content_ids":["raptor-warming-spray"],"content_name":"RAPTOR ELITE PRO สเปรย์สำหรับนักกีฬา สเปรย์สูตรวอร์มอัพ 250ml","content_category":"Raptor Sport Product","content_type":"product","value":179,"currency":"THB"});
-    </script>
+
+window.RaptorReplayMetaQueue();
+</script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1" alt=""></noscript>
     <!-- End Meta Pixel Code -->
 <script type="application/ld+json">
@@ -287,6 +323,7 @@
 <link rel="icon" type="image/webp" href="/assets/optimized/raptor-logo-still.webp">
 <link rel="preload" href="/assets/vendor/kanit-943218ba72a5.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/vendor/kanit-20ee1ffc0cbc.woff2" as="font" type="font/woff2" crossorigin>
+<script src="/tracking-worker-bootstrap.js?v=worker-20261019" defer></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <header class="sticky top-0 left-0 right-0 h-20 z-40 transition-all duration-300">
