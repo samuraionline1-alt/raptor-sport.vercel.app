@@ -253,7 +253,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
     <script src="/checkout.js?v=payment-layout-20261019" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
     <script src="/sticky-order-bar.js?v=performance-20261019" defer></script>
-<link rel="stylesheet" href="/performance.css?v=a11y-20261019">
+<link rel="stylesheet" href="/performance.css?v=image-sizes-20261019">
 <script src="/performance.js?v=a11y-20261019" defer></script>
 
 
@@ -1222,7 +1222,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
                     slide.setAttribute('aria-hidden', String(inactive));
                     slide.inert = inactive;
                 });
-                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+                slider.style.transform = currentSlide === 0 ? 'none' : `translateX(-${currentSlide * 100}%)`;
                 dots.forEach(function (dot, dotIndex) {
                     const isActive = dotIndex === currentSlide;
                     dot.classList.toggle('bg-orange-400', isActive);
