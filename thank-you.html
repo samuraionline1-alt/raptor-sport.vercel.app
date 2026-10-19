@@ -4,12 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script>/* raptor-queue:start */
+// Inlined before any page scripts: save early calls until the worker bridge is installed.
+window.dataLayer = window.dataLayer || [];
+window.RaptorTracking = window.RaptorTracking || { pendingMeta: [], workerReady: false };
+window.fbq = window.fbq || function () {
+    if (!window.RaptorTracking.workerReady) window.RaptorTracking.pendingMeta.push(Array.from(arguments));
+};
+/* raptor-queue:end */</script>
+<script type="text/partytown">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TW2P4VN5');</script>
     <!-- End Google Tag Manager -->
+<script type="text/partytown">
+/* raptor-meta:start */
+// Executes in the worker, or natively when Partytown falls back on an unsupported browser.
+(function (w, d) {
+    'use strict';
+    w.RaptorInitMetaPixel = function () {
+        if (!w.fbq || !w.fbq.loaded) {
+            const fbq = function () {
+                if (fbq.callMethod) fbq.callMethod.apply(fbq, arguments);
+                else fbq.queue.push(arguments);
+            };
+            w.fbq = fbq;
+            if (!w._fbq) w._fbq = fbq;
+            fbq.push = fbq;
+            fbq.loaded = true;
+            fbq.version = '2.0';
+            fbq.queue = [];
+            const script = d.createElement('script');
+            script.async = true;
+            script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+            d.head.appendChild(script);
+        }
+    };
+    w.RaptorReplayMetaQueue = function () {
+        // The worker already receives forwarded calls. Only native fallback replays the saved copy.
+        if (d.currentScript && String(d.currentScript.type).startsWith('text/partytown')) return;
+        const tracking = w.RaptorTracking;
+        if (!tracking) return;
+        const pending = tracking.pendingMeta.splice(0);
+        tracking.workerReady = true;
+        pending.forEach(function (args) { w.fbq.apply(w, args); });
+    };
+}(window, document));
+/* raptor-meta:end */
+window.RaptorInitMetaPixel();
+fbq("init", "462184846324554");
+fbq("track", "PageView");
+window.RaptorReplayMetaQueue();
+</script>
+
     <meta http-equiv="refresh" content="15; url=/">
     <title>Thank you | Raptor Sport</title>
     <meta name="robots" content="noindex, follow">
@@ -37,6 +85,7 @@
 
 <link rel="stylesheet" href="/assets/vendor/kanit.css?v=a11y-20261019">
 <link rel="icon" type="image/webp" href="/assets/optimized/raptor-logo-still.webp">
+<script src="/tracking-worker-bootstrap.js?v=worker-20261019" defer></script>
 </head>
 <body data-gtm-page="purchase" class="min-h-[100svh] overflow-x-hidden bg-slate-950 text-white">
     <main class="relative flex min-h-[100svh] items-center justify-center px-3 py-4 sm:px-5 sm:py-10">
