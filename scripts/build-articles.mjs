@@ -38,8 +38,8 @@ function shell({title, description, url, structured, body, article}) {
 <meta property="og:image" content="${base}${article?.thumbnail || '/raptor-dual-action-pack.png'}"><meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${escape(title)}"><meta name="twitter:description" content="${escape(description)}"><meta name="twitter:image" content="${base}${article?.thumbnail || '/raptor-dual-action-pack.png'}">
 ${article ? `<meta property="article:published_time" content="${article.published}T00:00:00+07:00"><meta property="article:modified_time" content="${article.modified}T00:00:00+07:00">` : ''}
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800&display=swap" rel="stylesheet">
+
+<link href="/assets/vendor/kanit.css?v=a11y-20261019" rel="stylesheet">
 <link rel="stylesheet" href="/articles.css?v=directory-20261012">
 <script type="application/ld+json">${json(structured)}</script>
 </head><body>

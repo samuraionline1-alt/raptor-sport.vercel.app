@@ -40,8 +40,8 @@
             return line;
         }
         row('ราคาสินค้า (' + order.quantity + ' ชิ้น)', '฿' + order.subtotal);
-        if (order.discount_amount) row('ส่วนลดคูปอง (' + order.coupon_code + ')', '-฿' + order.discount_amount, 'font-weight:700;color:#16a34a');
-        row('ค่าจัดส่ง', 'ส่งด่วนฟรี (฿0)', 'font-weight:700;color:#16a34a');
+        if (order.discount_amount) row('ส่วนลดคูปอง (' + order.coupon_code + ')', '-฿' + order.discount_amount, 'font-weight:700;color:#166534');
+        row('ค่าจัดส่ง', 'ส่งด่วนฟรี (฿0)', 'font-weight:700;color:#166534');
         if (order.giftCount) {
             const gift = document.createElement('div');
             gift.style.cssText = 'width:100%;box-sizing:border-box;background:#f0fdf4;border:1px dashed #86efac;color:#15803d;padding:8px 12px;border-radius:8px;text-align:left';
@@ -50,7 +50,7 @@
         }
         const divider = document.createElement('div');
         divider.style.cssText = 'width:100%;border-top:1px solid #fed7aa;margin:4px 0'; summary.appendChild(divider);
-        row('ยอดชำระสุทธิ', '฿' + order.totalPrice, 'font-size:1.35rem;font-weight:700;color:#ea580c').firstChild.style.fontWeight = '700';
+        row('ยอดชำระสุทธิ', '฿' + order.totalPrice, 'font-size:1.35rem;font-weight:700;color:#9a3412').firstChild.style.fontWeight = '700';
         if (submit && !submit.disabled) {
             submit.classList.add('order-submit-cta');
             const action = document.createElement('span');

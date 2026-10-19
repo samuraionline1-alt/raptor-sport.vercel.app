@@ -10,3 +10,19 @@ header { backdrop-filter: none !important; background-color: #111827; }
     html { scroll-behavior: auto !important; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+/* WCAG AA: white labels need a darker fill than the decorative orange accent. */
+.bg-orange-brand { background-color: #c2410c !important; }
+.bg-orange-600.text-white, .bg-\[\#FF6B00\].text-white { color: #18181b; }
+:focus-visible { outline: 3px solid #60a5fa; outline-offset: 4px; }
+
+@media (max-width: 640px) {
+  .animate-fire, .motivation-orb, .speed-line, .orbit-dot { animation: none !important; }
+}
+
+/* Isolate section layout without hiding content or changing scroll geometry. */
+#shop, #reviews, #contact { contain: layout style; }
+.fa-solid, .fa-brands, .fas, .fab { display: inline-block; min-width: 1em; }
+@media (max-width: 640px) {
+  .athlete-card, .quick-coupon-ticket, .order-submit-cta { animation: none !important; }
+  .home-background-slide { filter: none !important; }
+}

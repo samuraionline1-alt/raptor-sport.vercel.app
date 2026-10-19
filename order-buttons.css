@@ -21,7 +21,7 @@
 .raptor-order-form .quick-coupon-ticket[hidden] { display: none; }
 .coupon-label { flex: 1; min-width: 0; }
 .coupon-icon { flex-shrink: 0; animation: couponGiftBounce 2.8s ease-in-out infinite; }
-.coupon-action { flex-shrink: 0; white-space: nowrap; background: #ea580c; color: #fff; padding: 3px 8px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; }
+.coupon-action { flex-shrink: 0; white-space: nowrap; background: #9a3412; color: #fff; padding: 3px 8px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; }
 .raptor-order-form .quick-coupon-ticket.is-applied { background: #f0fdf4; border-color: #22c55e; color: #15803d; box-shadow: 0 3px 10px rgba(34, 197, 94, 0.12); animation: none; }
 .quick-coupon-ticket.is-applied .coupon-icon { animation: none; }
 .raptor-order-form .order-submit-cta {

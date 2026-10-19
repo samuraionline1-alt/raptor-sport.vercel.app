@@ -2,7 +2,9 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "functions": {
-    "api/*.js": { "maxDuration": 60 }
+    "api/*.js": {
+      "maxDuration": 60
+    }
   },
   "headers": [
     {
@@ -19,7 +21,16 @@
       ]
     },
     {
-      "source": "/(.*)\\.(png|jpg|jpeg|webp|mp4|css|js)",
+      "source": "/(.*)\\.(png|jpg|jpeg|webp|mp4|css|js|woff2|ttf)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/vendor/(.*)\\.(woff2|ttf)",
       "headers": [
         {
           "key": "Cache-Control",

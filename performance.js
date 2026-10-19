@@ -1,6 +1,7 @@
 (function () {
     'use strict';
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const compactScreen = matchMedia('(max-width: 640px)');
     let chartPromise;
     const watchedCharts = new WeakSet();
     function loadCharts() {
@@ -50,10 +51,10 @@
         function stop() { clearTimeout(timer); }
         function schedule() {
             stop();
-            if (!document.hidden && visible && !reducedMotion.matches) timer = setTimeout(advance, 5000);
+            if (!document.hidden && visible && !reducedMotion.matches && !compactScreen.matches) timer = setTimeout(advance, 5000);
         }
         async function advance() {
-            if (busy || document.hidden || !visible || reducedMotion.matches) return;
+            if (busy || document.hidden || !visible || reducedMotion.matches || compactScreen.matches) return;
             busy = true;
             const nextIndex = (active + 1) % slides.length;
             const next = slides[nextIndex];
@@ -64,7 +65,7 @@
                     delete next.dataset.src;
                 }
                 await next.decode();
-                if (!document.hidden && visible && !reducedMotion.matches) {
+                if (!document.hidden && visible && !reducedMotion.matches && !compactScreen.matches) {
                     slides[active].classList.remove('is-active');
                     next.classList.add('is-active'); active = nextIndex;
                 }
@@ -77,6 +78,7 @@
         }
         document.addEventListener('visibilitychange', schedule);
         reducedMotion.addEventListener('change', schedule);
+        compactScreen.addEventListener('change', schedule);
         schedule();
     });
 }());

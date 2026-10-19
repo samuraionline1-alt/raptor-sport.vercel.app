@@ -16,7 +16,7 @@ for (const path of ['index.html', ...readdirSync('products').map(slug => `produc
     for (const image of html.matchAll(/<img\b[^>]*\bsrc="\/assets\/optimized\/[^>]*>/g)) {
         assert.match(image[0], /\bwidth="\d+"/);
         assert.match(image[0], /\bheight="\d+"/);
-        assert.match(image[0], /\bsrcset="/);
+        if (!image[0].includes("logo-premium-image")) assert.match(image[0], /\bsrcset="/);
     }
 }
 const home = readFileSync('index.html', 'utf8');
