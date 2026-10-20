@@ -9,7 +9,8 @@
     "test:performance": "node tests/performance.mjs",
     "test": "node scripts/test.mjs",
     "test:browser": "node tests/browser-flow.mjs",
-    "security:headers": "node scripts/security-headers.mjs"
+    "security:headers": "node scripts/security-headers.mjs",
+    "test:visual": "node tests/visual-browser.mjs"
   },
   "dependencies": {
     "@vercel/functions": "^3.9.11",

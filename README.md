@@ -261,3 +261,27 @@ existing configured notification email, with independent leases, idempotency and
 retry through the existing five-minute worker; no LINE messages are sent.
 After eight attempts or 23 hours, inspect `email_status=manual_review`. Contact
 submissions emit a Contact analytics event without contact details, never Purchase.
+
+## Logo motion and product charts
+
+`performance.js` lazily loads the pinned local Chart.js 4.5.1 bundle from
+`assets/vendor/chart.umd-4.5.1.min.js`; its MIT license is shipped alongside it.
+Source: https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js
+SHA-256: 48444a82d4edcb5bec0f1965faacdde18d9c17db3063d042abada2f705c9f54a
+Chart loading stays within the enforced self script policy. A failed chart has a
+visible retry action instead of a silent blank canvas. All eleven existing product
+charts are covered by `npm run test:visual`, which uses the real vendored library.
+
+The homepage brand logo uses a 240-pixel H.264 copy of the original animation,
+without audio (about 121 kB), with muted inline looping playback and the existing
+still poster. Hidden/offscreen logos pause, reduced-motion preferences are
+respected, and an autoplay denial uses a small CSS fallback effect. A user gesture
+retries playback for mobile autoplay restrictions. Performance asset query versions
+are updated so returning browsers fetch the corrected loader and styles.
+
+Run `npm run build`, then `npm run test:visual` and `npm run test:browser`
+sequentially: public-build tests recreate `_site`, so do not run them concurrently
+with browser tests serving that directory. The visual suite checks actual chart
+pixels/animation completion, logo progress and loop, responsive behavior, menu,
+reduced motion, autoplay denial and chart retry. Mobile viewport Chromium is not a
+substitute for testing on a physical iPhone with its current power/motion settings.

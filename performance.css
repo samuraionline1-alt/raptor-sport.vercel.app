@@ -34,3 +34,12 @@ header { backdrop-filter: none !important; background-color: #111827; }
   #home-slider { will-change: auto; }
   #home [class*="backdrop-blur"] { backdrop-filter: none !important; }
 }
+
+/* Preserve the brand effect when mobile autoplay is denied; reduced-motion wins. */
+@keyframes logoFallbackPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+.logo-premium-shell[data-logo-state="fallback"] { animation: logoFallbackPulse 3s ease-in-out infinite; }
+.chart-load-status { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem; background: #fff; color: #334155; font-size: .875rem; text-align: center; padding: 1rem; }
+.chart-load-status button { border: 1px solid #2563eb; border-radius: .5rem; padding: .5rem 1rem; color: #1d4ed8; background: #fff; cursor: pointer; }

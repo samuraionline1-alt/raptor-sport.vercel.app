@@ -52,3 +52,15 @@ roles have no access and service-role server code performs controlled writes.
 GTM, Meta and Google script hosts remain trusted external integrations. Tests do
 not verify a real bank/card charge or inbox delivery. This review covers the
 listed checks and does not establish that every possible vulnerability is absent.
+
+## Visual regression follow-up
+
+The first security browser checks visited product pages without scrolling far
+enough to trigger deferred charts. This missed a CSP conflict with the Chart.js
+CDN loader. Charts now use a pinned, locally served Chart.js bundle under the
+same enforced policy. `npm run test:visual` scrolls to every existing chart and
+checks real rendered pixels and completed dataset animation, including failed
+load/retry recovery. It also checks the restored homepage logo video (the earlier
+performance release had replaced it with a still image), playback progress/loop,
+mobile/desktop visibility, reduced motion and blocked-autoplay fallback. Existing
+checkout/contact browser tests continue to run separately.
