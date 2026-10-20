@@ -232,12 +232,12 @@
   ]
 }
 </script>
-    <script src="/gtm-ecommerce.js" defer></script>
-    <script src="/order-context.js?v=order-ref-20261017" defer></script>
+    <script src="/gtm-ecommerce.js?v=secure-20261020" defer></script>
+    <script src="/order-context.js?v=secure-20261020" defer></script>
     <script src="/promo-config.js?v=receipt-20261005" defer></script>
     <link rel="stylesheet" href="/order-buttons.css?v=lighthouse-20261019">
-    <script src="/promotions.js?v=lighthouse-20261019" defer></script>
-    <script src="/checkout.js?v=payment-layout-20261019" defer></script>
+    <script src="/promotions.js?v=secure-20261020" defer></script>
+    <script src="/checkout.js?v=secure-20261020" defer></script>
     <link rel="stylesheet" href="/sticky-order-bar.css">
     <script src="/sticky-order-bar.js?v=performance-20261019" defer></script>
     <style id="herbal-gel-mobile-overflow-fix">
@@ -456,7 +456,7 @@
                 <!-- reviews-seo:start -->
   <section id="customer-reviews" class="reviews-section scroll-mt-24" aria-labelledby="customer-reviews-title">
     <div class="reviews-inner">
-        <div class="reviews-header"><h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2><p class="reviews-summary">⭐ 5.0/5.0 จากรีวิวนักกีฬา 2 รายการ</p></div>
+        <div class="reviews-header"><h2 id="customer-reviews-title">รีวิวจากผู้ใช้งาน</h2><p class="reviews-summary">⭐ 5.0/5.0 จากรีวิวนักกีฬา 2 รายการ</p></div>
         <div class="reviews-list">
             <article class="review-card"><div class="review-card__top"><strong>คุณหนิง, นักวิ่งมินิมาราธอน</strong><span role="img" class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div><span class="review-badge">✓ ยืนยันรีวิวจากนักกีฬา (Verified Athlete Review)</span><p>"เป็นเจลสมุนไพรสปอร์ตที่เย็นลึกยาวนานมากค่ะ ทาบำรุงและฟื้นฟูกล้ามเนื้อหลังฝึกซ้อมหนักๆ ช่วยลดอาการเมื่อยล้าสะสมระดับลึกได้ดีมาก เนื้อเจลซึมไวสุดๆ คุ้มราคาค่ะ"</p></article>
             <article class="review-card"><div class="review-card__top"><strong>คุณป๊อป, คาร์ดิโอ/ฟิตเนส</strong><span role="img" class="review-stars" aria-label="5 จาก 5 ดาว">★★★★★</span></div><span class="review-badge">✓ ยืนยันรีวิวจากนักกีฬา (Verified Athlete Review)</span><p>"กลิ่นหอมสมุนไพรอโรมาสดชื่นผ่อนคลายดีมากครับ เนื้อเจลใสทาแล้วเย็นสบายผิวอย่างต่อเนื่องยาวนาน ไม่แสบร้อนผิวเหมือนยาหม่องทั่วไปเลย ชอบมากครับ"</p></article>
@@ -470,7 +470,7 @@
                         <span class="animate-fire">🔥</span> ด่วน! สั่งซื้อตอนนี้รับราคาพิเศษเพียง 189 บาท (จากปกติ 290 บาท)
                     </div>
                     <h2 class="text-xl font-bold text-center text-gray-900">จองสิทธิ์ราคาพิเศษ · กรอกข้อมูลจัดส่ง</h2>
-                    <form class="space-y-4 raptor-order-form" id="raptor-herbal-cooling-gel-order-form" action="/api/orders" method="POST" data-product="RAPTOR HERBAL COOLING GEL" data-price="฿189" data-close-modal="closeHerbalGelModal">
+                    <form class="space-y-4 raptor-order-form" id="raptor-herbal-cooling-gel-order-form" action="/api/orders" method="POST" data-sku="raptor-herbal-cooling-gel" data-product="RAPTOR HERBAL COOLING GEL" data-price="฿189" data-close-modal="closeHerbalGelModal">
                         <input type="hidden" name="_subject" value="New Raptor Order: RAPTOR HERBAL COOLING GEL">
                         <input type="hidden" name="product" value="RAPTOR HERBAL COOLING GEL">
                         <input type="hidden" name="price" value="฿189">
@@ -486,7 +486,7 @@
                         </aside>
                         <div>
                             <label for="herbal-customer_name" class="block text-sm font-bold text-slate-700 mb-1">ชื่อ-นามสกุลผู้รับ</label>
-                            <input id="herbal-customer_name" type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name" autocomplete="name">
+                            <input id="herbal-customer_name" type="text" required placeholder="เช่น นายสมศักดิ์ รักดี" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="customer_name" maxlength="200" autocomplete="name">
                         </div>
                         <div>
                             <label for="herbal-phone" class="block text-sm font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
@@ -494,7 +494,7 @@
                         </div>
                         <div>
                             <label for="herbal-address" class="block text-sm font-bold text-slate-700 mb-1">ที่อยู่สำหรับจัดส่ง</label>
-                            <textarea id="herbal-address" required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address" autocomplete="street-address"></textarea>
+                            <textarea id="herbal-address" required rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" name="address" maxlength="500" autocomplete="street-address"></textarea>
                         </div>
                         <fieldset class="space-y-3" data-bundle-selector>
                             <legend class="block text-sm font-bold text-slate-700 mb-2">เลือกเซ็ตสุดคุ้ม</legend>

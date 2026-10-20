@@ -16,7 +16,23 @@
         },
         {
           "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
+          "value": "strict-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io https://checkout.stripe.com"
+        },
+        {
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://*.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://www.facebook.com https://formspree.io; frame-src https://www.googletagmanager.com"
         }
       ]
     },
@@ -39,7 +55,7 @@
       ]
     },
     {
-      "source": "/(promo-config|promotions|checkout|order-context).js",
+      "source": "/(product-catalog|promo-config|promotions|checkout|order-context|gtm-ecommerce|reviews-client).js",
       "headers": [
         {
           "key": "Cache-Control",
@@ -49,6 +65,17 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "raptorthailand.com"
+        }
+      ],
+      "destination": "https://www.raptorthailand.com/:path*",
+      "permanent": true
+    },
     {
       "source": "/products/raptor-speed-water-charge/",
       "destination": "/products/raptor-v-mix/",

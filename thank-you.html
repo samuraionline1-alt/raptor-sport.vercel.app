@@ -10,7 +10,6 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TW2P4VN5');</script>
     <!-- End Google Tag Manager -->
-    <meta http-equiv="refresh" content="15; url=/">
     <title>Thank you | Raptor Sport</title>
     <meta name="robots" content="noindex, follow">
     <link rel="stylesheet" href="/assets/site.css?v=a11y-20261019">
@@ -29,8 +28,8 @@
             100% { transform: scale(1.35); opacity: 0; }
         }
     </style>
-    <script src="/gtm-ecommerce.js" defer></script>
-    <script src="/order-context.js?v=order-ref-20261017" defer></script>
+    <script src="/gtm-ecommerce.js?v=secure-20261020" defer></script>
+    <script src="/order-context.js?v=secure-20261020" defer></script>
 <link rel="stylesheet" href="/performance.css?v=a11y-20261019">
 <script src="/performance.js?v=a11y-20261019" defer></script>
 
@@ -53,10 +52,9 @@
             </div>
 
             <p class="mb-2 text-xs font-black uppercase tracking-[0.28em] sm:mb-3 sm:text-sm sm:tracking-[0.45em] text-orange-200">Raptor Sport Order</p>
-            <h1 class="mb-3 text-4xl font-black tracking-tight text-white sm:mb-5 sm:text-5xl md:text-7xl">Thank you</h1>
-            <p class="mx-auto max-w-xl text-lg font-bold leading-relaxed text-slate-100 sm:text-2xl md:text-3xl">
-                ขอบคุณสำหรับการสั่งซื้อ<br>
-                ทางเราจะจัดส่งสินค้าภายใน 1-2 วัน
+            <h1 id="receipt-title" class="mb-3 text-4xl font-black tracking-tight text-white sm:mb-5 sm:text-5xl md:text-7xl">กำลังตรวจสอบออเดอร์</h1>
+            <p id="receipt-description" class="mx-auto max-w-xl text-lg font-bold leading-relaxed text-slate-100 sm:text-2xl md:text-3xl">
+                กรุณารอระบบตรวจสอบสถานะคำสั่งซื้อ
             </p>
 
             <p id="order-reference" class="mt-4 text-lg font-bold text-orange-200"></p>
@@ -67,9 +65,6 @@
                 <div class="rounded-2xl bg-white/10 p-3 text-center sm:p-4"><span class="block text-2xl">💎</span><strong>บริการพรีเมียม</strong></div>
             </div>
 
-            <p class="mt-5 text-sm sm:mt-7 font-semibold text-orange-100">
-                ระบบจะพากลับหน้าหลักอัตโนมัติภายใน <span id="countdown" class="text-xl font-black text-amber-300">30</span> วินาที
-            </p>
             <a href="/" class="mt-5 inline-flex items-center justify-center rounded-full bg-orange-500 px-7 py-3 font-black text-white shadow-lg shadow-orange-500/30 transition hover:-translate-y-0.5 hover:bg-orange-400">
                 กลับหน้าหลักทันที <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
             </a>
@@ -87,17 +82,13 @@
     </footer>
 
     <script>
+        document.addEventListener('raptor:order-confirmed', function (event) {
+            document.getElementById('receipt-title').textContent = 'ขอบคุณสำหรับการสั่งซื้อ';
+            document.getElementById('receipt-description').textContent = event.detail.payment_status === 'paid'
+                ? 'ยืนยันชำระเงินสำเร็จแล้ว ทางเราจะจัดเตรียมสินค้าเพื่อจัดส่ง'
+                : 'รับคำสั่งซื้อเก็บเงินปลายทางแล้ว ทางเราจะจัดเตรียมสินค้าเพื่อจัดส่ง';
+        });
         document.addEventListener('DOMContentLoaded', function () { RaptorOrders.confirm('retail'); });
-        let secondsLeft = 30;
-        const countdown = document.getElementById('countdown');
-        const timer = setInterval(function () {
-            secondsLeft -= 1;
-            if (countdown) countdown.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                clearInterval(timer);
-                window.location.href = '/';
-            }
-        }, 1000);
     </script>
     <script src="/admin-shortcut.js"></script>
 </body>
