@@ -3,7 +3,7 @@ import { lineOrderNotificationsEnabled } from '../lib/line-notifications.js';
 if (process.env.VERCEL_ENV === 'production') {
   const { database } = await import('../lib/order-store.js');
   for (const table of ['raptor_orders', 'raptor_line_events', 'raptor_order_items', 'raptor_contact_messages']) {
-    await database(`${table}?select=order_ref&limit=0`);
+    await database(`${table}?select=${table === 'raptor_contact_messages' ? 'id' : 'order_ref'}&limit=0`);
     console.log(`Order service check: ${table} accessible`);
   }
   const schema = await database('');
