@@ -52,7 +52,7 @@ export async function withOrderDatabase(run) {
     if(row)return ok([row]);
     const filter=query.get('or')||'';const prefix=filter.includes('email_status')?'email_':'';
     let rows=[...events.values()].filter(e=>{
-      if(filter.includes('manual_review'))return e.status==='manual_review'||e.email_status==='manual_review';
+      if(filter.includes('manual_review'))return (/(?:^|[, (])status\.eq\.manual_review/.test(filter)&&e.status==='manual_review')||(filter.includes('email_status.eq.manual_review')&&e.email_status==='manual_review');
       const cutoff=query.get('created_at');if(cutoff&&Date.parse(e.created_at)<Date.parse(cutoff.slice(4)))return false;
       return ['pending','failed'].includes(e[prefix+'status'])&&Date.parse(e[prefix+'next_attempt_at'])<=Date.now()||e[prefix+'status']==='sending'&&Date.parse(e[prefix+'lease_until'])<Date.now();
     });

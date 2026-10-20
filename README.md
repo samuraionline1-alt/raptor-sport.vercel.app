@@ -93,6 +93,17 @@ through PGlite. Run `npm run test:browser` with Chromium installed (defaults to
 flow. `npm run build` builds assets and performs extra read-only service checks
 when `VERCEL_ENV=production`. No test sends real customer orders or notifications.
 
+## Email-only order alerts
+
+Production uses the installed Vercel Resend integration and the existing
+`ORDER_NOTIFICATION_EMAIL` recipient. Set `LINE_ORDER_NOTIFICATIONS_ENABLED=false`
+to pause LINE order alerts, including retries and LINE backlog monitoring. Email
+receives the full worker budget and its own retries. Existing LINE credentials,
+webhook, historical queue and delivery markers are preserved. No historical emails
+are replayed. Redeploy after changing the flag; remove it or set `true` to resume
+LINE order alerts. Production build checks require Resend configuration while LINE
+is paused and do not call the LINE quota API.
+
 ## LINE order notifications in a group
 
 The server sends notifications to `LINE_ADMIN_USER_ID` and `LINE_GROUP_ID`.
