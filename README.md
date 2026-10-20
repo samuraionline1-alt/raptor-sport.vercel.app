@@ -223,3 +223,7 @@ Bump the asset query versions in affected HTML when changing cached CSS/JS.
 - Menu controls expose their name and expanded state. Rating graphics have an image role; hidden-focusable admin shortcuts are named. Review, checkout, badge and footer colors meet the automated contrast checks.
 - Non-fingerprinted assets revalidate after a day; content-hashed font files retain immutable caching. Shared stylesheet/script references are versioned for this release.
 - Verification: build, article/performance checks, product-script parsing, promotion/order-flow tests; Lighthouse accessibility passed on the homepage and cooling-spray page. Cloud Lighthouse blocks analytics domains at its proxy, so console-related Best Practices results from that environment do not represent a production analytics failure.
+
+API routing deliberately leaves global `trailingSlash` unset: Stripe/LINE webhooks
+and retry calls must not receive a 308 redirect. Existing directory page URLs
+remain available; `/thank-you/` rewrites internally to the clean receipt URL.

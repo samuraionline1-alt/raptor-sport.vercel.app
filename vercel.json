@@ -1,6 +1,5 @@
 {
   "cleanUrls": true,
-  "trailingSlash": true,
   "functions": {
     "api/*.js": {
       "maxDuration": 60
@@ -88,5 +87,11 @@
     }
   ],
   "buildCommand": "npm run build",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/thank-you/",
+      "destination": "/thank-you"
+    }
+  ]
 }
