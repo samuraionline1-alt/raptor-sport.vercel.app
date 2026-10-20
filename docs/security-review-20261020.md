@@ -44,7 +44,7 @@ Supabase public-key probe ใช้ `limit=0` เท่านั้น ไม่
 ## ผลทดสอบ
 
 - รันชุดเดิมทั้ง 9 ชุดจาก commit main ใน checkout ชั่วคราวหลังติดตั้ง dependency: ผ่านทั้งหมด ยืนยันว่าช่องโหว่เชิง business logic ไม่ได้ถูกครอบคลุมโดย assertions เดิม
-- ชุดแก้ไข: `npm test` มี 12 suites รวม PGlite ที่รัน SQL migrations/RPC/RLS จริงใน embedded PostgreSQL, pricing/coupon/tier, webhook signature/replay/amount/session, email/LINE, reviews และ retry เกิน 50 งาน
+- ชุดแก้ไข: `npm test` มี 13 suites รวม PGlite ที่รัน SQL migrations/RPC/RLS จริงใน embedded PostgreSQL, pricing/coupon/tier, webhook signature/replay/amount/session, email/LINE, reviews และ retry เกิน 50 งาน
 - `npm run test:browser`: mobile Chromium ใช้หน้า HTML/JS และ route handlers จริงต่อกับ database/service mocks; retail COD/Stripe และ wholesale 10 SKU, tracking throw, lost acknowledgement + retry, fake-paid URL, receipt proof, PII storage และ reload deduplication
 - `npm run build` ผ่านสำหรับ local build; production checks จะต้องมี schema/credentials จริง
 - `npm audit` ไม่พบ known dependency advisories ณ เวลาตรวจ ไม่ใช่คำรับรองว่า dependency ไม่มีช่องโหว่ทุกชนิด
