@@ -93,6 +93,26 @@ try {
  await page.locator('#submitOrder').click();await page.waitForURL(/payment=stripe_success/);await page.waitForFunction(()=>document.getElementById('receipt-title')?.textContent==='ชำระเงินสำเร็จ');
  const wholesaleRef=new URL(page.url()).searchParams.get('order_ref');assert.equal(orders.get(wholesaleRef).payload.items.length,10);assert.equal(orders.get(wholesaleRef).payment_status,'paid');assert.ok(orders.get(wholesaleRef).payload.product.length>200);
  assert.equal(await page.evaluate(()=>dataLayer.filter(x=>x.event==='purchase').length),1);
+ // Contact UI preserves input/id after failure and never counts a purchase.
+ let contactAttempts=[];
+ await page.route('**/api/contact',async route=>{
+   contactAttempts.push(route.request().postDataJSON());
+   await route.fulfill({status:contactAttempts.length===1?503:200,contentType:'application/json',body:JSON.stringify(contactAttempts.length===1?{error:'ลองอีกครั้ง'}:{ok:true})});
+ });
+ await page.goto(origin+'/');
+ await page.evaluate(()=>{window.trackRaptorPixel=()=>{throw Error('Tracking unavailable')}});
+ const contact=page.locator('.raptor-contact-form');
+ await contact.locator('[name="customer_name"]').fill('Contact buyer');
+ await contact.locator('[name="contact"]').fill('buyer@example.com');
+ await contact.locator('[name="message"]').fill('General enquiry');
+ await contact.evaluate(f=>f.requestSubmit());
+ await page.waitForFunction(()=>document.querySelector('.raptor-contact-form [role="status"]').textContent==='ลองอีกครั้ง');
+ assert.equal(await contact.locator('[name="message"]').inputValue(),'General enquiry');
+ await contact.evaluate(f=>f.requestSubmit());
+ await page.waitForFunction(()=>document.querySelector('.raptor-contact-form [role="status"]').textContent.includes('ส่งข้อความเรียบร้อย'));
+ assert.equal(contactAttempts[0].submission_id,contactAttempts[1].submission_id);
+ assert.equal(await contact.locator('[name="message"]').inputValue(),'');
+ assert.equal(await page.evaluate(()=>dataLayer.filter(x=>x.event==='purchase').length),0);
  // Only errors from blocked optional third-party providers may be ignored.
  assert.deepEqual(errors,[]);
  console.log('PASS: mobile Chromium retail COD/Stripe and 10-SKU wholesale Stripe return, real handlers, tracking failures, lost-ack retry, verified receipts, no PII storage, no reload duplicates, fake-paid rejection');

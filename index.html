@@ -827,20 +827,19 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
                     <h2 class="text-2xl font-bold text-zinc-900">CONTACT US หรือ สมัครตัวแทนจำหน่าย</h2>
                     <p class="text-xs text-gray-600">ติดต่อสอบถามข้อมูลเพิ่มเติมหรือสั่งซื้อยกลัง</p>
                 </div>
-                <form class="space-y-4 text-sm raptor-contact-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="Contact Message" data-price="-">
-                    <input type="hidden" name="_subject" value="New Raptor Contact Message">
-                    <input type="hidden" name="source" value="Raptor Sport Official Store Contact">
+                <form class="space-y-4 text-sm raptor-contact-form" action="/api/contact" method="POST" data-product="Contact Message" data-price="-">
+                    <div hidden aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">NAME</label>
-                        <input type="text" placeholder="ชื่อของคุณ" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="customer_name">
+                        <label class="block text-xs font-bold text-gray-600 mb-1" for="contact-name">NAME</label>
+                        <input type="text" placeholder="ชื่อของคุณ" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="customer_name" id="contact-name" required maxlength="200" autocomplete="name">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">EMAIL / PHONE</label>
-                        <input type="text" placeholder="อีเมล หรือ เบอร์โทรศัพท์" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="contact">
+                        <label class="block text-xs font-bold text-gray-600 mb-1" for="contact-details">EMAIL / PHONE</label>
+                        <input type="text" placeholder="อีเมล หรือ เบอร์โทรศัพท์" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="contact" id="contact-details" required maxlength="254" autocomplete="email">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">MESSAGE</label>
-                        <textarea rows="3" placeholder="พิมพ์ข้อความ..." class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="message"></textarea>
+                        <label class="block text-xs font-bold text-gray-600 mb-1" for="contact-message">MESSAGE</label>
+                        <textarea rows="3" placeholder="พิมพ์ข้อความ..." class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="message" id="contact-message" required maxlength="5000"></textarea>
                     </div>
                     <button type="submit" class="w-full bg-zinc-900 hover:bg-orange-brand text-white font-bold py-3 rounded-xl transition-colors">SEND MESSAGE</button>
                 </form>
@@ -1090,113 +1089,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
         });
     </script>
 
-    <script>
-        // Formspree integration for all Raptor order/contact forms
-        document.addEventListener('DOMContentLoaded', function () {
-            const forms = document.querySelectorAll('.raptor-order-form, .raptor-contact-form');
-
-            forms.forEach(function (form) {
-                updateOrderPriceByQuantity(form);
-                form.querySelector('input[name="quantity"]')?.addEventListener('input', function () {
-                    updateOrderPriceByQuantity(form);
-                });
-
-                form.addEventListener('submit', async function (event) {
-                    event.preventDefault();
-                    updateOrderPriceByQuantity(form);
-
-                    const submitButton = form.querySelector('button[type="submit"], button:not([type])');
-                    const originalButtonText = submitButton ? submitButton.innerHTML : '';
-                    let statusBox = form.querySelector('[data-form-status]');
-
-                    if (!statusBox) {
-                        statusBox = document.createElement('div');
-                        statusBox.setAttribute('data-form-status', '');
-                        statusBox.className = 'mt-3 text-center text-sm font-bold rounded-xl px-4 py-3 hidden';
-                        form.appendChild(statusBox);
-                    }
-
-                    if (submitButton) {
-                        submitButton.disabled = true;
-                        submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังส่งข้อมูล...';
-                    }
-
-                    statusBox.classList.remove('hidden', 'bg-green-50', 'text-green-700', 'bg-red-50', 'text-red-700');
-                    statusBox.classList.add('bg-orange-50', 'text-orange-700');
-                    statusBox.textContent = 'กำลังส่งคำสั่งซื้อไปยังระบบ...';
-
-                    const productName = form.dataset.product || form.querySelector('input[name="product"]')?.value || 'Raptor Sport Product';
-                    const productPrice = form.dataset.price || form.querySelector('input[name="price"]')?.value || '';
-                    const orderPricing = getOrderPricing(form);
-                    const pixelParams = {
-                        content_name: productName,
-                        content_category: 'Raptor Sport Order',
-                        content_type: 'product',
-                        value: orderPricing.totalPrice || getNumericPrice(productPrice),
-                        currency: 'THB',
-                        num_items: orderPricing.quantity
-                    };
-
-                    // Fire standard checkout and custom submit started pixels
-                    trackRaptorPixel('InitiateCheckout', pixelParams);
-                    trackRaptorPixel('RaptorFormSubmitStarted', pixelParams, true);
-
-                    try {
-                        const response = await fetch(form.action, {
-                            method: 'POST',
-                            body: new FormData(form),
-                            headers: { 'Accept': 'application/json' }
-                        });
-
-                        if (response.ok) {
-                            statusBox.classList.remove('bg-orange-50', 'text-orange-700', 'bg-red-50', 'text-red-700');
-                            statusBox.classList.add('bg-green-50', 'text-green-700');
-                            statusBox.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว กำลังพาไปหน้าขอบคุณ...';
-
-                            // Complete standard conversion and custom submit success pixels
-                            trackRaptorPixel('Lead', pixelParams);
-                            trackRaptorPixel('Purchase', pixelParams);
-                            trackRaptorPixel('RaptorOrderSubmitted', pixelParams, true);
-
-                            form.reset();
-
-                            if (form.classList.contains('raptor-order-form')) {
-                                window.location.href = '/thank-you.html';
-                            } else {
-                                const closeModalName = form.dataset.closeModal;
-                                if (closeModalName && typeof window[closeModalName] === 'function') {
-                                    setTimeout(function () {
-                                        window[closeModalName]();
-                                        document.body.style.overflow = 'auto';
-                                    }, 1200);
-                                } else {
-                                    document.body.style.overflow = 'auto';
-                                }
-                            }
-                        } else {
-                            let errorMessage = 'ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองใหม่อีกครั้ง';
-                            try {
-                                const data = await response.json();
-                                if (data && data.errors && data.errors.length) {
-                                    errorMessage = data.errors.map(error => error.message).join(', ');
-                                }
-                            } catch (jsonError) {}
-                            throw new Error(errorMessage);
-                        }
-                    } catch (error) {
-                        statusBox.classList.remove('bg-orange-50', 'text-orange-700', 'bg-green-50', 'text-green-700');
-                        statusBox.classList.add('bg-red-50', 'text-red-700');
-                        statusBox.textContent = error.message || 'เกิดข้อผิดพลาดในการส่งข้อมูล';
-                    } finally {
-                        if (submitButton) {
-                            submitButton.disabled = false;
-                            submitButton.innerHTML = originalButtonText;
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="/contact-form.js?v=20261020" defer></script>
 
 
 

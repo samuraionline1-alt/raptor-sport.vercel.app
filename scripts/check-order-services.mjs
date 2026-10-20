@@ -2,12 +2,12 @@
 import { lineOrderNotificationsEnabled } from '../lib/line-notifications.js';
 if (process.env.VERCEL_ENV === 'production') {
   const { database } = await import('../lib/order-store.js');
-  for (const table of ['raptor_orders', 'raptor_line_events', 'raptor_order_items']) {
+  for (const table of ['raptor_orders', 'raptor_line_events', 'raptor_order_items', 'raptor_contact_messages']) {
     await database(`${table}?select=order_ref&limit=0`);
     console.log(`Order service check: ${table} accessible`);
   }
   const schema = await database('');
-  for (const rpc of ['raptor_record_order','raptor_attach_checkout','raptor_claim_notification','raptor_rate_limit']) {
+  for (const rpc of ['raptor_record_order','raptor_attach_checkout','raptor_claim_notification','raptor_rate_limit','raptor_claim_contact_email']) {
     if (!schema.paths?.['/rpc/' + rpc]) throw new Error('Required order migration is missing: ' + rpc);
   }
   if (!process.env.CRON_SECRET || process.env.CRON_SECRET.length < 32) throw new Error('Set a strong CRON_SECRET before enabling notification retries');

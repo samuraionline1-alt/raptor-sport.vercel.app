@@ -238,3 +238,19 @@ Bump the asset query versions in affected HTML when changing cached CSS/JS.
 API routing deliberately leaves global `trailingSlash` unset: Stripe/LINE webhooks
 and retry calls must not receive a 308 redirect. Existing directory page URLs
 remain available; `/thank-you/` rewrites internally to the clean receipt URL.
+
+## General contact form
+
+The homepage contact form posts JSON to `/api/contact`. Messages are stored in
+`public.raptor_contact_messages`, with RLS enabled and no anon/authenticated table
+privileges. View messages in the RAPTOR-SPORT Supabase Table Editor. Server-only
+service credentials perform writes; browser clients cannot list messages.
+Apply `supabase/sql/contact_messages.sql` before deploying this code (remote
+migration name `raptor_contact_messages`; CLI unavailable during installation).
+The form validates name, email/phone and message; the API enforces length/origin
+and IP limits, ignores honeypot spam and deduplicates retries by random submission
+ID. Success requires database persistence. Resend sends contact alerts to the
+existing configured notification email, with independent leases, idempotency and
+retry through the existing five-minute worker; no LINE messages are sent.
+After eight attempts or 23 hours, inspect `email_status=manual_review`. Contact
+submissions emit a Contact analytics event without contact details, never Purchase.

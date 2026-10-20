@@ -43,6 +43,7 @@ export async function withOrderDatabase(run) {
       row[prefix+'status']='sending';row[prefix+'attempts']++;row[prefix+'first_attempt_at'] ||= new Date().toISOString();row[prefix+'lease_until']=new Date(Date.now()+90000).toISOString();return ok([row]);
     }
     if(path==='raptor_orders') {const row=orders.get(query.get('order_ref')?.slice(3));return ok(row?[row]:[]);}
+    if(path==='raptor_contact_messages')return ok([]);
     if(path==='product_reviews')return ok(null);
     if(path==='raptor_rate_limits')return ok(null);
     assert.equal(path,'raptor_line_events');

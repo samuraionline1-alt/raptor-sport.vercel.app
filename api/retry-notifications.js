@@ -1,4 +1,5 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
+import { retryContactEmails } from '../lib/contact-notifications.js';
 import { retryNotifications } from '../lib/notification-worker.js';
 function equal(actual, expected) {
   return Buffer.byteLength(actual) === Buffer.byteLength(expected) && timingSafeEqual(Buffer.from(actual),Buffer.from(expected));
@@ -16,6 +17,9 @@ export default async function handler(req,res) {
   const bearer = secret && equal(actual,`Bearer ${secret}`);
   if (!signed && !bearer) return res.status(401).json({error:'Unauthorized'});
   if (req.method !== 'GET') return res.status(405).json({error:'Method not allowed'});
-  try { return res.status(200).json(await retryNotifications({})); }
+  try {
+    const [orders,contact] = await Promise.all([retryNotifications({}),retryContactEmails()]);
+    return res.status(200).json({...orders,contact_processed:contact.processed});
+  }
   catch (_) { console.error('ORDER_NOTIFICATION_WORKER_FAILED'); return res.status(503).json({error:'Retry worker failed'}); }
 }
