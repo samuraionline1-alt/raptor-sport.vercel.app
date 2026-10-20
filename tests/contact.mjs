@@ -29,13 +29,14 @@ global.fetch=async(url,options={})=>{
  assert.equal(path,'raptor_contact_messages');
  if(options.method==='POST') {if(!rows.has(body.id))rows.set(body.id,{...body,email_status:'pending',email_attempts:0});return new Response(null,{status:204});}
  if(options.method==='PATCH') {Object.assign(rows.get(query.get('id').slice(3)),body);return new Response(null,{status:204});}
+ if(query.has('id'))return Response.json(rows.has(query.get('id').slice(3))?[rows.get(query.get('id').slice(3))]:[]);
  return Response.json([...rows.values()].filter(r=>r.email_status==='failed').slice(0,1));
 };
 const valid={submission_id:id,customer_name:'Test contact',contact:'buyer@example.com',message:'ข้อความทดสอบ'};
 const send=async(body=valid,extra={})=>{const res=response();await handler({method:'POST',headers:{'content-type':'application/json'},body,...extra},res);return res;};
 assert.equal((await send()).code,200);assert.equal(rows.size,1);assert.equal(emailCalls,1);
-assert.equal((await send({...valid,message:'Should not overwrite'})).code,200);assert.equal(emailCalls,1);assert.equal(rows.get(id).message,valid.message);
-for (const body of [{...valid,customer_name:''},{...valid,contact:'bad'},{...valid,message:'x'.repeat(5001)},{...valid,submission_id:'bad'},[]])assert.equal((await send(body)).code,400);
+assert.equal((await send({...valid,message:'Should not overwrite'})).code,409);assert.equal(emailCalls,1);assert.equal(rows.get(id).message,valid.message);
+for (const body of [{...valid,customer_name:''},{...valid,contact:'bad'},{...valid,contact:'--------'},{...valid,message:'x'.repeat(5001)},{...valid,submission_id:'bad'},[]])assert.equal((await send(body)).code,400);
 assert.equal((await send(valid,{headers:{'content-type':'application/json',origin:'https://evil.example'}})).code,403);
 assert.equal((await send(valid,{headers:{'content-type':'text/plain'}})).code,415);
 allowRate=false;assert.equal((await send()).code,429);allowRate=true;

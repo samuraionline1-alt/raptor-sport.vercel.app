@@ -82,10 +82,17 @@ rollback to the old webhook while new sessions remain open: the old receiver
 cannot interpret the new minimal metadata. Prefer a forward fix and retain the
 new receiver until sessions are settled. Never drop order tables to roll back.
 
-Browser protections enforce frame-ancestors/base-uri/object-src/form-action.
-Script restrictions initially use CSP Report-Only to avoid breaking legacy inline
-scripts. A strict script policy still needs nonce/hash migration and review of
-GTM dependencies; do not represent report-only as an enforced XSS defense.
+Browser protections enforce a script CSP with SHA-256 hashes for reviewed inline
+scripts and event handlers; arbitrary inline scripts and eval are blocked. GTM,
+Meta and documented Google analytics hosts are explicitly allowed. Run
+`npm run security:headers` after changing inline HTML/handlers and commit
+`vercel.json`; production build checks prevent stale hashes from going live.
+Only browser assets are copied into `_site`, the Vercel output directory. Server
+libraries, SQL, tests, documentation, draft article JSON and configuration are
+excluded from the static deployment. API functions remain separate server routes.
+Verified Stripe webhooks acknowledge payment after durable persistence; email/LINE
+outages and disabled channels recover through the existing queue, without asking
+Stripe to replay an already saved payment.
 
 Run `npm test` for isolated regression tests, including real PostgreSQL semantics
 through PGlite. Run `npm run test:browser` with Chromium installed (defaults to

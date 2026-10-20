@@ -28,4 +28,15 @@ for(const change of [{amount_total:1},{currency:'usd'},{id:'cs_test_other'}]){re
 res=response();await withOrderDatabase(()=>webhook(request({...session,payment_status:'unpaid'}),res));assert.equal(res.code,200);assert.equal(orders.get('RPT-webhook').payment_status,'pending');
 res=response();await withOrderDatabase(()=>webhook(request(session,{type:'checkout.session.async_payment_succeeded'}),res));assert.equal(res.code,200);assert.equal(orders.get('RPT-webhook').payment_status,'paid');assert.ok(events.has('RPT-webhook:payment_succeeded'));
 const eventCount=events.size;res=response();await withOrderDatabase(()=>webhook(request(session),res));assert.equal(events.size,eventCount);assert.equal(res.code,200);
+// Email-only operation must acknowledge a verified durable payment even when
+// the mail provider is down; the stored queue owns notification recovery.
+process.env.LINE_ORDER_NOTIFICATIONS_ENABLED='false';
+process.env.RESEND_API_KEY='mock';process.env.ORDER_NOTIFICATION_EMAIL='orders@example.com';process.env.RESEND_EMAIL_DOMAIN='example.com';
+let mailAttempts=0;global.fetch=async()=>{mailAttempts++;return {ok:false,status:503}};
+const paidEvent=events.get('RPT-webhook:payment_succeeded');paidEvent.email_status='pending';paidEvent.email_next_attempt_at=new Date(0).toISOString();
+res=response();await withOrderDatabase(()=>webhook(request(session),res));
+assert.equal(res.code,200,'Paused LINE and a temporary email outage cannot reject a saved Stripe payment');
+assert.equal(paidEvent.email_status,'failed');assert.equal(orders.get('RPT-webhook').payment_status,'paid');assert.equal(mailAttempts,1);
+global.fetch=async()=>({ok:false,status:503});res=response();await webhook(request(session),res);assert.equal(res.code,503,'Persistence failure must still ask Stripe to retry');
+delete process.env.LINE_ORDER_NOTIFICATIONS_ENABLED;
 console.log('PASS: durable COD under notification outage, retry/deduplication, fail-closed DB outage, signed webhooks without browser return, paid/currency/amount/session validation, asynchronous success and replay');

@@ -17,6 +17,7 @@
           signal:AbortSignal.timeout(20000)
         });
         const result=await response.json();
+        if (response.status===409) submissionId=crypto.randomUUID();
         if (!response.ok || result.ok!==true) throw new Error(result.error || 'ส่งข้อความไม่สำเร็จ กรุณาลองอีกครั้ง');
         form.reset(); submissionId=crypto.randomUUID();
         status.textContent='ส่งข้อความเรียบร้อยแล้ว ทีมงานจะติดต่อกลับตามข้อมูลที่คุณให้ไว้';

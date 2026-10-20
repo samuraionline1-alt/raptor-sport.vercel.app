@@ -40,10 +40,9 @@ export default async function handler(req, res) {
   // Ignore sessions belonging to other integrations on the same Stripe account.
   if (!['retail', 'wholesale'].includes(session.metadata?.order_channel)) return res.status(200).json({ received: true });
   try {
-    const delivery = await fulfillPayment(session);
-    // Stripe retries unsuccessful delivery even when the buyer closes the page.
-    if (!['sent', 'skipped'].includes(delivery.line_status)
-      || !['sent', 'skipped', 'not_configured'].includes(delivery.email_status)) return res.status(503).json({ error: 'Notification pending retry' });
+    // Acknowledge durable payment persistence. Notification retries belong to the
+    // stored queue, including when a channel is intentionally disabled.
+    await fulfillPayment(session,{background:true});
     return res.status(200).json({ received: true });
   } catch (_) { return res.status(503).json({ error: 'Order pending retry' }); }
 }

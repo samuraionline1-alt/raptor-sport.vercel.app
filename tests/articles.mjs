@@ -48,7 +48,7 @@ assert.ok(!(await read('articles/index.html')).includes('/sample-energy-gel-guid
 assert.ok(!sitemap.includes('/sample-energy-gel-guide/'));
 assert.ok((await read('index.html')).includes('href="/articles/"'));
 assert.equal(JSON.parse(await read('vercel.json')).buildCommand,'npm run build');
-assert.equal(JSON.parse(await read('vercel.json')).outputDirectory,'.');
+assert.equal(JSON.parse(await read('vercel.json')).outputDirectory,'_site');
 
 const fixture = await mkdtemp(path.join(tmpdir(),'raptor-articles-'));
 try {

@@ -16,6 +16,10 @@ if (process.env.VERCEL_ENV === 'production') {
   console.log('Order service check: recording function available');
   if (!process.env.STRIPE_WEBHOOK_SECRET?.startsWith('whsec_')) throw new Error('Stripe webhook signing secret is missing or invalid');
   console.log('Order service check: Stripe webhook secret configured');
+  const { stripeRequest } = await import('../lib/stripe-client.js');
+  const sessions = await stripeRequest('checkout/sessions?limit=1');
+  if (!Array.isArray(sessions.data)) throw new Error('Stripe Checkout API is unavailable');
+  console.log('Order service check: authenticated Stripe Checkout API reachable');
   if (process.env.RESEND_API_KEY) {
     if (!process.env.ORDER_NOTIFICATION_EMAIL || !process.env.RESEND_EMAIL_DOMAIN || !process.env.ORDER_NOTIFICATIONS_FROM) throw new Error('Email recipient or notification cutoff is missing');
   }

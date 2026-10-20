@@ -20,7 +20,7 @@ global.fetch=async(url,options)=>{
  }
  return {ok:true};
 };
-const root=process.cwd(), vercel=JSON.parse(fs.readFileSync('vercel.json','utf8'));
+const root=process.cwd(),staticRoot=path.join(root,'_site'), vercel=JSON.parse(fs.readFileSync('vercel.json','utf8'));
 const apiCalls=[]; let loseAcknowledgement=true;
 const server=http.createServer(async(req,res)=>{
  try {
@@ -33,7 +33,7 @@ const server=http.createServer(async(req,res)=>{
    res.status=code=>{res.statusCode=code;return res};res.json=body=>{if(url.pathname==='/api/orders' && loseAcknowledgement && body.ok){loseAcknowledgement=false;res.statusCode=503;body={error:'Simulated acknowledgement loss'};}res.setHeader('Content-Type','application/json');res.end(JSON.stringify(body));return res};
    await withOrderDatabase(()=>handler(req,res));return;
   }
-  let target=path.resolve(root,'.'+decodeURIComponent(url.pathname));if(!target.startsWith(root+path.sep))target=path.join(root,'index.html');
+  let target=path.resolve(staticRoot,'.'+decodeURIComponent(url.pathname));if(!target.startsWith(staticRoot+path.sep))target=path.join(staticRoot,'index.html');
   if(fs.existsSync(target)&&fs.statSync(target).isDirectory())target=path.join(target,'index.html');
   if(!fs.existsSync(target)&&!path.extname(target))target=target.replace(/\/$/,'')+'.html';
   if(!fs.existsSync(target)){res.statusCode=404;res.end();return;}
@@ -47,6 +47,7 @@ let browser;
 try {
  browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
  const page=await browser.newPage({viewport:{width:390,height:844}}),errors=[];
+ await page.addInitScript(()=>{window.scriptViolations=[];document.addEventListener('securitypolicyviolation',e=>{if(e.effectiveDirective.startsWith('script-src'))window.scriptViolations.push(e.blockedURI)});});
  page.on('pageerror',error=>{errors.push(error.message);console.error('BROWSER ERROR',error.message)});
  page.on('dialog',async dialog=>{console.error('DIALOG',dialog.message());await dialog.dismiss()});
 
@@ -113,6 +114,19 @@ try {
  assert.equal(contactAttempts[0].submission_id,contactAttempts[1].submission_id);
  assert.equal(await contact.locator('[name="message"]').inputValue(),'');
  assert.equal(await page.evaluate(()=>dataLayer.filter(x=>x.event==='purchase').length),0);
+ // Exercise every published product and content template under the enforced policy.
+ for(const route of [...fs.readdirSync(path.join(staticRoot,'products')).map(slug=>'/products/'+slug+'/'),'/articles/','/articles/sports-first-aid/','/policies/privacy-policy.html']) {
+   if(route.startsWith('/policies/') && !fs.existsSync(path.join(staticRoot,route)))continue;
+   await page.goto(origin+route,{waitUntil:'domcontentloaded'});
+   assert.deepEqual(await page.evaluate(()=>window.scriptViolations),[],route+' must not block first-party scripts');
+ }
+ await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
+ // The enforced policy permits the real storefront but rejects arbitrary inline code.
+ assert.deepEqual(await page.evaluate(()=>window.scriptViolations),[],'Legitimate contact/home scripts must satisfy CSP');
+ await page.evaluate(()=>{const script=document.createElement('script');script.textContent='window.__untrustedScriptRan=true';document.head.appendChild(script);});
+ await page.waitForFunction(()=>window.scriptViolations.length>0);
+ assert.equal(await page.evaluate(()=>window.__untrustedScriptRan),undefined,'Injected inline script must be blocked');
+ for(const privatePath of ['/lib/order-store.js','/supabase/sql/contact_messages.sql','/tests/contact.mjs'])assert.equal((await page.request.get(origin+privatePath)).status(),404);
  // Only errors from blocked optional third-party providers may be ignored.
  assert.deepEqual(errors,[]);
  console.log('PASS: mobile Chromium retail COD/Stripe and 10-SKU wholesale Stripe return, real handlers, tracking failures, lost-ack retry, verified receipts, no PII storage, no reload duplicates, fake-paid rejection');
