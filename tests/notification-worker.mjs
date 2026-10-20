@@ -1,3 +1,4 @@
+import {createHmac} from 'node:crypto';
 import assert from 'node:assert/strict';
 import { withOrderDatabase,events,orders,response } from './helpers/order-database.mjs';
 import {database} from '../lib/order-store.js';
@@ -13,4 +14,8 @@ await withOrderDatabase(async()=>{
 });
 process.env.CRON_SECRET='a-long-private-test-secret';let res=response();await worker({method:'GET',headers:{}},res);assert.equal(res.code,401);
 res=response();await withOrderDatabase(()=>worker({method:'GET',headers:{authorization:'Bearer '+process.env.CRON_SECRET}},res));assert.equal(res.code,200);
+const timestamp=String(Math.floor(Date.now()/1000));
+const signature=createHmac('sha256',process.env.CRON_SECRET).update(`${timestamp}:GET:/api/retry-notifications`).digest('hex');
+res=response();await withOrderDatabase(()=>worker({method:'GET',headers:{'x-raptor-cron-timestamp':timestamp,'x-raptor-cron-signature':signature}},res));assert.equal(res.code,200);
+for(const headers of [ {'x-raptor-cron-timestamp':timestamp,'x-raptor-cron-signature':'f'.repeat(64)}, {'x-raptor-cron-timestamp':String(Number(timestamp)-120),'x-raptor-cron-signature':signature} ]) {res=response();await worker({method:'GET',headers},res);assert.equal(res.code,401);}
 console.log('PASS: email backlog beyond 50, sent-row exclusion, protected cron and independent channel recovery');

@@ -33,7 +33,8 @@ and test notification recipients. Production activation order:
 4. Configure a random server-only `CRON_SECRET` of at least 32 characters.
    Production uses Supabase Cron (`pg_cron` + `pg_net`) every five minutes to call
    `/api/retry-notifications`. The same token is encrypted in Supabase Vault;
-   the scheduled SQL references its name, never a literal token. Vercel Hobby
+   the scheduled SQL references its name, never a literal token. Requests use
+   short-lived HMAC signatures, so the reusable secret never enters the HTTP queue. Vercel Hobby
    does not support five-minute cron jobs, so `vercel.json` has no native cron
    entry. Keep the Supabase job disabled until the matching deployment is READY,
    then enable it and inspect the HTTP response status. Set runtime log alerts
