@@ -63,6 +63,21 @@
         return { currency: CURRENCY, value: exactTotal, items: [item] };
     }
 
+    document.addEventListener('raptor:order-confirmed', function (event) {
+        var receipt = event.detail;
+        if (!receipt?.order_ref || !['paid','cod'].includes(receipt.payment_status)) return;
+        try {
+            var key = 'raptorPurchase:' + receipt.order_ref;
+            if (sessionStorage.getItem(key)) return;
+            // Mark before analytics: a broken tracking provider must not duplicate purchases on retry.
+            sessionStorage.setItem(key,'1');
+            var items = (receipt.items || []).map(function (line) { return {item_id:line.sku,item_name:line.name,quantity:line.quantity,price:line.line_total_cents / 100 / line.quantity}; });
+            pushEcommerce('purchase',{transaction_id:receipt.order_ref,currency:CURRENCY,value:receipt.total_price,items:items});
+            if (typeof window.fbq === 'function') window.fbq('track','Purchase',{value:receipt.total_price,currency:CURRENCY,content_name:receipt.product,num_items:receipt.quantity},{eventID:receipt.order_ref});
+            sessionStorage.removeItem(PENDING_ORDER_KEY);
+        } catch (_) { /* Receipt remains usable when analytics/storage is unavailable. */ }
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
         var product = productJsonLd();
         if (product) {
@@ -82,32 +97,5 @@
             }, true);
         });
 
-        if (document.body.dataset.gtmPage === 'purchase') {
-            try {
-                var query = new URLSearchParams(location.search);
-                var isStripe = query.get('payment') === 'stripe_success';
-                var storedOrder = sessionStorage.getItem(PENDING_ORDER_KEY);
-                var order = storedOrder ? JSON.parse(storedOrder) : { currency: CURRENCY, items: [] };
-                var queryValue = numberFrom(query.get('value'));
-                if (isStripe && queryValue) order.value = queryValue;
-                if (!order.value) return;
-                var sessionId = query.get('session_id') || ('raptor-' + Date.now());
-                order.currency = CURRENCY;
-                order.transaction_id = sessionId;
-                var purchaseGuard = 'raptorPurchase:' + sessionId;
-                if (sessionStorage.getItem(purchaseGuard)) return;
-                pushEcommerce('purchase', order);
-                if (isStripe && typeof window.fbq === 'function') window.fbq('track', 'Purchase', {
-                    value: order.value,
-                    currency: CURRENCY,
-                    content_name: query.get('product') || order.items[0]?.item_name,
-                    num_items: Number(query.get('qty')) || order.items[0]?.quantity || 1
-                });
-                sessionStorage.setItem(purchaseGuard, '1');
-                sessionStorage.removeItem(PENDING_ORDER_KEY);
-            } catch (error) {
-                // Ignore unavailable storage or malformed stale order data.
-            }
-        }
     });
 }());

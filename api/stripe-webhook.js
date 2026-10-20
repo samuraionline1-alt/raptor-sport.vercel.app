@@ -1,6 +1,5 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
-import { recordAndNotify } from '../lib/order-store.js';
-import { validOrder } from './orders.js';
+import { fulfillPayment } from '../lib/payment-orders.js';
 
 export const config = { api: { bodyParser: false } };
 
@@ -40,12 +39,8 @@ export default async function handler(req, res) {
   if (session?.payment_status !== 'paid') return res.status(200).json({ received: true });
   // Ignore sessions belonging to other integrations on the same Stripe account.
   if (!['retail', 'wholesale'].includes(session.metadata?.order_channel)) return res.status(200).json({ received: true });
-  const order = { ...session.metadata, total_price: session.amount_total / 100, stripe_session_id: session.id,
-    ...(session.created ? { order_created_at: new Date(session.created * 1000).toISOString() } : {}),
-    payment_method: 'STRIPE', payment_status: 'ชำระเงินสำเร็จ (PAID)', event_type: 'payment_succeeded' };
-  if (session.currency !== 'thb' || !validOrder(order)) return res.status(400).json({ error: 'Invalid order metadata' });
   try {
-    const delivery = await recordAndNotify(order);
+    const delivery = await fulfillPayment(session);
     // Stripe retries unsuccessful delivery even when the buyer closes the page.
     if (!['sent', 'skipped'].includes(delivery.line_status)
       || !['sent', 'skipped', 'not_configured'].includes(delivery.email_status)) return res.status(503).json({ error: 'Notification pending retry' });
