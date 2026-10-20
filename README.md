@@ -30,13 +30,14 @@ and test notification recipients. Production activation order:
    `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `LINE_CHANNEL_ACCESS_TOKEN`,
    and `LINE_ADMIN_USER_ID`/`LINE_GROUP_ID`. Keep the original fixed ISO timestamp
    `ORDER_NOTIFICATIONS_FROM`; never move it forward on redeploy.
-4. Configure a random server-only `CRON_SECRET` of at least 32 characters. The
-   `/api/retry-notifications` job is configured every 5 minutes in `vercel.json`.
-   This schedule requires a Vercel plan that supports that frequency. If using
-   another scheduler, call this endpoint with `Authorization: Bearer <CRON_SECRET>`
-   every 5 minutes and remove the Vercel cron entry. Do not silently downgrade to
-   a daily retry. Set runtime log alerts for `ORDER_NOTIFICATION_BACKLOG` and
-   `ORDER_NOTIFICATION_WORKER_FAILED`; monitor the private queue until resolved.
+4. Configure a random server-only `CRON_SECRET` of at least 32 characters.
+   Production uses Supabase Cron (`pg_cron` + `pg_net`) every five minutes to call
+   `/api/retry-notifications`. The same token is encrypted in Supabase Vault;
+   the scheduled SQL references its name, never a literal token. Vercel Hobby
+   does not support five-minute cron jobs, so `vercel.json` has no native cron
+   entry. Keep the Supabase job disabled until the matching deployment is READY,
+   then enable it and inspect the HTTP response status. Set runtime log alerts
+   for `ORDER_NOTIFICATION_BACKLOG` and `ORDER_NOTIFICATION_WORKER_FAILED`.
 5. For independent email delivery retain `RESEND_API_KEY`, verified
    `RESEND_EMAIL_DOMAIN`, and `ORDER_NOTIFICATION_EMAIL`. Build checks are
    read-only and no longer send a setup email. Email errors never log provider

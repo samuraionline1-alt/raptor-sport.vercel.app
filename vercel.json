@@ -88,11 +88,5 @@
     }
   ],
   "buildCommand": "npm run build",
-  "outputDirectory": ".",
-  "crons": [
-    {
-      "path": "/api/retry-notifications",
-      "schedule": "*/5 * * * *"
-    }
-  ]
+  "outputDirectory": "."
 }
