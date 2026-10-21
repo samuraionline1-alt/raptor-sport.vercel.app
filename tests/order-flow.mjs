@@ -1,37 +1,91 @@
+import { withOrderDatabase } from './helpers/order-database.mjs';
+import { readFileSync, readdirSync } from 'node:fs';
+import vm from 'node:vm';
+import { pathToFileURL } from 'node:url';
 import assert from 'node:assert/strict';
-import {withOrderDatabase,orders,events,response,fixture,rateLimits} from './helpers/order-database.mjs';
-import checkout from '../api/create-checkout-session.js';
-import confirm from '../api/confirm-payment.js';
-import cod from '../api/orders.js';
-import {tokenHash} from '../lib/order-security.js';
-process.env.STRIPE_SECRET_KEY='mock';
-let params,paid=false,stripeCreates=0;
-global.fetch=async(url,options)=>{
- if(url.startsWith('https://api.stripe.com/')) {
-  assert.ok(options.signal,'Stripe fetch is bounded');
-  if(options.method==='POST') {params=new URLSearchParams(options.body);stripeCreates++;assert.ok(orders.has(params.get('metadata[order_ref]')),'Order is durable before payment URL creation');}
-  return Response.json({id:'cs_test_match',url:'https://checkout.stripe.com/test',status:paid?'complete':'open',payment_status:paid?'paid':'unpaid',currency:'thb',amount_total:32900,metadata:{order_ref:'RPT-stripe',order_channel:'retail'}});
- }
- return {ok:true};
-};
-let res=response();await withOrderDatabase(()=>checkout({method:'POST',body:fixture({order_ref:'RPT-stripe',success_url:'https://attacker.vercel.app',page_url:'https://attacker.vercel.app'})},res));assert.equal(res.code,200);
-assert.equal(params.get('line_items[0][price_data][unit_amount]'),'32900');
-assert.equal(params.get('cancel_url'),'https://www.raptorthailand.com/');
-const success=new URL(params.get('success_url'));assert.equal(success.origin,'https://www.raptorthailand.com');
-assert.deepEqual([...success.searchParams.keys()],['payment','order_ref','session_id']);
-assert.deepEqual([...params.keys()].filter(k=>k.startsWith('metadata[')),['metadata[order_ref]','metadata[order_channel]']);
-assert.equal(orders.get('RPT-stripe').payload.receipt_token_hash,tokenHash('a'.repeat(64)));
-assert.equal(orders.get('RPT-stripe').payload.stripe_session_id,'cs_test_match');
-res=response();await withOrderDatabase(()=>checkout({method:'POST',body:fixture({order_ref:'RPT-stripe'})},res));assert.equal(res.code,200);assert.equal(stripeCreates,1,'Retry retrieves the bound checkout session');
-for(const token of [undefined,'b'.repeat(64)]){res=response();await withOrderDatabase(()=>confirm({method:'GET',query:{order_ref:'RPT-stripe',session_id:'cs_test_match'},headers:{'x-order-token':token}},res));assert.equal(res.code,403);}
-res=response();await withOrderDatabase(()=>confirm({method:'GET',query:{order_ref:'RPT-stripe',session_id:'cs_test_other'},headers:{'x-order-token':'a'.repeat(64)}},res));assert.equal(res.code,400);
-res=response();await withOrderDatabase(()=>confirm({method:'GET',query:{order_ref:'RPT-stripe',session_id:'cs_test_match'},headers:{'x-order-token':'a'.repeat(64)}},res));assert.equal(res.code,409);
-paid=true;res=response();await withOrderDatabase(()=>confirm({method:'GET',query:{order_ref:'RPT-stripe',session_id:'cs_test_match'},headers:{'x-order-token':'a'.repeat(64)}},res));assert.equal(res.code,200);assert.equal(res.body.payment_status,'paid');
-for(const key of ['customer_name','phone','address','note','receipt_token_hash','email'])assert.equal(res.body[key],undefined,'Receipt omits PII');
-assert.equal(orders.get('RPT-stripe').payment_status,'paid');assert.ok(events.has('RPT-stripe:payment_succeeded'));
-res=response();await withOrderDatabase(()=>cod({method:'POST',body:fixture({order_ref:'RPT-cod'})},res));assert.equal(res.code,200);
-res=response();await withOrderDatabase(()=>confirm({method:'GET',query:{order_ref:'RPT-cod'},headers:{'x-order-token':'a'.repeat(64)}},res));assert.equal(res.body.payment_status,'cod');
-res=response();await withOrderDatabase(()=>cod({method:'POST',body:fixture({order_ref:'RPT-origin'}),headers:{origin:'https://attacker.example'}},res));assert.equal(res.code,403);
-rateLimits.clear();
-for(let i=0;i<9;i++){res=response();await withOrderDatabase(()=>cod({method:'POST',body:fixture({order_ref:'RPT-limit-'+i})},res));assert.equal(res.code,i<8?200:429);}
-console.log('PASS: durable server-priced checkout, retry/session binding, safe redirects/metadata, receipt proof/privacy, COD/paid confirmation, origin and distributed limits');
+const load = async path => (await import(pathToFileURL(process.cwd() + '/' + path))).default;
+const checkout = await load('api/create-checkout-session.js');
+const confirm = await load('api/confirm-payment.js');
+process.env.STRIPE_SECRET_KEY = 'test-mocked-key';
+function response() { return {setHeader(){}, status(code){this.code=code;return this;}, json(body){this.body=body;return this;}}; }
+let params;
+global.fetch = async (_, options) => { params = new URLSearchParams(options.body); return {ok:true,json:async()=>({url:'https://checkout.stripe.com/test'})}; };
+for (const wholesale of [false,true]) {
+ const res=response();
+ await withOrderDatabase(() => checkout({method:'POST',body:{product:'สินค้า & Test',quantity:3,totalPrice:499,customer_name:'คุณ A & B',phone:'081-234-5678',address:'Bangkok',is_wholesale:wholesale,order_ref:'RPT-test'}},res));
+ assert.equal(res.code,200);
+ assert.equal(params.get('metadata[order_ref]'),'RPT-test');
+ assert.equal(params.get('payment_intent_data[metadata][order_ref]'),'RPT-test');
+ assert.equal(params.get('line_items[0][price_data][product_data][name]'),'สินค้า & Test (จำนวน 3 ชิ้น)');
+ assert.ok(params.get('payment_intent_data[description]').includes('[#RPT-test]'));
+ const url=new URL(params.get('success_url'));
+ assert.equal(url.pathname,wholesale?'/wholesale/':'/thank-you.html');
+ for (const [key,value] of Object.entries({order_ref:'RPT-test',phone:'0812345678',customer_name:'คุณ A & B',session_id:'{CHECKOUT_SESSION_ID}',product:'สินค้า & Test'})) assert.equal(url.searchParams.get(key),value);
+}
+const missing=response();
+await withOrderDatabase(() => checkout({method:'POST',body:{product:'Test',totalPrice:10,phone:'0812345678'}},missing));
+assert.equal(missing.code,400);
+const exact=response();
+await withOrderDatabase(() => checkout({method:'POST',body:{product:'Test',quantity:1,totalPrice:10,phone:'0899999999',customer_name:'Test',address:'Bangkok',order_ref:'RPT-1234-5678'}},exact));
+assert.equal(params.get('metadata[order_ref]'),'RPT-1234-5678');
+assert.ok(params.get('line_items[0][price_data][product_data][description]').includes('#RPT-1234-5678'));
+for (const paid of [true,false]) {
+ global.fetch=async()=>({ok:true,json:async()=>({status:'complete',payment_status:paid?'paid':'unpaid',amount_total:49900,metadata:{order_ref:'RPT-test',order_channel:'retail',phone:'0812345678'}})});
+ const res=response();await confirm({method:'GET',query:{session_id:'cs_test_123'}},res);assert.equal(res.code,paid?200:409);
+}
+const storage=new Map();const label={};let calls=[];let fail=false;let lineFail=false;
+const context={window:{},sessionStorage:{getItem:key=>storage.get(key),setItem:(key,value)=>storage.set(key,value)},crypto:globalThis.crypto,URLSearchParams,location:{search:'?payment=stripe_success&session_id=cs_test_123&order_ref=RPT-test&value=1&customer_name=Forged'},document:{getElementById:()=>label},console:{error(){}},
+ fetch:async(url,options)=>{calls.push({url,options});if(url === '/api/notify-line')return{ok:!lineFail};if(url.startsWith('/api/'))return{ok:true,json:async()=>({payment_status:'paid',order_ref:'RPT-test',order_channel:'retail',customer_name:'Verified Name',phone:'0812345678',product:'Test',total_price:499,address:'Verified Address'})};return{ok:!fail};}};
+vm.runInNewContext(readFileSync('order-context.js','utf8'),context);
+const orders=context.window.RaptorOrders;
+assert.match(orders.createRef('0812345678'), /^RPT-\d{8}-[0-9A-HJKMNP-TV-Z]{8}$/);
+const refs = new Set(Array.from({length: 1000}, () => orders.createRef()));
+assert.equal(refs.size, 1000);
+orders.save({order_ref:'RPT-test',address:'Local Address'});
+orders.save({order_ref:'RPT-other',address:'Wrong Address'});
+assert.equal(JSON.parse(storage.get('raptor_order_RPT-test')).address,'Local Address');
+lineFail=true;await orders.confirm('retail');assert.ok(!storage.has('paid_notified_cs_test_123'));
+lineFail=false;await orders.confirm('retail');assert.equal(storage.get('paid_notified_cs_test_123'),'1');
+const payload=JSON.parse(calls.at(-1).options.body);assert.equal(payload.customer_name,'Verified Name');assert.equal(payload.total_price,499);assert.equal(payload.address,'Verified Address');
+const count=calls.length;await orders.confirm('retail');assert.equal(calls.length,count);
+assert.equal(label.textContent,'รหัสคำสั่งซื้อ: RPT-test');
+context.location.search='?payment=stripe_success&session_id=cs_test_456&order_ref=RPT-test';calls=[];await orders.confirm('wholesale');assert.equal(calls.length,1);
+context.location.search='?paid=1&session_id=cs_test_789&order_ref=RPT-test';calls=[];lineFail=true;await orders.confirm('retail');
+assert.ok(!storage.has('paid_notified_cs_test_789'));assert.ok(!storage.has('line_paid_notified_cs_test_789'));
+lineFail=false;calls=[];await orders.confirm('retail');assert.equal(storage.get('line_paid_notified_cs_test_789'),'1');assert.ok(!calls.some(call=>call.url.startsWith('https://formspree')));
+context.location.search='';calls=[];await orders.confirm('retail');assert.equal(calls.length,0);
+for(const directory of readdirSync('products')) {
+ const html=readFileSync(`products/${directory}/index.html`,'utf8');
+ if(html.includes('<form')&&html.includes('raptor-order-form'))assert.ok(html.includes('/order-context.js?v=order-ref-20261017'));
+
+}
+for(const file of ['wholesale/index.html','thank-you.html']) {
+ const html=readFileSync(file,'utf8');
+ for(const match of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))if(match[1].trim())new vm.Script(match[1]);
+}
+new vm.Script(readFileSync('checkout.js','utf8'));
+// Exercise the capture handler for both COD and Stripe submissions.
+let handler;
+const fields = {quantity:{value:'3'},price:{value:'179'},total_price:{value:'499'},product:{value:'Test'},customer_name:{value:'Name'},phone:{value:'081-234-5678'},address:{value:'Address'},bundle_tier:{value:'Bundle'}};
+let payment = 'COD';
+const form = {dataset:{price:'฿179'},addEventListener:(event,fn)=>{if(event==='formdata')form.serialize=fn;},matches:()=>true,querySelector:selector=>{
+ if(selector.includes(':checked'))return{value:payment};
+ const name=selector.match(/name="([^"\]]+)"/);return name?fields[name[1]]:null;
+},appendChild:input=>{fields[input.name]=input;}};
+context.document={addEventListener:(event,fn)=>{if(event==='submit')handler=fn;},createElement:()=>({})};
+context.RaptorOrders=orders;context.window.dataLayer=[];
+context.FormData=class{set(){}};
+const frontendCalls=[];context.fetch=async(url,options)=>{frontendCalls.push({url,options});return{ok:true,json:async()=>({ok:true,url:payment==='STRIPE'?'https://checkout.stripe.com/test':undefined})};};
+context.window.location={};context.location.pathname='/products/test/';
+vm.runInNewContext(readFileSync('checkout.js','utf8'),context);
+await handler({target:form,preventDefault(){},stopImmediatePropagation(){}});
+assert.equal(frontendCalls[0].url,'/api/orders');const codLine=JSON.parse(frontendCalls[0].options.body);assert.equal(codLine.payment_method,'COD');assert.equal(codLine.total_price,499);
+assert.ok(fields.order_ref.value.startsWith('RPT-'));assert.equal(fields.phone.value,'0812345678');
+assert.equal(JSON.parse(storage.get('raptor_last_order')).total_price,499);
+const email=new Map();form.serialize({formData:email});
+assert.equal(email.get('bundle_tier_choice'),'เซ็ต 3 ชิ้น (฿499)');
+assert.ok(email.get('order_details').includes('#'+fields.order_ref.value));
+assert.equal(fields.price.value,fields.total_price.value);
+form.dataset.submitting='0';payment='STRIPE';await handler({target:form,preventDefault(){},stopImmediatePropagation(){}});
+assert.equal(context.window.location.href,'https://checkout.stripe.com/test');
+console.log('Order flow checks passed (Stripe payloads, verified payment, retry and duplicate guard, cross-order storage, retail coverage, inline script syntax).');

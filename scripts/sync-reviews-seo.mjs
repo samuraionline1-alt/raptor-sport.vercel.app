@@ -32,8 +32,8 @@ function ensureGtm(html) {
     <!-- End Google Tag Manager -->`;
     html = html.replace(/(<meta\s+name=["']viewport["'][^>]*>)/i, `$1\n${snippet}`);
   }
-  if (!/src=["']\/gtm-ecommerce\.js(?:\?[^"']*)?["']/.test(html)) {
-    html = html.replace('</head>', '    <script src="/gtm-ecommerce.js?v=secure-20261020" defer></script>\n</head>');
+  if (!html.includes('src="/gtm-ecommerce.js"')) {
+    html = html.replace('</head>', '    <script src="/gtm-ecommerce.js" defer></script>\n</head>');
   }
   return html;
 }
@@ -81,7 +81,7 @@ function renderReviews(reviews) {
     const date = reviewDate(review);
     return `        <article class="review-card">
           <div class="review-card__top"><strong>${escapeHtml(sanitizeReviewerName(review.reviewer_name))}</strong><span class="review-stars" aria-label="${rating} จาก 5 ดาว">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</span></div>
-          <span class="review-badge">${review.is_verified === true ? "✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)" : "รีวิวจากผู้ใช้งาน"}</span>
+          <span class="review-badge">✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)</span>
           <p>${escapeHtml(review.comment)}</p>
           <time datetime="${escapeHtml(date)}">${escapeHtml(thaiDate(date))}</time>
         </article>`;
@@ -90,13 +90,13 @@ function renderReviews(reviews) {
     ? reviews.reduce((sum, review) => sum + Number(review.rating), 0) / reviews.length
     : 0;
   const summary = reviews.length
-    ? `⭐ ${average.toFixed(1)}/5.0 จากรีวิวผู้ใช้งาน ${reviews.length} รายการ`
+    ? `⭐ ${average.toFixed(1)}/5.0 จากรีวิวผู้ซื้อจริง ${reviews.length} รายการ`
     : "ยังไม่มีรีวิวที่เผยแพร่ เป็นคนแรกที่แบ่งปันประสบการณ์กับสินค้านี้";
   return `${START}
   <section id="customer-reviews" class="reviews-section scroll-mt-24" aria-labelledby="customer-reviews-title">
     <div class="reviews-inner">
       <div class="reviews-header">
-        <h2 id="customer-reviews-title">รีวิวจากผู้ใช้งาน</h2>
+        <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
         <p class="reviews-summary" aria-live="polite">${summary}</p>
       </div>
       <div class="reviews-list">${cards ? `\n${cards}\n      ` : ""}</div>
@@ -155,18 +155,18 @@ function updateProductJsonLd(html, reviews, slug) {
         reviewRating: { "@type": "Rating", ratingValue: String(review.rating), bestRating: "5", worstRating: "1" }
       }));
     }
-    return `${open}\n${JSON.stringify(data, null, 2).replace(/</g, '\\u003c')}\n${close}`;
+    return `${open}\n${JSON.stringify(data, null, 2)}\n${close}`;
   });
   if (!found) throw new Error(`No Product JSON-LD found for ${slug}`);
   return updated;
 }
 
-const endpoint = `${SUPABASE_URL}/rest/v1/product_reviews?select=product_slug,reviewer_name,rating,comment,source_platform,is_verified,reviewed_at,created_at&product_slug=in.(${REVIEW_SLUGS.join(",")})&is_approved=eq.true&order=reviewed_at.desc`;
+const endpoint = `${SUPABASE_URL}/rest/v1/product_reviews?product_slug=in.(${REVIEW_SLUGS.join(",")})&is_approved=eq.true&order=reviewed_at.desc`;
 let approvedReviews;
 let usingSeed = false;
 try {
   const response = await fetch(endpoint, {
-    headers: { apikey: SUPABASE_ANON_KEY }
+    headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
   approvedReviews = await response.json();

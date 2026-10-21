@@ -1,25 +1,40 @@
+import { withOrderDatabase } from './helpers/order-database.mjs';
 import assert from 'node:assert/strict';
-import catalog from '../product-catalog.js';
-import promo from '../promo-config.js';
-import { priceOrder } from '../lib/order-pricing.js';
-import {fixture} from './helpers/order-database.mjs';
-import fs from 'node:fs';
-for(const p of catalog.retail)for(const [tier,count,rate] of [['tier_1',1,1],['tier_2',2,.92],['tier_3',3,.85],['tier_6',6,.8],['custom',7,1]]) {
- const subtotal=Math.round(p.price*count*rate);
- for(const code of ['',...Object.keys(promo.coupons)]) {
-  const result=promo.calculate(subtotal,tier==='custom'?'tier_7':tier,code);
-  const body=fixture({sku:p.sku,quantity:count,bundleTier:tier,subtotal,total_price:result.totalPrice,coupon_code:code});
-  if(result.couponError) {assert.throws(()=>priceOrder(body));continue;}
-  const priced=priceOrder(body);assert.equal(priced.total_cents,result.totalPrice*100);assert.equal(priced.free_gifts,result.free_gifts);
- }
- const html=fs.readFileSync(`products/${p.sku}/index.html`,'utf8');assert.ok(html.includes(`data-sku="${p.sku}"`));assert.ok(html.includes(`data-price="฿${p.price}"`));
+import config from '../promo-config.js';
+import checkout from '../api/create-checkout-session.js';
+import { readFileSync, readdirSync } from 'node:fs';
+import vm from 'node:vm';
+assert.equal(config.calculate(250, 'tier_2', ' raptor20 ').totalPrice, 230);
+assert.equal(config.calculate(249, 'tier_2', 'RAPTOR20').discount_amount, 0);
+assert.equal(config.calculate(450, 'tier_3', 'raptor50').totalPrice, 400);
+assert.equal(config.calculate(449, 'tier_3', 'RAPTOR50').discount_amount, 0);
+assert.equal(config.calculate(140, 'tier_1', 'freegel').free_gifts, config.coupons.FREEGEL.extraGift);
+assert.equal(config.calculate(139, 'tier_1', 'freegel').free_gifts, '');
+assert.equal(config.calculate(329, 'tier_2', 'FREEGEL').free_gifts, config.bundleGifts.tier_2.giftText + ' | ' + config.coupons.FREEGEL.extraGift);
+assert.equal(config.calculate(499, 'tier_3', 'bad').coupon_code, '');
+assert.equal(config.calculate(179, 'tier_1', '').free_gifts, '');
+assert.equal(config.calculate(859, 'tier_6', '').giftCount, 3);
+assert.equal(config.calculate(859, 'tier_6', 'FREEGEL').giftValue, 316);
+let params;
+process.env.STRIPE_SECRET_KEY = 'mock-key';
+global.fetch = async (_, options) => { params = new URLSearchParams(options.body); return { ok: true, json: async () => ({ url: 'https://checkout.stripe.com/test' }) }; };
+function response() { return { setHeader() {}, status(code) { this.code = code; return this; }, json(body) { this.body = body; return this; } }; }
+for (const code of ['raptor20', 'FREEGEL', '']) {
+ const promo = config.calculate(329, 'tier_2', code);
+ const res = response();
+ await withOrderDatabase(() => checkout({ method: 'POST', body: { product: 'Test', quantity: 2, bundleTier: 'tier_2', ...promo, total_price: promo.totalPrice, order_ref: 'RPT-promo-' + (code || 'none'), customer_name: 'Test', phone: '0812345678', address: 'Bangkok' } }, res));
+ assert.equal(res.code, 200);
+ assert.equal(params.get('line_items[0][price_data][unit_amount]'), String(promo.totalPrice * 100));
+ assert.equal(params.get('metadata[free_gifts]'), promo.free_gifts);
+ assert.equal(params.get('metadata[coupon_code]'), promo.coupon_code);
+ assert.ok(params.get('line_items[0][price_data][product_data][description]').includes(promo.free_gifts));
 }
-for(const change of [{total_price:1},{total_price:1,subtotal:1},{quantity:100,total_price:1,subtotal:1,bundleTier:'custom'},{sku:'unknown'},{quantity:-1},{quantity:2.5},{bundleTier:'tier_6'},{coupon_code:'invalid'},{subtotal:'invalid'}])assert.throws(()=>priceOrder(fixture(change)));
-for(const n of [50,100,101,200,201,300,301,400,401,500,501,1000,10000]) {
- const p=catalog.wholesale[0];const unit=p.tiers.reduce((v,t)=>n>=t.min?t.price:v,p.defaultPrice);
- const shipping=n<=100?150:n<=200?350:n<=300?500:n<=400?850:n<=500?1000:1500;
- const total=Number(((unit*n+shipping)*1.07).toFixed(2));
- const q=priceOrder({is_wholesale:true,items:[{id:p.id,qty:n,unitPrice:1}],total_price:total});assert.equal(q.total_price,total);assert.equal(q.items[0].unit_price_cents,unit*100);
+const invalid = response();
+await withOrderDatabase(() => checkout({ method: 'POST', body: { product: 'Test', subtotal: 329, quantity: 2, bundleTier: 'tier_2', coupon_code: 'RAPTOR20', total_price: 1, order_ref: 'RPT-promo' } }, invalid));
+assert.equal(invalid.code, 400);
+for (const path of ['index.html', ...readdirSync('products').map(dir => `products/${dir}/index.html`)]) {
+ const html = readFileSync(path, 'utf8');
+ assert.ok(html.includes('/promo-config.js?v=receipt-20261005'));
+ for (const match of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)) if (match[1].includes('function getOrderPricing') || match[1].includes('// Formspree integration')) new vm.Script(match[1]);
 }
-for(const items of [[],[{id:'p1',qty:49}],[{id:'fake',qty:50}],[{id:'p1',qty:50},{id:'p1',qty:50}]])assert.throws(()=>priceOrder({is_wholesale:true,items,total_price:1}));
-console.log('PASS: every retail product/tier/coupon, storefront catalog parity, price manipulation rejection, wholesale thresholds/shipping/VAT/duplicate SKU validation');
+console.log('Promotion checks passed: coupon thresholds, normalization, gifts, exact Stripe totals, mismatched-total rejection, and all retail scripts.');

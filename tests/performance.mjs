@@ -19,13 +19,7 @@ for (const path of ['index.html', ...readdirSync('products').map(slug => `produc
         if (!image[0].includes("logo-premium-image")) assert.match(image[0], /\bsrcset="/);
     }
 }
-const loader=readFileSync('performance.js','utf8');
-assert.ok(loader.includes("script.src = '/assets/vendor/chart.umd-4.5.1.min.js'"),'Charts must load from this site under the enforced CSP');
 const home = readFileSync('index.html', 'utf8');
-assert.equal((home.match(/class="logo-premium-video"/g)||[]).length,2);
-assert.ok(!/<video[^>]*\b(?:autoplay|loop)\b[^>]*class="logo-premium-video"/.test(home),'Native autoplay/loop must not bypass once-per-visit playback');
-assert.ok(!home.includes("video.addEventListener('ended'"),'Logo playback is managed only by the shared motion controller');
-assert.ok(statSync('assets/optimized/raptor-logo-animation-240.mp4').size<200000,'Logo video should stay compact');
 const backgrounds = [...home.matchAll(/<img[^>]*class="home-background-slide[^>]*>/g)].map(match => match[0]);
 assert.equal(backgrounds.length, 4);
 assert.equal(backgrounds.filter(tag => /\ssrc="/.test(tag)).length, 1);

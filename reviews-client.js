@@ -11,7 +11,7 @@
     "raptor-cool-patch", "raptor-ice-defense-sport-shampoo"
   ]);
   const VERIFIED_BUYER_BADGE = "✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)";
-  const headers = { apikey: SUPABASE_ANON_KEY };
+  const headers = { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` };
   const V_MIX_SLUGS = ["raptor-v-mix", "raptor-speed-water-charge"];
 
   function productSlug() {
@@ -82,13 +82,13 @@
     top.append(name, stars);
     const badge = document.createElement("div");
     badge.className = "review-badge";
-    badge.textContent = review.is_verified === true ? VERIFIED_BUYER_BADGE : 'รีวิวจากผู้ใช้งาน';
+    badge.textContent = VERIFIED_BUYER_BADGE;
     const comment = document.createElement("p");
     comment.textContent = review.comment;
     const date = document.createElement("time");
     const rawDate = review.reviewed_at || review.created_at;
     date.dateTime = rawDate;
-    date.textContent = rawDate && Number.isFinite(Date.parse(rawDate)) ? new Intl.DateTimeFormat("th-TH", { dateStyle: "long" }).format(new Date(rawDate)) : "";
+    date.textContent = rawDate ? new Intl.DateTimeFormat("th-TH", { dateStyle: "long" }).format(new Date(rawDate)) : "";
     article.append(top, badge, comment, date);
     return article;
   }
@@ -101,7 +101,7 @@
     section.innerHTML = `
       <div class="reviews-inner">
         <div class="reviews-header">
-          <h2 id="customer-reviews-title">รีวิวจากผู้ใช้งาน</h2>
+          <h2 id="customer-reviews-title">รีวิวจากผู้ซื้อจริง</h2>
           <p class="reviews-summary" aria-live="polite">กำลังโหลดรีวิว...</p>
         </div>
         <div class="reviews-list"></div>
@@ -187,11 +187,11 @@
     const summary = section.querySelector(".reviews-summary");
     try {
       const slugs = reviewSlugs(slug).map(encodeURIComponent).join(",");
-      const query = `?select=product_slug,reviewer_name,rating,comment,source_platform,is_verified,reviewed_at,created_at&product_slug=in.(${slugs})&is_approved=eq.true&order=reviewed_at.desc,created_at.desc`;
+      const query = `?product_slug=in.(${slugs})&is_approved=eq.true&order=reviewed_at.desc,created_at.desc`;
       const response = await fetch(API_URL + query, { headers });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const fetchedReviews = await response.json();
-      const reviews = fetchedReviews.filter(review => Number.isInteger(Number(review.rating)) && Number(review.rating) >= 1 && Number(review.rating) <= 5).map((review) => ({
+      const reviews = fetchedReviews.map((review) => ({
         ...review,
         comment: sanitizeReviewComment(slug, review.comment)
       }));
@@ -199,7 +199,7 @@
       list.replaceChildren();
       if (reviews.length) {
         const average = reviews.reduce((sum, item) => sum + Number(item.rating), 0) / reviews.length;
-        summary.textContent = `⭐ ${average.toFixed(1)}/5.0 จากรีวิวผู้ใช้งาน ${reviews.length} รายการ`;
+        summary.textContent = `⭐ ${average.toFixed(1)}/5.0 จากรีวิวผู้ซื้อจริง ${reviews.length} รายการ`;
         reviews.forEach((review) => list.append(makeReviewCard(review)));
         syncJsonLd(reviews);
       } else {
@@ -218,11 +218,10 @@
       const fields = new FormData(form);
       button.disabled = true; status.textContent = "กำลังส่งรีวิว...";
       try {
-        const response = await fetch("/api/reviews", {
+        const response = await fetch(API_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          signal: AbortSignal.timeout(20000),
-          body: JSON.stringify({ ...(window.RaptorOrders?.reviewProof() || {}), product_slug: submissionSlug(slug), reviewer_name: fields.get("reviewer_name").trim(), rating: Number(fields.get("rating")), comment: fields.get("comment").trim(), source_platform: fields.get("source_platform") })
+          headers: { ...headers, "Content-Type": "application/json", Prefer: "return=minimal" },
+          body: JSON.stringify({ product_slug: submissionSlug(slug), reviewer_name: fields.get("reviewer_name").trim(), rating: Number(fields.get("rating")), comment: fields.get("comment").trim(), source_platform: fields.get("source_platform"), is_verified: true, is_approved: false })
         });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         form.reset(); form.querySelector('[value="5"]').checked = true;

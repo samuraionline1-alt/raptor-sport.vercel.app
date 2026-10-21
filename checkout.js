@@ -13,7 +13,6 @@
         var unitPrice = numeric(form.dataset.price || form.querySelector('[name="price"]')?.value);
         var totalPrice = numeric(form.querySelector('[name="total_price"]')?.value) || unitPrice * quantity;
         return {
-            sku: form.dataset.sku,
             product: form.querySelector('[name="product"]')?.value || form.dataset.product || 'Raptor Sport Product',
             unitPrice: unitPrice,
             quantity: quantity,
@@ -79,10 +78,8 @@
         if (form.dataset.orderSignature !== signature) {
             form.dataset.orderSignature = signature;
             form.dataset.orderRef = RaptorOrders.createRef(order.phone);
-            form.dataset.receiptToken = RaptorOrders.createToken();
         }
         order.order_ref = form.dataset.orderRef;
-        order.receipt_token = form.dataset.receiptToken;
         order.total_price = order.totalPrice;
         order.price = order.total_price;
         order.bundle_tier = order.bundleTier;
@@ -108,32 +105,25 @@
         var button = form.querySelector('button[type="submit"], button:not([type])');
         var originalText = button?.innerHTML;
         if (button) { button.disabled = true; button.textContent = order.payment_method === 'STRIPE' ? 'กำลังเปิดหน้าชำระเงิน...' : 'กำลังบันทึกคำสั่งซื้อ...'; }
+        var tracking = ecommerce(order);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ ecommerce: null });
+        window.dataLayer.push({ event: 'begin_checkout', ecommerce: tracking });
+        if (typeof window.fbq === 'function') window.fbq('track', 'InitiateCheckout', { value: order.totalPrice, currency: 'THB', content_name: order.product, num_items: order.quantity });
+        try { sessionStorage.setItem(PENDING_ORDER_KEY, JSON.stringify(tracking)); } catch (_) {}
+
         try {
-            var tracking = ecommerce(order);
-            try {
-                window.dataLayer = window.dataLayer || [];
-                if (window.RaptorEcommerce) window.RaptorEcommerce.track('begin_checkout', tracking);
-                else {
-                    window.dataLayer.push({ ecommerce: null });
-                    window.dataLayer.push({ event:'begin_checkout',ecommerce:tracking });
-                }
-                sessionStorage.setItem(PENDING_ORDER_KEY,JSON.stringify(tracking));
-            } catch (_) {}
-            var pixelParams={value:order.totalPrice,currency:'THB',content_name:order.product,content_category:'Raptor Sport Order',content_type:'product',num_items:order.quantity};
-            try {
-                if(typeof window.trackRaptorPixel==='function') {
-                    window.trackRaptorPixel('InitiateCheckout',pixelParams);
-                    window.trackRaptorPixel('RaptorFormSubmitStarted',pixelParams,true);
-                } else RaptorOrders.track('InitiateCheckout',pixelParams);
-            } catch (_) { /* Tracking must never prevent checkout. */ }
-            var response = await fetch(order.payment_method === 'STRIPE' ? '/api/create-checkout-session' : '/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order), signal: AbortSignal.timeout(45000) });
+            var response = await fetch(order.payment_method === 'STRIPE' ? '/api/create-checkout-session' : '/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order) });
             var data = await response.json();
             if (!response.ok || (order.payment_method === 'STRIPE' ? !data.url : !data.ok)) throw new Error(data.error || 'ไม่สามารถบันทึกคำสั่งซื้อได้');
+            if (order.payment_method === 'COD') {
+                if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: order.totalPrice, currency: 'THB', content_name: order.product, num_items: order.quantity });
+            }
             window.location.href = data.url || '/thank-you.html?order_ref=' + encodeURIComponent(order.order_ref);
         } catch (error) {
-            if (data?.code === 'CHECKOUT_EXPIRED') { delete form.dataset.orderSignature; }
+            form.dataset.submitting = '0';
             if (button) { button.disabled = false; button.innerHTML = originalText; if (window.RaptorPromotions) RaptorPromotions.update(form); }
-            alert(error.name === 'TimeoutError' ? 'ใช้เวลานานกว่าปกติ กรุณากดอีกครั้งเพื่อตรวจสอบออเดอร์เดิม' : error.message || 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
-        } finally { form.dataset.submitting = '0'; }
+            alert(error.message || 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+        }
     }, true);
 }());

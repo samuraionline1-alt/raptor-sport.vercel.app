@@ -8,15 +8,15 @@
     <title>RAPTOR B2B Wholesale Portal</title>
     <meta name="description" content="พื้นที่สั่งซื้อสินค้าราคาส่งสำหรับตัวแทนจำหน่าย RAPTOR ที่ได้รับอนุมัติ">
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TW2P4VN5');</script>
-    <script src="/gtm-ecommerce.js?v=tracking-20261021" defer></script>
-    <script src="/product-catalog.js?v=secure-20261020"></script>
-    <script src="/order-context.js?v=secure-20261020"></script>
+    <script src="/order-context.js?v=order-ref-20261017"></script>
     <script>
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '462184846324554'); fbq('track', 'PageView'); fbq('trackCustom', 'PageView whole sale RAPTOR');
     </script>
-    <link rel="stylesheet" href="/assets/site.css?v=secure-20261020">
-    <link rel="stylesheet" href="/assets/vendor/kanit.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: Kanit, sans-serif; }
         .product-card { background: linear-gradient(145deg, rgba(31,41,55,.96), rgba(17,24,39,.96)); }
@@ -24,7 +24,6 @@
         .modal-open { overflow:hidden; }
         input:focus, textarea:focus { outline:none; border-color:#fb923c; box-shadow:0 0 0 3px rgba(251,146,60,.15); }
     </style>
-<link rel="stylesheet" href="/form-inputs.css?v=ios-focus-20261021">
 </head>
 <body class="min-h-screen bg-zinc-950 text-zinc-100">
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TW2P4VN5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -113,11 +112,11 @@
             <div class="flex items-center justify-between"><h2 id="orderTitle" class="text-2xl font-bold">ข้อมูลผู้สั่งซื้อ</h2><button id="closeOrder" type="button" class="rounded-lg p-2 text-2xl text-zinc-400" aria-label="ปิด">&times;</button></div>
             <div class="mt-4 rounded-xl border border-orange-500/30 bg-orange-500/10 p-3 text-center text-sm font-semibold text-orange-200">💳 ชำระเงินผ่าน QR PromptPay หรือ บัตรเครดิต/เดบิต เท่านั้น (งดบริการเก็บเงินปลายทางสำหรับเรทราคาส่ง)</div>
             <form id="orderForm" class="mt-6 grid gap-4 sm:grid-cols-2">
-                <label class="block sm:col-span-2"><span class="mb-1 block text-sm text-zinc-300">ชื่อ-นามสกุล / ชื่อร้านค้าหรือบริษัท *</span><input name="name" maxlength="200" required autocomplete="name" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5" type="text"></label>
+                <label class="block sm:col-span-2"><span class="mb-1 block text-sm text-zinc-300">ชื่อ-นามสกุล / ชื่อร้านค้าหรือบริษัท *</span><input name="name" required autocomplete="name" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5" type="text"></label>
                 <label class="block sm:col-span-2"><span class="mb-1 block text-sm text-zinc-300">เลขประจำตัวผู้เสียภาษี 13 หลัก (สำหรับออกใบกำกับภาษี VAT 7% - ถ้ามี)</span><input name="tax_id" pattern="[0-9]{13}" maxlength="13" inputmode="numeric" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5" type="text"></label>
-                <label class="block"><span class="mb-1 block text-sm text-zinc-300">อีเมลสำหรับรับใบเสร็จและใบกำกับภาษี *</span><input name="email" maxlength="254" required autocomplete="email" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5" type="email"></label>
+                <label class="block"><span class="mb-1 block text-sm text-zinc-300">อีเมลสำหรับรับใบเสร็จและใบกำกับภาษี *</span><input name="email" required autocomplete="email" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5" type="email"></label>
                 <label class="block"><span class="mb-1 block text-sm text-zinc-300">เบอร์โทรศัพท์ติดต่อ (10 หลัก) *</span><input name="phone" required pattern="^0[689][0-9]{8}$" maxlength="10" inputmode="numeric" autocomplete="tel" title="กรุณากรอกเบอร์มือถือไทย 10 หลัก เริ่มต้นด้วย 06, 08 หรือ 09" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5" type="tel"></label>
-                <label class="block sm:col-span-2"><span class="mb-1 block text-sm text-zinc-300">ที่อยู่สำหรับจัดส่งสินค้าและออกใบกำกับภาษี *</span><textarea name="address" maxlength="500" required autocomplete="street-address" rows="3" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5"></textarea></label>
+                <label class="block sm:col-span-2"><span class="mb-1 block text-sm text-zinc-300">ที่อยู่สำหรับจัดส่งสินค้าและออกใบกำกับภาษี *</span><textarea name="address" required autocomplete="street-address" rows="3" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5"></textarea></label>
                 <div class="rounded-xl bg-zinc-950 p-4 text-sm sm:col-span-2"><p>ยอดสุทธิรวมภาษีมูลค่าเพิ่ม (VAT 7%): <b id="orderAmount" class="text-orange-400"></b></p><p class="mt-2 text-zinc-300">ช่องทางชำระเงิน: สแกน QR PromptPay / บัตรเครดิต (Stripe Official Secure Checkout)</p></div>
                 <p id="formStatus" class="hidden rounded-lg p-3 text-sm sm:col-span-2" role="status"></p>
                 <button id="submitOrder" type="submit" class="rounded-xl bg-orange-500 py-3.5 text-lg font-bold text-zinc-950 hover:bg-orange-400 disabled:cursor-wait disabled:opacity-60 sm:col-span-2">ดำเนินการชำระเงิน (QR PromptPay / บัตรเครดิต)</button>
@@ -126,7 +125,18 @@
     </div>
 
     <script>
-        const products = RaptorCatalog.wholesale;
+        const products = [
+            {id:'p1',name:'สเปรย์เย็น (Raptor Sport Cooling Spray)',detail:'ขนาด 250ml / สูตรน้ำแข็งดับเบิ้ลคูล สำหรับนักกีฬา',image:'../raptor-sport-cooling-spray.png',defaultPrice:100,tiers:[{min:50,price:95},{min:100,price:85},{min:1000,price:75},{min:10000,price:65}]},
+            {id:'p2',name:'RAPTOR ELITE PRO สเปรย์สูตรวอร์มอัพ',detail:'ขนาด 250ml / วอร์มกล้ามเนื้อก่อนและหลังกีฬา คลายปวด',image:'../raptor-elite-pro-warming-spray-250ml.png',defaultPrice:100,tiers:[{min:50,price:95},{min:100,price:85},{min:1000,price:75},{min:10000,price:65}]},
+            {id:'p3',name:'น้ำมันนวดหัวลูกกลิ้ง (Raptor Herbal Roll-On)',detail:'ขนาด 10ml / หัวลูกกลิ้งสแตนเลส สารสกัดธรรมชาติ',image:'../raptor-herbal-roll-on.png',defaultPrice:75,tiers:[{min:50,price:71},{min:100,price:68},{min:1000,price:66},{min:10000,price:65}]},
+            {id:'p4',name:'แผ่นแปะเย็นประคบ (Raptor Cool Patch)',detail:'บรรจุ 6 แผ่น/กล่อง | ขนาด 7x10 cm แอดวานซ์เมนทอล',image:'../raptor-cool-patch.png',defaultPrice:98,tiers:[{min:50,price:93},{min:100,price:90},{min:1000,price:88},{min:10000,price:86}]},
+            {id:'p5',name:'เจลให้พลังงานทันที (Raptor Go Energy Gel)',detail:'รสโคล่า บรรจุ 10 ซอง/กล่องใหญ่ ให้พลังงาน 120 kcal',image:'../raptor-go-energy-gel.png',defaultPrice:280,tiers:[{min:50,price:255},{min:100,price:235},{min:1000,price:210},{min:10000,price:190}]},
+            {id:'p6',name:'RAPTOR V-MIX เครื่องดื่ม วิตามิน เกลือแร่ อิเล็กโทรไลท์',detail:'กลิ่นแตงโม วิตามิน B1/B6/B12 | บรรจุ 6g x 20 ซอง',image:'../raptor-v-mix-electrolyte-drink.png',defaultPrice:300,tiers:[{min:50,price:275},{min:100,price:260},{min:1000,price:230},{min:10000,price:220}]},
+            {id:'p7',name:'น้ำมันนวดสำหรับนักกีฬา (RAPTOR Sport & Therapy Oil)',detail:'ขนาด 100ml / นวดคลายกล้ามเนื้อ ซึมไวไม่เหนียวเหนอะหนะ',image:'../raptor-sport-therapy-oil.png',defaultPrice:100,tiers:[{min:50,price:95},{min:100,price:85},{min:1000,price:75},{min:10000,price:65}]},
+            {id:'p8',name:'เจลสมุนไพรสูตรเย็น (RAPTOR Herbal Cooling Gel)',detail:'ขนาด 100g / เนื้อเจลซึมไว บรรเทาอาการปวดเมื่อย',image:'../raptor-herbal-cooling-gel.png',defaultPrice:170,tiers:[{min:50,price:155},{min:100,price:140},{min:1000,price:125},{min:10000,price:110}]},
+            {id:'p9',name:'สเปรย์ฉีดเท้าลดกลิ่นอับ (RAPTOR Sport Foot Spray)',detail:'ขนาด 100ml / ลดกลิ่นอับ ช่วยคืนความเย็นสดชื่น',image:'../raptor-sport-foot-spray.png',defaultPrice:100,tiers:[{min:50,price:95},{min:100,price:85},{min:1000,price:75},{min:10000,price:65}]},
+            {id:'p10',name:'แชมพูสูตรเย็นสำหรับนักกีฬา (RAPTOR Ice Defense Sport Shampoo)',detail:'ขนาด 500ml / ขจัดคราบเหงื่อไคล เย็นสดชื่นหลังเล่นกีฬา',image:'../raptor-ice-defense-sport-shampoo.png',defaultPrice:120,tiers:[{min:50,price:110},{min:100,price:99},{min:1000,price:89},{min:10000,price:79}]}
+        ];
         const cart = {};
         let currentOrderSnapshot = null;
         const money = value => new Intl.NumberFormat('th-TH').format(value) + ' ฿';
@@ -210,7 +220,7 @@
         function clearCart() { Object.keys(cart).forEach(key => delete cart[key]); updateUI(); }
         function renderThankYouPage(receipt = currentOrderSnapshot) {
             document.getElementById('orderModal').classList.add('hidden'); document.getElementById('orderModal').classList.remove('flex');
-            document.getElementById('portalContent').innerHTML = `<section id="thank-you-page" class="mx-auto max-w-3xl px-4 py-16 text-center sm:py-24"><div class="rounded-3xl border border-emerald-500/30 bg-zinc-900 p-6 shadow-2xl sm:p-12"><div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500 text-3xl text-zinc-950">✓</div><h1 id="receipt-title" class="mt-6 text-3xl font-bold sm:text-4xl">${receipt.confirmed ? "ชำระเงินสำเร็จ" : "กำลังตรวจสอบคำสั่งซื้อ"}</h1><p class="mt-3 text-zinc-300">${receipt.confirmed ? "เราได้รับคำสั่งซื้อแล้ว เจ้าหน้าที่จะตรวจสอบและจัดเตรียมสินค้า" : "กรุณารอระบบยืนยันสถานะก่อน"}</p><div class="mt-8 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6"><p>ยอดชำระรวม VAT 7%</p><p class="mt-2 text-3xl font-bold text-emerald-400">${formatBaht(Number(receipt.grandTotal) || 0)}</p><p class="mt-2">จำนวน ${(Number(receipt.totalQty) || 0).toLocaleString()} ชิ้น</p></div><a class="mt-7 inline-block rounded-xl bg-emerald-500 px-7 py-3 font-bold text-zinc-950 hover:bg-emerald-400" href="https://lin.ee/qtuszPa">Add LINE @raptor</a></div></section>`;
+            document.getElementById('portalContent').innerHTML = `<section id="thank-you-page" class="mx-auto max-w-3xl px-4 py-16 text-center sm:py-24"><div class="rounded-3xl border border-emerald-500/30 bg-zinc-900 p-6 shadow-2xl sm:p-12"><div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500 text-3xl text-zinc-950">✓</div><h1 class="mt-6 text-3xl font-bold sm:text-4xl">ชำระเงินสำเร็จ</h1><p class="mt-3 text-zinc-300">เราได้รับใบสั่งซื้อราคาส่งของคุณแล้ว เจ้าหน้าที่จะตรวจสอบและจัดเตรียมสินค้า</p><div class="mt-8 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6"><p>ยอดชำระรวม VAT 7%</p><p class="mt-2 text-3xl font-bold text-emerald-400">${formatBaht(Number(receipt.grandTotal) || 0)}</p><p class="mt-2">จำนวน ${(Number(receipt.totalQty) || 0).toLocaleString()} ชิ้น</p></div><a class="mt-7 inline-block rounded-xl bg-emerald-500 px-7 py-3 font-bold text-zinc-950 hover:bg-emerald-400" href="https://lin.ee/qtuszPa">Add LINE @raptor</a></div></section>`;
             document.body.classList.remove('modal-open'); window.scrollTo({top:0,behavior:'smooth'});
         }
 
@@ -227,47 +237,40 @@
         document.getElementById('orderForm').addEventListener('submit', async event => {
             event.preventDefault(); if (!currentOrderSnapshot || !event.currentTarget.reportValidity()) return;
             const form = event.currentTarget, submit = document.getElementById('submitOrder'), status = document.getElementById('formStatus');
-            if (submit.disabled) return;
             submit.disabled = true; submit.textContent = 'กำลังส่งคำสั่งซื้อ…'; status.className = 'hidden';
-            try {
             const customer = Object.fromEntries(new FormData(form).entries());
             const cleanPhone = RaptorOrders.cleanPhone(customer.phone);
             const signature = JSON.stringify({customer, currentOrderSnapshot});
-            if (form.dataset.orderSignature !== signature) { form.dataset.orderSignature = signature; form.dataset.orderRef = RaptorOrders.createRef(cleanPhone); form.dataset.receiptToken = RaptorOrders.createToken(); }
+            if (form.dataset.orderSignature !== signature) { form.dataset.orderSignature = signature; form.dataset.orderRef = RaptorOrders.createRef(cleanPhone); }
             const orderRef = form.dataset.orderRef;
             const product = currentOrderSnapshot.lines.map(line => `${line.name} × ${line.qty}`).join(', ');
             const quantity = currentOrderSnapshot.totalQty, totalPrice = currentOrderSnapshot.grandTotal;
             const customerName = customer.name, address = customer.address;
             const bundleTier = `เซ็ต ${quantity} ชิ้น (฿${totalPrice})`;
             const orderDetails = `รหัส: #${orderRef} | สินค้า: ${product} (จำนวน ${quantity} ชิ้น) | ยอดสุทธิ: ฿${totalPrice} | ลูกค้า: ${customerName} (${cleanPhone}) | ที่อยู่: ${address}`;
-            const order = {order_ref:orderRef,receipt_token:form.dataset.receiptToken, customer_name:customer.name, phone:cleanPhone, address:customer.address,
+            const order = {order_ref:orderRef, customer_name:customer.name, phone:cleanPhone, address:customer.address,
                 product:product, note:customer.tax_id ? 'เลขประจำตัวผู้เสียภาษี: ' + customer.tax_id : '', payment_method:'STRIPE', page_url:window.location.href, quantity:currentOrderSnapshot.totalQty, total_price:currentOrderSnapshot.grandTotal};
             RaptorOrders.save(order);
-                RaptorOrders.track('InitiateCheckout', {value:currentOrderSnapshot.grandTotal,currency:'THB',content_name:'B2B Wholesale Checkout'});
-                try { window.dataLayer = window.dataLayer || []; window.dataLayer.push({event:'begin_wholesale_checkout',value:currentOrderSnapshot.grandTotal,currency:'THB'}); } catch (_) {}
-                const checkoutResponse = await fetch('/api/create-checkout-session', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...order,items:currentOrderSnapshot.lines.map(line => ({id:line.id,qty:line.qty})), product:product,quantity:currentOrderSnapshot.totalQty,totalPrice:currentOrderSnapshot.grandTotal,bundleTier:bundleTier,customer_name:customer.name,email:customer.email,phone:cleanPhone,address:customer.address,order_details:orderDetails,page_url:'https://www.raptorthailand.com/wholesale/',is_wholesale:true}),signal:AbortSignal.timeout(45000)});
+            const payload = {...customer, ...order, price:`฿${totalPrice}`, total_price:`฿${totalPrice}`, bundle_tier:bundleTier, bundle_tier_choice:bundleTier, order_details:orderDetails, payment_status:'Pending Online Payment (Stripe)', items:currentOrderSnapshot.lines.map(({id,name,qty,unitPrice}) => ({id,name,qty,unitPrice})), totalQty:currentOrderSnapshot.totalQty, subtotal:currentOrderSnapshot.subtotal, shippingCost:currentOrderSnapshot.shippingCost, vatCost:currentOrderSnapshot.vatCost, grandTotal:currentOrderSnapshot.grandTotal, _subject:'New RAPTOR B2B Wholesale Order & Tax Invoice'};
+            try {
+                if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', {value:currentOrderSnapshot.grandTotal,currency:'THB',content_name:'B2B Wholesale Checkout'});
+                window.dataLayer = window.dataLayer || []; window.dataLayer.push({event:'begin_wholesale_checkout',value:currentOrderSnapshot.grandTotal,currency:'THB'});
+                const checkoutResponse = await fetch('/api/create-checkout-session', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...order, product:product,quantity:currentOrderSnapshot.totalQty,totalPrice:currentOrderSnapshot.grandTotal,bundleTier:bundleTier,customer_name:customer.name,email:customer.email,phone:cleanPhone,address:customer.address,order_details:orderDetails,page_url:'https://www.raptorthailand.com/wholesale/',is_wholesale:true})});
                 const checkout = await checkoutResponse.json();
-                if (checkout.code === 'CHECKOUT_EXPIRED') delete form.dataset.orderSignature;
                 if (!checkoutResponse.ok || !checkout.url) throw new Error(checkout.error || 'ไม่สามารถเปิดหน้าชำระเงินได้ กรุณาลองอีกครั้ง');
                 window.location.assign(checkout.url);
             } catch (error) {
                 status.className = 'rounded-lg bg-red-500/10 p-3 text-sm text-red-300 sm:col-span-2'; status.textContent = error.message; submit.disabled = false; submit.textContent = 'ดำเนินการชำระเงิน (QR PromptPay / บัตรเครดิต)';
-            } finally { submit.disabled = false; }
+            }
         });
         ['cartModal','orderModal'].forEach(id => document.getElementById(id).addEventListener('click', event => { if (event.target.id === id) toggleModal(id, false); }));
         document.addEventListener('keydown', event => { if (event.key === 'Escape') { toggleModal('cartModal', false); toggleModal('orderModal', false); } });
         const paymentParams = new URLSearchParams(window.location.search);
         if (paymentParams.get('payment') === 'stripe_success' || paymentParams.get('paid') === '1') {
-            renderThankYouPage({grandTotal:0,totalQty:0});
+            renderThankYouPage({grandTotal:paymentParams.get('value'),totalQty:paymentParams.get('qty')});
             const reference = document.createElement('p');
             reference.id = 'order-reference'; reference.className = 'mt-4 text-lg font-bold text-orange-300';
             document.querySelector('#thank-you-page h1').after(reference);
-            document.addEventListener('raptor:order-confirmed', event => {
-                renderThankYouPage({confirmed:true,grandTotal:event.detail.total_price,totalQty:event.detail.quantity});
-                const ref = document.createElement('p'); ref.id = 'order-reference';
-                ref.textContent = 'รหัสคำสั่งซื้อ: ' + event.detail.order_ref;
-                document.getElementById('receipt-title').after(ref);
-            });
             RaptorOrders.confirm('wholesale');
         }
         else updateUI();

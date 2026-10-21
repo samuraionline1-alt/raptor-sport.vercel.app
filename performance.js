@@ -8,11 +8,8 @@
         if (window.Chart) return Promise.resolve();
         if (!chartPromise) chartPromise = new Promise(function (resolve, reject) {
             const script = document.createElement('script');
-            script.src = '/assets/vendor/chart.umd-4.5.1.min.js';
-            script.onload = function () {
-                if (window.Chart) { if (reducedMotion.matches) window.Chart.defaults.animation = false; resolve(); }
-                else { chartPromise = null; script.remove(); reject(new Error('Chart unavailable')); }
-            };
+            script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js';
+            script.onload = resolve;
             script.onerror = function () { chartPromise = null; script.remove(); reject(new Error('Chart unavailable')); };
             document.head.appendChild(script);
         });
@@ -23,29 +20,9 @@
             const canvas = document.getElementById(id);
             if (!canvas || watchedCharts.has(canvas)) return;
             watchedCharts.add(canvas);
-            let drawing = false;
-            let status;
             async function draw() {
-                if (drawing) return;
-                drawing = true;
-                const retry = status?.querySelector('button');
-                if (retry) retry.disabled = true;
-                try {
-                    await loadCharts(); render();
-                    status?.remove(); status = null;
-                } catch (_) {
-                    // Keep a usable retry action rather than an unexplained empty canvas.
-                    if (!status) {
-                        status = document.createElement('div');
-                        status.className = 'chart-load-status'; status.setAttribute('role','status');
-                        const text = document.createElement('span');
-                        text.textContent = 'ยังโหลดกราฟไม่ได้ กรุณาลองอีกครั้ง';
-                        const button = document.createElement('button'); button.type = 'button';
-                        button.textContent = 'โหลดกราฟอีกครั้ง'; button.addEventListener('click',draw);
-                        status.append(text,button); canvas.parentElement.appendChild(status);
-                    }
-                    status.querySelector('button').disabled = false;
-                } finally { drawing = false; }
+                try { await loadCharts(); render(); }
+                catch (_) { watchedCharts.delete(canvas); }
             }
             if (!('IntersectionObserver' in window)) { draw(); return; }
             const observer = new IntersectionObserver(function (entries) {
@@ -59,87 +36,7 @@
     document.addEventListener('visibilitychange', function () {
         document.documentElement.classList.toggle('page-paused', document.hidden);
     });
-    function restoreLogoMotion() {
-        const logos = Array.from(document.querySelectorAll('video.logo-premium-video'));
-        if (!logos.length) return;
-        const visibility = new WeakMap();
-        let completed = false, active = null, position = 0, run = 0;
-        let expectedHomeHashChange = null;
-        function sync(video) {
-            const visible = video.getClientRects().length > 0 && visibility.get(video) !== false;
-            if (completed || document.hidden || reducedMotion.matches || !visible) {
-                if (video === active && !completed) position = video.currentTime;
-                video.pause();
-                video.parentElement.dataset.logoState = completed ? 'completed' : 'paused';
-                return;
-            }
-            video.muted = true; video.defaultMuted = true; video.loop = false;
-            if (!video.getAttribute('src') && video.dataset.logoSrc) video.src = video.dataset.logoSrc;
-            if (active !== video) {
-                if (active) { position = active.currentTime; active.pause(); }
-                if (position > 0) video.currentTime = position;
-                active = video;
-            }
-            const currentRun = run;
-            const playback = video.play();
-            if (playback?.catch) playback.catch(function () {
-                if (run === currentRun && !completed && active === video) video.parentElement.dataset.logoState = 'fallback';
-            });
-        }
-        function syncAll() { logos.forEach(sync); }
-        function restart() {
-            run++; completed = false; position = 0; active = null;
-            logos.forEach(function (video) { video.pause(); video.currentTime = 0; });
-            syncAll();
-        }
-        logos.forEach(function (video) {
-            video.loop = false;
-            video.addEventListener('playing', function () {
-                if (completed || active !== video) { video.pause(); return; }
-                video.parentElement.dataset.logoState = 'playing';
-            });
-            video.addEventListener('ended', function () {
-                if (active !== video) return;
-                completed = true; syncAll();
-                // Return to the opening cover rather than leaving the final video frame.
-                logos.forEach(function (logo) { logo.currentTime = 0; });
-            });
-            video.addEventListener('error', function () {
-                if (!completed && active === video) video.parentElement.dataset.logoState = 'fallback';
-            });
-        });
-        document.addEventListener('click', function (event) {
-            const link = event.target.closest?.('a[href]');
-            if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-            const url = new URL(link.href, location.href);
-            if (url.origin === location.origin && url.pathname === location.pathname && url.hash === '#home') {
-                expectedHomeHashChange = location.hash !== '#home' ? url.href : null;
-                restart();
-            }
-        });
-        window.addEventListener('hashchange', function (event) {
-            if (event.newURL === expectedHomeHashChange) { expectedHomeHashChange = null; return; }
-            expectedHomeHashChange = null;
-            if (location.hash === '#home') restart();
-        });
-        window.addEventListener('pageshow', function (event) {
-            if (event.persisted) { expectedHomeHashChange = null; restart(); }
-        });
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) { visibility.set(entry.target, entry.isIntersecting); sync(entry.target); });
-            });
-            logos.forEach(function (video) { observer.observe(video); });
-        }
-        // Safari may refuse autoplay in Low Power Mode. Retry after a user gesture.
-        document.addEventListener('pointerdown',syncAll,{passive:true});
-        document.addEventListener('visibilitychange',syncAll);
-        reducedMotion.addEventListener('change',syncAll);
-        compactScreen.addEventListener('change',syncAll);
-        syncAll();
-    }
     document.addEventListener('DOMContentLoaded', function () {
-        restoreLogoMotion();
         // Mobile/reduced-motion CSS already stops decoration; avoid extra observer layout work.
         if ('IntersectionObserver' in window && !compactScreen.matches && !reducedMotion.matches) {
             const observer = new IntersectionObserver(function (entries) {
