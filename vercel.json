@@ -50,6 +50,16 @@
   ],
   "redirects": [
     {
+      "source": "/assets/optimized/raptor-logo-still.webp",
+      "destination": "/assets/optimized/raptor-brand-logo.png",
+      "permanent": false
+    },
+    {
+      "source": "/assets/optimized/raptor-logo-complete.webp",
+      "destination": "/assets/optimized/raptor-brand-logo.png",
+      "permanent": false
+    },
+    {
       "source": "/products/raptor-speed-water-charge/",
       "destination": "/products/raptor-v-mix/",
       "permanent": true
