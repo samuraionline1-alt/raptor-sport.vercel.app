@@ -299,3 +299,7 @@ invalid value cannot block checkout. Customer name/address typing does not rebui
 price summaries. Browser coverage repeatedly switches every product form on mobile
 and desktop, checks custom quantities and exact prices, and carries a custom
 7-item order plus coupon through real local checkout handlers and receipt storage.
+
+`form-inputs.css` keeps mobile/touch text controls at least 16px to avoid Safari's
+focus auto-zoom while preserving normal user pinch zoom. Controls fit their
+containers; wholesale product grid items can shrink to fit narrow screens.

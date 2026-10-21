@@ -1,0 +1,13 @@
+/* iOS Safari zooms focused text controls smaller than 16px. Keep manual zoom available. */
+@media (max-width: 767px), (pointer: coarse) {
+    input:is([type="text"], [type="tel"], [type="email"], [type="number"], [type="search"], [type="url"], [type="password"], :not([type])),
+    textarea, select {
+        font-size: 16px !important;
+        box-sizing: border-box;
+        min-width: 0;
+        max-width: 100%;
+    }
+}
+/* Intrinsic product-card widths must not widen the wholesale checkout page. */
+#productGrid, #productGrid > .product-card, #orderSummary { min-width: 0; }
+#productGrid .product-card h3 { overflow-wrap: anywhere; }

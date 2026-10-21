@@ -71,6 +71,14 @@ try {
    const form=page.locator('.raptor-order-form');
    if (!await form.count()) continue;
    const unit=await form.evaluate(f=>Number(f.dataset.price.replace(/[^\d.]/g,'')));
+   if(viewport.width<768){
+    for(const control of await form.locator('input:not([type="hidden"]):not([type="radio"]):not([type="checkbox"]), textarea, select').all()){
+     if(!await control.isVisible())continue;
+     assert.ok(await control.evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=16),'Mobile text controls must avoid iOS focus zoom');
+    }
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Product page must fit mobile viewport');
+   }
+
    for (const tier of ['tier_1','tier_6','tier_2','custom','tier_3','custom','tier_1','tier_2']) {
     const radio=form.locator('[name="bundle_tier_choice"][value="'+tier+'"]');
     await radio.locator('..').click();
