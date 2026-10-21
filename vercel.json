@@ -50,6 +50,11 @@
   ],
   "redirects": [
     {
+      "source": "/favicon.ico",
+      "destination": "/favicon.png?v=original-raptor-20261021",
+      "permanent": false
+    },
+    {
       "source": "/assets/optimized/raptor-logo-still.webp",
       "destination": "/assets/optimized/raptor-brand-logo.png",
       "permanent": false

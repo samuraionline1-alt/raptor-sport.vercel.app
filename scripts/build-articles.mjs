@@ -42,6 +42,7 @@ ${article ? `<meta property="article:published_time" content="${article.publishe
 <link href="/assets/vendor/kanit.css?v=a11y-20261019" rel="stylesheet">
 <link rel="stylesheet" href="/articles.css?v=directory-20261012">
 <script type="application/ld+json">${json(structured)}</script>
+<link rel="icon" type="image/png" href="/favicon.png?v=original-raptor-20261021">
 </head><body>
 <a class="skip" href="#main">ข้ามไปเนื้อหา</a>
 <header class="site-header"><nav class="nav" aria-label="เมนูหลัก"><a class="brand" href="/">RAPTOR<span> SPORT</span></a><div class="nav-links"><a href="/#shop">ผลิตภัณฑ์</a><a href="/articles/" aria-current="${article?'true':'page'}">บทความ</a><a href="/#contact">ติดต่อเรา</a></div></nav></header>
