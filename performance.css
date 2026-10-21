@@ -34,3 +34,23 @@ header { backdrop-filter: none !important; background-color: #111827; }
   #home-slider { will-change: auto; }
   #home [class*="backdrop-blur"] { backdrop-filter: none !important; }
 }
+
+/* iOS zooms focused controls below 16px, leaving the checkout viewport pannable. */
+@media (max-width: 767px), (hover: none) and (pointer: coarse) {
+  input:not([type="hidden"]):not([type="radio"]):not([type="checkbox"]):not([type="submit"]):not([type="button"]),
+  textarea,
+  select {
+    font-size: max(16px, 1em) !important;
+  }
+  .raptor-order-form {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .raptor-order-form input,
+  .raptor-order-form textarea,
+  .raptor-order-form select {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
