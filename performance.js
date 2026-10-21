@@ -101,6 +101,8 @@
             video.addEventListener('ended', function () {
                 if (active !== video) return;
                 completed = true; syncAll();
+                // Return to the opening cover rather than leaving the final video frame.
+                logos.forEach(function (logo) { logo.currentTime = 0; });
             });
             video.addEventListener('error', function () {
                 if (!completed && active === video) video.parentElement.dataset.logoState = 'fallback';

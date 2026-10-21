@@ -9,7 +9,7 @@
     function pricing(form) {
         const unitPrice = Number(String(form.dataset.price || '0').replace(/[^\d.]/g, ''));
         const tier = form.querySelector('[name="bundle_tier_choice"]:checked')?.value || 'custom';
-        const quantity = tier.match(/^tier_(\d+)$/) ? Number(tier.slice(5)) : Math.max(1, parseInt(form.querySelector('[name="quantity"]')?.value, 10) || 1);
+        const quantity = tier.match(/^tier_(\d+)$/) ? Number(tier.slice(5)) : Math.max(4, parseInt(form.querySelector('[data-custom-quantity]')?.value, 10) || 4);
         const rate = { tier_2: 0.92, tier_3: 0.85, tier_6: 0.8 }[tier] || 1;
         const subtotal = Math.round(unitPrice * quantity * rate);
         const giftTier = tier === 'custom' ? 'tier_' + quantity : tier;
@@ -17,6 +17,17 @@
     }
     function update(form) {
         const order = pricing(form);
+        const custom = form.querySelector('[data-custom-quantity]');
+        if (custom) {
+            const selected = order.bundleTier === 'custom';
+            custom.classList.remove('hidden');
+            custom.hidden = !selected;
+            custom.disabled = !selected;
+            custom.required = selected;
+            custom.max = '100000';
+            custom.step = '1';
+        }
+        field(form, 'bundle_tier', order.bundleTier);
         field(form, 'quantity', order.quantity);
         ['coupon_code', 'discount_amount', 'free_gifts'].forEach(key => field(form, key, order[key]));
         field(form, 'total_price', order.totalPrice);
@@ -113,8 +124,12 @@
             box.querySelector('[data-remove-coupon]').addEventListener('click', () => { input.value = ''; form.dataset.appliedCoupon = ''; update(form); });
             box.querySelector('[data-quick-coupon]').addEventListener('click', () => { if (pricing(form).subtotal >= 250) { input.value = pricing(form).subtotal >= 450 ? 'RAPTOR50' : 'RAPTOR20'; apply(); } });
             input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); apply(); } });
-            form.addEventListener('change', () => update(form));
-            form.addEventListener('input', event => { if (event.target !== input) update(form); });
+            form.addEventListener('change', event => {
+                if (event.target.matches('[name="bundle_tier_choice"]')) update(form);
+            });
+            form.addEventListener('input', event => {
+                if (event.target.matches('[data-custom-quantity]')) update(form);
+            });
             form.addEventListener('reset', () => { form.dataset.appliedCoupon = ''; setTimeout(() => update(form), 0); });
             update(form);
         });

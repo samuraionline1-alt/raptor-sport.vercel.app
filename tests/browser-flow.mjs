@@ -82,9 +82,15 @@ try {
  await page.evaluate(()=>{const f=document.querySelector('.raptor-order-form');for(let n=f;n&&n!==document.body;n=n.parentElement)n.classList.remove('hidden');});
  const online=page.locator('.raptor-order-form');
  await online.locator('[name="customer_name"]').fill('Online buyer');await online.locator('[name="phone"]').fill('0812345678');await online.locator('[name="address"]').fill('Online test address');
+ await online.locator('[name="bundle_tier_choice"][value="custom"]').check();
+ await online.locator('[data-custom-quantity]').fill('7');
+ await online.locator('[data-coupon-input]').fill('RAPTOR50');
+ await online.locator('[data-apply-coupon]').click();
+ assert.equal(await online.locator('[name="quantity"]').inputValue(),'7');
+ assert.equal(Number(await online.locator('[name="total_price"]').inputValue()),1203);
  await online.locator('[name="payment_method"][value="STRIPE"]').check({force:true});await online.evaluate(f=>f.requestSubmit());
  await page.waitForURL(/thank-you.*payment=stripe_success/);await page.waitForFunction(()=>document.getElementById('order-status')?.textContent.includes('ชำระเงินสำเร็จ'));
- const onlineRef=new URL(page.url()).searchParams.get('order_ref');assert.equal(orders.get(onlineRef).payment_status,'paid');
+ const onlineRef=new URL(page.url()).searchParams.get('order_ref');assert.equal(orders.get(onlineRef).payment_status,'paid');assert.equal(orders.get(onlineRef).payload.quantity,7);assert.equal(orders.get(onlineRef).payload.total_price,1203);assert.equal(orders.get(onlineRef).payload.coupon_code,'RAPTOR50');
  rateLimits.clear();await page.goto(origin+'/wholesale/');
  // Every SKU is retained through frontend -> API -> order store -> paid receipt.
  for(let i=1;i<=10;i++){await page.locator('#qty-p'+i).fill('5');await page.locator('[data-add="p'+i+'"]').click();}

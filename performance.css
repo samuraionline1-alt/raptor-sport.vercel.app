@@ -43,3 +43,9 @@ header { backdrop-filter: none !important; background-color: #111827; }
 .logo-premium-shell[data-logo-state="fallback"] { animation: logoFallbackPulse 3s ease-in-out 1; }
 .chart-load-status { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem; background: #fff; color: #334155; font-size: .875rem; text-align: center; padding: 1rem; }
 .chart-load-status button { border: 1px solid #2563eb; border-radius: .5rem; padding: .5rem 1rem; color: #1d4ed8; background: #fff; cursor: pointer; }
+/* A completed pass shows the original cover, including after responsive changes. */
+.logo-premium-shell[data-logo-state="completed"] { background-image: url('/assets/optimized/raptor-logo-still.webp'); background-size: cover; background-position: center; }
+.logo-premium-shell[data-logo-state="completed"] .logo-premium-video { opacity: 0; }
+/* Selection feedback must follow the tap immediately. */
+[data-bundle-selector] > label { transition: none; touch-action: manipulation; }
+[data-custom-quantity][hidden] { display: none !important; }

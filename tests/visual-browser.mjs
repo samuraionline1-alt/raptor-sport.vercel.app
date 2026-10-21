@@ -42,6 +42,7 @@ try {
  };
  await isPlaying();assert.equal(await logo.evaluate(v=>v.muted&&!v.loop&&v.playsInline),true);
  await finish();
+ assert.equal(await logo.evaluate(v=>v.currentTime<.05&&getComputedStyle(v).opacity==='0'&&getComputedStyle(v.parentElement).backgroundImage.includes('raptor-logo-still.webp')),true,'Completed logo shows its original cover');
  await page.locator('#mobile-menu-btn').click();assert.equal(await page.locator('#mobile-menu-btn').getAttribute('aria-expanded'),'true');
  await page.locator('#mobile-menu-btn').click();
  await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));
@@ -61,6 +62,52 @@ try {
  await page.reload();await isPlaying();await finish();
  await page.goto(origin+'/articles/');await page.goBack();await isPlaying();
  console.log('PASS: logo single pass, stops after ending, Home/same-hash/reload/Back restart, no click/resize replay');
+ // Exercise real taps repeatedly, custom editing, prices and coupon/payment transitions.
+ const timings=[];
+ for (const viewport of [{width:390,height:844},{width:1280,height:900}]) {
+  await page.setViewportSize(viewport);
+  for (const slug of fs.readdirSync(path.join(root,'products'))) {
+   await page.goto(origin+'/products/'+slug+'/');
+   const form=page.locator('.raptor-order-form');
+   if (!await form.count()) continue;
+   const unit=await form.evaluate(f=>Number(f.dataset.price.replace(/[^\d.]/g,'')));
+   for (const tier of ['tier_1','tier_6','tier_2','custom','tier_3','custom','tier_1','tier_2']) {
+    const radio=form.locator('[name="bundle_tier_choice"][value="'+tier+'"]');
+    await radio.locator('..').click();
+    const custom=form.locator('[data-custom-quantity]');
+    assert.equal(await custom.isVisible(),tier==='custom',slug+' custom visibility');
+    if (tier==='custom') await custom.fill('7');
+    const n=tier==='custom'?7:Number(tier.slice(5));
+    assert.equal(await form.locator('[name="quantity"]').inputValue(),String(n));
+    const expected=Math.round(unit*n*({tier_2:.92,tier_3:.85,tier_6:.8}[tier]||1));
+    assert.equal(Number(await form.locator('[name="total_price"]').inputValue()),expected,slug+' price');
+    assert.ok((await form.locator('[data-order-price-summary]').textContent()).includes('('+n+' ชิ้น)'));
+   }
+   await form.locator('[name="bundle_tier_choice"][value="custom"]').locator('..').click();
+   const custom=form.locator('[data-custom-quantity]');
+   await custom.fill('3');assert.equal(await custom.evaluate(e=>e.checkValidity()),false);
+   await custom.fill('7');assert.equal(await custom.evaluate(e=>e.checkValidity()),true);
+   await form.locator('[name="bundle_tier_choice"][value="tier_2"]').locator('..').click();
+   assert.equal(await custom.isDisabled(),true,'Hidden invalid custom field must not block bundles');
+   await form.locator('[name="payment_method"][value="STRIPE"]').check();
+   assert.ok((await form.locator('button[type="submit"]').textContent()).includes('ออนไลน์'));
+   await form.locator('[name="payment_method"][value="COD"]').check();
+   const mutations=await form.evaluate(async f=>{
+    let count=0;const observer=new MutationObserver(rs=>count+=rs.length);
+    observer.observe(f.querySelector('[data-order-price-summary]'),{childList:true,subtree:true});
+    const name=f.querySelector('[name="customer_name"]');name.value='Test';name.dispatchEvent(new Event('input',{bubbles:true}));
+    await Promise.resolve();observer.disconnect();return count;
+   });
+   assert.equal(mutations,0,'Typing delivery details must not rebuild pricing');
+   const latency=await form.evaluate(f=>{
+    const start=performance.now();
+    for(const tier of ['tier_1','tier_6','tier_3','tier_2'])f.querySelector('[value="'+tier+'"]').click();
+    return performance.now()-start;
+   });
+   timings.push(latency);assert.ok(latency<150,'Four rapid selections exceeded 150ms: '+latency);
+  }
+ }
+ console.log('PASS: all product forms mobile/desktop repeated real selection, custom quantity, exact prices, payment methods; max four-selection handler time '+Math.max(...timings).toFixed(1)+'ms');
  let charts=0;
  for(const slug of fs.readdirSync(path.join(root,'products'))){
   await page.goto(origin+'/products/'+slug+'/');

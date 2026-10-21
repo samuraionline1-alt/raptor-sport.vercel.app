@@ -290,3 +290,11 @@ The logo plays once per homepage visit, then stays stopped even after generic
 clicks, viewport changes or returning to the tab. Refresh, an explicit Home/logo
 link, hash-history return to `#home`, or browser Back restoring the homepage starts
 a fresh single pass. The fallback CSS effect is also finite.
+
+On completion the logo returns to the original still cover. Retail bundle choices
+update quantity and prices synchronously. Custom quantities show an enabled,
+required numeric field (minimum 4); preset bundles disable that field so a hidden
+invalid value cannot block checkout. Customer name/address typing does not rebuild
+price summaries. Browser coverage repeatedly switches every product form on mobile
+and desktop, checks custom quantities and exact prices, and carries a custom
+7-item order plus coupon through real local checkout handlers and receipt storage.
