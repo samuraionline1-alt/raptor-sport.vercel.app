@@ -73,10 +73,14 @@ try {
  await form.evaluate(f=>f.requestSubmit());
  await page.waitForURL(/thank-you/);await page.waitForFunction(()=>document.getElementById('order-status')?.textContent.includes('ปลายทาง'));
  assert.ok(apiCalls.includes('/api/orders'));assert.ok(await page.locator('#receipt-title').textContent());
+ const receiptPixels=await page.evaluate(()=>window.fbq?.queue||[]);
+ assert.equal(receiptPixels.filter(e=>e[0]==='track'&&e[1]==='Purchase').length,1,'Receipt must initialize Meta and queue Purchase');
+ assert.equal(receiptPixels.filter(e=>e[0]==='track'&&e[1]==='Lead').length,1,'Restore legacy Lead');
+ assert.ok(receiptPixels.some(e=>e[1]==='RaptorOrderSubmitted_RAPTOR_SPORTS_ICE_COLD_SPRAY'));
  const ref=new URL(page.url()).searchParams.get('order_ref');assert.equal(orders.get(ref).payload.total_price,329);assert.equal(orders.size,1,'Retry never creates a duplicate COD order');
  const storage=await page.evaluate(()=>JSON.stringify(sessionStorage));assert.ok(!storage.includes('Test address'));assert.ok(!storage.includes('0812345678'));
  const purchaseCount=await page.evaluate(()=>dataLayer.filter(x=>x.event==='purchase').length);assert.equal(purchaseCount,1);
- await page.reload();await page.waitForFunction(()=>document.getElementById('order-status')?.textContent.includes('ปลายทาง'));assert.equal(await page.evaluate(()=>dataLayer.filter(x=>x.event==='purchase').length),0,'Receipt reload never counts a second purchase');
+ await page.reload();await page.waitForFunction(()=>document.getElementById('order-status')?.textContent.includes('ปลายทาง'));assert.equal(await page.evaluate(()=>dataLayer.filter(x=>x.event==='purchase').length),0,'Receipt reload never counts a second purchase');assert.equal(await page.evaluate(()=>(fbq.queue||[]).filter(e=>e[0]==='track'&&e[1]==='Purchase').length),0,'Meta Purchase must also deduplicate reloads');
  await page.goto(origin+'/wholesale/?paid=1');assert.ok(!(await page.locator('#receipt-title').textContent()).includes('ชำระเงินสำเร็จ'));assert.equal(await page.evaluate(()=>dataLayer.filter(x=>x.event==='purchase').length),0);
  rateLimits.clear();await page.goto(origin+'/products/raptor-cooling-spray/');
  await page.evaluate(()=>{const f=document.querySelector('.raptor-order-form');for(let n=f;n&&n!==document.body;n=n.parentElement)n.classList.remove('hidden');});

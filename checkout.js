@@ -116,7 +116,13 @@
                 window.dataLayer.push({ event:'begin_checkout',ecommerce:tracking });
                 sessionStorage.setItem(PENDING_ORDER_KEY,JSON.stringify(tracking));
             } catch (_) {}
-            RaptorOrders.track('InitiateCheckout',{value:order.totalPrice,currency:'THB',content_name:order.product,num_items:order.quantity});
+            var pixelParams={value:order.totalPrice,currency:'THB',content_name:order.product,content_category:'Raptor Sport Order',content_type:'product',num_items:order.quantity};
+            try {
+                if(typeof window.trackRaptorPixel==='function') {
+                    window.trackRaptorPixel('InitiateCheckout',pixelParams);
+                    window.trackRaptorPixel('RaptorFormSubmitStarted',pixelParams,true);
+                } else RaptorOrders.track('InitiateCheckout',pixelParams);
+            } catch (_) { /* Tracking must never prevent checkout. */ }
             var response = await fetch(order.payment_method === 'STRIPE' ? '/api/create-checkout-session' : '/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order), signal: AbortSignal.timeout(45000) });
             var data = await response.json();
             if (!response.ok || (order.payment_method === 'STRIPE' ? !data.url : !data.ok)) throw new Error(data.error || 'ไม่สามารถบันทึกคำสั่งซื้อได้');

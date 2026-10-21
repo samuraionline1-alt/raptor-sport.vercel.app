@@ -3,6 +3,7 @@
 
     var CURRENCY = 'THB';
     var PENDING_ORDER_KEY = 'raptorPendingOrder';
+    var sent = new Set();
 
     window.dataLayer = window.dataLayer || [];
 
@@ -66,16 +67,32 @@
     document.addEventListener('raptor:order-confirmed', function (event) {
         var receipt = event.detail;
         if (!receipt?.order_ref || !['paid','cod'].includes(receipt.payment_status)) return;
-        try {
-            var key = 'raptorPurchase:' + receipt.order_ref;
-            if (sessionStorage.getItem(key)) return;
-            // Mark before analytics: a broken tracking provider must not duplicate purchases on retry.
-            sessionStorage.setItem(key,'1');
-            var items = (receipt.items || []).map(function (line) { return {item_id:line.sku,item_name:line.name,quantity:line.quantity,price:line.line_total_cents / 100 / line.quantity}; });
-            pushEcommerce('purchase',{transaction_id:receipt.order_ref,currency:CURRENCY,value:receipt.total_price,items:items});
-            if (typeof window.fbq === 'function') window.fbq('track','Purchase',{value:receipt.total_price,currency:CURRENCY,content_name:receipt.product,num_items:receipt.quantity},{eventID:receipt.order_ref});
-            sessionStorage.removeItem(PENDING_ORDER_KEY);
-        } catch (_) { /* Receipt remains usable when analytics/storage is unavailable. */ }
+        var key = 'raptorPurchase:' + receipt.order_ref;
+        function seen(name) { if(sent.has(name))return true;try { return sessionStorage.getItem(name)==='1'; } catch (_) { return false; } }
+        function mark(name) { sent.add(name);try { sessionStorage.setItem(name,'1'); } catch (_) {} }
+        var items = (receipt.items || []).map(function (line) { return {item_id:line.sku,item_name:line.name,quantity:line.quantity,price:line.line_total_cents / 100 / line.quantity}; });
+        if(!seen(key)) {
+            try {
+                pushEcommerce('purchase',{transaction_id:receipt.order_ref,currency:CURRENCY,value:receipt.total_price,items:items});
+                mark(key);
+            } catch (_) { /* Another provider can still receive its conversion. */ }
+        }
+        var metaKey='raptorMetaPurchase:'+receipt.order_ref;
+        if(!seen(metaKey) && typeof window.fbq==='function') {
+            var name=items.length===1?items[0].item_name:receipt.product;
+            var suffix=String(name||'').replace(/[^A-Za-z0-9_]+/g,'_').replace(/^_+|_+$/g,'');
+            var params={value:receipt.total_price,currency:CURRENCY,content_name:name,content_category:'Raptor Sport Order',content_type:'product',num_items:receipt.quantity};
+            try {
+                window.fbq('track','Lead',params);
+                window.fbq('trackCustom','Lead_'+suffix,params);
+                window.fbq('track','Purchase',params,{eventID:receipt.order_ref});
+                window.fbq('trackCustom','Purchase_'+suffix,params,{eventID:receipt.order_ref+':custom'});
+                window.fbq('trackCustom','RaptorOrderSubmitted_'+suffix,params,{eventID:receipt.order_ref+':submitted'});
+                mark(metaKey);
+            } catch (_) { /* Retry on a later verified confirmation if Pixel is unavailable. */ }
+        }
+        try { sessionStorage.removeItem(PENDING_ORDER_KEY); } catch (_) {}
+
     });
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -83,6 +100,12 @@
         if (product) {
             var item = itemFromProduct(product);
             pushEcommerce('view_item', { currency: CURRENCY, value: item.price, items: [item] });
+            // Product pages replaced modal navigation; preserve the legacy product-view event.
+            try {
+                var params={content_name:item.item_name,content_category:'Raptor Sport Product',content_type:'product',value:item.price,currency:CURRENCY};
+                if(typeof window.trackRaptorPixel==='function')window.trackRaptorPixel('RaptorProductView',params,true);
+            } catch (_) {}
+
         }
 
         document.querySelectorAll('.raptor-order-form').forEach(function (form) {

@@ -303,3 +303,21 @@ and desktop, checks custom quantities and exact prices, and carries a custom
 `form-inputs.css` keeps mobile/touch text controls at least 16px to avoid Safari's
 focus auto-zoom while preserving normal user pinch zoom. Controls fit their
 containers; wholesale product grid items can shrink to fit narrow screens.
+
+Analytics recovery (2026-10-21): receipt pages explicitly initialize the existing
+Meta Pixel 462184846324554 before ecommerce confirmation. Verified receipts restore
+Lead, Purchase and their legacy product-specific custom names plus
+RaptorOrderSubmitted; valid retail submissions restore RaptorFormSubmitStarted.
+Product page views restore RaptorProductView now that navigation uses pages rather
+than modal handlers. GTM remains GTM-TW2P4VN5; existing view_item, begin_checkout and
+purchase data-layer contracts are retained. Google and Meta conversion guards are
+independent; refreshing a receipt does not count it again. Purchase remains tied
+to server-confirmed receipts, never arbitrary URL parameters or contact messages.
+The CSP explicitly permits Meta/Google collection and conversion-frame endpoints
+while still blocking unreviewed inline scripts and eval. GTM Custom HTML/Custom JS
+container configuration requires a separate authenticated container inspection.
+
+`npm run test:tracking` runs actual storefront/receipt scripts under deployed CSP
+with mocked provider scripts/collectors, validates legacy events across all12
+product pages, social clicks, submission, conversion and duplicate suppression.
+It does not establish that Meta Events Manager or Google reports received events.
