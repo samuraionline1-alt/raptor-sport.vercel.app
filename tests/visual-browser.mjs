@@ -42,7 +42,7 @@ try {
  };
  await isPlaying();assert.equal(await logo.evaluate(v=>v.muted&&!v.loop&&v.playsInline),true);
  await finish();
- assert.equal(await logo.evaluate(v=>v.currentTime<.05&&getComputedStyle(v).opacity==='0'&&getComputedStyle(v.parentElement).backgroundImage.includes('raptor-logo-still.webp')),true,'Completed logo shows its original cover');
+ assert.equal(await logo.evaluate(v=>v.currentTime<.05&&getComputedStyle(v).opacity==='0'&&getComputedStyle(v.parentElement).backgroundImage.includes('raptor-logo-cover.png')),true,'Completed logo shows its original cover');
  await page.locator('#mobile-menu-btn').click();assert.equal(await page.locator('#mobile-menu-btn').getAttribute('aria-expanded'),'true');
  await page.locator('#mobile-menu-btn').click();
  await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));

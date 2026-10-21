@@ -274,7 +274,8 @@ charts are covered by `npm run test:visual`, which uses the real vendored librar
 
 The homepage brand logo uses a 240-pixel H.264 copy of the original animation,
 without audio (about 121 kB), with muted inline single-pass playback and the existing
-still poster. Hidden/offscreen logos pause, reduced-motion preferences are
+black-and-white dinosaur poster (`assets/optimized/raptor-logo-cover.png`, copied
+from the original `Capture4646 (1).png`). Hidden/offscreen logos pause, reduced-motion preferences are
 respected, and an autoplay denial uses a small CSS fallback effect. A user gesture
 retries playback for mobile autoplay restrictions. Performance asset query versions
 are updated so returning browsers fetch the corrected loader and styles.
