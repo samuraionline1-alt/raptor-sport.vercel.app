@@ -7,6 +7,48 @@
 
     window.dataLayer = window.dataLayer || [];
 
+
+    // Event names are reporting contracts: do not derive them from SEO headings.
+    var legacySuffixes = {
+        'raptor-cool-patch': 'RAPTOR_COOL_PATCH',
+        'raptor-cooling-spray': 'RAPTOR_SPORTS_ICE_COLD_SPRAY',
+        'raptor-ice-cold-spray': 'RAPTOR_SPORTS_ICE_COLD_SPRAY',
+        'raptor-dual-action-pack': 'RAPTOR_DUAL_ACTION_PACK',
+        'raptor-go-energy-gel': 'RAPTOR_GO_ENERGY_GEL',
+        'raptor-herbal-cooling-gel': 'RAPTOR_HERBAL_COOLING_GEL',
+        'raptor-herbal-roll-on': 'RAPTOR_HERBAL_ROLL_ON',
+        'raptor-ice-defense-sport-shampoo': 'RAPTOR_ICE_DEFENSE_SPORT_SHAMPOO',
+        'raptor-sport-foot-spray': 'RAPTOR_SPORT_FOOT_SPRAY',
+        'raptor-sport-therapy-oil': 'RAPTOR_SPORT_THERAPY_OIL',
+        'raptor-v-mix': 'RAPTOR_V_MIX',
+        'raptor-warming-spray': 'RAPTOR_ELITE_PRO_WARMING_SPRAY'
+    };
+    function pageSku() {
+        var match = location.pathname.match(/^\/products\/([^/]+)/);
+        return match ? match[1] : '';
+    }
+    function legacySuffix(name, sku) {
+        return legacySuffixes[sku] || String(name || '').replace(/[^A-Za-z0-9_]+/g, '_').replace(/^_+|_+$/g, '');
+    }
+    function productParams(params) {
+        var payload = Object.assign({}, params || {});
+        var nameField = document.querySelector('.raptor-order-form [name="product"]');
+        if (payload.content_name && pageSku() && nameField && nameField.value) payload.content_name = nameField.value;
+        return payload;
+    }
+    // Reconnect the existing social, section, order-button and submit handlers.
+    // Static product bootstraps already send ViewContent and Viewcontent_* once.
+    window.trackRaptorPixel = function (eventName, params, isCustomEvent) {
+        try {
+            if (typeof window.fbq !== 'function') return;
+            var payload = productParams(params);
+            var suffix = payload.content_name ? legacySuffix(payload.content_name, pageSku()) : '';
+            var customName = suffix ? (eventName === 'ViewContent' ? 'Viewcontent' : eventName) + '_' + suffix : eventName;
+            if (!isCustomEvent) window.fbq('track', eventName, payload);
+            if (isCustomEvent || suffix) window.fbq('trackCustom', customName, payload);
+        } catch (_) { /* Tracking never blocks navigation or checkout. */ }
+    };
+
     function pushEcommerce(eventName, ecommerce) {
         window.dataLayer.push({ ecommerce: null });
         // The published Ads conversion reads value at the data-layer root.
@@ -17,6 +59,8 @@
             window.dataLayer.push(arguments);
         }('event', eventName, Object.assign({ send_to: 'G-XC85CBJKQW' }, ecommerce)));
     }
+
+    window.RaptorEcommerce = { track: pushEcommerce };
 
     function numberFrom(value) {
         var number = Number(String(value == null ? '' : value).replace(/[^0-9.]/g, ''));
@@ -86,7 +130,7 @@
         var metaKey='raptorMetaPurchase:'+receipt.order_ref;
         if(!seen(metaKey) && typeof window.fbq==='function') {
             var name=items.length===1?items[0].item_name:receipt.product;
-            var suffix=String(name||'').replace(/[^A-Za-z0-9_]+/g,'_').replace(/^_+|_+$/g,'');
+            var suffix=legacySuffix(name, items.length===1 ? items[0].item_id : '');
             var params={value:receipt.total_price,currency:CURRENCY,content_name:name,content_category:'Raptor Sport Order',content_type:'product',num_items:receipt.quantity};
             try {
                 window.fbq('track','Lead',params);
@@ -108,10 +152,33 @@
             pushEcommerce('view_item', { currency: CURRENCY, value: item.price, items: [item] });
             // Product pages replaced modal navigation; preserve the legacy product-view event.
             try {
-                var params={content_name:item.item_name,content_category:'Raptor Sport Product',content_type:'product',value:item.price,currency:CURRENCY};
+                var params=productParams({content_name:item.item_name,content_category:'Raptor Sport Product',content_type:'product',value:item.price,currency:CURRENCY});
                 if(typeof window.trackRaptorPixel==='function')window.trackRaptorPixel('RaptorProductView',params,true);
             } catch (_) {}
 
+        }
+
+
+        // The shop is now a hash section rather than the old category/modal view.
+        var shop = document.getElementById('shop');
+        if (shop) {
+            var categorySent = false;
+            var observer;
+            function categoryView() {
+                if (categorySent || typeof window.fbq !== 'function') return;
+                window.fbq('trackCustom', 'ViewCategory', {content_name:'Raptor Sport Products',content_category:'Raptor Sport Product',currency:CURRENCY});
+                categorySent = true;
+                if (observer) observer.disconnect();
+            }
+            if ('IntersectionObserver' in window) {
+                observer = new IntersectionObserver(function (entries) {
+                    if (entries.some(function (entry) { return entry.isIntersecting; })) categoryView();
+                }, {threshold:0.1});
+                observer.observe(shop);
+            }
+            function hashCategoryView() { if (location.hash === '#shop') categoryView(); }
+            window.addEventListener('hashchange', hashCategoryView);
+            hashCategoryView();
         }
 
         document.querySelectorAll('.raptor-order-form').forEach(function (form) {

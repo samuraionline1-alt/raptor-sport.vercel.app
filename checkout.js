@@ -112,8 +112,11 @@
             var tracking = ecommerce(order);
             try {
                 window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({ ecommerce: null });
-                window.dataLayer.push({ event:'begin_checkout',ecommerce:tracking });
+                if (window.RaptorEcommerce) window.RaptorEcommerce.track('begin_checkout', tracking);
+                else {
+                    window.dataLayer.push({ ecommerce: null });
+                    window.dataLayer.push({ event:'begin_checkout',ecommerce:tracking });
+                }
                 sessionStorage.setItem(PENDING_ORDER_KEY,JSON.stringify(tracking));
             } catch (_) {}
             var pixelParams={value:order.totalPrice,currency:'THB',content_name:order.product,content_category:'Raptor Sport Order',content_type:'product',num_items:order.quantity};
