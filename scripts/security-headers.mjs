@@ -27,7 +27,7 @@ const csp=["default-src 'self'","base-uri 'self'","object-src 'none'","frame-anc
  "script-src 'self' https://www.googletagmanager.com https://connect.facebook.net https://www.google-analytics.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net "+[...scripts].sort().join(' '),
  "script-src-attr 'unsafe-hashes' "+[...handlers].sort().join(' '),
  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com","font-src 'self' https://fonts.gstatic.com","img-src 'self' data: https:","media-src 'self'",
- "connect-src 'self' https://jktnltfbyuvurhqmzhww.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://connect.facebook.net https://www.google.com https://www.google.co.th https://*.doubleclick.net https://www.googleadservices.com",
+ "connect-src 'self' https://jktnltfbyuvurhqmzhww.supabase.co https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.googletagmanager.com https://www.facebook.com https://connect.facebook.net https://7s-d309b5b93ece4e188e0aa4e9c7906f0f.ecs.us-west-1.on.aws https://bded8a3c6ae-1-1053047382554.us-central1.run.app https://www.google.com https://www.google.co.th https://*.doubleclick.net https://www.googleadservices.com",
  "frame-src https://www.googletagmanager.com https://www.facebook.com https://www.google.com https://www.google.co.th https://td.doubleclick.net"].join('; ');
 if(Buffer.byteLength(csp)>7500)throw new Error('CSP exceeds the response header budget');
 const config=JSON.parse(await readFile('vercel.json','utf8'));

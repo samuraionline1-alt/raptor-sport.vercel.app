@@ -9,7 +9,13 @@
 
     function pushEcommerce(eventName, ecommerce) {
         window.dataLayer.push({ ecommerce: null });
-        window.dataLayer.push({ event: eventName, ecommerce: ecommerce });
+        // The published Ads conversion reads value at the data-layer root.
+        window.dataLayer.push({ event: eventName, ecommerce: ecommerce, value: ecommerce.value, currency: ecommerce.currency, transaction_id: ecommerce.transaction_id || null });
+        // The published GTM v5 initializes GA4 but has no ecommerce event tags.
+        // Send to that existing GA4 destination without another config/PageView.
+        (function () {
+            window.dataLayer.push(arguments);
+        }('event', eventName, Object.assign({ send_to: 'G-XC85CBJKQW' }, ecommerce)));
     }
 
     function numberFrom(value) {
