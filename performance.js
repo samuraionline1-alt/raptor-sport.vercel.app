@@ -63,20 +63,65 @@
         const logos = Array.from(document.querySelectorAll('video.logo-premium-video'));
         if (!logos.length) return;
         const visibility = new WeakMap();
+        let completed = false, active = null, position = 0, run = 0;
+        let expectedHomeHashChange = null;
         function sync(video) {
             const visible = video.getClientRects().length > 0 && visibility.get(video) !== false;
-            if (document.hidden || reducedMotion.matches || !visible) {
-                video.pause(); video.parentElement.dataset.logoState = 'paused'; return;
+            if (completed || document.hidden || reducedMotion.matches || !visible) {
+                if (video === active && !completed) position = video.currentTime;
+                video.pause();
+                video.parentElement.dataset.logoState = completed ? 'completed' : 'paused';
+                return;
             }
-            video.muted = true; video.defaultMuted = true; video.loop = true;
+            video.muted = true; video.defaultMuted = true; video.loop = false;
             if (!video.getAttribute('src') && video.dataset.logoSrc) video.src = video.dataset.logoSrc;
+            if (active !== video) {
+                if (active) { position = active.currentTime; active.pause(); }
+                if (position > 0) video.currentTime = position;
+                active = video;
+            }
+            const currentRun = run;
             const playback = video.play();
-            if (playback?.catch) playback.catch(function () { video.parentElement.dataset.logoState = 'fallback'; });
+            if (playback?.catch) playback.catch(function () {
+                if (run === currentRun && !completed && active === video) video.parentElement.dataset.logoState = 'fallback';
+            });
         }
         function syncAll() { logos.forEach(sync); }
+        function restart() {
+            run++; completed = false; position = 0; active = null;
+            logos.forEach(function (video) { video.pause(); video.currentTime = 0; });
+            syncAll();
+        }
         logos.forEach(function (video) {
-            video.addEventListener('playing', function () { video.parentElement.dataset.logoState = 'playing'; });
-            video.addEventListener('error', function () { video.parentElement.dataset.logoState = 'fallback'; });
+            video.loop = false;
+            video.addEventListener('playing', function () {
+                if (completed || active !== video) { video.pause(); return; }
+                video.parentElement.dataset.logoState = 'playing';
+            });
+            video.addEventListener('ended', function () {
+                if (active !== video) return;
+                completed = true; syncAll();
+            });
+            video.addEventListener('error', function () {
+                if (!completed && active === video) video.parentElement.dataset.logoState = 'fallback';
+            });
+        });
+        document.addEventListener('click', function (event) {
+            const link = event.target.closest?.('a[href]');
+            if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            const url = new URL(link.href, location.href);
+            if (url.origin === location.origin && url.pathname === location.pathname && url.hash === '#home') {
+                expectedHomeHashChange = location.hash !== '#home' ? url.href : null;
+                restart();
+            }
+        });
+        window.addEventListener('hashchange', function (event) {
+            if (event.newURL === expectedHomeHashChange) { expectedHomeHashChange = null; return; }
+            expectedHomeHashChange = null;
+            if (location.hash === '#home') restart();
+        });
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) { expectedHomeHashChange = null; restart(); }
         });
         if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver(function (entries) {

@@ -35,19 +35,32 @@ try {
  });
  await page.goto(origin+'/');
  const logo=page.locator('video.logo-premium-video:visible');
- await page.waitForFunction(()=>[...document.querySelectorAll('video.logo-premium-video')].some(v=>v.getClientRects().length&&!v.paused&&v.currentTime>.1));
- assert.equal(await logo.evaluate(v=>v.muted&&v.loop&&v.playsInline),true);
- await logo.evaluate(v=>{v.currentTime=v.duration-.15});
- await page.waitForFunction(()=>[...document.querySelectorAll('video.logo-premium-video')].some(v=>v.getClientRects().length&&!v.paused&&v.currentTime<1));
+ const isPlaying=()=>page.waitForFunction(()=>[...document.querySelectorAll('video.logo-premium-video')].some(v=>v.getClientRects().length&&!v.paused&&v.currentTime>.1));
+ const finish=async()=>{
+  await page.locator('video.logo-premium-video:visible').evaluate(v=>{v.currentTime=v.duration-.1});
+  await page.waitForFunction(()=>[...document.querySelectorAll('video.logo-premium-video')].every(v=>v.paused)&&!!document.querySelector('[data-logo-state="completed"]'));
+ };
+ await isPlaying();assert.equal(await logo.evaluate(v=>v.muted&&!v.loop&&v.playsInline),true);
+ await finish();
  await page.locator('#mobile-menu-btn').click();assert.equal(await page.locator('#mobile-menu-btn').getAttribute('aria-expanded'),'true');
  await page.locator('#mobile-menu-btn').click();
+ await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));
+ assert.equal(await logo.evaluate(v=>v.paused),true,'Ordinary clicks/tab visibility must not replay a finished logo');
  await page.setViewportSize({width:1280,height:900});
- await page.waitForFunction(()=>[...document.querySelectorAll('video.logo-premium-video')].filter(v=>!v.paused).length===1);
- assert.equal(await page.locator('video.logo-premium-video:visible').evaluate(v=>v.paused),false);
+ assert.equal(await page.locator('video.logo-premium-video:visible').evaluate(v=>v.paused),true,'Resizing must not start a second pass');
+ await page.locator('a.nav-link[href="#home"]').click();await isPlaying();
+ assert.equal(await page.locator('video.logo-premium-video:visible').evaluate(v=>v.currentTime<2),true);
+ await finish();
+ await page.locator('a.nav-link[href="#home"]').click();await isPlaying(); // Same hash must also replay.
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.waitForFunction(()=>[...document.querySelectorAll('video.logo-premium-video')].every(v=>v.paused));
- await page.emulateMedia({reducedMotion:'no-preference'});
+ await page.emulateMedia({reducedMotion:'no-preference'});await isPlaying();await finish();
+ await page.emulateMedia({reducedMotion:'reduce'});await page.emulateMedia({reducedMotion:'no-preference'});
+ assert.equal(await page.locator('video.logo-premium-video:visible').evaluate(v=>v.paused),true,'Motion settings must not replay a finished pass');
  await page.setViewportSize({width:390,height:844});
+ await page.reload();await isPlaying();await finish();
+ await page.goto(origin+'/articles/');await page.goBack();await isPlaying();
+ console.log('PASS: logo single pass, stops after ending, Home/same-hash/reload/Back restart, no click/resize replay');
  let charts=0;
  for(const slug of fs.readdirSync(path.join(root,'products'))){
   await page.goto(origin+'/products/'+slug+'/');
@@ -81,6 +94,7 @@ try {
  });
  await blocked.goto(origin+'/');await blocked.waitForFunction(()=>document.querySelector('.logo-premium-shell[data-logo-state="fallback"]'));
  assert.equal(await blocked.locator('video.logo-premium-video:visible').evaluate(v=>getComputedStyle(v.parentElement).animationName),'logoFallbackPulse');
+ assert.equal(await blocked.locator('video.logo-premium-video:visible').evaluate(v=>getComputedStyle(v.parentElement).animationIterationCount),'1');
  await blocked.close();
- console.log('PASS: all 11 product charts visibly render under CSP, chart retry recovery, mobile/desktop logo playback and loop, reduced motion, blocked-autoplay fallback and mobile menu');
+ console.log('PASS: all 11 product charts visibly render under CSP, chart retry recovery, mobile/desktop single-pass logo and explicit restart, reduced motion, blocked-autoplay fallback and mobile menu');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

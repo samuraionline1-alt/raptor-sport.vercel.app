@@ -273,7 +273,7 @@ visible retry action instead of a silent blank canvas. All eleven existing produ
 charts are covered by `npm run test:visual`, which uses the real vendored library.
 
 The homepage brand logo uses a 240-pixel H.264 copy of the original animation,
-without audio (about 121 kB), with muted inline looping playback and the existing
+without audio (about 121 kB), with muted inline single-pass playback and the existing
 still poster. Hidden/offscreen logos pause, reduced-motion preferences are
 respected, and an autoplay denial uses a small CSS fallback effect. A user gesture
 retries playback for mobile autoplay restrictions. Performance asset query versions
@@ -282,6 +282,11 @@ are updated so returning browsers fetch the corrected loader and styles.
 Run `npm run build`, then `npm run test:visual` and `npm run test:browser`
 sequentially: public-build tests recreate `_site`, so do not run them concurrently
 with browser tests serving that directory. The visual suite checks actual chart
-pixels/animation completion, logo progress and loop, responsive behavior, menu,
+pixels/animation completion, logo progress, completion and Home/reload restart, responsive behavior, menu,
 reduced motion, autoplay denial and chart retry. Mobile viewport Chromium is not a
 substitute for testing on a physical iPhone with its current power/motion settings.
+
+The logo plays once per homepage visit, then stays stopped even after generic
+clicks, viewport changes or returning to the tab. Refresh, an explicit Home/logo
+link, hash-history return to `#home`, or browser Back restoring the homepage starts
+a fresh single pass. The fallback CSS effect is also finite.
