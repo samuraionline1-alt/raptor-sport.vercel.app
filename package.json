@@ -6,7 +6,8 @@
     "build:articles": "node scripts/build-articles.mjs",
     "test:articles": "node tests/articles.mjs",
     "build:css": "tailwindcss -i ./styles/site.css -o ./assets/site.css --minify",
-    "test:performance": "node tests/performance.mjs"
+    "test:performance": "node tests/performance.mjs",
+    "test:contact": "node tests/contact.mjs"
   },
   "dependencies": {
     "@vercel/functions": "^3.9.11",

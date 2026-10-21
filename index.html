@@ -260,6 +260,7 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
 <link rel="stylesheet" href="/assets/vendor/kanit.css?v=a11y-20261019">
 <link rel="icon" type="image/webp" href="/assets/optimized/raptor-logo-complete.webp">
 <script src="/logo-player.js?v=20261021-restored" defer></script>
+<script src="/contact-form.js?v=supabase-contact-20261021" defer></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
     <noscript>
@@ -828,20 +829,19 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
                     <h2 class="text-2xl font-bold text-zinc-900">CONTACT US หรือ สมัครตัวแทนจำหน่าย</h2>
                     <p class="text-xs text-gray-600">ติดต่อสอบถามข้อมูลเพิ่มเติมหรือสั่งซื้อยกลัง</p>
                 </div>
-                <form class="space-y-4 text-sm raptor-contact-form" action="https://formspree.io/f/mvzyqnag" method="POST" data-product="Contact Message" data-price="-">
-                    <input type="hidden" name="_subject" value="New Raptor Contact Message">
-                    <input type="hidden" name="source" value="Raptor Sport Official Store Contact">
+                <form class="space-y-4 text-sm raptor-contact-form" action="/api/contact" method="POST">
+                    <div hidden aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
                     <div>
                         <label class="block text-xs font-bold text-gray-600 mb-1">NAME</label>
-                        <input type="text" placeholder="ชื่อของคุณ" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="customer_name">
+                        <input type="text" placeholder="ชื่อของคุณ" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="customer_name" required maxlength="200">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-600 mb-1">EMAIL / PHONE</label>
-                        <input type="text" placeholder="อีเมล หรือ เบอร์โทรศัพท์" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="contact">
+                        <input type="text" placeholder="อีเมล หรือ เบอร์โทรศัพท์" class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="contact" required maxlength="254">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-600 mb-1">MESSAGE</label>
-                        <textarea rows="3" placeholder="พิมพ์ข้อความ..." class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="message"></textarea>
+                        <textarea rows="3" placeholder="พิมพ์ข้อความ..." class="w-full p-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-orange-500" name="message" required maxlength="5000"></textarea>
                     </div>
                     <button type="submit" class="w-full bg-zinc-900 hover:bg-orange-brand text-white font-bold py-3 rounded-xl transition-colors">SEND MESSAGE</button>
                 </form>
@@ -1088,9 +1088,9 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
     </script>
 
     <script>
-        // Formspree integration for all Raptor order/contact forms
+        // Legacy order-form integration; contact messages use contact-form.js.
         document.addEventListener('DOMContentLoaded', function () {
-            const forms = document.querySelectorAll('.raptor-order-form, .raptor-contact-form');
+            const forms = document.querySelectorAll('.raptor-order-form');
 
             forms.forEach(function (form) {
                 updateOrderPriceByQuantity(form);
