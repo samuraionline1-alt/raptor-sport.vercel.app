@@ -55,7 +55,8 @@
             submit.classList.add('order-submit-cta');
             const action = document.createElement('span');
             action.className = 'cta-primary';
-            action.textContent = (['STRIPE', 'PROMPTPAY'].includes(form.querySelector('[name="payment_method"]:checked')?.value) ? 'ชำระเงินออนไลน์' : 'สั่งซื้อเก็บเงินปลายทาง') + ' ฿' + order.totalPrice + ' ›';
+            const method = form.querySelector('[name="payment_method"]:checked')?.value || 'COD';
+            action.textContent = (method === 'PROMPTPAY' ? 'ชำระด้วย PromptPay' : method === 'STRIPE' ? 'ชำระด้วยบัตร' : 'สั่งซื้อเก็บเงินปลายทาง') + ' ฿' + order.totalPrice + ' ›';
             submit.replaceChildren(action);
             if (order.giftCount) {
                 const gift = document.createElement('span');

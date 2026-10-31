@@ -48,8 +48,8 @@
         paymentSelector.className = 'payment-selector';
         paymentSelector.innerHTML = '<p class="payment-selector-title" aria-hidden="true">เลือกวิธีชำระเงิน</p>' +
             '<label class="payment-selector-option"><input class="payment-selector-radio" type="radio" name="payment_method" value="COD" checked><span><strong>🚚 เก็บเงินปลายทาง (COD)</strong><br>รับของก่อนจ่ายเงินที่หน้าบ้าน</span></label>' +
-            '<label class="payment-selector-option"><input class="payment-selector-radio" type="radio" name="payment_method" value="PROMPTPAY"><span><strong>📲 PromptPay — บันทึก QR ลงมือถือ</strong><br>บันทึกรูปแล้วเลือกรูป QR ในแอปธนาคาร</span></label>' +
-            '<label class="payment-selector-option"><input class="payment-selector-radio" type="radio" name="payment_method" value="STRIPE"><span><strong>📲 สแกน QR PromptPay / บัตรเครดิต</strong><br>ชำระออนไลน์ปลอดภัย 100% (ไม่ต้องรอรับสายขนส่ง)</span></label>';
+            '<label class="payment-selector-option"><input class="payment-selector-radio" type="radio" name="payment_method" value="PROMPTPAY"><span><strong>📲 PromptPay — สแกนหรือบันทึก QR</strong><br>สแกน QR หรือบันทึกรูปเพื่อจ่ายในแอปธนาคาร</span></label>' +
+            '<label class="payment-selector-option"><input class="payment-selector-radio" type="radio" name="payment_method" value="STRIPE"><span><strong>💳 บัตรเครดิต / เดบิต</strong><br>ชำระด้วยบัตรผ่านระบบ Stripe</span></label>';
         var emailPanel = document.createElement('label');
         emailPanel.hidden = true;
         emailPanel.textContent = 'อีเมลสำหรับชำระเงิน PromptPay';
@@ -63,8 +63,9 @@
             var isQr = form.querySelector('[name="payment_method"]:checked')?.value === 'PROMPTPAY';
             emailPanel.hidden = !isQr; emailInput.required = isQr;
             if (!button || button.disabled) return;
-            button.textContent = form.querySelector('[name="payment_method"]:checked')?.value !== 'COD'
-                ? 'ดำเนินการสแกน QR / ชำระเงินออนไลน์'
+            var method = form.querySelector('[name="payment_method"]:checked')?.value || 'COD';
+            button.textContent = method === 'PROMPTPAY' ? 'ดำเนินการชำระด้วย PromptPay'
+                : method === 'STRIPE' ? 'ดำเนินการชำระด้วยบัตรเครดิต / เดบิต'
                 : 'ยืนยันการสั่งซื้อเก็บเงินปลายทาง';
         }
         paymentSelector.addEventListener('change', function () { updateButton(); if (window.RaptorPromotions) RaptorPromotions.update(form); });

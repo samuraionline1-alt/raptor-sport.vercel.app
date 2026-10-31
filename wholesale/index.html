@@ -120,7 +120,7 @@
                 <label class="block sm:col-span-2"><span class="mb-1 block text-sm text-zinc-300">ที่อยู่สำหรับจัดส่งสินค้าและออกใบกำกับภาษี *</span><textarea name="address" required autocomplete="street-address" rows="3" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5"></textarea></label>
                 <div class="rounded-xl bg-zinc-950 p-4 text-sm sm:col-span-2"><p>ยอดสุทธิรวมภาษีมูลค่าเพิ่ม (VAT 7%): <b id="orderAmount" class="text-orange-400"></b></p><p class="mt-2 text-zinc-300">ช่องทางชำระเงิน: สแกน QR PromptPay / บัตรเครดิต (Stripe Official Secure Checkout)</p></div>
                 <p id="formStatus" class="hidden rounded-lg p-3 text-sm sm:col-span-2" role="status"></p>
-                <label class="sm:col-span-2">ช่องทางชำระเงิน <select name="payment_method" class="w-full rounded-lg bg-zinc-900 p-3"><option value="PROMPTPAY">PromptPay — บันทึก QR ลงมือถือ</option><option value="STRIPE">ชำระผ่าน Stripe / บัตรเครดิต</option></select></label>
+                <label class="sm:col-span-2">ช่องทางชำระเงิน <select name="payment_method" class="w-full rounded-lg bg-zinc-900 p-3"><option value="PROMPTPAY">PromptPay — สแกนหรือบันทึก QR</option><option value="STRIPE">บัตรเครดิต / เดบิต</option></select></label>
                 <button id="submitOrder" type="submit" class="rounded-xl bg-orange-500 py-3.5 text-lg font-bold text-zinc-950 hover:bg-orange-400 disabled:cursor-wait disabled:opacity-60 sm:col-span-2">ดำเนินการชำระเงิน (QR PromptPay / บัตรเครดิต)</button>
             </form>
         </div>

@@ -97,6 +97,8 @@ export default async function handler(req, res) {
     success_url: successUrl(body, totalPrice, product, quantity, orderRef, customerName, cleanPhone),
     cancel_url: cancelUrl(body.page_url)
   });
+  // PromptPay has its own QR flow; keep it out of the card Checkout option.
+  if (body.payment_method === 'STRIPE') params.set('excluded_payment_method_types[0]', 'promptpay');
   const customerEmail = safeText(body.email, 254);
   if (body.payment_method === 'PROMPTPAY' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) return res.status(400).json({ error: 'กรุณาระบุอีเมลสำหรับชำระเงิน PromptPay' });
   if (customerEmail) params.set('customer_email', customerEmail);

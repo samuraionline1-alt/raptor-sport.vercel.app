@@ -12,9 +12,10 @@ let params;
 global.fetch = async (_, options) => { params = new URLSearchParams(options.body); return {ok:true,json:async()=>({url:'https://checkout.stripe.com/test'})}; };
 for (const wholesale of [false,true]) {
  const res=response();
- await withOrderDatabase(() => checkout({method:'POST',body:{product:'สินค้า & Test',quantity:3,totalPrice:499,customer_name:'คุณ A & B',phone:'081-234-5678',address:'Bangkok',is_wholesale:wholesale,order_ref:'RPT-test'}},res));
+ await withOrderDatabase(() => checkout({method:'POST',body:{product:'สินค้า & Test',quantity:3,totalPrice:499,customer_name:'คุณ A & B',phone:'081-234-5678',address:'Bangkok',payment_method:'STRIPE',is_wholesale:wholesale,order_ref:'RPT-test'}},res));
  assert.equal(res.code,200);
  assert.equal(params.get('metadata[order_ref]'),'RPT-test');
+ assert.equal(params.get('excluded_payment_method_types[0]'),'promptpay');
  assert.equal(params.get('payment_intent_data[metadata][order_ref]'),'RPT-test');
  assert.equal(params.get('line_items[0][price_data][product_data][name]'),'สินค้า & Test (จำนวน 3 ชิ้น)');
  assert.ok(params.get('payment_intent_data[description]').includes('[#RPT-test]'));
