@@ -131,7 +131,9 @@ export default async function handler(req, res) {
       ...(session.created ? { order_created_at: new Date(session.created * 1000).toISOString() } : {}),
       event_type: 'checkout_initiated', payment_method: 'STRIPE', payment_status: 'รอสแกนชำระเงิน' });
     return res.status(200).json({ url: session.url, ...delivery });
-  } catch (_) {
+  } catch (error) {
+    if (error.code === 'PROMPTPAY_CREATE_FAILED') return res.status(502).json({ error: error.message });
+    console.error('CHECKOUT_PREPARATION_FAILED', JSON.stringify({ payment_method: body.payment_method || 'STRIPE', code: error.code || 'UNEXPECTED' }));
     return res.status(502).json({ error: 'ไม่สามารถเตรียมคำสั่งซื้อได้ กรุณาลองอีกครั้ง' });
   }
 }

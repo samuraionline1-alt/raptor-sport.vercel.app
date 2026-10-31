@@ -220,7 +220,7 @@ from the banking app; saving the image never marks an order paid.
 
 Before deploying, add **payment_intent.succeeded** to the existing Stripe webhook
 destination (keep both Checkout Session events). Enable PromptPay in Stripe.
-The direct QR integration uses Stripe API version `2026-09-30.endive`.
+The direct QR integration uses the account API version, like the existing Checkout integration. Dynamic payment methods remain enabled; the submitted payment method is PromptPay.
 Validate creation, PNG decoding, expired QR, mobile saving on iOS/Android and
 a successful sandbox webhook with the browser closed before enabling production.
 No new environment variables or database migrations are required.
