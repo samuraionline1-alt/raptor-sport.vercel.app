@@ -38,7 +38,6 @@
           // Prepare the file before the tap to preserve mobile share activation.
           fetch(imageUrl).then(function (r) { if (!r.ok) throw new Error('QR unavailable'); return r.blob(); }).then(function (blob) {
             file = new File([blob], 'RAPTOR-PromptPay.png', { type: 'image/png' });
-            if (navigator.canShare && navigator.canShare({ files: [file] })) document.getElementById('share').hidden = false;
           }).catch(function () {});
         }
       }
@@ -46,9 +45,21 @@
     finally { busy = false; }
     timer = setTimeout(check, 5000);
   }
-  document.getElementById('share').addEventListener('click', async function () {
+  document.getElementById('download').addEventListener('click', async function (event) {
+    if (!file || !navigator.share || !navigator.canShare || !navigator.canShare({ files: [file] })) {
+      document.getElementById('saveStatus').textContent = 'หากรูปอยู่ในแอปไฟล์ ให้เปิดรูป กดแชร์ แล้วเลือกบันทึกรูปภาพ';
+      return; // The link downloads the PNG when file sharing is unavailable.
+    }
+    event.preventDefault();
     try { await navigator.share({ files: [file] }); }
-    catch (error) { if (error.name !== 'AbortError') document.getElementById('saveStatus').textContent = 'แชร์รูปไม่สำเร็จ กรุณาใช้ปุ่มดาวน์โหลด QR Code'; }
+    catch (error) {
+      if (error.name === 'AbortError') return;
+      // Keep one visible action and download automatically if sharing fails.
+      var fallback = document.createElement('a');
+      fallback.href = imageUrl + '&download=1'; fallback.download = 'RAPTOR-PromptPay.png';
+      document.body.appendChild(fallback); fallback.click(); fallback.remove();
+      document.getElementById('saveStatus').textContent = 'ดาวน์โหลดรูป QR แล้ว หากรูปอยู่ในแอปไฟล์ ให้เปิดรูปแล้วเลือกบันทึกรูปภาพ';
+    }
   });
   document.addEventListener('visibilitychange', function () { clearTimeout(timer); if (!document.hidden) check(); });
   check();

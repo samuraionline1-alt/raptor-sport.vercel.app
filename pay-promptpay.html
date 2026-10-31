@@ -14,13 +14,12 @@
   <section id="payment" hidden>
     <img id="qr" alt="QR PromptPay สำหรับคำสั่งซื้อนี้">
     <p id="expiry"></p>
-    <a id="download" download="RAPTOR-PromptPay.png">ดาวน์โหลด QR Code</a>
-    <button id="share" type="button" hidden>บันทึก / แชร์รูป QR บนมือถือ</button>
+    <a id="download" download="RAPTOR-PromptPay.png">บันทึก QR เพื่อชำระเงิน</a>
     <p id="saveStatus" role="status" aria-live="polite"></p>
-    <ol><li>ดาวน์โหลด QR หรือกดบันทึก / แชร์รูป</li><li>เปิดแอปธนาคาร เลือกสแกนจ่าย แล้วเลือกรูป QR จากมือถือ</li><li>ตรวจสอบชื่อผู้รับและยอดเงินก่อนยืนยัน แล้วกลับมาหน้านี้เพื่อตรวจสอบผล</li></ol>
+    <ol><li>กด “บันทึก QR เพื่อชำระเงิน” แล้วเลือกบันทึกรูปภาพ หากมีเมนูให้เลือก</li><li>เปิดแอปธนาคาร เลือกสแกนจ่าย แล้วเลือกรูป QR จากมือถือ</li><li>ตรวจสอบชื่อผู้รับและยอดเงินก่อนยืนยัน แล้วกลับมาหน้านี้เพื่อตรวจสอบผล</li></ol>
     <small>iPhone: หากรูปอยู่ในแอปไฟล์ ให้เปิดรูป กดแชร์ แล้วเลือกบันทึกรูปภาพ หรือแตะรูป QR ค้างไว้เพื่อบันทึก</small>
     <p><small>ระบบจะแสดงผลชำระเงินหลังธนาคารยืนยัน การดาวน์โหลดรูปยังไม่ถือว่าชำระเงินแล้ว</small></p>
   </section>
   <a href="/" class="secondary">กลับหน้าร้าน</a>
-</main><script src="/promptpay.js?v=20261031-optional-expiry"></script></body>
+</main><script src="/promptpay.js?v=20261031-single-save"></script></body>
 </html>
