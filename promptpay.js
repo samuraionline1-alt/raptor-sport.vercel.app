@@ -20,14 +20,16 @@
         location.replace((data.wholesale ? '/wholesale/' : '/thank-you.html') + '?payment=stripe_success&paid=1&session_id=' + encodeURIComponent(id));
         return;
       }
-      var expired = !data.expires_at || data.expires_at * 1000 <= Date.now();
-      if (expired || data.status !== 'requires_action') {
+      var expired = data.expires_at != null && data.expires_at * 1000 <= Date.now();
+      if (expired || data.status !== 'requires_action' || data.qr_available === false) {
         payment.hidden = true;
         status.textContent = data.status === 'processing' ? 'กำลังตรวจสอบผลชำระเงิน กรุณารอสักครู่' : 'QR นี้หมดอายุหรือใช้ไม่ได้แล้ว กรุณากลับหน้าร้านเพื่อเริ่มรายการใหม่';
         if (data.status !== 'processing') return;
       } else {
         payment.hidden = false; status.textContent = 'รอการชำระเงิน';
-        document.getElementById('expiry').textContent = 'ใช้ QR ได้ถึง ' + new Date(data.expires_at * 1000).toLocaleString('th-TH');
+        document.getElementById('expiry').textContent = data.expires_at
+          ? 'ใช้ QR ได้ถึง ' + new Date(data.expires_at * 1000).toLocaleString('th-TH')
+          : 'QR สำหรับคำสั่งซื้อนี้เท่านั้น กรุณาชำระเพียงครั้งเดียว';
         var qr = document.getElementById('qr');
         if (!qr.getAttribute('src')) {
           qr.src = imageUrl;
