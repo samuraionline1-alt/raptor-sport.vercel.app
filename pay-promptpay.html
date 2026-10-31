@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+  <title>ชำระเงิน PromptPay | RAPTOR</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#111;color:#fafafa;font:16px/1.7 system-ui,sans-serif;padding:24px 16px}main{max-width:480px;margin:auto}h1{font-size:25px}#qr{display:block;width:100%;max-width:320px;height:auto;margin:20px auto;background:white;border:16px solid white;border-radius:12px}a,button{display:block;width:100%;text-align:center;padding:14px;border:0;border-radius:10px;background:#fb923c;color:#111;font:inherit;font-weight:700;text-decoration:none;margin:12px 0;cursor:pointer}a.secondary{background:#333;color:white}small{color:#ddd}#status{min-height:2em}[hidden]{display:none!important}ol{padding-left:24px}
+  </style>
+</head>
+<body><main>
+  <p>RAPTOR THAILAND</p><h1>ชำระเงินผ่าน PromptPay</h1>
+  <p id="order"></p><p id="amount"></p><p id="status" role="status" aria-live="polite">กำลังโหลดรายการชำระเงิน…</p>
+  <section id="payment" hidden>
+    <img id="qr" alt="QR PromptPay สำหรับคำสั่งซื้อนี้">
+    <p id="expiry"></p>
+    <a id="download" download="RAPTOR-PromptPay.png">ดาวน์โหลด QR Code</a>
+    <button id="share" type="button" hidden>บันทึก / แชร์รูป QR บนมือถือ</button>
+    <p id="saveStatus" role="status" aria-live="polite"></p>
+    <ol><li>ดาวน์โหลด QR หรือกดบันทึก / แชร์รูป</li><li>เปิดแอปธนาคาร เลือกสแกนจ่าย แล้วเลือกรูป QR จากมือถือ</li><li>ตรวจสอบชื่อผู้รับและยอดเงินก่อนยืนยัน แล้วกลับมาหน้านี้เพื่อตรวจสอบผล</li></ol>
+    <small>iPhone: หากรูปอยู่ในแอปไฟล์ ให้เปิดรูป กดแชร์ แล้วเลือกบันทึกรูปภาพ หรือแตะรูป QR ค้างไว้เพื่อบันทึก</small>
+    <p><small>ระบบจะแสดงผลชำระเงินหลังธนาคารยืนยัน การดาวน์โหลดรูปยังไม่ถือว่าชำระเงินแล้ว</small></p>
+  </section>
+  <a href="/" class="secondary">กลับหน้าร้าน</a>
+</main><script src="/promptpay.js?v=20261031"></script></body>
+</html>

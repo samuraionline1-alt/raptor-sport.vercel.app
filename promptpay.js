@@ -1,0 +1,53 @@
+(function () {
+  'use strict';
+  var query = new URLSearchParams(location.search);
+  var id = query.get('id') || '', token = query.get('token') || '';
+  var status = document.getElementById('status'), payment = document.getElementById('payment');
+  var endpoint = '/api/promptpay?id=' + encodeURIComponent(id) + '&token=' + encodeURIComponent(token);
+  var imageUrl = endpoint + '&image=1';
+  var file, timer, busy = false;
+  async function check() {
+    if (busy) return;
+    busy = true;
+    try {
+      var response = await fetch(endpoint, { cache: 'no-store' });
+      var data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'ไม่สามารถโหลดรายการได้');
+      document.getElementById('order').textContent = 'คำสั่งซื้อ: ' + data.order_ref;
+      document.getElementById('amount').textContent = 'ยอดชำระ ' + new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(data.amount);
+      if (data.status === 'succeeded') {
+        payment.hidden = true; status.textContent = 'ชำระเงินสำเร็จ กำลังเปิดหน้าสรุปคำสั่งซื้อ…';
+        location.replace((data.wholesale ? '/wholesale/' : '/thank-you.html') + '?payment=stripe_success&paid=1&session_id=' + encodeURIComponent(id));
+        return;
+      }
+      var expired = !data.expires_at || data.expires_at * 1000 <= Date.now();
+      if (expired || data.status !== 'requires_action') {
+        payment.hidden = true;
+        status.textContent = data.status === 'processing' ? 'กำลังตรวจสอบผลชำระเงิน กรุณารอสักครู่' : 'QR นี้หมดอายุหรือใช้ไม่ได้แล้ว กรุณากลับหน้าร้านเพื่อเริ่มรายการใหม่';
+        if (data.status !== 'processing') return;
+      } else {
+        payment.hidden = false; status.textContent = 'รอการชำระเงิน';
+        document.getElementById('expiry').textContent = 'ใช้ QR ได้ถึง ' + new Date(data.expires_at * 1000).toLocaleString('th-TH');
+        var qr = document.getElementById('qr');
+        if (!qr.getAttribute('src')) {
+          qr.src = imageUrl;
+          qr.onerror = function () { document.getElementById('saveStatus').textContent = 'โหลดรูป QR ไม่สำเร็จ กรุณาโหลดหน้านี้ใหม่'; };
+          document.getElementById('download').href = imageUrl + '&download=1';
+          // Prepare the file before the tap to preserve mobile share activation.
+          fetch(imageUrl).then(function (r) { if (!r.ok) throw new Error('QR unavailable'); return r.blob(); }).then(function (blob) {
+            file = new File([blob], 'RAPTOR-PromptPay.png', { type: 'image/png' });
+            if (navigator.canShare && navigator.canShare({ files: [file] })) document.getElementById('share').hidden = false;
+          }).catch(function () {});
+        }
+      }
+    } catch (error) { status.textContent = error.message; }
+    finally { busy = false; }
+    timer = setTimeout(check, 5000);
+  }
+  document.getElementById('share').addEventListener('click', async function () {
+    try { await navigator.share({ files: [file] }); }
+    catch (error) { if (error.name !== 'AbortError') document.getElementById('saveStatus').textContent = 'แชร์รูปไม่สำเร็จ กรุณาใช้ปุ่มดาวน์โหลด QR Code'; }
+  });
+  document.addEventListener('visibilitychange', function () { clearTimeout(timer); if (!document.hidden) check(); });
+  check();
+}());

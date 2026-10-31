@@ -1,5 +1,6 @@
 import { recordAndNotify } from '../lib/order-store.js';
 import { validOrder } from './orders.js';
+import { createQrPayment } from '../lib/promptpay.js';
 import promoConfig from '../promo-config.js';
 const STRIPE_ENDPOINT = 'https://api.stripe.com/v1/checkout/sessions';
 const SITE_ORIGIN = 'https://www.raptorthailand.com';
@@ -97,6 +98,7 @@ export default async function handler(req, res) {
     cancel_url: cancelUrl(body.page_url)
   });
   const customerEmail = safeText(body.email, 254);
+  if (body.payment_method === 'PROMPTPAY' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) return res.status(400).json({ error: 'กรุณาระบุอีเมลสำหรับชำระเงิน PromptPay' });
   if (customerEmail) params.set('customer_email', customerEmail);
   Object.entries(metadata).forEach(([key, value]) => {
     params.set(`metadata[${key}]`, value);
@@ -104,6 +106,13 @@ export default async function handler(req, res) {
   });
 
   try {
+    if (body.payment_method === 'PROMPTPAY') {
+      const result = await createQrPayment({ metadata, totalPrice, orderRef, customerName, customerEmail });
+      await recordAndNotify({ ...metadata, quantity, total_price: totalPrice,
+        stripe_session_id: result.id, order_created_at: new Date(result.created * 1000).toISOString(),
+        event_type: 'checkout_initiated', payment_method: 'STRIPE', payment_status: 'รอสแกนชำระเงิน' });
+      return res.status(200).json({ url: result.url });
+    }
     const stripeResponse = await fetch(STRIPE_ENDPOINT, {
       method: 'POST',
       headers: {

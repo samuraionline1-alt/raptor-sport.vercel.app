@@ -18,6 +18,7 @@
             quantity: quantity,
             totalPrice: totalPrice,
             bundleTier: `เซ็ต ${quantity} ชิ้น (฿${totalPrice})`,
+            email: form.querySelector('[name="promptpay_email"]')?.value || '',
             customer_name: form.querySelector('[name="customer_name"]')?.value || '',
             phone: form.querySelector('[name="phone"]')?.value || '',
             address: form.querySelector('[name="address"]')?.value || '',
@@ -47,12 +48,22 @@
         paymentSelector.className = 'payment-selector';
         paymentSelector.innerHTML = '<p class="payment-selector-title" aria-hidden="true">เลือกวิธีชำระเงิน</p>' +
             '<label class="payment-selector-option"><input class="payment-selector-radio" type="radio" name="payment_method" value="COD" checked><span><strong>🚚 เก็บเงินปลายทาง (COD)</strong><br>รับของก่อนจ่ายเงินที่หน้าบ้าน</span></label>' +
+            '<label class="payment-selector-option"><input class="payment-selector-radio" type="radio" name="payment_method" value="PROMPTPAY"><span><strong>📲 PromptPay — บันทึก QR ลงมือถือ</strong><br>บันทึกรูปแล้วเลือกรูป QR ในแอปธนาคาร</span></label>' +
             '<label class="payment-selector-option"><input class="payment-selector-radio" type="radio" name="payment_method" value="STRIPE"><span><strong>📲 สแกน QR PromptPay / บัตรเครดิต</strong><br>ชำระออนไลน์ปลอดภัย 100% (ไม่ต้องรอรับสายขนส่ง)</span></label>';
+        var emailPanel = document.createElement('label');
+        emailPanel.hidden = true;
+        emailPanel.textContent = 'อีเมลสำหรับชำระเงิน PromptPay';
+        var emailInput = document.createElement('input');
+        emailInput.type = 'email'; emailInput.name = 'promptpay_email'; emailInput.autocomplete = 'email';
+        emailInput.style.cssText = 'display:block;width:100%;padding:12px;margin-top:8px;background:#fff;color:#111;border-radius:8px';
+        emailPanel.appendChild(emailInput); paymentSelector.appendChild(emailPanel);
         var button = form.querySelector('button[type="submit"], button:not([type])');
         button?.insertAdjacentElement('beforebegin', paymentSelector);
         function updateButton() {
+            var isQr = form.querySelector('[name="payment_method"]:checked')?.value === 'PROMPTPAY';
+            emailPanel.hidden = !isQr; emailInput.required = isQr;
             if (!button || button.disabled) return;
-            button.textContent = form.querySelector('[name="payment_method"]:checked')?.value === 'STRIPE'
+            button.textContent = form.querySelector('[name="payment_method"]:checked')?.value !== 'COD'
                 ? 'ดำเนินการสแกน QR / ชำระเงินออนไลน์'
                 : 'ยืนยันการสั่งซื้อเก็บเงินปลายทาง';
         }
@@ -104,7 +115,7 @@
         form.dataset.submitting = '1';
         var button = form.querySelector('button[type="submit"], button:not([type])');
         var originalText = button?.innerHTML;
-        if (button) { button.disabled = true; button.textContent = order.payment_method === 'STRIPE' ? 'กำลังเปิดหน้าชำระเงิน...' : 'กำลังบันทึกคำสั่งซื้อ...'; }
+        if (button) { button.disabled = true; button.textContent = order.payment_method !== 'COD' ? 'กำลังเปิดหน้าชำระเงิน...' : 'กำลังบันทึกคำสั่งซื้อ...'; }
         var tracking = ecommerce(order);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ ecommerce: null });
@@ -113,9 +124,9 @@
         try { sessionStorage.setItem(PENDING_ORDER_KEY, JSON.stringify(tracking)); } catch (_) {}
 
         try {
-            var response = await fetch(order.payment_method === 'STRIPE' ? '/api/create-checkout-session' : '/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order) });
+            var response = await fetch(order.payment_method !== 'COD' ? '/api/create-checkout-session' : '/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order) });
             var data = await response.json();
-            if (!response.ok || (order.payment_method === 'STRIPE' ? !data.url : !data.ok)) throw new Error(data.error || 'ไม่สามารถบันทึกคำสั่งซื้อได้');
+            if (!response.ok || (order.payment_method !== 'COD' ? !data.url : !data.ok)) throw new Error(data.error || 'ไม่สามารถบันทึกคำสั่งซื้อได้');
             if (order.payment_method === 'COD') {
                 if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: order.totalPrice, currency: 'THB', content_name: order.product, num_items: order.quantity });
             }

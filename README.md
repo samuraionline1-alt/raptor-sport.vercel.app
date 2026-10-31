@@ -209,3 +209,19 @@ Bump the asset query versions in affected HTML when changing cached CSS/JS.
 - Menu controls expose their name and expanded state. Rating graphics have an image role; hidden-focusable admin shortcuts are named. Review, checkout, badge and footer colors meet the automated contrast checks.
 - Non-fingerprinted assets revalidate after a day; content-hashed font files retain immutable caching. Shared stylesheet/script references are versioned for this release.
 - Verification: build, article/performance checks, product-script parsing, promotion/order-flow tests; Lighthouse accessibility passed on the homepage and cooling-spray page. Cloud Lighthouse blocks analytics domains at its proxy, so console-related Best Practices results from that environment do not represent a production analytics failure.
+
+## Downloadable PromptPay QR
+
+Retail and wholesale can select PromptPay to open `/pay-promptpay.html` with a
+Stripe-generated, order-specific QR. The PNG download is served from the same
+origin; supported phones also offer file sharing/saving. An email is required
+by Stripe for this payment method. The page checks status again after returning
+from the banking app; saving the image never marks an order paid.
+
+Before deploying, add **payment_intent.succeeded** to the existing Stripe webhook
+destination (keep both Checkout Session events). Enable PromptPay in Stripe.
+The direct QR integration uses Stripe API version `2026-09-30.endive`.
+Validate creation, PNG decoding, expired QR, mobile saving on iOS/Android and
+a successful sandbox webhook with the browser closed before enabling production.
+No new environment variables or database migrations are required.
+Run `node tests/promptpay.mjs` and the existing order regression checks.

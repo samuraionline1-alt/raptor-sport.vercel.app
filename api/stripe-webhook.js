@@ -35,8 +35,12 @@ export default async function handler(req, res) {
   let event;
   try { event = JSON.parse(raw.toString('utf8')); }
   catch (_) { return res.status(400).json({ error: 'Invalid event' }); }
-  if (!['checkout.session.completed', 'checkout.session.async_payment_succeeded'].includes(event.type)) return res.status(200).json({ received: true });
-  const session = event.data?.object;
+  if (!['checkout.session.completed', 'checkout.session.async_payment_succeeded', 'payment_intent.succeeded'].includes(event.type)) return res.status(200).json({ received: true });
+  let session = event.data?.object;
+  if (event.type === 'payment_intent.succeeded') {
+    if (session?.status !== 'succeeded' || session.metadata?.payment_flow !== 'downloadable_promptpay') return res.status(200).json({ received: true });
+    session = { ...session, payment_status: 'paid', amount_total: session.amount_received };
+  }
   if (session?.payment_status !== 'paid') return res.status(200).json({ received: true });
   // Ignore sessions belonging to other integrations on the same Stripe account.
   if (!['retail', 'wholesale'].includes(session.metadata?.order_channel)) return res.status(200).json({ received: true });
