@@ -82,7 +82,7 @@
     top.append(name, stars);
     const badge = document.createElement("div");
     badge.className = "review-badge";
-    badge.textContent = VERIFIED_BUYER_BADGE;
+    badge.textContent = review.is_verified ? VERIFIED_BUYER_BADGE : "รีวิวจากผู้ใช้งาน (ยังไม่ยืนยันการซื้อ)";
     const comment = document.createElement("p");
     comment.textContent = review.comment;
     const date = document.createElement("time");
@@ -221,7 +221,7 @@
         const response = await fetch(API_URL, {
           method: "POST",
           headers: { ...headers, "Content-Type": "application/json", Prefer: "return=minimal" },
-          body: JSON.stringify({ product_slug: submissionSlug(slug), reviewer_name: fields.get("reviewer_name").trim(), rating: Number(fields.get("rating")), comment: fields.get("comment").trim(), source_platform: fields.get("source_platform"), is_verified: true, is_approved: false })
+          body: JSON.stringify({ product_slug: submissionSlug(slug), reviewer_name: fields.get("reviewer_name").trim(), rating: Number(fields.get("rating")), comment: fields.get("comment").trim(), source_platform: fields.get("source_platform"), is_verified: false, is_approved: false })
         });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         form.reset(); form.querySelector('[value="5"]').checked = true;
