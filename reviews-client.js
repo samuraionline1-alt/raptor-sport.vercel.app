@@ -8,7 +8,7 @@
     "raptor-warming-spray", "raptor-cooling-spray", "raptor-go-energy-gel",
     "raptor-dual-action-pack", "raptor-sport-therapy-oil", "raptor-v-mix", "raptor-speed-water-charge",
     "raptor-herbal-cooling-gel", "raptor-sport-foot-spray", "raptor-herbal-roll-on",
-    "raptor-cool-patch", "raptor-ice-defense-sport-shampoo"
+    "raptor-cool-patch", "raptor-ice-defense-sport-shampoo", "raptor-cooly-body-spray"
   ]);
   const VERIFIED_BUYER_BADGE = "✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)";
   const headers = { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` };
