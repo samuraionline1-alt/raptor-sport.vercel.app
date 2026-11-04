@@ -964,7 +964,29 @@ src="https://www.facebook.com/tr?id=462184846324554&ev=PageView&noscript=1"
 
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuBtn.addEventListener('click', () => { const closed = mobileMenu.classList.toggle('hidden'); mobileMenuBtn.setAttribute('aria-expanded', String(!closed)); mobileMenuBtn.setAttribute('aria-label', closed ? 'เปิดเมนูหลัก' : 'ปิดเมนูหลัก'); });
+        function setMobileMenuOpen(open) {
+            mobileMenu.classList.toggle('hidden', !open);
+            mobileMenuBtn.setAttribute('aria-expanded', String(open));
+            mobileMenuBtn.setAttribute('aria-label', open ? 'ปิดเมนูหลัก' : 'เปิดเมนูหลัก');
+        }
+
+        mobileMenuBtn.addEventListener('click', () => {
+            setMobileMenuOpen(mobileMenu.classList.contains('hidden'));
+        });
+        mobileMenu.addEventListener('click', (event) => {
+            if (event.target.closest('a')) setMobileMenuOpen(false);
+        });
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                setMobileMenuOpen(false);
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                setMobileMenuOpen(false);
+                mobileMenuBtn.focus();
+            }
+        });
 
     </script>
 
