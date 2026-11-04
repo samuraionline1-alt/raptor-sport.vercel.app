@@ -8,7 +8,7 @@ const PRODUCT_SLUGS = [
   "raptor-warming-spray", "raptor-cooling-spray", "raptor-go-energy-gel",
   "raptor-dual-action-pack", "raptor-sport-therapy-oil", "raptor-v-mix",
   "raptor-herbal-cooling-gel", "raptor-sport-foot-spray", "raptor-herbal-roll-on",
-  "raptor-cool-patch", "raptor-ice-defense-sport-shampoo"
+  "raptor-cool-patch", "raptor-ice-defense-sport-shampoo", "raptor-cooly-body-spray"
 ];
 const REVIEW_SLUG_ALIASES = new Map([
   ["raptor-v-mix", "raptor-v-mix"],
@@ -81,7 +81,7 @@ function renderReviews(reviews) {
     const date = reviewDate(review);
     return `        <article class="review-card">
           <div class="review-card__top"><strong>${escapeHtml(sanitizeReviewerName(review.reviewer_name))}</strong><span class="review-stars" aria-label="${rating} จาก 5 ดาว">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</span></div>
-          <span class="review-badge">✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)</span>
+          <span class="review-badge">${review.is_verified ? "✓ ยืนยันผู้ซื้อจริง (Verified Official Buyer)" : "รีวิวจากผู้ใช้งาน (ยังไม่ยืนยันการซื้อ)"}</span>
           <p>${escapeHtml(review.comment)}</p>
           <time datetime="${escapeHtml(date)}">${escapeHtml(thaiDate(date))}</time>
         </article>`;
